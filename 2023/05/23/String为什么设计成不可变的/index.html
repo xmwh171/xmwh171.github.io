@@ -19,27 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="典型回答平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。 因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。 对于Java开发者来说，Java减少了开发和部署到多个平台的">
+    <meta name="description" content="为什么要把String设计成不可变的呢？有什么好处呢？ 这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。 在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:  I would use an immutable whenever I can.  那么，他给出这个答案背后的原因是什么呢？是基于哪些思考的呢？ 其实，主要是从缓存、">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Java是如何实现平台无关性的">
-<meta property="og:url" content="http://example.com/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/index.html">
+<meta property="og:title" content="String为什么设计成不可变的">
+<meta property="og:url" content="http://example.com/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/index.html">
 <meta property="og:site_name" content="心梦无痕">
-<meta property="og:description" content="典型回答平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。 因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。 对于Java开发者来说，Java减少了开发和部署到多个平台的">
+<meta property="og:description" content="为什么要把String设计成不可变的呢？有什么好处呢？ 这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。 在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:  I would use an immutable whenever I can.  那么，他给出这个答案背后的原因是什么呢？是基于哪些思考的呢？ 其实，主要是从缓存、">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-24T07:01:52.000Z">
-<meta property="article:modified_time" content="2023-05-24T09:56:58.670Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242104703.jpg">
+<meta property="article:published_time" content="2023-05-23T02:48:03.000Z">
+<meta property="article:modified_time" content="2023-05-24T13:08:55.974Z">
 <meta property="article:author" content="ZYH">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242104703.jpg">
 
 
-<link rel="canonical" href="http://example.com/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/">
+<link rel="canonical" href="http://example.com/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/","path":"2023/05/24/Java是如何实现平台无关性的/","title":"Java是如何实现平台无关性的"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/","path":"2023/05/23/String为什么设计成不可变的/","title":"String为什么设计成不可变的"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Java是如何实现平台无关性的 | 心梦无痕</title>
+<title>String为什么设计成不可变的 | 心梦无痕</title>
   
 
 
@@ -142,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9B%9E%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">典型回答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">扩展知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E8%99%9A%E6%8B%9F%E6%9C%BA%E4%B8%8E%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">Java虚拟机与平台无关性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E8%8A%82%E7%A0%81%E4%B8%8E%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">字节码与平台无关性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java%E8%AF%AD%E8%A8%80%E8%A7%84%E8%8C%83%E4%B8%8E%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7"><span class="nav-number">2.3.</span> <span class="nav-text">Java语言规范与平台无关性</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%93%E5%AD%98"><span class="nav-number">1.</span> <span class="nav-text">缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E5%85%A8%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">安全性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">3.</span> <span class="nav-text">线程安全</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hashcode%E7%BC%93%E5%AD%98"><span class="nav-number">4.</span> <span class="nav-text">hashcode缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">5.</span> <span class="nav-text">性能</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -218,7 +220,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -231,12 +233,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Java是如何实现平台无关性的 | 心梦无痕">
+      <meta itemprop="name" content="String为什么设计成不可变的 | 心梦无痕">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Java是如何实现平台无关性的
+          String为什么设计成不可变的
         </h1>
 
         <div class="post-meta-container">
@@ -246,9 +248,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
-      
 
-      <time title="创建时间：2023-05-24 15:01:52 / 修改时间：17:56:58" itemprop="dateCreated datePublished" datetime="2023-05-24T15:01:52+08:00">2023-05-24</time>
+      <time title="创建时间：2023-05-23 10:48:03" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-05-24 21:08:55" itemprop="dateModified" datetime="2023-05-24T21:08:55+08:00">2023-05-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -274,7 +282,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>737</span>
+      <span>948</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -291,19 +299,38 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
-<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
-<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
-<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
-<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
-<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
-<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
-<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
-<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
-<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
-<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
-<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
+    <div class="post-body" itemprop="articleBody"><p>为什么要把String设计成不可变的呢？有什么好处呢？</p>
+<p>这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。</p>
+<p>在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:</p>
+<blockquote>
+<p>I would use an immutable whenever I can.</p>
+</blockquote>
+<p>那么，他给出这个答案背后的原因是什么呢？是基于哪些思考的呢？</p>
+<p>其实，主要是从缓存、安全性、线程安全和性能等角度出发的。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>字符串是使用最广泛的数据结构。大量的字符串的创建是非常耗费资源的，所以，Java提供了对字符串的缓存功能，可以大大的节省堆空间。</p>
+<p>JVM中专门开辟了一部分空间来存储Java字符串，那就是字符串池。</p>
+<p>通过字符串池，两个内容相同的字符串变量，可以从池中指向同一个字符串对象，从而节省了关键的内存资源。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;abcd&quot;;</span><br><span class="line">String s2 = s;</span><br></pre></td></tr></table></figure>
+
+<p>对于这个例子，s和s2都表示”abcd”，所以他们会指向字符串池中的同一个字符串对象：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242104703.jpg" alt="img"></p>
+<p>但是，之所以可以这么做，主要是因为字符串的不变性。试想一下，如果字符串是可变的，我们一旦修改了s的内容，那必然导致s2的内容也被动的改变了，这显然不是我们想看到的。</p>
+<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>字符串在Java应用程序中广泛用于存储敏感信息，如用户名、密码、连接url、网络连接等。JVM类加载器在加载类的时也广泛地使用它。</p>
+<p>因此，保护String类对于提升整个应用程序的安全性至关重要。</p>
+<p>当我们在程序中传递一个字符串的时候，如果这个字符串的内容是不可变的，那么我们就可以相信这个字符串中的内容。</p>
+<p>但是，如果是可变的，那么这个字符串内容就可能随时都被修改。那么这个字符串内容就完全不可信了。这样整个系统就没有安全性可言了。</p>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>不可变会自动使字符串成为线程安全的，因为当从多个线程访问它们时，它们不会被更改。</p>
+<p>因此，一般来说，不可变对象可以在同时运行的多个线程之间共享。它们也是线程安全的，因为如果线程更改了值，那么将在字符串池中创建一个新的字符串，而不是修改相同的值。因此，字符串对于多线程来说是安全的。</p>
+<h2 id="hashcode缓存"><a href="#hashcode缓存" class="headerlink" title="hashcode缓存"></a>hashcode缓存</h2><p>由于字符串对象被广泛地用作数据结构，它们也被广泛地用于哈希实现，如HashMap、HashTable、HashSet等。在对这些散列实现进行操作时，经常调用hashCode()方法。</p>
+<p>不可变性保证了字符串的值不会改变。因此，hashCode()方法在String类中被重写，以方便缓存，这样在第一次hashCode()调用期间计算和缓存散列，并从那时起返回相同的值。</p>
+<p>在String类中，有以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private int hash;//this is used to cache hash code.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>前面提到了的字符串池、hashcode缓存等，都是提升性能的体现。</p>
+<p>因为字符串不可变，所以可以用字符串池缓存，可以大大节省堆内存。而且还可以提前对hashcode进行缓存，更加高效</p>
+<p>由于字符串是应用最广泛的数据结构，提高字符串的性能对提高整个应用程序的总体性能有相当大的影响。</p>
 
     </div>
 
@@ -346,13 +373,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/" rel="prev" title="为什么不能用浮点数表示金额">
-                  <i class="fa fa-chevron-left"></i> 为什么不能用浮点数表示金额
+                <a href="/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/" rel="prev" title="日志文件">
+                  <i class="fa fa-chevron-left"></i> 日志文件
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/" rel="next" title="为什么Java不支持多继承">
-                  为什么Java不支持多继承 <i class="fa fa-chevron-right"></i>
+                <a href="/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/" rel="next" title="String str=new String("hollis")创建了几个对象">
+                  String str=new String("hollis")创建了几个对象 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
