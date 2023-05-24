@@ -19,25 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="技术博客">
-<meta property="og:type" content="website">
-<meta property="og:title" content="心梦无痕">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta name="description" content="典型回答Java中有8种基本数据类型，这些基本类型又都有对应的包装类。      分类 基本数据类型 包装类    布尔型 boolean Boolean   整型 byte Byte    short Short    int Integer    long Long   字符型 char Character   浮点型 float Float    double Double   因为Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java中有了基本类型为什么还需要包装类">
+<meta property="og:url" content="http://example.com/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/index.html">
 <meta property="og:site_name" content="心梦无痕">
-<meta property="og:description" content="技术博客">
+<meta property="og:description" content="典型回答Java中有8种基本数据类型，这些基本类型又都有对应的包装类。      分类 基本数据类型 包装类    布尔型 boolean Boolean   整型 byte Byte    short Short    int Integer    long Long   字符型 char Character   浮点型 float Float    double Double   因为Java">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-24T10:01:52.000Z">
+<meta property="article:modified_time" content="2023-05-24T10:59:50.287Z">
 <meta property="article:author" content="ZYH">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/","path":"2023/05/24/Java中有了基本类型为什么还需要包装类/","title":"Java中有了基本类型为什么还需要包装类"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>心梦无痕</title>
+<title>Java中有了基本类型为什么还需要包装类 | 心梦无痕</title>
   
 
 
@@ -72,7 +74,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">心梦无痕</h1>
+      <p class="site-title">心梦无痕</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">个人博客</p>
@@ -126,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -140,6 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9B%9E%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">典型回答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%89%A9%E5%B1%95"><span class="nav-number">2.</span> <span class="nav-text">知识扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">2.1.</span> <span class="nav-text">基本类型和包装类型的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E7%90%86%E8%A7%A3%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1"><span class="nav-number">2.2.</span> <span class="nav-text">如何理解自动拆装箱</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%86%E7%AE%B1%E4%B8%8E%E8%A3%85%E7%AE%B1"><span class="nav-number">2.2.1.</span> <span class="nav-text">拆箱与装箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1"><span class="nav-number">2.2.2.</span> <span class="nav-text">自动拆装箱</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E5%8E%9F%E7%90%86"><span class="nav-number">2.2.3.</span> <span class="nav-text">自动拆装箱原理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%93%AA%E4%BA%9B%E5%9C%B0%E6%96%B9%E4%BC%9A%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1"><span class="nav-number">2.3.</span> <span class="nav-text">哪些地方会自动拆装箱</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%80%E3%80%81%E5%B0%86%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%94%BE%E5%85%A5%E9%9B%86%E5%90%88%E7%B1%BB"><span class="nav-number">2.3.1.</span> <span class="nav-text">场景一、将基本数据类型放入集合类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%E3%80%81%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E5%92%8C%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A4%A7%E5%B0%8F%E6%AF%94%E8%BE%83"><span class="nav-number">2.3.2.</span> <span class="nav-text">场景二、包装类型和基本类型的大小比较</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%89%E3%80%81%E5%8C%85%E8%A3%85%E7%B1%BB%E5%9E%8B%E7%9A%84%E8%BF%90%E7%AE%97"><span class="nav-number">2.3.3.</span> <span class="nav-text">场景三、包装类型的运算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%9B%9B%E3%80%81%E4%B8%89%E7%9B%AE%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.3.4.</span> <span class="nav-text">场景四、三目运算符的使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%94%E3%80%81%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">2.3.5.</span> <span class="nav-text">场景五、函数参数与返回值</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E6%8B%86%E8%A3%85%E7%AE%B1%E4%B8%8E%E7%BC%93%E5%AD%98"><span class="nav-number">2.4.</span> <span class="nav-text">自动拆装箱与缓存</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -204,16 +207,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -227,13 +231,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="name" content="Java中有了基本类型为什么还需要包装类 | 心梦无痕">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/" class="post-title-link" itemprop="url">Java中有了基本类型为什么还需要包装类</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Java中有了基本类型为什么还需要包装类
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -257,6 +261,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
     <span class="post-meta-break"></span>
     <span class="post-meta-item" title="本文字数">
       <span class="post-meta-item-icon">
@@ -280,8 +291,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java中有8种基本数据类型，这些基本类型又都有对应的包装类。  </p>
+    <div class="post-body" itemprop="articleBody"><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java中有8种基本数据类型，这些基本类型又都有对应的包装类。  </p>
 <table>
 <thead>
 <tr>
@@ -417,7 +427,6 @@
 </blockquote>
 <p>范围内的时，将p包装成a和b两个对象时，可以直接使用a&#x3D;&#x3D;b判断a和b的值是否相等。</p>
 
-      
     </div>
 
     
@@ -426,471 +435,50 @@
 	
 	<div>
 		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
 </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">为什么Java不支持多继承</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-24 16:01:52 / 修改时间：18:17:50" itemprop="dateCreated datePublished" datetime="2023-05-24T16:01:52+08:00">2023-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
-<p>在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。但是，Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，但是，Java8中为了避免菱形继承的问题，在实现的多个接口中如果有相同方法，就会要求该类必须重写这个方法。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>Java的创始人James Gosling曾经回答过，他表示：</p>
-<p>“Java之所以不支持一个类继承多个类，主要是因为在设计之初我们听取了来自C++和Objective-C登阵营的人的意见。因为多继承会产生很多歧义问题。”</p>
-<p>Gosling老人家提到的歧义问题，其实是C++因为支持多继承之后带来的菱形继承问题。</p>
-<p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png" alt="image-20230524180528863"></p>
-<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
-<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
-<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
-<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
-<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
-<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8之前），这就避免了 C++ 中多继承的歧义问题。</p>
-<h2 id="Java-8中的多继承"><a href="#Java-8中的多继承" class="headerlink" title="Java 8中的多继承"></a>Java 8中的多继承</h2><p>Java不支持多继承，但是是支持多实现的，也就是说，同一个类可以同时实现多个类。</p>
-<p>我们知道，在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。</p>
-<p>那么问题来了。</p>
-<p>Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Pet &#123;</span><br><span class="line">    public default void eat()&#123;</span><br><span class="line">        System.out.println(&quot;Pet Is Eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，这不就是变相支持了多继承么。<br>那么，Java是怎么解决菱形继承问题的呢？我们再定义一个哺乳动物接口，也定义一个eat方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Mammal &#123;	</span><br><span class="line">	  public default void eat()&#123;</span><br><span class="line">	      System.out.println(&quot;Mammal Is Eating&quot;);</span><br><span class="line">	  &#125;        </span><br><span class="line">&#125;	    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后定义一个Cat，让他分别实现两个接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时候，编译期会报错：</p>
-<blockquote>
-<p>error: class Cat inherits unrelated defaults for eat() from types Mammal and Pet</p>
-</blockquote>
-<p>这时候，就要求Cat类中，必须重写eat()方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat Is Eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>所以可以看到，Java并没有帮我们解决多继承的歧义问题，而是把这个问题留给开发人员，通过重写方法的方式自己解决。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
 		
 	</div>
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="ZYH 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="ZYH 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
 </div>
 
 
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/" class="post-title-link" itemprop="url">Java是如何实现平台无关性的</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-24 15:01:52 / 修改时间：17:56:58" itemprop="dateCreated datePublished" datetime="2023-05-24T15:01:52+08:00">2023-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>737</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
-<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
-<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
-<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
-<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
-<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
-<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
-<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
-<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
-<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
-<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
-<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/" class="post-title-link" itemprop="url">为什么不能用浮点数表示金额</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-24 14:01:52 / 修改时间：17:43:18" itemprop="dateCreated datePublished" datetime="2023-05-24T14:01:52+08:00">2023-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">日志文件</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-23 10:48:03 / 修改时间：15:31:06" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>344</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/" rel="prev" title="为什么Java不支持多继承">
+                  <i class="fa fa-chevron-left"></i> 为什么Java不支持多继承
+                </a>
             </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 

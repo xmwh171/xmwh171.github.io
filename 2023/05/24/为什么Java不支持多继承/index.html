@@ -19,35 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="典型回答因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。">
+    <meta name="description" content="典型回答因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。 在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么不能用浮点数表示金额">
-<meta property="og:url" content="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/index.html">
+<meta property="og:title" content="为什么Java不支持多继承">
+<meta property="og:url" content="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/index.html">
 <meta property="og:site_name" content="心梦无痕">
-<meta property="og:description" content="典型回答因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。">
+<meta property="og:description" content="典型回答因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。 在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png">
-<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png">
-<meta property="article:published_time" content="2023-05-24T06:01:52.000Z">
-<meta property="article:modified_time" content="2023-05-24T09:43:18.453Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png">
+<meta property="article:published_time" content="2023-05-24T08:01:52.000Z">
+<meta property="article:modified_time" content="2023-05-24T10:17:50.992Z">
 <meta property="article:author" content="ZYH">
-<meta property="article:tag" content="double">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png">
 
 
-<link rel="canonical" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/">
+<link rel="canonical" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/","path":"2023/05/24/为什么不能用浮点数表示金额/","title":"为什么不能用浮点数表示金额"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/","path":"2023/05/24/为什么Java不支持多继承/","title":"为什么Java不支持多继承"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>为什么不能用浮点数表示金额 | 心梦无痕</title>
+<title>为什么Java不支持多继承 | 心梦无痕</title>
   
 
 
@@ -150,7 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9B%9E%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">典型回答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">扩展知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%81%E8%BF%9B%E5%88%B6%E8%BD%AC%E4%BA%8C%E8%BF%9B%E5%88%B6"><span class="nav-number">2.1.</span> <span class="nav-text">十进制转二进制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E6%98%AF%E6%89%80%E6%9C%89%E6%95%B0%E9%83%BD%E8%83%BD%E7%94%A8%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E7%A4%BA"><span class="nav-number">2.2.</span> <span class="nav-text">不是所有数都能用二进制表示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IEEE-754"><span class="nav-number">2.3.</span> <span class="nav-text">IEEE 754</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E7%B2%BE%E5%BA%A6%E4%B8%A2%E5%A4%B1"><span class="nav-number">2.4.</span> <span class="nav-text">避免精度丢失</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9B%9E%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">典型回答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">扩展知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8F%B1%E5%BD%A2%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">菱形继承问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java-8%E4%B8%AD%E7%9A%84%E5%A4%9A%E7%BB%A7%E6%89%BF"><span class="nav-number">3.</span> <span class="nav-text">Java 8中的多继承</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +220,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -239,12 +233,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="为什么不能用浮点数表示金额 | 心梦无痕">
+      <meta itemprop="name" content="为什么Java不支持多继承 | 心梦无痕">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          为什么不能用浮点数表示金额
+          为什么Java不支持多继承
         </h1>
 
         <div class="post-meta-container">
@@ -256,7 +250,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-24 14:01:52 / 修改时间：17:43:18" itemprop="dateCreated datePublished" datetime="2023-05-24T14:01:52+08:00">2023-05-24</time>
+      <time title="创建时间：2023-05-24 16:01:52 / 修改时间：18:17:50" itemprop="dateCreated datePublished" datetime="2023-05-24T16:01:52+08:00">2023-05-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -282,14 +276,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
+      <span>1.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -299,31 +293,46 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
-<span id="more"></span>
+    <div class="post-body" itemprop="articleBody"><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
+<p>在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。但是，Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
+<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，但是，Java8中为了避免菱形继承的问题，在实现的多个接口中如果有相同方法，就会要求该类必须重写这个方法。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>Java的创始人James Gosling曾经回答过，他表示：</p>
+<p>“Java之所以不支持一个类继承多个类，主要是因为在设计之初我们听取了来自C++和Objective-C登阵营的人的意见。因为多继承会产生很多歧义问题。”</p>
+<p>Gosling老人家提到的歧义问题，其实是C++因为支持多继承之后带来的菱形继承问题。</p>
+<p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png" alt="image-20230524180528863"></p>
+<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
+<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
+<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
+<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
+<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
+<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8之前），这就避免了 C++ 中多继承的歧义问题。</p>
+<h2 id="Java-8中的多继承"><a href="#Java-8中的多继承" class="headerlink" title="Java 8中的多继承"></a>Java 8中的多继承</h2><p>Java不支持多继承，但是是支持多实现的，也就是说，同一个类可以同时实现多个类。</p>
+<p>我们知道，在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。</p>
+<p>那么问题来了。</p>
+<p>Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Pet &#123;</span><br><span class="line">    public default void eat()&#123;</span><br><span class="line">        System.out.println(&quot;Pet Is Eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><p>十进制整数转换为二进制整数采用”除2取余，逆序排列”法。<br>具体做法是：<br>用2整除十进制整数，可以得到一个商和余数；<br>再用2去除商，又会得到一个商和余数，如此进行，直到商为小于1时为止<br>然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。<br>如，我们想要把127转换成二进制，做法如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png" alt="屏幕截图 2023-05-24 172509"></p>
-<p>那么，<strong>十进制小数转换成二进制小数，又该如何计算呢？</strong><br>十进制小数转换成二进制小数采用”乘2取整，顺序排列”法。<br>具体做法是：<br>用2乘十进制小数，可以得到积<br>将积的整数部分取出，再用2乘余下的小数部分，又得到一个积<br>再将积的整数部分取出，如此进行，直到积中的小数部分为零，此时0或1为二进制的最后一位。或者达到所要求的精度为止。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png" alt="image-20230524172648834"></p>
-<p>所以，十进制的0.625对应的二进制就是0.101。</p>
-<h3 id="不是所有数都能用二进制表示"><a href="#不是所有数都能用二进制表示" class="headerlink" title="不是所有数都能用二进制表示"></a>不是所有数都能用二进制表示</h3><p>我们知道了如何将一个十进制小数转换成二进制，那么是不是计算就可以直接用二进制表示小数了呢？<br>前面我们的例子中0.625是一个特列，那么还是用同样的算法，请计算下0.1对应的二进制是多少？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png" alt="image-20230524172739187"></p>
-<p>我们发现，0.1的二进制表示中出现了无限循环的情况，也就是(0.1)10 &#x3D; (0.000110011001100…)2<br>这种情况，计算机就没办法用二进制精确的表示0.1了。<br><strong>也就是说，对于像0.1这种数字，我们是没办法将他转换成一个确定的二进制数的。</strong></p>
-<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>为了解决部分小数无法使用二进制精确表示的问题，于是就有了IEEE 754规范。<br>IEEE二进制浮点数算术标准（IEEE 754）是20世纪80年代以来最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用。<br>浮点数和小数并不是完全一样的，计算机中小数的表示法，其实有定点和浮点两种。因为在位数相同的情况下，定点数的表示范围要比浮点数小。所以在计算机科学中，使用浮点数来表示实数的近似值。<br>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。<br>其中最常用的就是32位单精度浮点数和64位双精度浮点数。<br><strong>IEEE并没有解决小数无法精确表示的问题，只是提出了一种使用近似值表示小数的方式，并且引入了精度的概念。</strong><br>浮点数是一串0和1构成的位序列(bit sequence)，从逻辑上用三元组{S,E,M}表示一个数N,如下图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png"></p>
-<ul>
-<li>S(sign)表示N的符号位。对应值s满足：n&gt;0时，s&#x3D;0; n≤0时，s&#x3D;1。</li>
-<li>E(exponent)表示N的指数位，位于S和M之间的若干位。对应值e值也可正可负。</li>
-<li>M(mantissa)表示N的尾数位，恰好，它位于N末尾。M也叫有效数字位（significand）、系数位（coefficient), 甚至被称作”小数”。</li>
-</ul>
-<p>则浮点数N的实际值n由下方的式子表示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png" alt="image-20230524172940592"></p>
-<p>上面这个公式看起来很复杂，其中符号位和尾数位还比较容易理解，但是这个指数位就不是那么容易理解了。<br>其实，大家也不用太过于纠结这个公式，大家只需要知道对于单精度浮点数，最多只能用32位字符表示一个数字，双精度浮点数最多只能用64位来表示一个数字。<br><strong>而对于那些无限循环的二进制数来说，计算机采用浮点数的方式保留了一定的有效数字，那么这个值只能是近似值，不可能是真实值。</strong><br>至于一个数对应的IEEE 754浮点数应该如何计算，不是本文的重点，这里就不再赘述了，过程还是比较复杂的，需要进行对阶、尾数求和、规格化、舍入以及溢出判断等。<br>但是这些其实不需要了解的太详细，我们只需要知道，小数在计算机中的表示是近似数，并不是真实值。根据精度不同，近似程度也有所不同。<br>如0.1这个小数，他对应的在双精度浮点数的二进制为：0.00011001100110011001100110011001100110011001100110011001 。<br>0.2这个小数0.00110011001100110011001100110011001100110011001100110011 。<br>所以两者相加：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png" alt="image-20230524173051530"></p>
-<p>转换成10进制之后得到：0.30000000000000004！</p>
-<h3 id="避免精度丢失"><a href="#避免精度丢失" class="headerlink" title="避免精度丢失"></a>避免精度丢失</h3><p>在Java中，使用float表示单精度浮点数，double表示双精度浮点数，表示的都是近似值。<br>所以，在Java代码中，千万不要使用float或者double来进行高精度运算，尤其是金额运算，否则就很容易产生资损问题。</p>
-<p>为了解决这样的精度问题，Java中提供了BigDecimal来进行精确运算。</p>
+
+
+<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，这不就是变相支持了多继承么。<br>那么，Java是怎么解决菱形继承问题的呢？我们再定义一个哺乳动物接口，也定义一个eat方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Mammal &#123;	</span><br><span class="line">	  public default void eat()&#123;</span><br><span class="line">	      System.out.println(&quot;Mammal Is Eating&quot;);</span><br><span class="line">	  &#125;        </span><br><span class="line">&#125;	    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后定义一个Cat，让他分别实现两个接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候，编译期会报错：</p>
+<blockquote>
+<p>error: class Cat inherits unrelated defaults for eat() from types Mammal and Pet</p>
+</blockquote>
+<p>这时候，就要求Cat类中，必须重写eat()方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat Is Eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>所以可以看到，Java并没有帮我们解决多继承的歧义问题，而是把这个问题留给开发人员，通过重写方法的方式自己解决。</p>
 
     </div>
 
@@ -361,21 +370,18 @@
   </div>
 </div>
 
-          <div class="post-tags">
-              <a href="/tags/double/" rel="tag"><i class="fa fa-tag"></i> double</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/" rel="prev" title="日志文件">
-                  <i class="fa fa-chevron-left"></i> 日志文件
+                <a href="/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/" rel="prev" title="Java是如何实现平台无关性的">
+                  <i class="fa fa-chevron-left"></i> Java是如何实现平台无关性的
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/" rel="next" title="Java是如何实现平台无关性的">
-                  Java是如何实现平台无关性的 <i class="fa fa-chevron-right"></i>
+                <a href="/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/" rel="next" title="Java中有了基本类型为什么还需要包装类">
+                  Java中有了基本类型为什么还需要包装类 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
