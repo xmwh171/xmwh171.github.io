@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="典型回答单例模式主要是通过把一个类的构造方法私有化，来避免重复创建多个对象的。那么，想要破坏单例，只要想办法能够执行到这个私有的构造方法就行了。 一般来说做法有使用反射及使用反序列化都可以破坏单例。 扩展知识我们先通过双重校验锁的方式创建一个单例，后文会通过反射及反序列化的方式尝试破坏这个单例。 1234567891011121314151617181920package com.hollis;i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何破坏单例模式">
+<meta property="og:url" content="http://example.com/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/index.html">
+<meta property="og:site_name" content="心梦无痕">
+<meta property="og:description" content="典型回答单例模式主要是通过把一个类的构造方法私有化，来避免重复创建多个对象的。那么，想要破坏单例，只要想办法能够执行到这个私有的构造方法就行了。 一般来说做法有使用反射及使用反序列化都可以破坏单例。 扩展知识我们先通过双重校验锁的方式创建一个单例，后文会通过反射及反序列化的方式尝试破坏这个单例。 1234567891011121314151617181920package com.hollis;i">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305251841292.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305251842849.jpeg">
+<meta property="article:published_time" content="2023-05-25T02:48:03.000Z">
+<meta property="article:modified_time" content="2023-05-25T10:45:33.846Z">
+<meta property="article:author" content="ZYH">
+<meta property="article:tag" content="单例">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305251841292.png">
+
+
+<link rel="canonical" href="http://example.com/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/","path":"2023/05/25/如何破坏单例模式/","title":"如何破坏单例模式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>如何破坏单例模式 | 心梦无痕</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+    
+   <script type = "text/javascript" src="/js/love-click.js"></script > 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">心梦无痕</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9B%9E%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">典型回答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">扩展知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B"><span class="nav-number">2.1.</span> <span class="nav-text">反射破坏单例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B"><span class="nav-number">2.2.</span> <span class="nav-text">反序列化破坏单例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ObjectInputStream"><span class="nav-number">2.3.</span> <span class="nav-text">ObjectInputStream</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.4.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E5%8D%95%E4%BE%8B%E8%A2%AB%E7%A0%B4%E5%9D%8F"><span class="nav-number">2.5.</span> <span class="nav-text">如何避免单例被破坏</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%8F%8D%E5%B0%84%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B"><span class="nav-number">2.5.1.</span> <span class="nav-text">避免反射破坏单例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%81%BF%E5%85%8D%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B"><span class="nav-number">2.5.2.</span> <span class="nav-text">避免反序列化破坏单例</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=4940920&auto=1&height=66">
+		</iframe>
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZYH"
+      src="/images/yh.jpeg">
+  <p class="site-author-name" itemprop="name">ZYH</p>
+  <div class="site-description" itemprop="description">技术博客</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xmwh171" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xmwh171" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://bilibili.com/" title="https:&#x2F;&#x2F;bilibili.com" rel="noopener" target="_blank">b站</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">百度</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="如何破坏单例模式 | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何破坏单例模式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：18:45:33" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>5 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>单例模式主要是通过把一个类的构造方法私有化，来避免重复创建多个对象的。那么，想要破坏单例，只要想办法能够执行到这个私有的构造方法就行了。</p>
+<p>一般来说做法有使用反射及使用反序列化都可以破坏单例。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><p>我们先通过双重校验锁的方式创建一个单例，后文会通过反射及反序列化的方式尝试破坏这个单例。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.Serializable;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> * 使用双重校验锁方式实现单例</span><br><span class="line"> */</span><br><span class="line">public class Singleton implements Serializable&#123;</span><br><span class="line">    private volatile static Singleton singleton;</span><br><span class="line">    private Singleton ()&#123;&#125;</span><br><span class="line">    public static Singleton getSingleton() &#123;</span><br><span class="line">        if (singleton == null) &#123;</span><br><span class="line">            synchronized (Singleton.class) &#123;</span><br><span class="line">                if (singleton == null) &#123;</span><br><span class="line">                    singleton = new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="反射破坏单例"><a href="#反射破坏单例" class="headerlink" title="反射破坏单例"></a>反射破坏单例</h3><p>我们尝试通过反射技术，来破坏单例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Singleton singleton1 = Singleton.getInstance();</span><br><span class="line"></span><br><span class="line">//通过反射获取到构造函数</span><br><span class="line">Constructor&lt;Singleton&gt; constructor = Singleton.class.getDeclaredConstructor();</span><br><span class="line">//将构造函数设置为可访问类型</span><br><span class="line">constructor.setAccessible(true);</span><br><span class="line">//调用构造函数的newInstance创建一个对象</span><br><span class="line">Singleton singleton2 = constructor.newInstance();</span><br><span class="line">//判断反射创建的对象和之前的对象是不是同一个对象</span><br><span class="line">System.out.println(s1 == s2);</span><br></pre></td></tr></table></figure>
+
+<p>以上代码，输出结果为false，也就是说通过反射技术，我们给单例对象创建出来了一个”兄弟”。</p>
+<p>setAccessible(true)，使得反射对象在使用时应该取消 Java 语言访问检查，使得私有的构造函数能够被访问。</p>
+<h3 id="反序列化破坏单例"><a href="#反序列化破坏单例" class="headerlink" title="反序列化破坏单例"></a>反序列化破坏单例</h3><p>我们尝试通过序列化+反序列化来破坏一下单例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.*;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> */</span><br><span class="line">public class SerializableDemo1 &#123;</span><br><span class="line">    //为了便于理解，忽略关闭流操作及删除文件操作。真正编码时千万不要忘记</span><br><span class="line">    //Exception直接抛出</span><br><span class="line">    public static void main(String[] args) throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        //Write Obj to file</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(Singleton.getSingleton());</span><br><span class="line">        //Read Obj from file</span><br><span class="line">        File file = new File(&quot;tempFile&quot;);</span><br><span class="line">        ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        Singleton newInstance = (Singleton) ois.readObject();</span><br><span class="line">        //判断是否是同一个对象</span><br><span class="line">        System.out.println(newInstance == Singleton.getSingleton());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//false</span><br></pre></td></tr></table></figure>
+
+
+
+<p>输出结构为false，说明：</p>
+<p>通过对Singleton的序列化与反序列化得到的对象是一个新的对象，这就破坏了Singleton的单例性。</p>
+<p>这里，在介绍如何解决这个问题之前，我们先来深入分析一下，为什么会这样？在反序列化的过程中到底发生了什么。</p>
+<h3 id="ObjectInputStream"><a href="#ObjectInputStream" class="headerlink" title="ObjectInputStream"></a>ObjectInputStream</h3><p>对象的序列化过程通过ObjectOutputStream和ObjectInputStream来实现的，那么带着刚刚的问题，分析一下ObjectInputStream 的readObject 方法执行情况到底是怎样的。</p>
+<p>为了节省篇幅，这里给出ObjectInputStream的readObject的调用栈：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305251841292.png" alt="img"></p>
+<p>这里看一下重点代码，readOrdinaryObject方法的代码片段： code 3</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private Object readOrdinaryObject(boolean unshared)</span><br><span class="line">        throws IOException</span><br><span class="line">    &#123;</span><br><span class="line">        //此处省略部分代码</span><br><span class="line"></span><br><span class="line">        Object obj;</span><br><span class="line">        try &#123;</span><br><span class="line">            obj = desc.isInstantiable() ? desc.newInstance() : null;</span><br><span class="line">        &#125; catch (Exception ex) &#123;</span><br><span class="line">            throw (IOException) new InvalidClassException(</span><br><span class="line">                desc.forClass().getName(),</span><br><span class="line">                &quot;unable to create instance&quot;).initCause(ex);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //此处省略部分代码</span><br><span class="line"></span><br><span class="line">        if (obj != null &amp;&amp;</span><br><span class="line">            handles.lookupException(passHandle) == null &amp;&amp;</span><br><span class="line">            desc.hasReadResolveMethod())</span><br><span class="line">        &#123;</span><br><span class="line">            Object rep = desc.invokeReadResolve(obj);</span><br><span class="line">            if (unshared &amp;&amp; rep.getClass().isArray()) &#123;</span><br><span class="line">                rep = cloneArray(rep);</span><br><span class="line">            &#125;</span><br><span class="line">            if (rep != obj) &#123;</span><br><span class="line">                handles.setObject(passHandle, obj = rep);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return obj;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>code 3 中主要贴出两部分代码。先分析第一部分：</p>
+<p>code 3.1</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Object obj;</span><br><span class="line">try &#123;</span><br><span class="line">    obj = desc.isInstantiable() ? desc.newInstance() : null;</span><br><span class="line">&#125; catch (Exception ex) &#123;</span><br><span class="line">    throw (IOException) new InvalidClassException(desc.forClass().getName(),&quot;unable to create instance&quot;).initCause(ex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>这里创建的这个obj对象，就是本方法要返回的对象，也可以暂时理解为是ObjectInputStream的readObject返回的对象。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305251842849.jpeg" alt="img"></p>
+<blockquote>
+<p>isInstantiable：如果一个serializable&#x2F;externalizable的类可以在运行时被实例化，那么该方法就返回true。针对serializable和externalizable我会在其他文章中介绍。</p>
+<p>desc.newInstance：该方法通过反射的方式调用无参构造方法新建一个对象。</p>
+</blockquote>
+<p>所以。到目前为止，也就可以解释，为什么序列化可以破坏单例了？</p>
+<blockquote>
+<p>答：序列化会通过反射调用无参数的构造方法创建一个新的对象。</p>
+</blockquote>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在涉及到序列化的场景时，要格外注意他对单例的破坏。</p>
+<h3 id="如何避免单例被破坏"><a href="#如何避免单例被破坏" class="headerlink" title="如何避免单例被破坏"></a>如何避免单例被破坏</h3><h4 id="避免反射破坏单例"><a href="#避免反射破坏单例" class="headerlink" title="避免反射破坏单例"></a>避免反射破坏单例</h4><p>反射是调用默认的构造函数创建出来的，只需要我们改造下构造函数，使其在反射调用的时候识别出来对象是不是被创建过就行了：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private Singleton() &#123;</span><br><span class="line">    if (singleton != null)&#123;        </span><br><span class="line">    throw new RuntimeException(&quot;单例对象只能创建一次... &quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="避免反序列化破坏单例"><a href="#避免反序列化破坏单例" class="headerlink" title="避免反序列化破坏单例"></a>避免反序列化破坏单例</h4><p>只要在Singleton类中定义readResolve就可以解决该问题：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.Serializable;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> * 使用双重校验锁方式实现单例</span><br><span class="line"> */</span><br><span class="line">public class Singleton implements Serializable&#123;</span><br><span class="line">    private volatile static Singleton singleton;</span><br><span class="line">    private Singleton ()&#123;&#125;</span><br><span class="line">    public static Singleton getSingleton() &#123;</span><br><span class="line">        if (singleton == null) &#123;</span><br><span class="line">            synchronized (Singleton.class) &#123;</span><br><span class="line">                if (singleton == null) &#123;</span><br><span class="line">                    singleton = new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Object readResolve() &#123;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>还是运行以下测试类：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.*;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> */</span><br><span class="line">public class SerializableDemo1 &#123;</span><br><span class="line">    //为了便于理解，忽略关闭流操作及删除文件操作。真正编码时千万不要忘记</span><br><span class="line">    //Exception直接抛出</span><br><span class="line">    public static void main(String[] args) throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        //Write Obj to file</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(Singleton.getSingleton());</span><br><span class="line">        //Read Obj from file</span><br><span class="line">        File file = new File(&quot;tempFile&quot;);</span><br><span class="line">        ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        Singleton newInstance = (Singleton) ois.readObject();</span><br><span class="line">        //判断是否是同一个对象</span><br><span class="line">        System.out.println(newInstance == Singleton.getSingleton());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//true</span><br></pre></td></tr></table></figure>
+
+
+
+<p>本次输出结果为true。具体原理，我们回过头继续分析code 3中的第二段代码:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if (obj != null &amp;&amp;</span><br><span class="line">            handles.lookupException(passHandle) == null &amp;&amp;</span><br><span class="line">            desc.hasReadResolveMethod())</span><br><span class="line">        &#123;</span><br><span class="line">            Object rep = desc.invokeReadResolve(obj);</span><br><span class="line">            if (unshared &amp;&amp; rep.getClass().isArray()) &#123;</span><br><span class="line">                rep = cloneArray(rep);</span><br><span class="line">            &#125;</span><br><span class="line">            if (rep != obj) &#123;</span><br><span class="line">                handles.setObject(passHandle, obj = rep);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>hasReadResolveMethod:如果实现了serializable 或者 externalizable接口的类中包含readResolve则返回true</p>
+<p>invokeReadResolve:通过反射的方式调用要被反序列化的类的readResolve方法。</p>
+<p>所以，原理也就清楚了，主要在Singleton中定义readResolve方法，并在该方法中指定要返回的对象的生成策略，就可以防止单例被破坏。</p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="ZYH 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="ZYH 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%95%E4%BE%8B/" rel="tag"><i class="fa fa-tag"></i> 单例</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/" rel="prev" title="常见的语法糖">
+                  <i class="fa fa-chevron-left"></i> 常见的语法糖
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/" rel="next" title="什么是反射机制？为什么反射慢？">
+                  什么是反射机制？为什么反射慢？ <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZYH</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">20k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:14</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+    </div>
+  </footer>
+ 
+	
+	<script type="text/javascript"
+	color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+

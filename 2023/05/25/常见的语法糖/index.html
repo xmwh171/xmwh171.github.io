@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="典型回答语法糖（Syntactic sugar），指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。 虽然Java中有很多语法糖，但是Java虚拟机并不支持这些语法糖，所以这些语法糖在编译阶段就会被还原成简单的基础语法结构，这样才能被虚拟机识别，这个过程就是解语法糖。 如果看过Java虚拟机的源码，就会发现在编译过程中有一个重要的步骤就是调用desugar()，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见的语法糖">
+<meta property="og:url" content="http://example.com/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/index.html">
+<meta property="og:site_name" content="心梦无痕">
+<meta property="og:description" content="典型回答语法糖（Syntactic sugar），指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。 虽然Java中有很多语法糖，但是Java虚拟机并不支持这些语法糖，所以这些语法糖在编译阶段就会被还原成简单的基础语法结构，这样才能被虚拟机识别，这个过程就是解语法糖。 如果看过Java虚拟机的源码，就会发现在编译过程中有一个重要的步骤就是调用desugar()，">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-05-25T02:48:03.000Z">
+<meta property="article:modified_time" content="2023-05-25T07:50:06.782Z">
+<meta property="article:author" content="ZYH">
+<meta property="article:tag" content="语法糖">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/","path":"2023/05/25/常见的语法糖/","title":"常见的语法糖"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>常见的语法糖 | 心梦无痕</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+    
+   <script type = "text/javascript" src="/js/love-click.js"></script > 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">心梦无痕</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9B%9E%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">典型回答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9F%A5%E8%AF%86%E6%89%A9%E5%B1%95"><span class="nav-number">2.</span> <span class="nav-text">知识扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%A7%A3%E8%AF%AD%E6%B3%95%E7%B3%96%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">如何解语法糖？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E4%B8%80%E3%80%81-switch-%E6%94%AF%E6%8C%81-String-%E4%B8%8E%E6%9E%9A%E4%B8%BE"><span class="nav-number">2.2.</span> <span class="nav-text">糖块一、 switch 支持 String 与枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E4%BA%8C%E3%80%81-%E6%B3%9B%E5%9E%8B"><span class="nav-number">2.3.</span> <span class="nav-text">糖块二、 泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E4%B8%89%E3%80%81-%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1%E4%B8%8E%E6%8B%86%E7%AE%B1"><span class="nav-number">2.4.</span> <span class="nav-text">糖块三、 自动装箱与拆箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E5%9B%9B-%E3%80%81-%E6%96%B9%E6%B3%95%E5%8F%98%E9%95%BF%E5%8F%82%E6%95%B0"><span class="nav-number">2.5.</span> <span class="nav-text">糖块四 、 方法变长参数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E4%BA%94-%E3%80%81-%E6%9E%9A%E4%B8%BE"><span class="nav-number">2.6.</span> <span class="nav-text">糖块五 、 枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E5%85%AD-%E3%80%81-%E5%86%85%E9%83%A8%E7%B1%BB"><span class="nav-number">2.7.</span> <span class="nav-text">糖块六 、 内部类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E4%B8%83-%E3%80%81%E6%9D%A1%E4%BB%B6%E7%BC%96%E8%AF%91"><span class="nav-number">2.8.</span> <span class="nav-text">糖块七 、条件编译</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E5%85%AB-%E3%80%81-%E6%96%AD%E8%A8%80"><span class="nav-number">2.9.</span> <span class="nav-text">糖块八 、 断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E4%B9%9D-%E3%80%81-%E6%95%B0%E5%80%BC%E5%AD%97%E9%9D%A2%E9%87%8F"><span class="nav-number">2.10.</span> <span class="nav-text">糖块九 、 数值字面量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E5%8D%81-%E3%80%81-for-each"><span class="nav-number">2.11.</span> <span class="nav-text">糖块十 、 for-each</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E5%8D%81%E4%B8%80-%E3%80%81-try-with-resource"><span class="nav-number">2.12.</span> <span class="nav-text">糖块十一 、 try-with-resource</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B3%96%E5%9D%97%E5%8D%81%E4%BA%8C%E3%80%81Lambda%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.13.</span> <span class="nav-text">糖块十二、Lambda表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%AF%E8%83%BD%E9%81%87%E5%88%B0%E7%9A%84%E5%9D%91"><span class="nav-number">3.</span> <span class="nav-text">可能遇到的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%9B%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">泛型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%87%AA%E5%8A%A8%E8%A3%85%E7%AE%B1%E4%B8%8E%E6%8B%86%E7%AE%B1"><span class="nav-number">3.2.</span> <span class="nav-text">自动装箱与拆箱</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A2%9E%E5%BC%BAfor%E5%BE%AA%E7%8E%AF"><span class="nav-number">3.3.</span> <span class="nav-text">增强for循环</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+		<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=4940920&auto=1&height=66">
+		</iframe>
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZYH"
+      src="/images/yh.jpeg">
+  <p class="site-author-name" itemprop="name">ZYH</p>
+  <div class="site-description" itemprop="description">技术博客</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xmwh171" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xmwh171" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://bilibili.com/" title="https:&#x2F;&#x2F;bilibili.com" rel="noopener" target="_blank">b站</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">百度</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="常见的语法糖 | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常见的语法糖
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：15:50:06" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>5.3k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>19 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>语法糖（Syntactic sugar），指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。</p>
+<p>虽然Java中有很多语法糖，但是Java虚拟机并不支持这些语法糖，所以这些语法糖在编译阶段就会被还原成简单的基础语法结构，这样才能被虚拟机识别，这个过程就是解语法糖。</p>
+<p>如果看过Java虚拟机的源码，就会发现在编译过程中有一个重要的步骤就是调用desugar()，这个方法就是负责解语法糖的实现。</p>
+<p>常见的语法糖有 switch支持枚举及字符串、泛型、条件编译、断言、可变参数、自动装箱&#x2F;拆箱、枚举、内部类、增强for循环、try-with-resources语句、lambda表达式等。</p>
+<h2 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h2><h3 id="如何解语法糖？"><a href="#如何解语法糖？" class="headerlink" title="如何解语法糖？"></a>如何解语法糖？</h3><p>语法糖的存在主要是方便开发人员使用。但其实，Java虚拟机并不支持这些语法糖。这些语法糖在编译阶段就会被还原成简单的基础语法结构，这个过程就是解语法糖。</p>
+<p>说到编译，大家肯定都知道，Java语言中javac命令可以将后缀名为.java的源文件编译为后缀名为.class的可以运行于Java虚拟机的字节码。如果你去看com.sun.tools.javac.main.JavaCompiler的源码，你会发现在compile()中有一个步骤就是调用<code>desugar()</code>，这个方法就是负责解语法糖的实现的。</p>
+<h3 id="糖块一、-switch-支持-String-与枚举"><a href="#糖块一、-switch-支持-String-与枚举" class="headerlink" title="糖块一、 switch 支持 String 与枚举"></a>糖块一、 switch 支持 String 与枚举</h3><p>前面提到过，从Java 7 开始，Java语言中的语法糖在逐渐丰富，其中一个比较重要的就是Java 7中switch开始支持String。</p>
+<p>在开始coding之前先科普下，Java中的switch自身原本就支持基本类型。比如int、char等。对于int类型，直接进行数值的比较。对于char类型则是比较其ascii码。所以，对于编译器来说，switch中其实只能使用整型，任何类型的比较都要转换成整型。比如byte。short，char(ackii码是整型)以及int。</p>
+<p>那么接下来看下switch对String得支持，有以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class switchDemoString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String str = &quot;world&quot;;</span><br><span class="line">        switch (str) &#123;</span><br><span class="line">        case &quot;hello&quot;:</span><br><span class="line">            System.out.println(&quot;hello&quot;);</span><br><span class="line">            break;</span><br><span class="line">        case &quot;world&quot;:</span><br><span class="line">            System.out.println(&quot;world&quot;);</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>[反编译][1]后内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class switchDemoString</span><br><span class="line">&#123;</span><br><span class="line">​    public switchDemoString()</span><br><span class="line">​    &#123;</span><br><span class="line">​    &#125;</span><br><span class="line">​    public static void main(String args[])</span><br><span class="line">​    &#123;</span><br><span class="line">​        String str = &quot;world&quot;;</span><br><span class="line">​        String s;</span><br><span class="line">​        switch((s = str).hashCode())</span><br><span class="line">​        &#123;</span><br><span class="line">​        default:</span><br><span class="line">​            break;</span><br><span class="line">​        case 99162322:</span><br><span class="line">​            if(s.equals(&quot;hello&quot;))</span><br><span class="line">​                System.out.println(&quot;hello&quot;);</span><br><span class="line">​            break;</span><br><span class="line">​        case 113318802:</span><br><span class="line">​            if(s.equals(&quot;world&quot;))</span><br><span class="line">​                System.out.println(&quot;world&quot;);</span><br><span class="line">​            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看到这个代码，你知道原来字符串的switch是通过equals()和hashCode()方法来实现的。还好hashCode()方法返回的是int，而不是long。</p>
+<blockquote>
+<p>仔细看下可以发现，进行switch的实际是哈希值，然后通过使用equals方法比较进行安全检查，这个检查是必要的，因为哈希可能会发生碰撞。因此它的性能是不如使用枚举进行switch或者使用纯整数常量，但这也不是很差。</p>
+</blockquote>
+<h3 id="糖块二、-泛型"><a href="#糖块二、-泛型" class="headerlink" title="糖块二、 泛型"></a><strong>糖块二、 泛型</strong></h3><p>我们都知道，很多语言都是支持泛型的，但是很多人不知道的是，不同的编译器对于泛型的处理方式是不同的，通常情况下，一个编译器处理泛型有两种方式：Code specialization和Code sharing。C++和C#是使用Code specialization的处理机制，而Java使用的是Code sharing的机制。</p>
+<blockquote>
+<p>Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。将多种泛型类形实例映射到唯一的字节码表示是通过类型擦除（type erasue）实现的。</p>
+</blockquote>
+<p>也就是说，对于Java虚拟机来说，他根本不认识Map&lt;String, String&gt; map这样的语法。需要在编译阶段通过类型擦除的方式进行解语法糖。</p>
+<p>类型擦除的主要过程如下： 1.将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。 2.移除所有的类型参数。</p>
+<p>以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;(); </span><br><span class="line">map.put(&quot;name&quot;, &quot;hollis&quot;); </span><br><span class="line">map.put(&quot;wechat&quot;, &quot;Hollis&quot;); </span><br><span class="line">map.put(&quot;blog&quot;, &quot;www.hollischuang.com&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>解语法糖之后会变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map map = new HashMap(); </span><br><span class="line">map.put(&quot;name&quot;, &quot;hollis&quot;); </span><br><span class="line">map.put(&quot;wechat&quot;, &quot;Hollis&quot;); </span><br><span class="line">map.put(&quot;blog&quot;, &quot;www.hollischuang.com&quot;);</span><br></pre></td></tr></table></figure>
+
+
+<p> 以下代码： ​</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;A extends Comparable&lt;A&gt;&gt; A max(Collection&lt;A&gt; xs) &#123;</span><br><span class="line">	Iterator&lt;A&gt; xi = xs.iterator();</span><br><span class="line">	A w = xi.next();</span><br><span class="line">	while (xi.hasNext()) &#123;</span><br><span class="line">		A x = xi.next();</span><br><span class="line">		if (w.compareTo(x) &lt; 0)</span><br><span class="line">			w = x;</span><br><span class="line">	&#125;</span><br><span class="line">	return w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p> 类型擦除后会变成：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static Comparable max(Collection xs)&#123;</span><br><span class="line">	Iterator xi = xs.iterator();</span><br><span class="line">	Comparable w = (Comparable)xi.next();</span><br><span class="line">	while(xi.hasNext())</span><br><span class="line">	&#123;</span><br><span class="line">		Comparable x = (Comparable)xi.next();</span><br><span class="line">		if(w.compareTo(x) &lt; 0)</span><br><span class="line">			w = x;</span><br><span class="line">	&#125;</span><br><span class="line">	return w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p> <strong>虚拟机中没有泛型，只有普通类和普通方法，所有泛型类的类型参数在编译时都会被擦除，泛型类并没有自己独有的Class类对象。比如并不存在List<String>.class或是List<Integer>.class，而只有List.class。</strong></p>
+<h3 id="糖块三、-自动装箱与拆箱"><a href="#糖块三、-自动装箱与拆箱" class="headerlink" title="糖块三、 自动装箱与拆箱"></a>糖块三、 自动装箱与拆箱</h3><p>自动装箱就是Java自动将原始类型值转换成对应的对象，比如将int的变量转换成Integer对象，这个过程叫做装箱，反之将Integer对象转换成int类型值，这个过程叫做拆箱。因为这里的装箱和拆箱是自动进行的非人为转换，所以就称作为自动装箱和拆箱。原始类型byte, short, char, int, long, float, double 和 boolean 对应的封装类为Byte, Short, Character, Integer, Long, Float, Double, Boolean。</p>
+<p> 先来看个自动装箱的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123; </span><br><span class="line">	int i = 10; </span><br><span class="line">	Integer n = i; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后代码如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[]) &#123; </span><br><span class="line">	int i = 10; </span><br><span class="line">	Integer n = Integer.valueOf(i); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>再来看个自动拆箱的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123; </span><br><span class="line">	Integer i = 10; </span><br><span class="line">	int n = i; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">    Integer i = Integer.valueOf(10);</span><br><span class="line">    int n = i.intValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从反编译得到内容可以看出，在装箱的时候自动调用的是Integer的valueOf(int)方法。而在拆箱的时候自动调用的是Integer的intValue方法。</p>
+<p>所以，<strong>装箱过程是通过调用包装器的valueOf方法实现的，而拆箱过程是通过调用包装器的 xxxValue方法实现的。</strong></p>
+<h3 id="糖块四-、-方法变长参数"><a href="#糖块四-、-方法变长参数" class="headerlink" title="糖块四 、 方法变长参数"></a>糖块四 、 方法变长参数</h3><p>可变参数(variable arguments)是在Java 1.5中引入的一个特性。它允许一个方法把任意数量的值作为参数。</p>
+<p>看下以下可变参数代码，其中print方法接收可变参数：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">    &#123;</span><br><span class="line">        print(&quot;Holis&quot;, &quot;公众号:Hollis&quot;, &quot;博客：www.hollischuang.com&quot;, &quot;QQ：907607222&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">public static void print(String... strs)</span><br><span class="line">&#123;</span><br><span class="line">    for (int i = 0; i &lt; strs.length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(strs[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>反编译后代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">	    print(new String[] &#123;</span><br><span class="line">	            &quot;Holis&quot;, &quot;\u516C\u4F17\u53F7:Hollis&quot;,&quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;, &quot;QQ\uFF1A907607222&quot;</span><br><span class="line">	                &#125;);</span><br><span class="line">&#125;</span><br><span class="line">public static transient void print(String strs[])</span><br><span class="line">&#123;</span><br><span class="line">	    for(int i = 0; i &lt; strs.length; i++)</span><br><span class="line">	    	        System.out.println(strs[i]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从反编译后代码可以看出，可变参数在被使用的时候，他首先会创建一个数组，数组的长度就是调用该方法是传递的实参的个数，然后再把参数值全部放到这个数组当中，然后再把这个数组作为参数传递到被调用的方法中。</p>
+<blockquote>
+<p>PS：反编译后的print方法声明中有一个transient标识，是不是很奇怪？transient不是不可以修饰方法吗？transient不是和序列化有关么？transient在这里的作用是什么？因为这个与本文关系不大，这里不做深入分析了。</p>
+</blockquote>
+<h3 id="糖块五-、-枚举"><a href="#糖块五-、-枚举" class="headerlink" title="糖块五 、 枚举"></a>糖块五 、 枚举</h3><p>在Java中，枚举是一种特殊的数据类型，用于表示有限的一组常量。枚举常量是在枚举类型中定义的，每个常量都是该类型的一个实例。Java中的枚举类型是一种安全而优雅的方式来表示有限的一组值。</p>
+<p>要想看源码，首先得有一个类吧，那么枚举类型到底是什么类呢？是enum吗？答案很明显不是，enum就和class一样，只是一个关键字，他并不是一个类，那么枚举是由什么类维护的呢，我们简单的写一个枚举：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public enum t &#123;</span><br><span class="line">    SPRING,SUMMER;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后我们使用反编译，看看这段代码到底是怎么实现的，反编译后代码内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public final class T extends Enum</span><br><span class="line">&#123;</span><br><span class="line">    private T(String s, int i)</span><br><span class="line">    &#123;</span><br><span class="line">        super(s, i);</span><br><span class="line">    &#125;</span><br><span class="line">    public static T[] values()</span><br><span class="line">    &#123;</span><br><span class="line">        T at[];</span><br><span class="line">        int i;</span><br><span class="line">        T at1[];</span><br><span class="line">        System.arraycopy(at = ENUM$VALUES, 0, at1 = new T[i = at.length], 0, i);</span><br><span class="line">        return at1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static T valueOf(String s)</span><br><span class="line">    &#123;</span><br><span class="line">        return (T)Enum.valueOf(demo/T, s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static final T SPRING;</span><br><span class="line">    public static final T SUMMER;</span><br><span class="line">    private static final T ENUM$VALUES[];</span><br><span class="line">    static</span><br><span class="line">    &#123;</span><br><span class="line">        SPRING = new T(&quot;SPRING&quot;, 0);</span><br><span class="line">        SUMMER = new T(&quot;SUMMER&quot;, 1);</span><br><span class="line">        ENUM$VALUES = (new T[] &#123;</span><br><span class="line">            SPRING, SUMMER</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>通过反编译后代码我们可以看到，public final class T extends Enum，说明，该类是继承了Enum类的，同时final关键字告诉我们，这个类也是不能被继承的。<strong>当我们使用enmu来定义一个枚举类型的时候，编译器会自动帮我们创建一个final类型的类继承Enum类，所以枚举类型不能被继承。</strong></p>
+<h3 id="糖块六-、-内部类"><a href="#糖块六-、-内部类" class="headerlink" title="糖块六 、 内部类"></a>糖块六 、 内部类</h3><p>内部类又称为嵌套类，可以把内部类理解为外部类的一个普通成员。</p>
+<p><strong>内部类之所以也是语法糖，是因为它仅仅是一个编译时的概念，outer.java里面定义了一个内部类inner，一旦编译成功，就会生成两个完全不同的.class文件了，分别是outer.class和outer$inner.class。所以内部类的名字完全可以和它的外部类名字相同。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class OutterClass &#123;</span><br><span class="line">    private String userName;</span><br><span class="line"></span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserName(String userName) &#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class InnerClass&#123;</span><br><span class="line">        private String name;</span><br><span class="line"></span><br><span class="line">        public String getName() &#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setName(String name) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码编译后会生成两个class文件：OutterClass$InnerClass.class 、OutterClass.class 。当我们尝试对OutterClass.class文件进行反编译的时候，命令行会打印以下内容：Parsing OutterClass.class…Parsing inner class OutterClass$InnerClass.class… Generating OutterClass.jad 。他会把两个文件全部进行反编译，然后一起生成一个OutterClass.jad文件。文件内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class OutterClass</span><br><span class="line">&#123;</span><br><span class="line">    class InnerClass</span><br><span class="line">    &#123;</span><br><span class="line">        public String getName()</span><br><span class="line">        &#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line">        public void setName(String name)</span><br><span class="line">        &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">        private String name;</span><br><span class="line">        final OutterClass this$0;</span><br><span class="line"></span><br><span class="line">        InnerClass()</span><br><span class="line">        &#123;</span><br><span class="line">            this.this$0 = OutterClass.this;</span><br><span class="line">            super();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public OutterClass()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getUserName()</span><br><span class="line">    &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUserName(String userName)&#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String args1[])</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    private String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="糖块七-、条件编译"><a href="#糖块七-、条件编译" class="headerlink" title="糖块七 、条件编译"></a>糖块七 、条件编译</h3><p>—般情况下，程序中的每一行代码都要参加编译。但有时候出于对程序代码优化的考虑，希望只对其中一部分内容进行编译，此时就需要在程序中加上条件，让编译器只对满足条件的代码进行编译，将不满足条件的代码舍弃，这就是条件编译。</p>
+<p>如在C或CPP中，可以通过预处理语句来实现条件编译。其实在Java中也可实现条件编译。我们先来看一段代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ConditionalCompilation &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        final boolean DEBUG = true;</span><br><span class="line">        if(DEBUG) &#123;</span><br><span class="line">            System.out.println(&quot;Hello, DEBUG!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        final boolean ONLINE = false;</span><br><span class="line"></span><br><span class="line">        if(ONLINE)&#123;</span><br><span class="line">            System.out.println(&quot;Hello, ONLINE!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ConditionalCompilation</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public ConditionalCompilation()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[])</span><br><span class="line">    &#123;</span><br><span class="line">        boolean DEBUG = true;</span><br><span class="line">        System.out.println(&quot;Hello, DEBUG!&quot;);</span><br><span class="line">        boolean ONLINE = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>首先，我们发现，在反编译后的代码中没有System.out.println(“Hello, ONLINE!”);，这其实就是条件编译。当if(ONLINE)为false的时候，编译器就没有对其内的代码进行编译。</p>
+<p><strong>所以，Java语法的条件编译，是通过判断条件为常量的if语句实现的。其原理也是Java语言的语法糖。根据if判断条件的真假，编译器直接把分支为false的代码块消除。通过该方式实现的条件编译，必须在方法体内实现，而无法在正整个Java类的结构或者类的属性上进行条件编译，这与C&#x2F;C++的条件编译相比，确实更有局限性。在Java语言设计之初并没有引入条件编译的功能，虽有局限，但是总比没有更强。</strong></p>
+<hr>
+<h3 id="糖块八-、-断言"><a href="#糖块八-、-断言" class="headerlink" title="糖块八 、 断言"></a>糖块八 、 断言</h3><p>在Java中，assert关键字是从JAVA SE 1.4 引入的，为了避免和老版本的Java代码中使用了assert关键字导致错误，Java在执行的时候默认是不启动断言检查的（这个时候，所有的断言语句都将忽略！），如果要开启断言检查，则需要用开关-enableassertions或-ea来开启。</p>
+<p>看一段包含断言的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class AssertTest &#123;</span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        int a = 1;</span><br><span class="line">        int b = 1;</span><br><span class="line">        assert a == b;</span><br><span class="line">        System.out.println(&quot;公众号：Hollis&quot;);</span><br><span class="line">        assert a != b : &quot;Hollis&quot;;</span><br><span class="line">        System.out.println(&quot;博客：www.hollischuang.com&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class AssertTest &#123;</span><br><span class="line">   public AssertTest()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">    int a = 1;</span><br><span class="line">    int b = 1;</span><br><span class="line">    if(!$assertionsDisabled &amp;&amp; a != b)</span><br><span class="line">        throw new AssertionError();</span><br><span class="line">    System.out.println(&quot;\u516C\u4F17\u53F7\uFF1AHollis&quot;);</span><br><span class="line">    if(!$assertionsDisabled &amp;&amp; a == b)</span><br><span class="line">    &#123;</span><br><span class="line">        throw new AssertionError(&quot;Hollis&quot;);</span><br><span class="line">    &#125; else</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(&quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static final boolean $assertionsDisabled = !com/hollis/suguar/AssertTest.desiredAssertionStatus();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>很明显，反编译之后的代码要比我们自己的代码复杂的多。所以，使用了assert这个语法糖我们节省了很多代码。<strong>其实断言的底层实现就是if语言，如果断言结果为true，则什么都不做，程序继续执行</strong>，<strong>如果断言结果为false，则程序抛出AssertError来打断程序的执行</strong>。-enableassertions会设置$assertionsDisabled字段的值。</p>
+<h3 id="糖块九-、-数值字面量"><a href="#糖块九-、-数值字面量" class="headerlink" title="糖块九 、 数值字面量"></a>糖块九 、 数值字面量</h3><p>在java 7中，数值字面量，不管是整数还是浮点数，都允许在数字之间插入任意多个下划线。这些下划线不会对字面量的数值产生影响，目的就是方便阅读。</p>
+<p>比如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String... args) &#123;</span><br><span class="line">        int i = 10_000;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Test</span><br><span class="line">&#123;</span><br><span class="line">  public static void main(String[] args)</span><br><span class="line">  &#123;</span><br><span class="line">    int i = 10000;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后就是把删除了。也就是说 <strong>编译器并不认识在数字字面量中的，需要在编译阶段把他去掉</strong>。</p>
+<h3 id="糖块十-、-for-each"><a href="#糖块十-、-for-each" class="headerlink" title="糖块十 、 for-each"></a>糖块十 、 for-each</h3><p>增强for循环（for-each）相信大家都不陌生，日常开发经常会用到的，他会比for循环要少写很多代码，那么这个语法糖背后是如何实现的呢？</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    String[] strs = &#123;&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;&#125;;</span><br><span class="line">    for (String s : strs) &#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;String&gt; strList = ImmutableList.of(&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;);</span><br><span class="line">    for (String s : strList) &#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static transient void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">    String strs[] = &#123;</span><br><span class="line">        &quot;Hollis&quot;, &quot;\u516C\u4F17\u53F7\uFF1AHollis&quot;, &quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">    String args1[] = strs;</span><br><span class="line">    int i = args1.length;</span><br><span class="line">    for(int j = 0; j &lt; i; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        String s = args1[j];</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List strList = ImmutableList.of(&quot;Hollis&quot;, &quot;\u516C\u4F17\u53F7\uFF1AHollis&quot;, &quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;);</span><br><span class="line">    String s;</span><br><span class="line">    for(Iterator iterator = strList.iterator(); iterator.hasNext(); System.out.println(s))</span><br><span class="line">        s = (String)iterator.next();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码很简单，<strong>for-each的实现原理其实就是使用了普通的for循环和迭代器</strong>。</p>
+<h3 id="糖块十一-、-try-with-resource"><a href="#糖块十一-、-try-with-resource" class="headerlink" title="糖块十一 、 try-with-resource"></a><strong>糖块十一 、 try-with-resource</strong></h3><p>Java里，对于文件操作IO流、数据库连接等开销非常昂贵的资源，用完之后必须及时通过close方法将其关闭，否则资源会一直处于打开状态，可能会导致内存泄露等问题。</p>
+<p>关闭资源的常用方式就是在finally块里是释放，即调用close方法。比如，我们经常会写这样的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    BufferedReader br = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        String line;</span><br><span class="line">        br = new BufferedReader(new FileReader(&quot;d:\\hollischuang.xml&quot;));</span><br><span class="line">        while ((line = br.readLine()) != null) &#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        // handle exception</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (br != null) &#123;</span><br><span class="line">                br.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException ex) &#123;</span><br><span class="line">            // handle exception</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从Java 7开始，jdk提供了一种更好的方式关闭资源，使用try-with-resources语句，改写一下上面的代码，效果如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    try (BufferedReader br = new BufferedReader(new FileReader(&quot;d:\\ hollischuang.xml&quot;))) &#123;</span><br><span class="line">        String line;</span><br><span class="line">        while ((line = br.readLine()) != null) &#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        // handle exception</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>看，这简直是一大福音啊，虽然我之前一般使用IOUtils去关闭流，并不会使用在finally中写很多代码的方式，但是这种新的语法糖看上去好像优雅很多呢。看下他的背后：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public static transient void main(String args[])</span><br><span class="line">    &#123;</span><br><span class="line">        BufferedReader br;</span><br><span class="line">        Throwable throwable;</span><br><span class="line">        br = new BufferedReader(new FileReader(&quot;d:\\ hollischuang.xml&quot;));</span><br><span class="line">        throwable = null;</span><br><span class="line">        String line;</span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            while((line = br.readLine()) != null)</span><br><span class="line">                System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Throwable throwable2)</span><br><span class="line">        &#123;</span><br><span class="line">            throwable = throwable2;</span><br><span class="line">            throw throwable2;</span><br><span class="line">        &#125;</span><br><span class="line">        if(br != null)</span><br><span class="line">            if(throwable != null)</span><br><span class="line">                try</span><br><span class="line">                &#123;</span><br><span class="line">                    br.close();</span><br><span class="line">                &#125;</span><br><span class="line">                catch(Throwable throwable1)</span><br><span class="line">                &#123;</span><br><span class="line">                    throwable.addSuppressed(throwable1);</span><br><span class="line">                &#125;</span><br><span class="line">            else</span><br><span class="line">                br.close();</span><br><span class="line">            break MISSING_BLOCK_LABEL_113;</span><br><span class="line">            Exception exception;</span><br><span class="line">            exception;</span><br><span class="line">            if(br != null)</span><br><span class="line">                if(throwable != null)</span><br><span class="line">                    try</span><br><span class="line">                    &#123;</span><br><span class="line">                        br.close();</span><br><span class="line">                    &#125;</span><br><span class="line">                    catch(Throwable throwable3)</span><br><span class="line">                      &#123;</span><br><span class="line">                        throwable.addSuppressed(throwable3);</span><br><span class="line">                    &#125;</span><br><span class="line">                else</span><br><span class="line">                    br.close();</span><br><span class="line">        throw exception;</span><br><span class="line">        IOException ioexception;</span><br><span class="line">        ioexception;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>其实背后的原理也很简单，那些我们没有做的关闭资源的操作，编译器都帮我们做了。所以，再次印证了，语法糖的作用就是方便程序员的使用，但最终还是要转成编译器认识的语言。</strong></p>
+<h3 id="糖块十二、Lambda表达式"><a href="#糖块十二、Lambda表达式" class="headerlink" title="糖块十二、Lambda表达式"></a>糖块十二、Lambda表达式</h3><p>先来看一个简单的lambda表达式。遍历一个list：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    List&lt;String&gt; strList = ImmutableList.of(&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;);</span><br><span class="line"></span><br><span class="line">    strList.forEach( s -&gt; &#123; System.out.println(s); &#125; );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为啥说他并不是内部类的语法糖呢，前面讲内部类我们说过，内部类在编译之后会有两个class文件，但是，包含lambda表达式的类编译后只有一个文件。</p>
+<p>反编译后代码如下:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static /* varargs */ void main(String ... args) &#123;</span><br><span class="line">    ImmutableList strList = ImmutableList.of((Object)&quot;Hollis&quot;, (Object)&quot;\u516c\u4f17\u53f7\uff1aHollis&quot;, (Object)&quot;\u535a\u5ba2\uff1awww.hollischuang.com&quot;);</span><br><span class="line">    strList.forEach((Consumer&lt;String&gt;)LambdaMetafactory.metafactory(null, null, null, (Ljava/lang/Object;)V, lambda$main$0(java.lang.String ), (Ljava/lang/String;)V)());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static /* synthetic */ void lambda$main$0(String s) &#123;</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，在forEach方法中，其实是调用了java.lang.invoke.LambdaMetafactory#metafactory方法，该方法的第四个参数implMethod指定了方法实现。可以看到这里其实是调用了一个lambda$main$0方法进行了输出。</p>
+<p>再来看一个稍微复杂一点的，先对List进行过滤，然后再输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    List&lt;String&gt; strList = ImmutableList.of(&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;);</span><br><span class="line"></span><br><span class="line">    List HollisList = strList.stream().filter(string -&gt; string.contains(&quot;Hollis&quot;)).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    HollisList.forEach( s -&gt; &#123; System.out.println(s); &#125; );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>反编译后代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static /* varargs */ void main(String ... args) &#123;</span><br><span class="line">    ImmutableList strList = ImmutableList.of((Object)&quot;Hollis&quot;, (Object)&quot;\u516c\u4f17\u53f7\uff1aHollis&quot;, (Object)&quot;\u535a\u5ba2\uff1awww.hollischuang.com&quot;);</span><br><span class="line">    List&lt;Object&gt; HollisList = strList.stream().filter((Predicate&lt;String&gt;)LambdaMetafactory.metafactory(null, null, null, (Ljava/lang/Object;)Z, lambda$main$0(java.lang.String ), (Ljava/lang/String;)Z)()).collect(Collectors.toList());</span><br><span class="line">    HollisList.forEach((Consumer&lt;Object&gt;)LambdaMetafactory.metafactory(null, null, null, (Ljava/lang/Object;)V, lambda$main$1(java.lang.Object ), (Ljava/lang/Object;)V)());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static /* synthetic */ void lambda$main$1(Object s) &#123;</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static /* synthetic */ boolean lambda$main$0(String string) &#123;</span><br><span class="line">    return string.contains(&quot;Hollis&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>两个lambda表达式分别调用了lambda$main$1和lambda$main$0两个方法。</p>
+<p><strong>所以，lambda表达式的实现其实是依赖了一些底层的api，在编译阶段，编译器会把lambda表达式进行解糖，转换成调用内部api的方式。</strong></p>
+<h2 id="可能遇到的坑"><a href="#可能遇到的坑" class="headerlink" title="可能遇到的坑"></a>可能遇到的坑</h2><h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p><strong>一、当泛型遇到重载</strong> public class GenericTypes {</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> public static void method(List&lt;String&gt; list) &#123;  </span><br><span class="line">        System.out.println(&quot;invoke method(List&lt;String&gt; list)&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    public static void method(List&lt;Integer&gt; list) &#123;  </span><br><span class="line">        System.out.println(&quot;invoke method(List&lt;Integer&gt; list)&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面这段代码，有两个重载的函数，因为他们的参数类型不同，一个是List另一个是List ，但是，这段代码是编译通不过的。因为我们前面讲过，参数List和List编译之后都被擦除了，变成了一样的原生类型List，擦除动作导致这两个方法的特征签名变得一模一样。</p>
+<p>二、<strong>当泛型遇到catch</strong> 泛型的类型参数不能用在Java异常处理的catch语句中。因为异常处理是由JVM在运行时刻来进行的。由于类型信息被擦除，JVM是无法区分两个异常类型MyException<String>和MyException<Integer>的</p>
+<p><strong>三、当泛型内包含静态变量</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class StaticTest&#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        GT&lt;Integer&gt; gti = new GT&lt;Integer&gt;();</span><br><span class="line">        gti.var=1;</span><br><span class="line">        GT&lt;String&gt; gts = new GT&lt;String&gt;();</span><br><span class="line">        gts.var=2;</span><br><span class="line">        System.out.println(gti.var);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class GT&lt;T&gt;&#123;</span><br><span class="line">    public static int var=0;</span><br><span class="line">    public void nothing(T x)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上代码输出结果为：2！由于经过类型擦除，所有的泛型类实例都关联到同一份字节码上，泛型类的所有静态变量是共享的。</p>
+<h3 id="自动装箱与拆箱"><a href="#自动装箱与拆箱" class="headerlink" title="自动装箱与拆箱"></a>自动装箱与拆箱</h3><p><strong>对象相等比较</strong></p>
+<p>public class BoxingTest {</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Integer a = 1000;</span><br><span class="line">    Integer b = 1000;</span><br><span class="line">    Integer c = 100;</span><br><span class="line">    Integer d = 100;</span><br><span class="line">    System.out.println(&quot;a == b is &quot; + (a == b));</span><br><span class="line">    System.out.println((&quot;c == d is &quot; + (c == d)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>输出结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a == b is false</span><br><span class="line">c == d is true</span><br></pre></td></tr></table></figure>
+
+<p>在Java 5中，在Integer的操作上引入了一个新功能来节省内存和提高性能。整型对象通过使用相同的对象引用实现了缓存和重用。</p>
+<blockquote>
+<p>适用于整数值区间-128 至 +127。</p>
+<p>只适用于自动装箱。使用构造函数创建对象不适用。</p>
+</blockquote>
+<h3 id="增强for循环"><a href="#增强for循环" class="headerlink" title="增强for循环"></a>增强for循环</h3><p><strong>ConcurrentModificationException</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (Student stu : students) &#123;    </span><br><span class="line">    if (stu.getId() == 2)     </span><br><span class="line">        students.remove(stu);    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>会抛出ConcurrentModificationException异常。</p>
+<p>Iterator是工作在一个独立的线程中，并且拥有一个 mutex 锁。 Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来的对象数量发生变化时，这个索引表的内容不会同步改变，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照 fail-fast 原则 Iterator 会马上抛出java.util.ConcurrentModificationException异常。</p>
+<p>所以 Iterator 在工作的时候是不允许被迭代的对象被改变的。但你可以使用 Iterator 本身的方法remove()来删除对象，Iterator.remove() 方法会在删除当前迭代对象的同时维护索引的一致性。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>前面介绍了12种Java中常用的语法糖。所谓语法糖就是提供给开发人员便于开发的一种语法而已。但是这种语法只有开发人员认识。要想被执行，需要进行解糖，即转成JVM认识的语法。当我们把语法糖解糖之后，你就会发现其实我们日常使用的这些方便的语法，其实都是一些其他更简单的语法构成的。</p>
+<p>有了这些语法糖，我们在日常开发的时候可以大大提升效率，但是同时也要避免过渡使用。使用之前最好了解下原理，避免掉坑。</p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="ZYH 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="ZYH 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/%E8%AF%AD%E6%B3%95%E7%B3%96/" rel="tag"><i class="fa fa-tag"></i> 语法糖</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/" rel="prev" title="Java中有了基本类型为什么还需要包装类">
+                  <i class="fa fa-chevron-left"></i> Java中有了基本类型为什么还需要包装类
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="next" title="如何破坏单例模式">
+                  如何破坏单例模式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZYH</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">20k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">1:14</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+    </div>
+  </footer>
+ 
+	
+	<script type="text/javascript"
+	color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+
