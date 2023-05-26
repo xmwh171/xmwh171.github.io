@@ -3,7 +3,7 @@
   <entry>
     <title>DDD的实现流程</title>
     <url>/2023/05/26/DDD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B/</url>
-    <content><![CDATA[<p>领域驱动设计（DDD）是一种面向领域的软件设计方法。它强调将业务知识和业务逻辑集成到软件设计中，从而提高软件系统的可维护性、可扩展性和可测试性。DDD 的实现流程主要包括以下几个步骤：</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>领域驱动设计（DDD）是一种面向领域的软件设计方法。它强调将业务知识和业务逻辑集成到软件设计中，从而提高软件系统的可维护性、可扩展性和可测试性。DDD 的实现流程主要包括以下几个步骤：</p>
 <p><strong>1</strong>.<strong>确定业务领域</strong><br>首先，<strong>需要明确软件系统要解决的业务问题，并确定业务领域的边界。</strong>业务领域是指具有内在一致性和自治性的业务范畴，它包含了一些核心概念、业务规则和业务流程。</p>
 <p>（假设我们要对一个电商网站进行DDD落地，首先，需要明确电商系统要解决的业务问题，即为用户提供方便快捷的购物体验。<strong>业务领域的边界为商品、订单和用户三个核心领域</strong>。）</p>
 <p><strong>2</strong>.<strong>设计领域模型</strong><br>在确定业务领域之后，需要设计领域模型。领域模型是用来描述业务领域的核心概念、业务规则和业务流程的一种图形化表示方式。它由实体、值对象、聚合、领域服务和事件等元素组成。</p>
@@ -44,9 +44,30 @@
       </categories>
   </entry>
   <entry>
+    <title>Java是如何实现平台无关性的</title>
+    <url>/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
+<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
+<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
+<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
+<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
+<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
+<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
+<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
+<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
+<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
+<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
+<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java中创建对象有哪些种方式</title>
     <url>/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
 <p>User user &#x3D; new User();</p>
 <h3 id="使用反射机制"><a href="#使用反射机制" class="headerlink" title="使用反射机制"></a>使用反射机制</h3><p>运用反射手段，调用Java.lang.Class或者java.lang.reflect.Constructor类的newInstance()实例方法。</p>
 <p>1 使用Class类的newInstance方法</p>
@@ -77,7 +98,7 @@
   <entry>
     <title>Java中有了基本类型为什么还需要包装类</title>
     <url>/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java中有8种基本数据类型，这些基本类型又都有对应的包装类。  </p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java中有8种基本数据类型，这些基本类型又都有对应的包装类。  </p>
 <table>
 <thead>
 <tr>
@@ -221,30 +242,9 @@
       </categories>
   </entry>
   <entry>
-    <title>Java是如何实现平台无关性的</title>
-    <url>/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
-<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
-<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
-<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
-<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
-<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
-<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
-<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
-<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
-<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
-<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
-<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java注解</title>
     <url>/2023/05/26/Java%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<p>注解是Java提供的设置程序中元素的关联信息和元数据的方法，它是一个接口</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>注解是Java提供的设置程序中元素的关联信息和元数据的方法，它是一个接口</p>
 <h2 id="标准注解"><a href="#标准注解" class="headerlink" title="标准注解"></a>标准注解</h2><p>@Override，覆盖超类中的方法</p>
 <p>@Deprecated，编译器会发出警告信息。</p>
 <p>@SuppressWarnings，关闭不当的编译器警告信息。</p>
@@ -289,72 +289,9 @@
       </tags>
   </entry>
   <entry>
-    <title>String str=new String(&quot;hollis&quot;)创建了几个对象</title>
-    <url>/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>创建的对象数应该是1个或者2个。</p>
-<p>首先要清楚什么是对象？</p>
-<p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的，在HotSpot虚拟机中，存储的形式就是oop-klass model，即Java对象模型。我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。</p>
-<p>这才叫对象。其他的，一概都不叫对象。</p>
-<p>那么不管怎么样，一次new的过程，都会在堆上创建一个对象，那么就是起码有一个对象了。至于另外一个对象，到底有没有要看具体情况了。</p>
-<p>另外这一个对象就是常量池中的字符串常量，这个字符串其实是类编译阶段就进到Class常量池的，那么当这个类第一次被ClassLoader加载的时候，会从Class常量池进入到运行时常量池。</p>
-<p>在运行时常量池中，也并不是会立刻被解析成对象，而是会先以JVM_CONSTANT_UnresolveString_info的形式驻留在常量池。在后面，该引用第一次被LDC指令执行到的时候，就尝试在堆上创建字符串对象，并将对象的引用驻留在字符串常量池中。</p>
-<p>通过看上面的过程，你也能发现，这个过程的触发条件是我们没办法决定的，问题的题干中也没提到。有可能执行这段代码的时候是第一次LDC指令执行，也许在前面就执行过了。</p>
-<p>所以，如果是第一次执行，那么就是会同时创建两个对象。一个字符串常量引用指向的对象，一个我们new出来的对象。</p>
-<p>如果不是第一次执行，那么就只会创建我们自己new出来的对象。</p>
-<p>至于有人说什么在字符串池内还有在栈上还有一个引用对象，你听听这说法，引用就是引用。别往对象上面扯。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="字面量和运行时常量池"><a href="#字面量和运行时常量池" class="headerlink" title="字面量和运行时常量池"></a>字面量和运行时常量池</h3><p>JVM为了提高性能和减少内存开销，在实例化字符串常量的时候进行了一些优化。为了减少在JVM中创建的字符串的数量，字符串类维护了一个字符串常量池。</p>
-<p>在JVM运行时区域的方法区中，有一块区域是运行时常量池，主要用来存储<strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>。</p>
-<p>了解Class文件结构或者做过Java代码的反编译的朋友可能都知道，在java代码被javac编译之后，文件结构中是包含一部分Constant pool的。比如以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	String s = &quot;Hollis&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>经过编译后，常量池内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Constant pool:</span><br><span class="line">	#1 = Methodref 		#4.#20   // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">	#2 = String 		#21		 // Hollis</span><br><span class="line">	#3 = Class 			#22 	// StringDemo</span><br><span class="line">	#4 = Class 			#23 	// java/lang/Object</span><br><span class="line">	...</span><br><span class="line">	#16 = Utf8 			s</span><br><span class="line">	..</span><br><span class="line">	#21 = Utf8 			Hollis</span><br><span class="line">	#22 = Utf8 			StringDemo</span><br><span class="line">	#23 = Utf8 			java/lang/Object</span><br></pre></td></tr></table></figure>
-
-<p>上面的Class文件中的常量池中，比较重要的几个内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#16 = Utf8 			s</span><br><span class="line">#21 = Utf8 			Hollis</span><br><span class="line">#22 = Utf8 			StringDemo</span><br></pre></td></tr></table></figure>
-
-
-
-<p>上面几个常量中，s就是前面提到的<strong>符号引用</strong>，而Hollis就是前面提到的字面量。而Class文件中的常量池部分的内容，会在运行期被运行时常量池加载进去。关于字面量，详情参考<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.10.5">Java SE Specifications</a></p>
-<h3 id="intern"><a href="#intern" class="headerlink" title="intern"></a>intern</h3><p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期向运行时常量池中增加常量。那就是String的intern方法。</p>
-<p>当一个String实例调用intern()方法时，Java查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用；</p>
-<p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用</strong>。</p>
-<h4 id="intern的正确用法"><a href="#intern的正确用法" class="headerlink" title="intern的正确用法"></a>intern的正确用法</h4><p>不知道，你有没有发现，在String s3 &#x3D; new String(“Hollis”).intern();中，其实intern是多余的？</p>
-<p>因为就算不用intern，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才需要使用intern呢？</p>
-<p>在解释这个之前，我们先来看下以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = s1 + s2;</span><br><span class="line">String s4 = &quot;Hollis&quot; + &quot;Chuang&quot;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在经过反编译后，得到代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = (new StringBuilder()).append(s1).append(s2).toString();</span><br><span class="line">String s4 = &quot;HollisChuang&quot;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>可以发现，同样是字符串拼接，s3和s4在经过编译器编译后的实现方式并不一样。s3被转化成StringBuilder及append，而s4被直接拼接成新的字符串。</p>
-<p>如果你感兴趣，你还能发现，String s3 &#x3D; s1 + s2; 经过编译之后，常量池中是有两个字符串常量的分别是 Hollis、Chuang（其实Hollis和Chuang是String s1 &#x3D; “Hollis”;和String s2 &#x3D; “Chuang”;定义出来的），拼接结果HollisChuang并不在常量池中。</p>
-<p>如果代码只有String s4 &#x3D; “Hollis” + “Chuang”;，那么常量池中将只有HollisChuang而没有”Hollis” 和 “Chuang”。</p>
-<p>究其原因，是因为常量池要保存的是<strong>已确定</strong>的字面量值。也就是说，对于字符串的拼接，纯字面量和字面量的拼接，会把拼接结果作为常量保存到字符串池。</p>
-<p>如果在字符串拼接中，有一个参数是非字面量，而是一个变量的话，整个拼接操作会被编译成StringBuilder.append，这种情况编译器是无法知道其确定值的。只有在运行期才能确定。</p>
-<p>那么，有了这个特性了，intern就有用武之地了。那就是很多时候，我们在程序中得到的字符串是只有在运行期才能确定的，在编译期是无法确定的，那么也就没办法在编译期被加入到常量池中。</p>
-<p>这时候，对于那种可能经常使用的字符串，使用intern进行定义，每次JVM运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。</p>
-<p>如一<a href="https://tech.meituan.com/in_depth_understanding_string_intern.html">深入解析String#intern</a>文中举的一个例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static final int MAX = 1000 * 10000;</span><br><span class="line">static final String[] arr = new String[MAX];</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Integer[] DB_DATA = new Integer[10];</span><br><span class="line">	Random random = new Random(10 * 10000);</span><br><span class="line">	for (int i = 0; i &lt; DB_DATA.length; i++) &#123;</span><br><span class="line">		DB_DATA[i] = random.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line">	long t = System.currentTimeMillis();</span><br><span class="line">	for (int i = 0; i &lt; MAX; i++) &#123;</span><br><span class="line">		arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	System.out.println((System.currentTimeMillis() - t) + &quot;ms&quot;);</span><br><span class="line">	System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过intern显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
     <title>String、StringBuilder和StringBuffer的区别</title>
     <url>/2023/05/23/String%E3%80%81StringBuilder%E5%92%8CStringBuffer%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>String是不可变的，StringBuilder和StringBuffer是可变的。而StringBuffer是线程安全的，而StringBuilder是非线程安全的。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>String是不可变的，StringBuilder和StringBuffer是可变的。而StringBuffer是线程安全的，而StringBuilder是非线程安全的。</p>
 <h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="String的不可变性"><a href="#String的不可变性" class="headerlink" title="String的不可变性"></a>String的不可变性</h3><p>String在Java中特别常用，相信很多人都看过他的源码，在JDK中，关于String的类声明是这样的：</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public final class String</span><br><span class="line"></span><br><span class="line">implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;</span><br><span class="line">  	private final char value[]；</span><br><span class="line">		private int hash；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -420,7 +357,7 @@
   <entry>
     <title>String为什么设计成不可变的</title>
     <url>/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/</url>
-    <content><![CDATA[<p>为什么要把String设计成不可变的呢？有什么好处呢？</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>为什么要把String设计成不可变的呢？有什么好处呢？</p>
 <p>这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。</p>
 <p>在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:</p>
 <blockquote>
@@ -458,57 +395,108 @@
       </categories>
   </entry>
   <entry>
-    <title>为什么Java不支持多继承</title>
-    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
-<p>在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。但是，Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，但是，Java8中为了避免菱形继承的问题，在实现的多个接口中如果有相同方法，就会要求该类必须重写这个方法。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>Java的创始人James Gosling曾经回答过，他表示：</p>
-<p>“Java之所以不支持一个类继承多个类，主要是因为在设计之初我们听取了来自C++和Objective-C登阵营的人的意见。因为多继承会产生很多歧义问题。”</p>
-<p>Gosling老人家提到的歧义问题，其实是C++因为支持多继承之后带来的菱形继承问题。</p>
-<p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png" alt="image-20230524180528863"></p>
-<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
-<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
-<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
-<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
-<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
-<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8之前），这就避免了 C++ 中多继承的歧义问题。</p>
-<h2 id="Java-8中的多继承"><a href="#Java-8中的多继承" class="headerlink" title="Java 8中的多继承"></a>Java 8中的多继承</h2><p>Java不支持多继承，但是是支持多实现的，也就是说，同一个类可以同时实现多个类。</p>
-<p>我们知道，在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。</p>
-<p>那么问题来了。</p>
-<p>Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Pet &#123;</span><br><span class="line">    public default void eat()&#123;</span><br><span class="line">        System.out.println(&quot;Pet Is Eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>String str=new String(&quot;hollis&quot;)创建了几个对象</title>
+    <url>/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>创建的对象数应该是1个或者2个。</p>
+<p>首先要清楚什么是对象？</p>
+<p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的，在HotSpot虚拟机中，存储的形式就是oop-klass model，即Java对象模型。我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。</p>
+<p>这才叫对象。其他的，一概都不叫对象。</p>
+<p>那么不管怎么样，一次new的过程，都会在堆上创建一个对象，那么就是起码有一个对象了。至于另外一个对象，到底有没有要看具体情况了。</p>
+<p>另外这一个对象就是常量池中的字符串常量，这个字符串其实是类编译阶段就进到Class常量池的，那么当这个类第一次被ClassLoader加载的时候，会从Class常量池进入到运行时常量池。</p>
+<p>在运行时常量池中，也并不是会立刻被解析成对象，而是会先以JVM_CONSTANT_UnresolveString_info的形式驻留在常量池。在后面，该引用第一次被LDC指令执行到的时候，就尝试在堆上创建字符串对象，并将对象的引用驻留在字符串常量池中。</p>
+<p>通过看上面的过程，你也能发现，这个过程的触发条件是我们没办法决定的，问题的题干中也没提到。有可能执行这段代码的时候是第一次LDC指令执行，也许在前面就执行过了。</p>
+<p>所以，如果是第一次执行，那么就是会同时创建两个对象。一个字符串常量引用指向的对象，一个我们new出来的对象。</p>
+<p>如果不是第一次执行，那么就只会创建我们自己new出来的对象。</p>
+<p>至于有人说什么在字符串池内还有在栈上还有一个引用对象，你听听这说法，引用就是引用。别往对象上面扯。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="字面量和运行时常量池"><a href="#字面量和运行时常量池" class="headerlink" title="字面量和运行时常量池"></a>字面量和运行时常量池</h3><p>JVM为了提高性能和减少内存开销，在实例化字符串常量的时候进行了一些优化。为了减少在JVM中创建的字符串的数量，字符串类维护了一个字符串常量池。</p>
+<p>在JVM运行时区域的方法区中，有一块区域是运行时常量池，主要用来存储<strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>。</p>
+<p>了解Class文件结构或者做过Java代码的反编译的朋友可能都知道，在java代码被javac编译之后，文件结构中是包含一部分Constant pool的。比如以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	String s = &quot;Hollis&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，这不就是变相支持了多继承么。<br>那么，Java是怎么解决菱形继承问题的呢？我们再定义一个哺乳动物接口，也定义一个eat方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Mammal &#123;	</span><br><span class="line">	  public default void eat()&#123;</span><br><span class="line">	      System.out.println(&quot;Mammal Is Eating&quot;);</span><br><span class="line">	  &#125;        </span><br><span class="line">&#125;	    </span><br></pre></td></tr></table></figure>
+
+
+<p>经过编译后，常量池内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Constant pool:</span><br><span class="line">	#1 = Methodref 		#4.#20   // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">	#2 = String 		#21		 // Hollis</span><br><span class="line">	#3 = Class 			#22 	// StringDemo</span><br><span class="line">	#4 = Class 			#23 	// java/lang/Object</span><br><span class="line">	...</span><br><span class="line">	#16 = Utf8 			s</span><br><span class="line">	..</span><br><span class="line">	#21 = Utf8 			Hollis</span><br><span class="line">	#22 = Utf8 			StringDemo</span><br><span class="line">	#23 = Utf8 			java/lang/Object</span><br></pre></td></tr></table></figure>
+
+<p>上面的Class文件中的常量池中，比较重要的几个内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#16 = Utf8 			s</span><br><span class="line">#21 = Utf8 			Hollis</span><br><span class="line">#22 = Utf8 			StringDemo</span><br></pre></td></tr></table></figure>
 
 
 
-<p>然后定义一个Cat，让他分别实现两个接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时候，编译期会报错：</p>
-<blockquote>
-<p>error: class Cat inherits unrelated defaults for eat() from types Mammal and Pet</p>
-</blockquote>
-<p>这时候，就要求Cat类中，必须重写eat()方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat Is Eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-
+<p>上面几个常量中，s就是前面提到的<strong>符号引用</strong>，而Hollis就是前面提到的字面量。而Class文件中的常量池部分的内容，会在运行期被运行时常量池加载进去。关于字面量，详情参考<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.10.5">Java SE Specifications</a></p>
+<h3 id="intern"><a href="#intern" class="headerlink" title="intern"></a>intern</h3><p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期向运行时常量池中增加常量。那就是String的intern方法。</p>
+<p>当一个String实例调用intern()方法时，Java查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用；</p>
+<p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用</strong>。</p>
+<h4 id="intern的正确用法"><a href="#intern的正确用法" class="headerlink" title="intern的正确用法"></a>intern的正确用法</h4><p>不知道，你有没有发现，在String s3 &#x3D; new String(“Hollis”).intern();中，其实intern是多余的？</p>
+<p>因为就算不用intern，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才需要使用intern呢？</p>
+<p>在解释这个之前，我们先来看下以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = s1 + s2;</span><br><span class="line">String s4 = &quot;Hollis&quot; + &quot;Chuang&quot;;</span><br></pre></td></tr></table></figure>
 
 
-<p>所以可以看到，Java并没有帮我们解决多继承的歧义问题，而是把这个问题留给开发人员，通过重写方法的方式自己解决。</p>
+
+<p>在经过反编译后，得到代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = (new StringBuilder()).append(s1).append(s2).toString();</span><br><span class="line">String s4 = &quot;HollisChuang&quot;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以发现，同样是字符串拼接，s3和s4在经过编译器编译后的实现方式并不一样。s3被转化成StringBuilder及append，而s4被直接拼接成新的字符串。</p>
+<p>如果你感兴趣，你还能发现，String s3 &#x3D; s1 + s2; 经过编译之后，常量池中是有两个字符串常量的分别是 Hollis、Chuang（其实Hollis和Chuang是String s1 &#x3D; “Hollis”;和String s2 &#x3D; “Chuang”;定义出来的），拼接结果HollisChuang并不在常量池中。</p>
+<p>如果代码只有String s4 &#x3D; “Hollis” + “Chuang”;，那么常量池中将只有HollisChuang而没有”Hollis” 和 “Chuang”。</p>
+<p>究其原因，是因为常量池要保存的是<strong>已确定</strong>的字面量值。也就是说，对于字符串的拼接，纯字面量和字面量的拼接，会把拼接结果作为常量保存到字符串池。</p>
+<p>如果在字符串拼接中，有一个参数是非字面量，而是一个变量的话，整个拼接操作会被编译成StringBuilder.append，这种情况编译器是无法知道其确定值的。只有在运行期才能确定。</p>
+<p>那么，有了这个特性了，intern就有用武之地了。那就是很多时候，我们在程序中得到的字符串是只有在运行期才能确定的，在编译期是无法确定的，那么也就没办法在编译期被加入到常量池中。</p>
+<p>这时候，对于那种可能经常使用的字符串，使用intern进行定义，每次JVM运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。</p>
+<p>如一<a href="https://tech.meituan.com/in_depth_understanding_string_intern.html">深入解析String#intern</a>文中举的一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static final int MAX = 1000 * 10000;</span><br><span class="line">static final String[] arr = new String[MAX];</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Integer[] DB_DATA = new Integer[10];</span><br><span class="line">	Random random = new Random(10 * 10000);</span><br><span class="line">	for (int i = 0; i &lt; DB_DATA.length; i++) &#123;</span><br><span class="line">		DB_DATA[i] = random.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line">	long t = System.currentTimeMillis();</span><br><span class="line">	for (int i = 0; i &lt; MAX; i++) &#123;</span><br><span class="line">		arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	System.out.println((System.currentTimeMillis() - t) + &quot;ms&quot;);</span><br><span class="line">	System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过intern显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
 ]]></content>
       <categories>
         <category>java基础</category>
       </categories>
   </entry>
   <entry>
+    <title>为什么不能用浮点数表示金额</title>
+    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
+<span id="more"></span>
+
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><p>十进制整数转换为二进制整数采用”除2取余，逆序排列”法。<br>具体做法是：<br>用2整除十进制整数，可以得到一个商和余数；<br>再用2去除商，又会得到一个商和余数，如此进行，直到商为小于1时为止<br>然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。<br>如，我们想要把127转换成二进制，做法如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png" alt="屏幕截图 2023-05-24 172509"></p>
+<p>那么，<strong>十进制小数转换成二进制小数，又该如何计算呢？</strong><br>十进制小数转换成二进制小数采用”乘2取整，顺序排列”法。<br>具体做法是：<br>用2乘十进制小数，可以得到积<br>将积的整数部分取出，再用2乘余下的小数部分，又得到一个积<br>再将积的整数部分取出，如此进行，直到积中的小数部分为零，此时0或1为二进制的最后一位。或者达到所要求的精度为止。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png" alt="image-20230524172648834"></p>
+<p>所以，十进制的0.625对应的二进制就是0.101。</p>
+<h3 id="不是所有数都能用二进制表示"><a href="#不是所有数都能用二进制表示" class="headerlink" title="不是所有数都能用二进制表示"></a>不是所有数都能用二进制表示</h3><p>我们知道了如何将一个十进制小数转换成二进制，那么是不是计算就可以直接用二进制表示小数了呢？<br>前面我们的例子中0.625是一个特列，那么还是用同样的算法，请计算下0.1对应的二进制是多少？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png" alt="image-20230524172739187"></p>
+<p>我们发现，0.1的二进制表示中出现了无限循环的情况，也就是(0.1)10 &#x3D; (0.000110011001100…)2<br>这种情况，计算机就没办法用二进制精确的表示0.1了。<br><strong>也就是说，对于像0.1这种数字，我们是没办法将他转换成一个确定的二进制数的。</strong></p>
+<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>为了解决部分小数无法使用二进制精确表示的问题，于是就有了IEEE 754规范。<br>IEEE二进制浮点数算术标准（IEEE 754）是20世纪80年代以来最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用。<br>浮点数和小数并不是完全一样的，计算机中小数的表示法，其实有定点和浮点两种。因为在位数相同的情况下，定点数的表示范围要比浮点数小。所以在计算机科学中，使用浮点数来表示实数的近似值。<br>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。<br>其中最常用的就是32位单精度浮点数和64位双精度浮点数。<br><strong>IEEE并没有解决小数无法精确表示的问题，只是提出了一种使用近似值表示小数的方式，并且引入了精度的概念。</strong><br>浮点数是一串0和1构成的位序列(bit sequence)，从逻辑上用三元组{S,E,M}表示一个数N,如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png"></p>
+<ul>
+<li>S(sign)表示N的符号位。对应值s满足：n&gt;0时，s&#x3D;0; n≤0时，s&#x3D;1。</li>
+<li>E(exponent)表示N的指数位，位于S和M之间的若干位。对应值e值也可正可负。</li>
+<li>M(mantissa)表示N的尾数位，恰好，它位于N末尾。M也叫有效数字位（significand）、系数位（coefficient), 甚至被称作”小数”。</li>
+</ul>
+<p>则浮点数N的实际值n由下方的式子表示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png" alt="image-20230524172940592"></p>
+<p>上面这个公式看起来很复杂，其中符号位和尾数位还比较容易理解，但是这个指数位就不是那么容易理解了。<br>其实，大家也不用太过于纠结这个公式，大家只需要知道对于单精度浮点数，最多只能用32位字符表示一个数字，双精度浮点数最多只能用64位来表示一个数字。<br><strong>而对于那些无限循环的二进制数来说，计算机采用浮点数的方式保留了一定的有效数字，那么这个值只能是近似值，不可能是真实值。</strong><br>至于一个数对应的IEEE 754浮点数应该如何计算，不是本文的重点，这里就不再赘述了，过程还是比较复杂的，需要进行对阶、尾数求和、规格化、舍入以及溢出判断等。<br>但是这些其实不需要了解的太详细，我们只需要知道，小数在计算机中的表示是近似数，并不是真实值。根据精度不同，近似程度也有所不同。<br>如0.1这个小数，他对应的在双精度浮点数的二进制为：0.00011001100110011001100110011001100110011001100110011001 。<br>0.2这个小数0.00110011001100110011001100110011001100110011001100110011 。<br>所以两者相加：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png" alt="image-20230524173051530"></p>
+<p>转换成10进制之后得到：0.30000000000000004！</p>
+<h3 id="避免精度丢失"><a href="#避免精度丢失" class="headerlink" title="避免精度丢失"></a>避免精度丢失</h3><p>在Java中，使用float表示单精度浮点数，double表示双精度浮点数，表示的都是近似值。<br>所以，在Java代码中，千万不要使用float或者double来进行高精度运算，尤其是金额运算，否则就很容易产生资损问题。</p>
+<p>为了解决这样的精度问题，Java中提供了BigDecimal来进行精确运算。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>double</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>什么是反射机制？为什么反射慢？</title>
     <url>/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。  </p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。  </p>
 <p>Java的反射可以：</p>
 <ol>
 <li><p>在运行时判断任意一个对象所属的类。</p>
@@ -557,45 +545,9 @@
       </tags>
   </entry>
   <entry>
-    <title>为什么不能用浮点数表示金额</title>
-    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
-<span id="more"></span>
-
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><p>十进制整数转换为二进制整数采用”除2取余，逆序排列”法。<br>具体做法是：<br>用2整除十进制整数，可以得到一个商和余数；<br>再用2去除商，又会得到一个商和余数，如此进行，直到商为小于1时为止<br>然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。<br>如，我们想要把127转换成二进制，做法如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png" alt="屏幕截图 2023-05-24 172509"></p>
-<p>那么，<strong>十进制小数转换成二进制小数，又该如何计算呢？</strong><br>十进制小数转换成二进制小数采用”乘2取整，顺序排列”法。<br>具体做法是：<br>用2乘十进制小数，可以得到积<br>将积的整数部分取出，再用2乘余下的小数部分，又得到一个积<br>再将积的整数部分取出，如此进行，直到积中的小数部分为零，此时0或1为二进制的最后一位。或者达到所要求的精度为止。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png" alt="image-20230524172648834"></p>
-<p>所以，十进制的0.625对应的二进制就是0.101。</p>
-<h3 id="不是所有数都能用二进制表示"><a href="#不是所有数都能用二进制表示" class="headerlink" title="不是所有数都能用二进制表示"></a>不是所有数都能用二进制表示</h3><p>我们知道了如何将一个十进制小数转换成二进制，那么是不是计算就可以直接用二进制表示小数了呢？<br>前面我们的例子中0.625是一个特列，那么还是用同样的算法，请计算下0.1对应的二进制是多少？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png" alt="image-20230524172739187"></p>
-<p>我们发现，0.1的二进制表示中出现了无限循环的情况，也就是(0.1)10 &#x3D; (0.000110011001100…)2<br>这种情况，计算机就没办法用二进制精确的表示0.1了。<br><strong>也就是说，对于像0.1这种数字，我们是没办法将他转换成一个确定的二进制数的。</strong></p>
-<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>为了解决部分小数无法使用二进制精确表示的问题，于是就有了IEEE 754规范。<br>IEEE二进制浮点数算术标准（IEEE 754）是20世纪80年代以来最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用。<br>浮点数和小数并不是完全一样的，计算机中小数的表示法，其实有定点和浮点两种。因为在位数相同的情况下，定点数的表示范围要比浮点数小。所以在计算机科学中，使用浮点数来表示实数的近似值。<br>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。<br>其中最常用的就是32位单精度浮点数和64位双精度浮点数。<br><strong>IEEE并没有解决小数无法精确表示的问题，只是提出了一种使用近似值表示小数的方式，并且引入了精度的概念。</strong><br>浮点数是一串0和1构成的位序列(bit sequence)，从逻辑上用三元组{S,E,M}表示一个数N,如下图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png"></p>
-<ul>
-<li>S(sign)表示N的符号位。对应值s满足：n&gt;0时，s&#x3D;0; n≤0时，s&#x3D;1。</li>
-<li>E(exponent)表示N的指数位，位于S和M之间的若干位。对应值e值也可正可负。</li>
-<li>M(mantissa)表示N的尾数位，恰好，它位于N末尾。M也叫有效数字位（significand）、系数位（coefficient), 甚至被称作”小数”。</li>
-</ul>
-<p>则浮点数N的实际值n由下方的式子表示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png" alt="image-20230524172940592"></p>
-<p>上面这个公式看起来很复杂，其中符号位和尾数位还比较容易理解，但是这个指数位就不是那么容易理解了。<br>其实，大家也不用太过于纠结这个公式，大家只需要知道对于单精度浮点数，最多只能用32位字符表示一个数字，双精度浮点数最多只能用64位来表示一个数字。<br><strong>而对于那些无限循环的二进制数来说，计算机采用浮点数的方式保留了一定的有效数字，那么这个值只能是近似值，不可能是真实值。</strong><br>至于一个数对应的IEEE 754浮点数应该如何计算，不是本文的重点，这里就不再赘述了，过程还是比较复杂的，需要进行对阶、尾数求和、规格化、舍入以及溢出判断等。<br>但是这些其实不需要了解的太详细，我们只需要知道，小数在计算机中的表示是近似数，并不是真实值。根据精度不同，近似程度也有所不同。<br>如0.1这个小数，他对应的在双精度浮点数的二进制为：0.00011001100110011001100110011001100110011001100110011001 。<br>0.2这个小数0.00110011001100110011001100110011001100110011001100110011 。<br>所以两者相加：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png" alt="image-20230524173051530"></p>
-<p>转换成10进制之后得到：0.30000000000000004！</p>
-<h3 id="避免精度丢失"><a href="#避免精度丢失" class="headerlink" title="避免精度丢失"></a>避免精度丢失</h3><p>在Java中，使用float表示单精度浮点数，double表示双精度浮点数，表示的都是近似值。<br>所以，在Java代码中，千万不要使用float或者double来进行高精度运算，尤其是金额运算，否则就很容易产生资损问题。</p>
-<p>为了解决这样的精度问题，Java中提供了BigDecimal来进行精确运算。</p>
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-      <tags>
-        <tag>double</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>什么是实体，什么是值对象</title>
     <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E4%BD%93%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[<p><strong>实体通常指具有唯一标识的具体对象或事物</strong>。实体通常具有自己的生命周期，可以被创建、修改和删除。在数据库中，实体通常对应着数据库表的一行记录，每个实体具有唯一的标识符（通常是主键）。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>实体通常指具有唯一标识的具体对象或事物</strong>。实体通常具有自己的生命周期，可以被创建、修改和删除。在数据库中，实体通常对应着数据库表的一行记录，每个实体具有唯一的标识符（通常是主键）。</p>
 <p>比如，一个人可以被视为一个实体，因为每个人都有唯一的身份证号码作为标识符，并且每个人具有自己的生命周期，可以被创建、修改和删除。</p>
 <p><strong>值对象通常指没有唯一标识的对象或数据类型</strong>。值对象通常不可变，一旦创建就不能修改，只能通过创建新的值对象来替换原来的值对象。在数据库中，值对象通常对应着数据库表的一组字段，每个值对象不具有唯一的标识符，而是通过一组字段来描述其属性。</p>
 <p>比如，一个地址可以被视为一个值对象，因为它没有唯一标识符，而是由一组字段描述，例如国家、省份、城市、街道和门牌号等。并且地址通常是不可变的，一旦创建就不能修改，只能通过创建新的地址对象来替换原来的地址对象。</p>
@@ -631,9 +583,86 @@
       </categories>
   </entry>
   <entry>
+    <title>为什么Java不支持多继承</title>
+    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
+<p>在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。但是，Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
+<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，但是，Java8中为了避免菱形继承的问题，在实现的多个接口中如果有相同方法，就会要求该类必须重写这个方法。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>Java的创始人James Gosling曾经回答过，他表示：</p>
+<p>“Java之所以不支持一个类继承多个类，主要是因为在设计之初我们听取了来自C++和Objective-C登阵营的人的意见。因为多继承会产生很多歧义问题。”</p>
+<p>Gosling老人家提到的歧义问题，其实是C++因为支持多继承之后带来的菱形继承问题。</p>
+<p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png" alt="image-20230524180528863"></p>
+<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
+<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
+<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
+<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
+<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
+<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8之前），这就避免了 C++ 中多继承的歧义问题。</p>
+<h2 id="Java-8中的多继承"><a href="#Java-8中的多继承" class="headerlink" title="Java 8中的多继承"></a>Java 8中的多继承</h2><p>Java不支持多继承，但是是支持多实现的，也就是说，同一个类可以同时实现多个类。</p>
+<p>我们知道，在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。</p>
+<p>那么问题来了。</p>
+<p>Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Pet &#123;</span><br><span class="line">    public default void eat()&#123;</span><br><span class="line">        System.out.println(&quot;Pet Is Eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，这不就是变相支持了多继承么。<br>那么，Java是怎么解决菱形继承问题的呢？我们再定义一个哺乳动物接口，也定义一个eat方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Mammal &#123;	</span><br><span class="line">	  public default void eat()&#123;</span><br><span class="line">	      System.out.println(&quot;Mammal Is Eating&quot;);</span><br><span class="line">	  &#125;        </span><br><span class="line">&#125;	    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后定义一个Cat，让他分别实现两个接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候，编译期会报错：</p>
+<blockquote>
+<p>error: class Cat inherits unrelated defaults for eat() from types Mammal and Pet</p>
+</blockquote>
+<p>这时候，就要求Cat类中，必须重写eat()方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat Is Eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>所以可以看到，Java并没有帮我们解决多继承的歧义问题，而是把这个问题留给开发人员，通过重写方法的方式自己解决。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>什么是类型擦除</title>
+    <url>/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>类型擦除是Java在处理泛型的一种方式，如Java的编译器在编译以下代码时：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Foo&lt;T&gt; &#123;</span><br><span class="line">    T bar;</span><br><span class="line">    void doSth(T param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo&lt;String&gt; f1;</span><br><span class="line">Foo&lt;Integer&gt; f2;</span><br></pre></td></tr></table></figure>
+
+<p>在编译后的字节码文件中，会把泛型的信息擦除掉：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Foo &#123;</span><br><span class="line">    Object bar;</span><br><span class="line">    void doSth(Object param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>也就是说，在代码中的Foo 和 Foo使用的类，经过编译后都是同一个类。</p>
+<p>所以说泛型技术实际上是Java语言的一颗语法糖，因为泛型经过编译器处理之后就被擦除了，编译器根本不认识泛型。</p>
+<p>这种擦除的过程，被称之为——类型擦除。所以类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。</p>
+<p><strong>类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码</strong>。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="C语言对泛型的支持"><a href="#C语言对泛型的支持" class="headerlink" title="C语言对泛型的支持"></a>C语言对泛型的支持</h3><p>泛型是一种编程范式，在不同的语言和编译器中的实现和支持方式都不一样。</p>
+<p>通常情况下，一个编译器处理泛型有多种方式，在C++中，当编译器对以下代码编译时：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">struct Foo</span><br><span class="line">&#123;</span><br><span class="line">    T bar;</span><br><span class="line">    void doSth(T param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo&lt;int&gt; f1;</span><br><span class="line">Foo&lt;float&gt; f2;</span><br></pre></td></tr></table></figure>
+
+<p>当编译器对其进行编译时，编译器发现要用到Foo和Foo，这时候就会为每一个泛型类新生成一份执行代码。相当于新创建了如下两个类：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct FooInt</span><br><span class="line">&#123;</span><br><span class="line">    int bar;</span><br><span class="line">    void doSth(int param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct FooFloat</span><br><span class="line">&#123;</span><br><span class="line">    float bar;</span><br><span class="line">    void doSth(float param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这种做法，用起来的时候很方便，只需要根据具体类型找到具体的的类和方法就行了。但是问题是，当我们多次使用不同类型的模板时，就会创建出来的很多新的类，就会导致代码膨胀。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>泛型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>什么是泛型？有什么好处</title>
     <url>/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java泛型（generics） 是JDK 5中引入的一个新特性，允许在定义类和接口的时候使用类型参数（type parameter）。声明的类型参数在使用时用具体的类型来替换。泛型最主要的应用是在JDK 5中的新集合类框架中。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java泛型（generics） 是JDK 5中引入的一个新特性，允许在定义类和接口的时候使用类型参数（type parameter）。声明的类型参数在使用时用具体的类型来替换。泛型最主要的应用是在JDK 5中的新集合类框架中。</p>
 <p>泛型的好处有两个：</p>
 <ol>
 <li><p>方便：可以提高代码的复用性。以List接口为例，我们可以将String、Integer等类型放入List中，如不用泛型，存放String类型要写一个List接口，存放Integer要写另外一个List接口，泛型可以很好的解决这个问题</p>
@@ -689,38 +718,54 @@
       </tags>
   </entry>
   <entry>
-    <title>什么是类型擦除</title>
-    <url>/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>类型擦除是Java在处理泛型的一种方式，如Java的编译器在编译以下代码时：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Foo&lt;T&gt; &#123;</span><br><span class="line">    T bar;</span><br><span class="line">    void doSth(T param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo&lt;String&gt; f1;</span><br><span class="line">Foo&lt;Integer&gt; f2;</span><br></pre></td></tr></table></figure>
+    <title>充血模型和贫血模型</title>
+    <url>/2023/05/26/%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>充血模型（Domain Driven Design）是一种面向对象的软件设计方法，它强调将业务逻辑封装在领域对象中。</p>
+<p>假设有一个电商网站，需要对商品进行购买、库存管理等操作。在充血模型中，我们可以定义一个Product类来表示商品。Product类会包含商品的属性（例如名称、价格、库存等），并且也会包含一些行为（例如购买商品、更新库存等）。这些行为是直接封装在Product类中的，以便于对商品进行操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product&#123;</span><br><span class="line">	private String productName;</span><br><span class="line">	private BigDecimal price;</span><br><span class="line">	private Long stock;</span><br><span class="line"></span><br><span class="line">	 public void purchase(int quantity) &#123;</span><br><span class="line">      if (quantity &gt; stock) &#123;</span><br><span class="line">          throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      stock -= quantity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>在编译后的字节码文件中，会把泛型的信息擦除掉：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Foo &#123;</span><br><span class="line">    Object bar;</span><br><span class="line">    void doSth(Object param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>贫血模型（Anemic Domain Model）则是一种将数据与行为分离的模型，其中数据由对象持有，而行为则由外部服务提供。</p>
+<p>在贫血模型中，Product类可能只包含商品的属性（例如名称、价格、库存等），而行为则由其他类或服务提供。例如，我们可能会创建一个ProductService类来提供购买商品、更新库存等操作，而Product类只用于存储数据。这种方式下，Product类只是一个被动的数据持有者，而没有自己的行为。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private double price;</span><br><span class="line">    private int stock;</span><br><span class="line"></span><br><span class="line">    public Product(String name, double price, int stock) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.price = price;</span><br><span class="line">        this.stock = stock;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double getPrice() &#123;</span><br><span class="line">        return price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getStock() &#123;</span><br><span class="line">        return stock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>也就是说，在代码中的Foo 和 Foo使用的类，经过编译后都是同一个类。</p>
-<p>所以说泛型技术实际上是Java语言的一颗语法糖，因为泛型经过编译器处理之后就被擦除了，编译器根本不认识泛型。</p>
-<p>这种擦除的过程，被称之为——类型擦除。所以类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。</p>
-<p><strong>类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码</strong>。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="C语言对泛型的支持"><a href="#C语言对泛型的支持" class="headerlink" title="C语言对泛型的支持"></a>C语言对泛型的支持</h3><p>泛型是一种编程范式，在不同的语言和编译器中的实现和支持方式都不一样。</p>
-<p>通常情况下，一个编译器处理泛型有多种方式，在C++中，当编译器对以下代码编译时：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">struct Foo</span><br><span class="line">&#123;</span><br><span class="line">    T bar;</span><br><span class="line">    void doSth(T param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo&lt;int&gt; f1;</span><br><span class="line">Foo&lt;float&gt; f2;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class ProductService &#123;</span><br><span class="line"> public void purchase(Product product, int quantity) &#123;</span><br><span class="line"> if (quantity &gt; product.getStock()) &#123;</span><br><span class="line"> throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line"> &#125;</span><br><span class="line"> product.setStock(product.getStock() - quantity);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>当编译器对其进行编译时，编译器发现要用到Foo和Foo，这时候就会为每一个泛型类新生成一份执行代码。相当于新创建了如下两个类：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">struct FooInt</span><br><span class="line">&#123;</span><br><span class="line">    int bar;</span><br><span class="line">    void doSth(int param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct FooFloat</span><br><span class="line">&#123;</span><br><span class="line">    float bar;</span><br><span class="line">    void doSth(float param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p>这种做法，用起来的时候很方便，只需要根据具体类型找到具体的的类和方法就行了。但是问题是，当我们多次使用不同类型的模板时，就会创建出来的很多新的类，就会导致代码膨胀。</p>
+
+<h3 id="优缺点及适用场景"><a href="#优缺点及适用场景" class="headerlink" title="优缺点及适用场景"></a>优缺点及适用场景</h3><p>充血模型的优点：</p>
+<ol>
+<li><strong>面向对象设计，具有良好的封装性和可维护性。</strong></li>
+<li>领域对象自包含业务逻辑，易于理解和扩展。</li>
+<li>可以避免过度依赖外部服务，提高系统的稳定性。</li>
+</ol>
+<p>充血模型的缺点：</p>
+<ol>
+<li>对象可能变得庞大复杂，<strong>维护成本高。</strong></li>
+<li>对象间的协作可能增加，导致设计变得复杂。</li>
+<li>对象的状态可能会变得不一致，需要特别注意。</li>
+</ol>
+<p>贫血模型的优点：</p>
+<ol>
+<li><strong>数据与行为分离，降低了对象的复杂度。</strong></li>
+<li>可以提高代码的重用性和可测试性。</li>
+<li>可以更好地利用现有的服务和框架。</li>
+</ol>
+<p>贫血模型的缺点：</p>
+<ol>
+<li><strong>对象缺乏封装性，易于出现耦合性和脆弱性。</strong></li>
+<li>业务逻辑被分散在多个类中，<strong>难以维护和理解。</strong></li>
+<li><strong>过度依赖外部服务，可能导致系统的不稳定性。</strong></li>
+</ol>
+<p>一般来说，对于较小的应用系统或者简单的业务流程，可以使用贫血模型；对于较大的应用系统或者复杂的业务流程，建议使用充血模型。</p>
 ]]></content>
       <categories>
-        <category>java基础</category>
+        <category>DDD</category>
       </categories>
-      <tags>
-        <tag>泛型</tag>
-      </tags>
   </entry>
   <entry>
     <title>什么是聚合，什么是聚合根</title>
     <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%E6%A0%B9/</url>
-    <content><![CDATA[<p>在软件开发中，聚合是指将多个相关的对象或实体组合在一起形成一个单独的整体。这个整体可以是一个具有单一标识符的对象，它代表了一组相关的子对象或属性，而这些子对象或属性在整个系统中具有特定的上下文和含义。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在软件开发中，聚合是指将多个相关的对象或实体组合在一起形成一个单独的整体。这个整体可以是一个具有单一标识符的对象，它代表了一组相关的子对象或属性，而这些子对象或属性在整个系统中具有特定的上下文和含义。</p>
 <p>聚合根是聚合中最重要的对象，它代表了聚合的根实体。聚合根是聚合中的唯一标识符，并且控制着聚合中其他对象的生命周期。聚合根是整个聚合的唯一入口点，所有的操作都是通过聚合根来进行的。</p>
 <p>例如，如果我们有一个订单聚合，那么订单就是聚合根，它包含了发件人信息、商品信息、发票信息等子对象。</p>
 <p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261228279.png" alt="img"></p>
@@ -730,9 +775,40 @@
       </categories>
   </entry>
   <entry>
+    <title>日志文件</title>
+    <url>/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
+<span id="more"></span>
+<h2 id="redolog"><a href="#redolog" class="headerlink" title="redolog"></a>redolog</h2><p>redo log是MySQL中的重做日志，用于记录将来需要进行回滚操作的更改操作。当MySQL执行一个事务时，它会首先将更改操作记录到redolog中，然后再将更改写入磁盘。如果MySQL在写入磁盘之前崩溃，则可以使用redolog来恢复未完成的事务。用于实现崩溃恢复和数据持久性的一种机制。</p>
+<h2 id="undolog"><a href="#undolog" class="headerlink" title="undolog"></a>undolog</h2><p>undolog是MySQL中的撤销日志，用于事务回滚或系统崩溃时撤销(回滚)事务所做的修改。当MySQL执行一个事务时，它会将更改操作记录到redolog中，并且将旧值记录到undolog中。如果需要回滚该事务，则可以使用undolog中的旧值来还原修改操作。支持MVCC机制，用于在并发事务时提供一定的隔离性。</p>
+<p>注：redolog和undolog只适用于innodb引擎，因为要支持事务。</p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>泛型中K T V E ？ Object等分别代表什么含义</title>
+    <url>/2023/05/23/%E6%B3%9B%E5%9E%8B%E4%B8%ADK-T-V-E-%EF%BC%9F-Object%E7%AD%89%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>E – Element (在集合中使用，因为集合中存放的是元素)<br>T – Type（Java 类）<br>K – Key（键）<br>V – Value（值）<br>N – Number（数值类型）<br>？ – 表示不确定的java类型（无限制通配符类型）<br>S、U、V – 2nd、3rd、4th types<br>Object – 是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是用使用了泛型T、E等这些标识符后，在实际用之前类型就已经确定了，不需要再进行类型强制转换。</p>
+<p><strong>代码示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 示例1：使用T作为泛型类型参数，表示任何类型</span><br><span class="line">public class MyGenericClass&lt;T&gt; &#123;</span><br><span class="line">    private T myField;</span><br><span class="line"></span><br><span class="line">    public MyGenericClass(T myField) &#123;</span><br><span class="line">        this.myField = myField;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T getMyField() &#123;</span><br><span class="line">        return myField;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例2：使用K、V作为泛型类型参数，表示键值对中的键和值的类型</span><br><span class="line">public class MyMap&lt;K, V&gt; &#123;</span><br><span class="line">    private List&lt;Entry&lt;K, V&gt;&gt; entries;</span><br><span class="line"></span><br><span class="line">    public MyMap() &#123;</span><br><span class="line">        entries = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void put(K key, V value) &#123;</span><br><span class="line">        Entry&lt;K, V&gt; entry = new Entry&lt;&gt;(key, value);</span><br><span class="line">        entries.add(entry);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public V get(K key) &#123;</span><br><span class="line">        for (Entry&lt;K, V&gt; entry : entries) &#123;</span><br><span class="line">            if (entry.getKey().equals(key)) &#123;</span><br><span class="line">                return entry.getValue();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private class Entry&lt;K, V&gt; &#123;</span><br><span class="line">        private K key;</span><br><span class="line">        private V value;</span><br><span class="line"></span><br><span class="line">        public Entry(K key, V value) &#123;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public K getKey() &#123;</span><br><span class="line">            return key;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public V getValue() &#123;</span><br><span class="line">            return value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例3：使用E作为泛型类型参数，表示集合中的元素类型</span><br><span class="line">public class MyList&lt;E&gt; &#123;</span><br><span class="line">    private List&lt;E&gt; elements;</span><br><span class="line"></span><br><span class="line">    public MyList() &#123;</span><br><span class="line">        elements = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void add(E element) &#123;</span><br><span class="line">        elements.add(element);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>泛型</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>如何破坏单例模式</title>
     <url>/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>单例模式主要是通过把一个类的构造方法私有化，来避免重复创建多个对象的。那么，想要破坏单例，只要想办法能够执行到这个私有的构造方法就行了。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>单例模式主要是通过把一个类的构造方法私有化，来避免重复创建多个对象的。那么，想要破坏单例，只要想办法能够执行到这个私有的构造方法就行了。</p>
 <p>一般来说做法有使用反射及使用反序列化都可以破坏单例。</p>
 <h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><p>我们先通过双重校验锁的方式创建一个单例，后文会通过反射及反序列化的方式尝试破坏这个单例。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.Serializable;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> * 使用双重校验锁方式实现单例</span><br><span class="line"> */</span><br><span class="line">public class Singleton implements Serializable&#123;</span><br><span class="line">    private volatile static Singleton singleton;</span><br><span class="line">    private Singleton ()&#123;&#125;</span><br><span class="line">    public static Singleton getSingleton() &#123;</span><br><span class="line">        if (singleton == null) &#123;</span><br><span class="line">            synchronized (Singleton.class) &#123;</span><br><span class="line">                if (singleton == null) &#123;</span><br><span class="line">                    singleton = new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -809,70 +885,9 @@
       </tags>
   </entry>
   <entry>
-    <title>充血模型和贫血模型</title>
-    <url>/2023/05/26/%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<p>充血模型（Domain Driven Design）是一种面向对象的软件设计方法，它强调将业务逻辑封装在领域对象中。</p>
-<p>假设有一个电商网站，需要对商品进行购买、库存管理等操作。在充血模型中，我们可以定义一个Product类来表示商品。Product类会包含商品的属性（例如名称、价格、库存等），并且也会包含一些行为（例如购买商品、更新库存等）。这些行为是直接封装在Product类中的，以便于对商品进行操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product&#123;</span><br><span class="line">	private String productName;</span><br><span class="line">	private BigDecimal price;</span><br><span class="line">	private Long stock;</span><br><span class="line"></span><br><span class="line">	 public void purchase(int quantity) &#123;</span><br><span class="line">      if (quantity &gt; stock) &#123;</span><br><span class="line">          throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      stock -= quantity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>贫血模型（Anemic Domain Model）则是一种将数据与行为分离的模型，其中数据由对象持有，而行为则由外部服务提供。</p>
-<p>在贫血模型中，Product类可能只包含商品的属性（例如名称、价格、库存等），而行为则由其他类或服务提供。例如，我们可能会创建一个ProductService类来提供购买商品、更新库存等操作，而Product类只用于存储数据。这种方式下，Product类只是一个被动的数据持有者，而没有自己的行为。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private double price;</span><br><span class="line">    private int stock;</span><br><span class="line"></span><br><span class="line">    public Product(String name, double price, int stock) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.price = price;</span><br><span class="line">        this.stock = stock;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double getPrice() &#123;</span><br><span class="line">        return price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getStock() &#123;</span><br><span class="line">        return stock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class ProductService &#123;</span><br><span class="line"> public void purchase(Product product, int quantity) &#123;</span><br><span class="line"> if (quantity &gt; product.getStock()) &#123;</span><br><span class="line"> throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line"> &#125;</span><br><span class="line"> product.setStock(product.getStock() - quantity);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="优缺点及适用场景"><a href="#优缺点及适用场景" class="headerlink" title="优缺点及适用场景"></a>优缺点及适用场景</h3><p>充血模型的优点：</p>
-<ol>
-<li><strong>面向对象设计，具有良好的封装性和可维护性。</strong></li>
-<li>领域对象自包含业务逻辑，易于理解和扩展。</li>
-<li>可以避免过度依赖外部服务，提高系统的稳定性。</li>
-</ol>
-<p>充血模型的缺点：</p>
-<ol>
-<li>对象可能变得庞大复杂，<strong>维护成本高。</strong></li>
-<li>对象间的协作可能增加，导致设计变得复杂。</li>
-<li>对象的状态可能会变得不一致，需要特别注意。</li>
-</ol>
-<p>贫血模型的优点：</p>
-<ol>
-<li><strong>数据与行为分离，降低了对象的复杂度。</strong></li>
-<li>可以提高代码的重用性和可测试性。</li>
-<li>可以更好地利用现有的服务和框架。</li>
-</ol>
-<p>贫血模型的缺点：</p>
-<ol>
-<li><strong>对象缺乏封装性，易于出现耦合性和脆弱性。</strong></li>
-<li>业务逻辑被分散在多个类中，<strong>难以维护和理解。</strong></li>
-<li><strong>过度依赖外部服务，可能导致系统的不稳定性。</strong></li>
-</ol>
-<p>一般来说，对于较小的应用系统或者简单的业务流程，可以使用贫血模型；对于较大的应用系统或者复杂的业务流程，建议使用充血模型。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>日志文件</title>
-    <url>/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
-<span id="more"></span>
-<h2 id="redolog"><a href="#redolog" class="headerlink" title="redolog"></a>redolog</h2><p>redo log是MySQL中的重做日志，用于记录将来需要进行回滚操作的更改操作。当MySQL执行一个事务时，它会首先将更改操作记录到redolog中，然后再将更改写入磁盘。如果MySQL在写入磁盘之前崩溃，则可以使用redolog来恢复未完成的事务。用于实现崩溃恢复和数据持久性的一种机制。</p>
-<h2 id="undolog"><a href="#undolog" class="headerlink" title="undolog"></a>undolog</h2><p>undolog是MySQL中的撤销日志，用于事务回滚或系统崩溃时撤销(回滚)事务所做的修改。当MySQL执行一个事务时，它会将更改操作记录到redolog中，并且将旧值记录到undolog中。如果需要回滚该事务，则可以使用undolog中的旧值来还原修改操作。支持MVCC机制，用于在并发事务时提供一定的隔离性。</p>
-<p>注：redolog和undolog只适用于innodb引擎，因为要支持事务。</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>领域驱动设计</title>
     <url>/2023/05/26/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/</url>
-    <content><![CDATA[<p>领域驱动设计（Domain-Driven Design，DDD）是一种<strong>软件开发方法论</strong>，强调将业务领域作为软件设计的核心，以便更好地满足业务需求。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>领域驱动设计（Domain-Driven Design，DDD）是一种<strong>软件开发方法论</strong>，强调将业务领域作为软件设计的核心，以便更好地满足业务需求。</p>
 <p><strong>DDD认为，软件开发的核心是理解业务，而不是实现技术。</strong>在DDD中，软件开发人员应该与业务人员密切合作，了解业务需求，理解业务模型。通过抽象出业务领域模型、领域服务和领域事件等概念，将业务模型映射到软件系统中，以实现更好的业务价值。</p>
 <p><strong>在不使用DDD的软件开发过程中，来了一个需求，开发会首先考虑如何设计表结构，然后再根据表结构设计实体类以及对应的Service服务。但是在DDD中，提倡通过领域驱动设计，要先进行领域建模，最后在考虑持久化存储。</strong></p>
 <p>具体而言，DDD的主要思想包括：</p>
@@ -899,7 +914,7 @@
   <entry>
     <title>常见的语法糖</title>
     <url>/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>语法糖（Syntactic sugar），指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。</p>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>语法糖（Syntactic sugar），指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。</p>
 <p>虽然Java中有很多语法糖，但是Java虚拟机并不支持这些语法糖，所以这些语法糖在编译阶段就会被还原成简单的基础语法结构，这样才能被虚拟机识别，这个过程就是解语法糖。</p>
 <p>如果看过Java虚拟机的源码，就会发现在编译过程中有一个重要的步骤就是调用desugar()，这个方法就是负责解语法糖的实现。</p>
 <p>常见的语法糖有 switch支持枚举及字符串、泛型、条件编译、断言、可变参数、自动装箱&#x2F;拆箱、枚举、内部类、增强for循环、try-with-resources语句、lambda表达式等。</p>
@@ -1079,21 +1094,6 @@
       </categories>
       <tags>
         <tag>语法糖</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>泛型中K T V E ？ Object等分别代表什么含义</title>
-    <url>/2023/05/23/%E6%B3%9B%E5%9E%8B%E4%B8%ADK-T-V-E-%EF%BC%9F-Object%E7%AD%89%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89/</url>
-    <content><![CDATA[<p>E – Element (在集合中使用，因为集合中存放的是元素)<br>T – Type（Java 类）<br>K – Key（键）<br>V – Value（值）<br>N – Number（数值类型）<br>？ – 表示不确定的java类型（无限制通配符类型）<br>S、U、V – 2nd、3rd、4th types<br>Object – 是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是用使用了泛型T、E等这些标识符后，在实际用之前类型就已经确定了，不需要再进行类型强制转换。</p>
-<p><strong>代码示例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 示例1：使用T作为泛型类型参数，表示任何类型</span><br><span class="line">public class MyGenericClass&lt;T&gt; &#123;</span><br><span class="line">    private T myField;</span><br><span class="line"></span><br><span class="line">    public MyGenericClass(T myField) &#123;</span><br><span class="line">        this.myField = myField;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T getMyField() &#123;</span><br><span class="line">        return myField;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例2：使用K、V作为泛型类型参数，表示键值对中的键和值的类型</span><br><span class="line">public class MyMap&lt;K, V&gt; &#123;</span><br><span class="line">    private List&lt;Entry&lt;K, V&gt;&gt; entries;</span><br><span class="line"></span><br><span class="line">    public MyMap() &#123;</span><br><span class="line">        entries = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void put(K key, V value) &#123;</span><br><span class="line">        Entry&lt;K, V&gt; entry = new Entry&lt;&gt;(key, value);</span><br><span class="line">        entries.add(entry);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public V get(K key) &#123;</span><br><span class="line">        for (Entry&lt;K, V&gt; entry : entries) &#123;</span><br><span class="line">            if (entry.getKey().equals(key)) &#123;</span><br><span class="line">                return entry.getValue();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private class Entry&lt;K, V&gt; &#123;</span><br><span class="line">        private K key;</span><br><span class="line">        private V value;</span><br><span class="line"></span><br><span class="line">        public Entry(K key, V value) &#123;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public K getKey() &#123;</span><br><span class="line">            return key;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public V getValue() &#123;</span><br><span class="line">            return value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例3：使用E作为泛型类型参数，表示集合中的元素类型</span><br><span class="line">public class MyList&lt;E&gt; &#123;</span><br><span class="line">    private List&lt;E&gt; elements;</span><br><span class="line"></span><br><span class="line">    public MyList() &#123;</span><br><span class="line">        elements = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void add(E element) &#123;</span><br><span class="line">        elements.add(element);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-      <tags>
-        <tag>泛型</tag>
       </tags>
   </entry>
 </search>
