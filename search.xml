@@ -44,6 +44,37 @@
       </categories>
   </entry>
   <entry>
+    <title>Java中创建对象有哪些种方式</title>
+    <url>/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
+<p>User user &#x3D; new User();</p>
+<h3 id="使用反射机制"><a href="#使用反射机制" class="headerlink" title="使用反射机制"></a>使用反射机制</h3><p>运用反射手段，调用Java.lang.Class或者java.lang.reflect.Constructor类的newInstance()实例方法。</p>
+<p>1 使用Class类的newInstance方法</p>
+<p>可以使用Class类的newInstance方法创建对象。这个newInstance方法调用无参的构造函数创建对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">User user = (User)Class.forName(&quot;xxx.xxx.User&quot;).newInstance(); </span><br><span class="line">User user = User.class.newInstance();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2 使用Constructor类的newInstance方法</p>
+<p>和Class类的newInstance方法很像， java.lang.reflect.Constructor类里也有一个newInstance方法可以创建对象。我们可以通过这个newInstance方法调用有参数的和私有的构造函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Constructor  constructor = User.class.getConstructor();</span><br><span class="line">User user = constructor.newInstance();</span><br></pre></td></tr></table></figure>
+
+<p>这两种newInstance方法就是大家所说的反射。事实上Class的newInstance方法内部调用Constructor的newInstance方法。</p>
+<h3 id="使用clone方法"><a href="#使用clone方法" class="headerlink" title="使用clone方法"></a>使用clone方法</h3><p>无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。 </p>
+<p>要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。如果只实现了Cloneable接口，并没有重写clone方法的话，会默认使用Object类中的clone方法，这是一个native的方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class CloneTest implements Cloneable&#123;</span><br><span class="line">    private String name; </span><br><span class="line">    private int age; </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">    	this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">    	return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">    	this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public CloneTest(String name, int age) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            CloneTest cloneTest = new CloneTest(&quot;wangql&quot;,18);</span><br><span class="line">            CloneTest copyClone = (CloneTest) cloneTest.clone();</span><br><span class="line">            System.out.println(&quot;newclone:&quot;+cloneTest.getName());</span><br><span class="line">            System.out.println(&quot;copyClone:&quot;+copyClone.getName());</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">        	e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h3><p>当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。其实反序列化也是基于反射实现的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //Initializes The Object</span><br><span class="line">    User1 user = new User1();</span><br><span class="line">    user.setName(&quot;hollis&quot;);</span><br><span class="line">    user.setAge(23);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    //Write Obj to File</span><br><span class="line">    ObjectOutputStream oos = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(oos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //Read Obj from File</span><br><span class="line">    File file = new File(&quot;tempFile&quot;);</span><br><span class="line">    ObjectInputStream ois = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        User1 newUser = (User1) ois.readObject();</span><br><span class="line">        System.out.println(newUser);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(ois);</span><br><span class="line">        try &#123;</span><br><span class="line">            FileUtils.forceDelete(file);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java中有了基本类型为什么还需要包装类</title>
     <url>/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java中有8种基本数据类型，这些基本类型又都有对应的包装类。  </p>
@@ -190,37 +221,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Java中创建对象有哪些种方式</title>
-    <url>/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
-<p>User user &#x3D; new User();</p>
-<h3 id="使用反射机制"><a href="#使用反射机制" class="headerlink" title="使用反射机制"></a>使用反射机制</h3><p>运用反射手段，调用Java.lang.Class或者java.lang.reflect.Constructor类的newInstance()实例方法。</p>
-<p>1 使用Class类的newInstance方法</p>
-<p>可以使用Class类的newInstance方法创建对象。这个newInstance方法调用无参的构造函数创建对象。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">User user = (User)Class.forName(&quot;xxx.xxx.User&quot;).newInstance(); </span><br><span class="line">User user = User.class.newInstance();</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2 使用Constructor类的newInstance方法</p>
-<p>和Class类的newInstance方法很像， java.lang.reflect.Constructor类里也有一个newInstance方法可以创建对象。我们可以通过这个newInstance方法调用有参数的和私有的构造函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Constructor  constructor = User.class.getConstructor();</span><br><span class="line">User user = constructor.newInstance();</span><br></pre></td></tr></table></figure>
-
-<p>这两种newInstance方法就是大家所说的反射。事实上Class的newInstance方法内部调用Constructor的newInstance方法。</p>
-<h3 id="使用clone方法"><a href="#使用clone方法" class="headerlink" title="使用clone方法"></a>使用clone方法</h3><p>无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。 </p>
-<p>要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。如果只实现了Cloneable接口，并没有重写clone方法的话，会默认使用Object类中的clone方法，这是一个native的方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class CloneTest implements Cloneable&#123;</span><br><span class="line">    private String name; </span><br><span class="line">    private int age; </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">    	this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">    	return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">    	this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public CloneTest(String name, int age) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            CloneTest cloneTest = new CloneTest(&quot;wangql&quot;,18);</span><br><span class="line">            CloneTest copyClone = (CloneTest) cloneTest.clone();</span><br><span class="line">            System.out.println(&quot;newclone:&quot;+cloneTest.getName());</span><br><span class="line">            System.out.println(&quot;copyClone:&quot;+copyClone.getName());</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">        	e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h3><p>当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。其实反序列化也是基于反射实现的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //Initializes The Object</span><br><span class="line">    User1 user = new User1();</span><br><span class="line">    user.setName(&quot;hollis&quot;);</span><br><span class="line">    user.setAge(23);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    //Write Obj to File</span><br><span class="line">    ObjectOutputStream oos = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(oos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //Read Obj from File</span><br><span class="line">    File file = new File(&quot;tempFile&quot;);</span><br><span class="line">    ObjectInputStream ois = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        User1 newUser = (User1) ois.readObject();</span><br><span class="line">        System.out.println(newUser);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(ois);</span><br><span class="line">        try &#123;</span><br><span class="line">            FileUtils.forceDelete(file);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java是如何实现平台无关性的</title>
     <url>/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
@@ -289,66 +289,88 @@
       </tags>
   </entry>
   <entry>
-    <title>String str=new String(&quot;hollis&quot;)创建了几个对象</title>
-    <url>/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>创建的对象数应该是1个或者2个。</p>
-<p>首先要清楚什么是对象？</p>
-<p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的，在HotSpot虚拟机中，存储的形式就是oop-klass model，即Java对象模型。我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。</p>
-<p>这才叫对象。其他的，一概都不叫对象。</p>
-<p>那么不管怎么样，一次new的过程，都会在堆上创建一个对象，那么就是起码有一个对象了。至于另外一个对象，到底有没有要看具体情况了。</p>
-<p>另外这一个对象就是常量池中的字符串常量，这个字符串其实是类编译阶段就进到Class常量池的，那么当这个类第一次被ClassLoader加载的时候，会从Class常量池进入到运行时常量池。</p>
-<p>在运行时常量池中，也并不是会立刻被解析成对象，而是会先以JVM_CONSTANT_UnresolveString_info的形式驻留在常量池。在后面，该引用第一次被LDC指令执行到的时候，就尝试在堆上创建字符串对象，并将对象的引用驻留在字符串常量池中。</p>
-<p>通过看上面的过程，你也能发现，这个过程的触发条件是我们没办法决定的，问题的题干中也没提到。有可能执行这段代码的时候是第一次LDC指令执行，也许在前面就执行过了。</p>
-<p>所以，如果是第一次执行，那么就是会同时创建两个对象。一个字符串常量引用指向的对象，一个我们new出来的对象。</p>
-<p>如果不是第一次执行，那么就只会创建我们自己new出来的对象。</p>
-<p>至于有人说什么在字符串池内还有在栈上还有一个引用对象，你听听这说法，引用就是引用。别往对象上面扯。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="字面量和运行时常量池"><a href="#字面量和运行时常量池" class="headerlink" title="字面量和运行时常量池"></a>字面量和运行时常量池</h3><p>JVM为了提高性能和减少内存开销，在实例化字符串常量的时候进行了一些优化。为了减少在JVM中创建的字符串的数量，字符串类维护了一个字符串常量池。</p>
-<p>在JVM运行时区域的方法区中，有一块区域是运行时常量池，主要用来存储<strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>。</p>
-<p>了解Class文件结构或者做过Java代码的反编译的朋友可能都知道，在java代码被javac编译之后，文件结构中是包含一部分Constant pool的。比如以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	String s = &quot;Hollis&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <title>QPS、TPS与RT</title>
+    <url>/2023/05/26/QPS%E3%80%81TPS%E4%B8%8ERT/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="RT"><a href="#RT" class="headerlink" title="RT"></a>RT</h2><p>响应时间(Response Time)，是指从客户端发一个请求开始计时，到客户端接收到从服务器端返回的响应结果结束所经历的时间。</p>
+<p>当我们评价一个网站的”快”和”慢”的时候，其实说的就是他的RT时间的长和短。当我们访问某个网站，有时候我们会说这个网站很”卡”，其实言下之意说的就是这个网站的RT很长。</p>
+<p>如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需要重点优化的。</p>
+<p>拿一个游乐园的例子来说明一下可能会比较容易理解，比如我们去迪士尼乐园游玩时候，大多数的项目都是需要排队的。</p>
+<p>为了让游客知道一个项目需要排队多久才能玩上，迪士尼做了很多事情，比如他们有一个App，专门可以提示每个项目的预计排队时间。再有就是每个项目的排队处都有一个小牌牌，上面写着预计排队时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261514980.jpg" alt="img"></p>
+<p>但是，这个时间并不是凭空设定出来的，而是『计算』出来的。</p>
+<p>迪士尼的排队时间计算方法：</p>
+<p>1、迪士尼在每个项目的入口处和出口处都会设置工作人员。 2、入口处工作人员随机寻找游客，给游客一张小纸条，上面记录着游客开始排队的时间。 3、入口处工作人员提醒游客，项目游览玩之后，在出口处把小纸条交还给出口处的工作人员。 4、出口处工作人员在收到游客的小纸条后，会用：当前时间-游客开始排队的时间 &#x3D; 排队时长。 5、为了尽量让数据准确，一般会收集多个排队时长之后，计算一个平均值。</p>
+<p>以上就是迪士尼的排队时间计算法。其实，这也是RT的计算方法。在一个请求开始的时候记录时间，请求结束的时候再记录时间，两个时间的差值，就是RT了。</p>
+<p>如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需要重点优化的。</p>
+<p>服务器响应时间也有多部分组成，一般包含：请求发送时间、网络传输时间和服务器处理时间等三部分。</p>
+<h2 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h2><p>QPS，指的是系统每秒能处理的请求数(Query Per Second) ，在Web应用中我们更关注的是Web应用每秒能处理的request数量。这个是衡量系统性能的重要指标。有时候，我们也称之为<strong>吞吐量</strong>。</p>
+<p>QPS和RT几乎总是成对出现的。当我们评价迪士尼的一个项目的好坏的时候，通常会包含这几个指标：是否好玩、游玩时长以及可以同时容纳多少人。</p>
+<p>这个可以同时容纳多少人，就可以简单的理解为QPS。很大程度上，一个项目同时可以容纳多少人，其实会大大的影响游客的游玩时长。</p>
+<p>所以，QPS和RT之间是有着一定的关系的：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">RT=并发数/QPS</span><br><span class="line">QPS=并发数/RT</span><br></pre></td></tr></table></figure>
 
-
-
-
-
-<p>经过编译后，常量池内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Constant pool:</span><br><span class="line">	#1 = Methodref 		#4.#20   // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">	#2 = String 		#21		 // Hollis</span><br><span class="line">	#3 = Class 			#22 	// StringDemo</span><br><span class="line">	#4 = Class 			#23 	// java/lang/Object</span><br><span class="line">	...</span><br><span class="line">	#16 = Utf8 			s</span><br><span class="line">	..</span><br><span class="line">	#21 = Utf8 			Hollis</span><br><span class="line">	#22 = Utf8 			StringDemo</span><br><span class="line">	#23 = Utf8 			java/lang/Object</span><br></pre></td></tr></table></figure>
-
-<p>上面的Class文件中的常量池中，比较重要的几个内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#16 = Utf8 			s</span><br><span class="line">#21 = Utf8 			Hollis</span><br><span class="line">#22 = Utf8 			StringDemo</span><br></pre></td></tr></table></figure>
-
-
-
-<p>上面几个常量中，s就是前面提到的<strong>符号引用</strong>，而Hollis就是前面提到的字面量。而Class文件中的常量池部分的内容，会在运行期被运行时常量池加载进去。关于字面量，详情参考<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.10.5">Java SE Specifications</a></p>
-<h3 id="intern"><a href="#intern" class="headerlink" title="intern"></a>intern</h3><p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期向运行时常量池中增加常量。那就是String的intern方法。</p>
-<p>当一个String实例调用intern()方法时，Java查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用；</p>
-<p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用</strong>。</p>
-<h4 id="intern的正确用法"><a href="#intern的正确用法" class="headerlink" title="intern的正确用法"></a>intern的正确用法</h4><p>不知道，你有没有发现，在String s3 &#x3D; new String(“Hollis”).intern();中，其实intern是多余的？</p>
-<p>因为就算不用intern，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才需要使用intern呢？</p>
-<p>在解释这个之前，我们先来看下以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = s1 + s2;</span><br><span class="line">String s4 = &quot;Hollis&quot; + &quot;Chuang&quot;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在经过反编译后，得到代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = (new StringBuilder()).append(s1).append(s2).toString();</span><br><span class="line">String s4 = &quot;HollisChuang&quot;;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>可以发现，同样是字符串拼接，s3和s4在经过编译器编译后的实现方式并不一样。s3被转化成StringBuilder及append，而s4被直接拼接成新的字符串。</p>
-<p>如果你感兴趣，你还能发现，String s3 &#x3D; s1 + s2; 经过编译之后，常量池中是有两个字符串常量的分别是 Hollis、Chuang（其实Hollis和Chuang是String s1 &#x3D; “Hollis”;和String s2 &#x3D; “Chuang”;定义出来的），拼接结果HollisChuang并不在常量池中。</p>
-<p>如果代码只有String s4 &#x3D; “Hollis” + “Chuang”;，那么常量池中将只有HollisChuang而没有”Hollis” 和 “Chuang”。</p>
-<p>究其原因，是因为常量池要保存的是<strong>已确定</strong>的字面量值。也就是说，对于字符串的拼接，纯字面量和字面量的拼接，会把拼接结果作为常量保存到字符串池。</p>
-<p>如果在字符串拼接中，有一个参数是非字面量，而是一个变量的话，整个拼接操作会被编译成StringBuilder.append，这种情况编译器是无法知道其确定值的。只有在运行期才能确定。</p>
-<p>那么，有了这个特性了，intern就有用武之地了。那就是很多时候，我们在程序中得到的字符串是只有在运行期才能确定的，在编译期是无法确定的，那么也就没办法在编译期被加入到常量池中。</p>
-<p>这时候，对于那种可能经常使用的字符串，使用intern进行定义，每次JVM运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。</p>
-<p>如一<a href="https://tech.meituan.com/in_depth_understanding_string_intern.html">深入解析String#intern</a>文中举的一个例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static final int MAX = 1000 * 10000;</span><br><span class="line">static final String[] arr = new String[MAX];</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Integer[] DB_DATA = new Integer[10];</span><br><span class="line">	Random random = new Random(10 * 10000);</span><br><span class="line">	for (int i = 0; i &lt; DB_DATA.length; i++) &#123;</span><br><span class="line">		DB_DATA[i] = random.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line">	long t = System.currentTimeMillis();</span><br><span class="line">	for (int i = 0; i &lt; MAX; i++) &#123;</span><br><span class="line">		arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	System.out.println((System.currentTimeMillis() - t) + &quot;ms&quot;);</span><br><span class="line">	System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过intern显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
+<p>虽然上面的等式看上去，在并发数一定的情况下，想要提升QPS的话就只能降低RT。但其实并不是，以上只是QPS的计算方法。想要提升QPS往往有很多手段。</p>
+<p>就像想要提升游乐设施的吞吐量，最首先想到的办法就是升级设备，比如增加游乐场地的面积，增加设备的座位数目，增加排队的队伍个数等。</p>
+<p>在计算机系统中，想要提升QPS，主要可以在CPU、内存等硬件上面下功夫，比如提升CPU利用率、增加CPU数目、提升内存等。</p>
+<h2 id="TPS"><a href="#TPS" class="headerlink" title="TPS"></a>TPS</h2><p>TPS：是Transactions Per Second的缩写，也就是事务数&#x2F;秒。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数。</p>
+<p>一次事务包含了以下三个过程：</p>
+<p>1）用户请求服务器<br>2）服务器自己的内部处理<br>3）服务器返回给用户</p>
+<p>所以，TPS包含的时长就是三个过程的总和。</p>
+<h2 id="并发用户数"><a href="#并发用户数" class="headerlink" title="并发用户数"></a>并发用户数</h2><p>并发用户数指的就是同时跑到一个项目前面排队的人数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515576.jpg" alt="img"></p>
+<p>关于并发用户数有两种常见的错误观点。</p>
+<p>一种错误观点是把并发用户数量理解为使用系统的全部用户的数量；（比如迪士尼的飞跃地平线项目一天可能会接纳50万人，我们不能说这个50万就是并发用户数）</p>
+<p>还有一种错误观点是把用户在线数量理解为并发用户数量。（比如晚上六点的时候，迪士尼的飞跃地平线项目排队加观看人数共有1万人，我们不能说这个1万就是并发用户数）</p>
+<p>并发用户数量的正确理解为：在<strong>同一时刻</strong>与服务器<strong>进行了交互</strong>的<strong>在线用户数量</strong>。（我们说，晚上六点的时候，共有8000人正在和正在排队使用飞跃地平线这个项目。这才是并发用户数）</p>
+<p>拿系统来说，我们说淘宝详情页的并发用户数，其实说的是同一时刻请求查看详情页的用户个数。有些用户虽然也在浏览详情页，但是它并没有在并发时刻和系统有交互，这就不算的。</p>
+<h2 id="最佳线程数"><a href="#最佳线程数" class="headerlink" title="最佳线程数"></a>最佳线程数</h2><p>最佳线程数指的就是一个项目最多可以容纳的人数，这里的容纳可以包含排队的人数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515366.jpg" alt="img"></p>
+<p>迪士尼每新开一个场馆或者一个游戏项目的时候，都会是一个试运营的阶段。在试运营阶段，通过不断调整并发用户数来观察整个场馆或者项目的运行情况。</p>
+<p>除了上线新场馆和新项目以外，有的是在节假日之前也会有一些类似的实验。</p>
+<p>这和计算机软件的压测很像。就是不断的提高请求数目，来观察系统的QPS和系统的其他指标，如CPU情况、内存情况等。</p>
+<p>性能压测的情况下，起初随着用户数的增加，QPS会上升并对CPU等影响不大，当到了一定的阀值之后，用户数量增加QPS并不会增加，或者增加不明显，同时CPU Load有飙高、内存占用大等情况发生。随之而来的伴随着请求的响应时间大幅增加。这个阀值我们认为是最佳线程数。</p>
+<p>如果并发请求数目，超过了系统的最佳线程数，那么就会导致激烈的资源竞争，随着资源的匮乏甚至枯竭，整个系统也就面临着灾难。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>QPS (Queries Per Second)：是指在一秒钟内完成的查询次数。通常用于衡量系统性能。</li>
+<li>TPS (Transactions Per Second)：是指在一秒钟内完成的事务处理次数，一个事务可以包含一个或多个查询操作。相对于QPS更强调业务处理，如交易系统等。</li>
+<li>RT (Response Time)：是指从发送请求到收到响应的时间。通常用于衡量系统响应速度和用户体验。</li>
+</ul>
+<p>总之，QPS和TPS主要是用来衡量系统的处理能力，而RT则更加关注系统的响应速度和用户体验。</p>
 ]]></content>
       <categories>
-        <category>java基础</category>
+        <category>高性能</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>SLA</title>
+    <url>/2023/05/26/SLA/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>SLA是Service Level Agreement的缩写，意为服务等级协议。它是指供应商和客户之间达成的一份正式协议，规定了供应商应该向客户提供的服务水平、质量、可靠性和响应时间等指标。</p>
+<p>SLA通常会涉及到各种服务指标，例如<strong>服务可用性</strong>、服务等待时间、故障修复时间、数据保密性、客户支持等，旨在确保供应商向客户提供高质量、高可靠性、高安全性的服务。</p>
+<p>SLA通常用于云计算、SaaS、PaaS等服务领域，对于企业用户和服务提供商之间的合作非常重要。通过制定合适的SLA，双方可以达成共识，从而更好地维护业务合作关系。</p>
+<p>一般作为甲方在采购乙方的服务的时候，乙方都会提供一些SLA指标，这些指标包括但不限于以下几个方面：</p>
+<ol>
+<li><p><strong>可用性</strong>：指服务在一定时间范围内能够正常使用的时间比例，通常以百分比表示。例如，“四个九”（99.99%）可用性要求表示一年内服务最多只能停机不超过52.56分钟。</p>
+</li>
+<li><p>响应时间：指服务响应请求的时间，通常以毫秒或秒为单位表示。例如，网络服务的响应时间可要求在100毫秒以内。</p>
+</li>
+<li><p><strong>吞吐量</strong>：指系统在单位时间内能够处理的请求量，通常以每秒钟处理的请求量（QPS）或每分钟处理的请求量（RPM）为单位。</p>
+</li>
+<li><p>故障处理时间：指故障发生后系统能够恢复正常运行的时间，通常以分钟或小时为单位。例如，“四个九”（99.99%）可用性要求通常要求故障处理时间在5分钟以内。</p>
+</li>
+<li><p><strong>数据可靠性</strong>：指系统能够保证数据的完整性、一致性、可用性和安全性。例如，在数据库系统中，可要求采用主从同步、备份等技术手段来保证数据的可靠性。</p>
+</li>
+<li><p><strong>服务支持</strong>：指服务提供商提供的技术支持、客户服务等方面的指标。例如，在运营云服务时，可要求服务提供商提供24小时客户服务、及时响应客户请求等。</p>
+</li>
+<li><p><strong>其他指标</strong>：根据具体业务需求和服务类型，还可以定义其他指标，如安全性、可扩展性、性能等。</p>
+<p>SLA的指标需要根据业务需求、技术能力和市场标准等因素来进行制定，同时要具备可量化和可监控的特性，以确保双方都能够达成共识并得到有效执行。</p>
+</li>
+</ol>
+<h3 id="4个9、5个9"><a href="#4个9、5个9" class="headerlink" title="4个9、5个9"></a>4个9、5个9</h3><p>SLA 4个9指的是服务的可用性要求，也被称为“四个九”，通常表示服务的可用性达到99.99%。</p>
+<p>具体地说，四个九表示在一年的时间内，服务最多只能停机不超过52.56分钟（365<em>24</em>60*(1-0.9999)）。这意味着服务需要保持高可用性，并且具备足够的弹性和韧性，以应对突发的故障和异常情况。</p>
+<p>同理，3个9、5个9等也是类似的算法。</p>
+]]></content>
+      <categories>
+        <category>高可用</category>
       </categories>
   </entry>
   <entry>
@@ -418,6 +440,145 @@
       </categories>
   </entry>
   <entry>
+    <title>String str=new String(&quot;hollis&quot;)创建了几个对象</title>
+    <url>/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>创建的对象数应该是1个或者2个。</p>
+<p>首先要清楚什么是对象？</p>
+<p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的，在HotSpot虚拟机中，存储的形式就是oop-klass model，即Java对象模型。我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。</p>
+<p>这才叫对象。其他的，一概都不叫对象。</p>
+<p>那么不管怎么样，一次new的过程，都会在堆上创建一个对象，那么就是起码有一个对象了。至于另外一个对象，到底有没有要看具体情况了。</p>
+<p>另外这一个对象就是常量池中的字符串常量，这个字符串其实是类编译阶段就进到Class常量池的，那么当这个类第一次被ClassLoader加载的时候，会从Class常量池进入到运行时常量池。</p>
+<p>在运行时常量池中，也并不是会立刻被解析成对象，而是会先以JVM_CONSTANT_UnresolveString_info的形式驻留在常量池。在后面，该引用第一次被LDC指令执行到的时候，就尝试在堆上创建字符串对象，并将对象的引用驻留在字符串常量池中。</p>
+<p>通过看上面的过程，你也能发现，这个过程的触发条件是我们没办法决定的，问题的题干中也没提到。有可能执行这段代码的时候是第一次LDC指令执行，也许在前面就执行过了。</p>
+<p>所以，如果是第一次执行，那么就是会同时创建两个对象。一个字符串常量引用指向的对象，一个我们new出来的对象。</p>
+<p>如果不是第一次执行，那么就只会创建我们自己new出来的对象。</p>
+<p>至于有人说什么在字符串池内还有在栈上还有一个引用对象，你听听这说法，引用就是引用。别往对象上面扯。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="字面量和运行时常量池"><a href="#字面量和运行时常量池" class="headerlink" title="字面量和运行时常量池"></a>字面量和运行时常量池</h3><p>JVM为了提高性能和减少内存开销，在实例化字符串常量的时候进行了一些优化。为了减少在JVM中创建的字符串的数量，字符串类维护了一个字符串常量池。</p>
+<p>在JVM运行时区域的方法区中，有一块区域是运行时常量池，主要用来存储<strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>。</p>
+<p>了解Class文件结构或者做过Java代码的反编译的朋友可能都知道，在java代码被javac编译之后，文件结构中是包含一部分Constant pool的。比如以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	String s = &quot;Hollis&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>经过编译后，常量池内容如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Constant pool:</span><br><span class="line">	#1 = Methodref 		#4.#20   // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">	#2 = String 		#21		 // Hollis</span><br><span class="line">	#3 = Class 			#22 	// StringDemo</span><br><span class="line">	#4 = Class 			#23 	// java/lang/Object</span><br><span class="line">	...</span><br><span class="line">	#16 = Utf8 			s</span><br><span class="line">	..</span><br><span class="line">	#21 = Utf8 			Hollis</span><br><span class="line">	#22 = Utf8 			StringDemo</span><br><span class="line">	#23 = Utf8 			java/lang/Object</span><br></pre></td></tr></table></figure>
+
+<p>上面的Class文件中的常量池中，比较重要的几个内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">#16 = Utf8 			s</span><br><span class="line">#21 = Utf8 			Hollis</span><br><span class="line">#22 = Utf8 			StringDemo</span><br></pre></td></tr></table></figure>
+
+
+
+<p>上面几个常量中，s就是前面提到的<strong>符号引用</strong>，而Hollis就是前面提到的字面量。而Class文件中的常量池部分的内容，会在运行期被运行时常量池加载进去。关于字面量，详情参考<a href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.10.5">Java SE Specifications</a></p>
+<h3 id="intern"><a href="#intern" class="headerlink" title="intern"></a>intern</h3><p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期向运行时常量池中增加常量。那就是String的intern方法。</p>
+<p>当一个String实例调用intern()方法时，Java查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用；</p>
+<p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用</strong>。</p>
+<h4 id="intern的正确用法"><a href="#intern的正确用法" class="headerlink" title="intern的正确用法"></a>intern的正确用法</h4><p>不知道，你有没有发现，在String s3 &#x3D; new String(“Hollis”).intern();中，其实intern是多余的？</p>
+<p>因为就算不用intern，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才需要使用intern呢？</p>
+<p>在解释这个之前，我们先来看下以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = s1 + s2;</span><br><span class="line">String s4 = &quot;Hollis&quot; + &quot;Chuang&quot;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在经过反编译后，得到代码如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = (new StringBuilder()).append(s1).append(s2).toString();</span><br><span class="line">String s4 = &quot;HollisChuang&quot;;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>可以发现，同样是字符串拼接，s3和s4在经过编译器编译后的实现方式并不一样。s3被转化成StringBuilder及append，而s4被直接拼接成新的字符串。</p>
+<p>如果你感兴趣，你还能发现，String s3 &#x3D; s1 + s2; 经过编译之后，常量池中是有两个字符串常量的分别是 Hollis、Chuang（其实Hollis和Chuang是String s1 &#x3D; “Hollis”;和String s2 &#x3D; “Chuang”;定义出来的），拼接结果HollisChuang并不在常量池中。</p>
+<p>如果代码只有String s4 &#x3D; “Hollis” + “Chuang”;，那么常量池中将只有HollisChuang而没有”Hollis” 和 “Chuang”。</p>
+<p>究其原因，是因为常量池要保存的是<strong>已确定</strong>的字面量值。也就是说，对于字符串的拼接，纯字面量和字面量的拼接，会把拼接结果作为常量保存到字符串池。</p>
+<p>如果在字符串拼接中，有一个参数是非字面量，而是一个变量的话，整个拼接操作会被编译成StringBuilder.append，这种情况编译器是无法知道其确定值的。只有在运行期才能确定。</p>
+<p>那么，有了这个特性了，intern就有用武之地了。那就是很多时候，我们在程序中得到的字符串是只有在运行期才能确定的，在编译期是无法确定的，那么也就没办法在编译期被加入到常量池中。</p>
+<p>这时候，对于那种可能经常使用的字符串，使用intern进行定义，每次JVM运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。</p>
+<p>如一<a href="https://tech.meituan.com/in_depth_understanding_string_intern.html">深入解析String#intern</a>文中举的一个例子：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">static final int MAX = 1000 * 10000;</span><br><span class="line">static final String[] arr = new String[MAX];</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Integer[] DB_DATA = new Integer[10];</span><br><span class="line">	Random random = new Random(10 * 10000);</span><br><span class="line">	for (int i = 0; i &lt; DB_DATA.length; i++) &#123;</span><br><span class="line">		DB_DATA[i] = random.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line">	long t = System.currentTimeMillis();</span><br><span class="line">	for (int i = 0; i &lt; MAX; i++) &#123;</span><br><span class="line">		arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	System.out.println((System.currentTimeMillis() - t) + &quot;ms&quot;);</span><br><span class="line">	System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过intern显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>为什么不能用浮点数表示金额</title>
+    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
+<span id="more"></span>
+
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><p>十进制整数转换为二进制整数采用”除2取余，逆序排列”法。<br>具体做法是：<br>用2整除十进制整数，可以得到一个商和余数；<br>再用2去除商，又会得到一个商和余数，如此进行，直到商为小于1时为止<br>然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。<br>如，我们想要把127转换成二进制，做法如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png" alt="屏幕截图 2023-05-24 172509"></p>
+<p>那么，<strong>十进制小数转换成二进制小数，又该如何计算呢？</strong><br>十进制小数转换成二进制小数采用”乘2取整，顺序排列”法。<br>具体做法是：<br>用2乘十进制小数，可以得到积<br>将积的整数部分取出，再用2乘余下的小数部分，又得到一个积<br>再将积的整数部分取出，如此进行，直到积中的小数部分为零，此时0或1为二进制的最后一位。或者达到所要求的精度为止。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png" alt="image-20230524172648834"></p>
+<p>所以，十进制的0.625对应的二进制就是0.101。</p>
+<h3 id="不是所有数都能用二进制表示"><a href="#不是所有数都能用二进制表示" class="headerlink" title="不是所有数都能用二进制表示"></a>不是所有数都能用二进制表示</h3><p>我们知道了如何将一个十进制小数转换成二进制，那么是不是计算就可以直接用二进制表示小数了呢？<br>前面我们的例子中0.625是一个特列，那么还是用同样的算法，请计算下0.1对应的二进制是多少？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png" alt="image-20230524172739187"></p>
+<p>我们发现，0.1的二进制表示中出现了无限循环的情况，也就是(0.1)10 &#x3D; (0.000110011001100…)2<br>这种情况，计算机就没办法用二进制精确的表示0.1了。<br><strong>也就是说，对于像0.1这种数字，我们是没办法将他转换成一个确定的二进制数的。</strong></p>
+<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>为了解决部分小数无法使用二进制精确表示的问题，于是就有了IEEE 754规范。<br>IEEE二进制浮点数算术标准（IEEE 754）是20世纪80年代以来最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用。<br>浮点数和小数并不是完全一样的，计算机中小数的表示法，其实有定点和浮点两种。因为在位数相同的情况下，定点数的表示范围要比浮点数小。所以在计算机科学中，使用浮点数来表示实数的近似值。<br>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。<br>其中最常用的就是32位单精度浮点数和64位双精度浮点数。<br><strong>IEEE并没有解决小数无法精确表示的问题，只是提出了一种使用近似值表示小数的方式，并且引入了精度的概念。</strong><br>浮点数是一串0和1构成的位序列(bit sequence)，从逻辑上用三元组{S,E,M}表示一个数N,如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png"></p>
+<ul>
+<li>S(sign)表示N的符号位。对应值s满足：n&gt;0时，s&#x3D;0; n≤0时，s&#x3D;1。</li>
+<li>E(exponent)表示N的指数位，位于S和M之间的若干位。对应值e值也可正可负。</li>
+<li>M(mantissa)表示N的尾数位，恰好，它位于N末尾。M也叫有效数字位（significand）、系数位（coefficient), 甚至被称作”小数”。</li>
+</ul>
+<p>则浮点数N的实际值n由下方的式子表示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png" alt="image-20230524172940592"></p>
+<p>上面这个公式看起来很复杂，其中符号位和尾数位还比较容易理解，但是这个指数位就不是那么容易理解了。<br>其实，大家也不用太过于纠结这个公式，大家只需要知道对于单精度浮点数，最多只能用32位字符表示一个数字，双精度浮点数最多只能用64位来表示一个数字。<br><strong>而对于那些无限循环的二进制数来说，计算机采用浮点数的方式保留了一定的有效数字，那么这个值只能是近似值，不可能是真实值。</strong><br>至于一个数对应的IEEE 754浮点数应该如何计算，不是本文的重点，这里就不再赘述了，过程还是比较复杂的，需要进行对阶、尾数求和、规格化、舍入以及溢出判断等。<br>但是这些其实不需要了解的太详细，我们只需要知道，小数在计算机中的表示是近似数，并不是真实值。根据精度不同，近似程度也有所不同。<br>如0.1这个小数，他对应的在双精度浮点数的二进制为：0.00011001100110011001100110011001100110011001100110011001 。<br>0.2这个小数0.00110011001100110011001100110011001100110011001100110011 。<br>所以两者相加：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png" alt="image-20230524173051530"></p>
+<p>转换成10进制之后得到：0.30000000000000004！</p>
+<h3 id="避免精度丢失"><a href="#避免精度丢失" class="headerlink" title="避免精度丢失"></a>避免精度丢失</h3><p>在Java中，使用float表示单精度浮点数，double表示双精度浮点数，表示的都是近似值。<br>所以，在Java代码中，千万不要使用float或者double来进行高精度运算，尤其是金额运算，否则就很容易产生资损问题。</p>
+<p>为了解决这样的精度问题，Java中提供了BigDecimal来进行精确运算。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>double</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>String为什么设计成不可变的</title>
+    <url>/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>为什么要把String设计成不可变的呢？有什么好处呢？</p>
+<p>这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。</p>
+<p>在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:</p>
+<blockquote>
+<p>I would use an immutable whenever I can.</p>
+</blockquote>
+<p>那么，他给出这个答案背后的原因是什么呢？是基于哪些思考的呢？</p>
+<p>其实，主要是从缓存、安全性、线程安全和性能等角度出发的。</p>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>字符串是使用最广泛的数据结构。大量的字符串的创建是非常耗费资源的，所以，Java提供了对字符串的缓存功能，可以大大的节省堆空间。</p>
+<p>JVM中专门开辟了一部分空间来存储Java字符串，那就是字符串池。</p>
+<p>通过字符串池，两个内容相同的字符串变量，可以从池中指向同一个字符串对象，从而节省了关键的内存资源。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s = &quot;abcd&quot;;</span><br><span class="line">String s2 = s;</span><br></pre></td></tr></table></figure>
+
+<p>对于这个例子，s和s2都表示”abcd”，所以他们会指向字符串池中的同一个字符串对象：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242104703.jpg" alt="img"></p>
+<p>但是，之所以可以这么做，主要是因为字符串的不变性。试想一下，如果字符串是可变的，我们一旦修改了s的内容，那必然导致s2的内容也被动的改变了，这显然不是我们想看到的。</p>
+<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>字符串在Java应用程序中广泛用于存储敏感信息，如用户名、密码、连接url、网络连接等。JVM类加载器在加载类的时也广泛地使用它。</p>
+<p>因此，保护String类对于提升整个应用程序的安全性至关重要。</p>
+<p>当我们在程序中传递一个字符串的时候，如果这个字符串的内容是不可变的，那么我们就可以相信这个字符串中的内容。</p>
+<p>但是，如果是可变的，那么这个字符串内容就可能随时都被修改。那么这个字符串内容就完全不可信了。这样整个系统就没有安全性可言了。</p>
+<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>不可变会自动使字符串成为线程安全的，因为当从多个线程访问它们时，它们不会被更改。</p>
+<p>因此，一般来说，不可变对象可以在同时运行的多个线程之间共享。它们也是线程安全的，因为如果线程更改了值，那么将在字符串池中创建一个新的字符串，而不是修改相同的值。因此，字符串对于多线程来说是安全的。</p>
+<h2 id="hashcode缓存"><a href="#hashcode缓存" class="headerlink" title="hashcode缓存"></a>hashcode缓存</h2><p>由于字符串对象被广泛地用作数据结构，它们也被广泛地用于哈希实现，如HashMap、HashTable、HashSet等。在对这些散列实现进行操作时，经常调用hashCode()方法。</p>
+<p>不可变性保证了字符串的值不会改变。因此，hashCode()方法在String类中被重写，以方便缓存，这样在第一次hashCode()调用期间计算和缓存散列，并从那时起返回相同的值。</p>
+<p>在String类中，有以下代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private int hash;//this is used to cache hash code.</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>前面提到了的字符串池、hashcode缓存等，都是提升性能的体现。</p>
+<p>因为字符串不可变，所以可以用字符串池缓存，可以大大节省堆内存。而且还可以提前对hashcode进行缓存，更加高效</p>
+<p>由于字符串是应用最广泛的数据结构，提高字符串的性能对提高整个应用程序的总体性能有相当大的影响。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>为什么Java不支持多继承</title>
     <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
@@ -463,120 +624,6 @@
 ]]></content>
       <categories>
         <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>String为什么设计成不可变的</title>
-    <url>/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>为什么要把String设计成不可变的呢？有什么好处呢？</p>
-<p>这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。</p>
-<p>在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:</p>
-<blockquote>
-<p>I would use an immutable whenever I can.</p>
-</blockquote>
-<p>那么，他给出这个答案背后的原因是什么呢？是基于哪些思考的呢？</p>
-<p>其实，主要是从缓存、安全性、线程安全和性能等角度出发的。</p>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>字符串是使用最广泛的数据结构。大量的字符串的创建是非常耗费资源的，所以，Java提供了对字符串的缓存功能，可以大大的节省堆空间。</p>
-<p>JVM中专门开辟了一部分空间来存储Java字符串，那就是字符串池。</p>
-<p>通过字符串池，两个内容相同的字符串变量，可以从池中指向同一个字符串对象，从而节省了关键的内存资源。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">String s = &quot;abcd&quot;;</span><br><span class="line">String s2 = s;</span><br></pre></td></tr></table></figure>
-
-<p>对于这个例子，s和s2都表示”abcd”，所以他们会指向字符串池中的同一个字符串对象：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242104703.jpg" alt="img"></p>
-<p>但是，之所以可以这么做，主要是因为字符串的不变性。试想一下，如果字符串是可变的，我们一旦修改了s的内容，那必然导致s2的内容也被动的改变了，这显然不是我们想看到的。</p>
-<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>字符串在Java应用程序中广泛用于存储敏感信息，如用户名、密码、连接url、网络连接等。JVM类加载器在加载类的时也广泛地使用它。</p>
-<p>因此，保护String类对于提升整个应用程序的安全性至关重要。</p>
-<p>当我们在程序中传递一个字符串的时候，如果这个字符串的内容是不可变的，那么我们就可以相信这个字符串中的内容。</p>
-<p>但是，如果是可变的，那么这个字符串内容就可能随时都被修改。那么这个字符串内容就完全不可信了。这样整个系统就没有安全性可言了。</p>
-<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>不可变会自动使字符串成为线程安全的，因为当从多个线程访问它们时，它们不会被更改。</p>
-<p>因此，一般来说，不可变对象可以在同时运行的多个线程之间共享。它们也是线程安全的，因为如果线程更改了值，那么将在字符串池中创建一个新的字符串，而不是修改相同的值。因此，字符串对于多线程来说是安全的。</p>
-<h2 id="hashcode缓存"><a href="#hashcode缓存" class="headerlink" title="hashcode缓存"></a>hashcode缓存</h2><p>由于字符串对象被广泛地用作数据结构，它们也被广泛地用于哈希实现，如HashMap、HashTable、HashSet等。在对这些散列实现进行操作时，经常调用hashCode()方法。</p>
-<p>不可变性保证了字符串的值不会改变。因此，hashCode()方法在String类中被重写，以方便缓存，这样在第一次hashCode()调用期间计算和缓存散列，并从那时起返回相同的值。</p>
-<p>在String类中，有以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">private int hash;//this is used to cache hash code.</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>前面提到了的字符串池、hashcode缓存等，都是提升性能的体现。</p>
-<p>因为字符串不可变，所以可以用字符串池缓存，可以大大节省堆内存。而且还可以提前对hashcode进行缓存，更加高效</p>
-<p>由于字符串是应用最广泛的数据结构，提高字符串的性能对提高整个应用程序的总体性能有相当大的影响。</p>
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>为什么不能用浮点数表示金额</title>
-    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
-<span id="more"></span>
-
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><p>十进制整数转换为二进制整数采用”除2取余，逆序排列”法。<br>具体做法是：<br>用2整除十进制整数，可以得到一个商和余数；<br>再用2去除商，又会得到一个商和余数，如此进行，直到商为小于1时为止<br>然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。<br>如，我们想要把127转换成二进制，做法如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png" alt="屏幕截图 2023-05-24 172509"></p>
-<p>那么，<strong>十进制小数转换成二进制小数，又该如何计算呢？</strong><br>十进制小数转换成二进制小数采用”乘2取整，顺序排列”法。<br>具体做法是：<br>用2乘十进制小数，可以得到积<br>将积的整数部分取出，再用2乘余下的小数部分，又得到一个积<br>再将积的整数部分取出，如此进行，直到积中的小数部分为零，此时0或1为二进制的最后一位。或者达到所要求的精度为止。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png" alt="image-20230524172648834"></p>
-<p>所以，十进制的0.625对应的二进制就是0.101。</p>
-<h3 id="不是所有数都能用二进制表示"><a href="#不是所有数都能用二进制表示" class="headerlink" title="不是所有数都能用二进制表示"></a>不是所有数都能用二进制表示</h3><p>我们知道了如何将一个十进制小数转换成二进制，那么是不是计算就可以直接用二进制表示小数了呢？<br>前面我们的例子中0.625是一个特列，那么还是用同样的算法，请计算下0.1对应的二进制是多少？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png" alt="image-20230524172739187"></p>
-<p>我们发现，0.1的二进制表示中出现了无限循环的情况，也就是(0.1)10 &#x3D; (0.000110011001100…)2<br>这种情况，计算机就没办法用二进制精确的表示0.1了。<br><strong>也就是说，对于像0.1这种数字，我们是没办法将他转换成一个确定的二进制数的。</strong></p>
-<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>为了解决部分小数无法使用二进制精确表示的问题，于是就有了IEEE 754规范。<br>IEEE二进制浮点数算术标准（IEEE 754）是20世纪80年代以来最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用。<br>浮点数和小数并不是完全一样的，计算机中小数的表示法，其实有定点和浮点两种。因为在位数相同的情况下，定点数的表示范围要比浮点数小。所以在计算机科学中，使用浮点数来表示实数的近似值。<br>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。<br>其中最常用的就是32位单精度浮点数和64位双精度浮点数。<br><strong>IEEE并没有解决小数无法精确表示的问题，只是提出了一种使用近似值表示小数的方式，并且引入了精度的概念。</strong><br>浮点数是一串0和1构成的位序列(bit sequence)，从逻辑上用三元组{S,E,M}表示一个数N,如下图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png"></p>
-<ul>
-<li>S(sign)表示N的符号位。对应值s满足：n&gt;0时，s&#x3D;0; n≤0时，s&#x3D;1。</li>
-<li>E(exponent)表示N的指数位，位于S和M之间的若干位。对应值e值也可正可负。</li>
-<li>M(mantissa)表示N的尾数位，恰好，它位于N末尾。M也叫有效数字位（significand）、系数位（coefficient), 甚至被称作”小数”。</li>
-</ul>
-<p>则浮点数N的实际值n由下方的式子表示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png" alt="image-20230524172940592"></p>
-<p>上面这个公式看起来很复杂，其中符号位和尾数位还比较容易理解，但是这个指数位就不是那么容易理解了。<br>其实，大家也不用太过于纠结这个公式，大家只需要知道对于单精度浮点数，最多只能用32位字符表示一个数字，双精度浮点数最多只能用64位来表示一个数字。<br><strong>而对于那些无限循环的二进制数来说，计算机采用浮点数的方式保留了一定的有效数字，那么这个值只能是近似值，不可能是真实值。</strong><br>至于一个数对应的IEEE 754浮点数应该如何计算，不是本文的重点，这里就不再赘述了，过程还是比较复杂的，需要进行对阶、尾数求和、规格化、舍入以及溢出判断等。<br>但是这些其实不需要了解的太详细，我们只需要知道，小数在计算机中的表示是近似数，并不是真实值。根据精度不同，近似程度也有所不同。<br>如0.1这个小数，他对应的在双精度浮点数的二进制为：0.00011001100110011001100110011001100110011001100110011001 。<br>0.2这个小数0.00110011001100110011001100110011001100110011001100110011 。<br>所以两者相加：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png" alt="image-20230524173051530"></p>
-<p>转换成10进制之后得到：0.30000000000000004！</p>
-<h3 id="避免精度丢失"><a href="#避免精度丢失" class="headerlink" title="避免精度丢失"></a>避免精度丢失</h3><p>在Java中，使用float表示单精度浮点数，double表示双精度浮点数，表示的都是近似值。<br>所以，在Java代码中，千万不要使用float或者double来进行高精度运算，尤其是金额运算，否则就很容易产生资损问题。</p>
-<p>为了解决这样的精度问题，Java中提供了BigDecimal来进行精确运算。</p>
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-      <tags>
-        <tag>double</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>什么是实体，什么是值对象</title>
-    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E4%BD%93%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>实体通常指具有唯一标识的具体对象或事物</strong>。实体通常具有自己的生命周期，可以被创建、修改和删除。在数据库中，实体通常对应着数据库表的一行记录，每个实体具有唯一的标识符（通常是主键）。</p>
-<p>比如，一个人可以被视为一个实体，因为每个人都有唯一的身份证号码作为标识符，并且每个人具有自己的生命周期，可以被创建、修改和删除。</p>
-<p><strong>值对象通常指没有唯一标识的对象或数据类型</strong>。值对象通常不可变，一旦创建就不能修改，只能通过创建新的值对象来替换原来的值对象。在数据库中，值对象通常对应着数据库表的一组字段，每个值对象不具有唯一的标识符，而是通过一组字段来描述其属性。</p>
-<p>比如，一个地址可以被视为一个值对象，因为它没有唯一标识符，而是由一组字段描述，例如国家、省份、城市、街道和门牌号等。并且地址通常是不可变的，一旦创建就不能修改，只能通过创建新的地址对象来替换原来的地址对象。</p>
-<h3 id="举例说明实体和值对象"><a href="#举例说明实体和值对象" class="headerlink" title="举例说明实体和值对象"></a>举例说明实体和值对象</h3><p>假设我们正在设计一个电商系统，需要设计一个订单类。订单包含多个订单项，每个订单项对应着购买了某个商品的数量和价格。</p>
-<p>首先，我们定义一个订单项类，它包含订单号、商品名称、数量和单价三个属性，并且它们都是可变的，因为每个订单项都可以修改：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class OrderItem &#123;</span><br><span class="line">    private String productName;</span><br><span class="line">    private int quantity;</span><br><span class="line">    private BigDecimal unitPrice;</span><br><span class="line"></span><br><span class="line">    //setter 和 getter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后，我们定义一个订单类，它包含订单号、订单项列表、订单状态和订单总价四个属性。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Order &#123;</span><br><span class="line">    private long orderId; // 实体</span><br><span class="line">    private List&lt;OrderItem&gt; orderItems; // 值对象</span><br><span class="line">    private OrderStatus status; </span><br><span class="line">    private BigDecimal totalPrice; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们在数据库中存储订单的时候，可以这样存储：</p>
-<table>
-<thead>
-<tr>
-<th>orderId</th>
-<th>status</th>
-<th>totalPrice</th>
-<th>orderItems</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2023021811223344</td>
-<td>CONFIRMED</td>
-<td>120</td>
-<td>{“productName”:”《深入理解Java核心技术》 作者 Hollis”,”quantity”:100,”unitPrice”:129}</td>
-</tr>
-</tbody></table>
-<p>以上，订单就是一个实体，因为每一个订单对应一个单独的数据库记录，并且有唯一表示，就是订单号。而订单条目就是值对象，他是依赖于实体进行存储的。</p>
-<p>在数据库中把数据取出来的时候，是可以把orderItems这个json类型的字段转成我们定义好的OrderItem的对象的。这样更方便我们进行操作。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
       </categories>
   </entry>
   <entry>
@@ -629,6 +676,20 @@
       <tags>
         <tag>反射</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>什么是异地多活</title>
+    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>异地多活是一种分布式系统架构模式</strong>，可以让多个数据中心在不同地理位置提供相同的服务，并且能够实现数据的实时同步和故障切换。通常用于需要在全球范围内提供高可用性和低延迟的应用程序，例如在线游戏、社交媒体、金融交易等。</p>
+<p><strong>在异地多活架构中，多个数据中心之间通过高速网络连接进行数据同步和负载均衡。每个数据中心都具有完整的应用程序和数据副本，可以同时提供服务并处理客户端请求。当一个数据中心发生故障时，可以通过自动切换和故障转移机制将流量转移到其他健康的数据中心，从而保证系统的可用性和可靠性。</strong></p>
+<p>异地多活架构需要考虑多个因素，例如数据同步和冲突解决、负载均衡和故障切换、安全性和隐私保护等。通常需要采用分布式数据库、消息队列、负载均衡器、DNS解析等技术来支持异地多活架构。</p>
+<h2 id="同城容灾"><a href="#同城容灾" class="headerlink" title="同城容灾"></a>同城容灾</h2><p>同城容灾和异地多活一样，也是一种分布式系统架构模式，可以在同一城市或地理区域内提供高可用性和容灾能力。它通过将不同的服务器和存储设备组合在一起，构建出一个分布式系统，可以实现数据的实时同步和故障切换。</p>
+<p>在同城容灾架构中，多个数据中心之间通过高速网络连接进行数据同步和负载均衡。每个数据中心都具有完整的应用程序和数据副本，可以同时提供服务并处理客户端请求。当一个数据中心发生故障时，可以通过自动切换和故障转移机制将流量转移到其他健康的数据中心，从而保证系统的可用性和可靠性。</p>
+<p><strong>同城容灾架构相比于异地多活架构来说，更加适用于数据中心距离较近的情况。它可以通过使用复制、镜像和数据同步等技术来实现数据的备份和容灾，从而提高系统的可用性和可靠性。同时，同城容灾架构还可以提供低延迟和高带宽的网络连接，以支持高吞吐量的应用程序。</strong></p>
+]]></content>
+      <categories>
+        <category>高可用</category>
+      </categories>
   </entry>
   <entry>
     <title>什么是泛型？有什么好处</title>
@@ -689,6 +750,56 @@
       </tags>
   </entry>
   <entry>
+    <title>什么是实体，什么是值对象</title>
+    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E4%BD%93%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>实体通常指具有唯一标识的具体对象或事物</strong>。实体通常具有自己的生命周期，可以被创建、修改和删除。在数据库中，实体通常对应着数据库表的一行记录，每个实体具有唯一的标识符（通常是主键）。</p>
+<p>比如，一个人可以被视为一个实体，因为每个人都有唯一的身份证号码作为标识符，并且每个人具有自己的生命周期，可以被创建、修改和删除。</p>
+<p><strong>值对象通常指没有唯一标识的对象或数据类型</strong>。值对象通常不可变，一旦创建就不能修改，只能通过创建新的值对象来替换原来的值对象。在数据库中，值对象通常对应着数据库表的一组字段，每个值对象不具有唯一的标识符，而是通过一组字段来描述其属性。</p>
+<p>比如，一个地址可以被视为一个值对象，因为它没有唯一标识符，而是由一组字段描述，例如国家、省份、城市、街道和门牌号等。并且地址通常是不可变的，一旦创建就不能修改，只能通过创建新的地址对象来替换原来的地址对象。</p>
+<h3 id="举例说明实体和值对象"><a href="#举例说明实体和值对象" class="headerlink" title="举例说明实体和值对象"></a>举例说明实体和值对象</h3><p>假设我们正在设计一个电商系统，需要设计一个订单类。订单包含多个订单项，每个订单项对应着购买了某个商品的数量和价格。</p>
+<p>首先，我们定义一个订单项类，它包含订单号、商品名称、数量和单价三个属性，并且它们都是可变的，因为每个订单项都可以修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class OrderItem &#123;</span><br><span class="line">    private String productName;</span><br><span class="line">    private int quantity;</span><br><span class="line">    private BigDecimal unitPrice;</span><br><span class="line"></span><br><span class="line">    //setter 和 getter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们定义一个订单类，它包含订单号、订单项列表、订单状态和订单总价四个属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Order &#123;</span><br><span class="line">    private long orderId; // 实体</span><br><span class="line">    private List&lt;OrderItem&gt; orderItems; // 值对象</span><br><span class="line">    private OrderStatus status; </span><br><span class="line">    private BigDecimal totalPrice; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在数据库中存储订单的时候，可以这样存储：</p>
+<table>
+<thead>
+<tr>
+<th>orderId</th>
+<th>status</th>
+<th>totalPrice</th>
+<th>orderItems</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2023021811223344</td>
+<td>CONFIRMED</td>
+<td>120</td>
+<td>{“productName”:”《深入理解Java核心技术》 作者 Hollis”,”quantity”:100,”unitPrice”:129}</td>
+</tr>
+</tbody></table>
+<p>以上，订单就是一个实体，因为每一个订单对应一个单独的数据库记录，并且有唯一表示，就是订单号。而订单条目就是值对象，他是依赖于实体进行存储的。</p>
+<p>在数据库中把数据取出来的时候，是可以把orderItems这个json类型的字段转成我们定义好的OrderItem的对象的。这样更方便我们进行操作。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>什么是聚合，什么是聚合根</title>
+    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%E6%A0%B9/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在软件开发中，聚合是指将多个相关的对象或实体组合在一起形成一个单独的整体。这个整体可以是一个具有单一标识符的对象，它代表了一组相关的子对象或属性，而这些子对象或属性在整个系统中具有特定的上下文和含义。</p>
+<p>聚合根是聚合中最重要的对象，它代表了聚合的根实体。聚合根是聚合中的唯一标识符，并且控制着聚合中其他对象的生命周期。聚合根是整个聚合的唯一入口点，所有的操作都是通过聚合根来进行的。</p>
+<p>例如，如果我们有一个订单聚合，那么订单就是聚合根，它包含了发件人信息、商品信息、发票信息等子对象。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261228279.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+  </entry>
+  <entry>
     <title>什么是类型擦除</title>
     <url>/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>类型擦除是Java在处理泛型的一种方式，如Java的编译器在编译以下代码时：</p>
@@ -716,6 +827,87 @@
       <tags>
         <tag>泛型</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>充血模型和贫血模型</title>
+    <url>/2023/05/26/%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>充血模型（Domain Driven Design）是一种面向对象的软件设计方法，它强调将业务逻辑封装在领域对象中。</p>
+<p>假设有一个电商网站，需要对商品进行购买、库存管理等操作。在充血模型中，我们可以定义一个Product类来表示商品。Product类会包含商品的属性（例如名称、价格、库存等），并且也会包含一些行为（例如购买商品、更新库存等）。这些行为是直接封装在Product类中的，以便于对商品进行操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product&#123;</span><br><span class="line">	private String productName;</span><br><span class="line">	private BigDecimal price;</span><br><span class="line">	private Long stock;</span><br><span class="line"></span><br><span class="line">	 public void purchase(int quantity) &#123;</span><br><span class="line">      if (quantity &gt; stock) &#123;</span><br><span class="line">          throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      stock -= quantity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>贫血模型（Anemic Domain Model）则是一种将数据与行为分离的模型，其中数据由对象持有，而行为则由外部服务提供。</p>
+<p>在贫血模型中，Product类可能只包含商品的属性（例如名称、价格、库存等），而行为则由其他类或服务提供。例如，我们可能会创建一个ProductService类来提供购买商品、更新库存等操作，而Product类只用于存储数据。这种方式下，Product类只是一个被动的数据持有者，而没有自己的行为。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private double price;</span><br><span class="line">    private int stock;</span><br><span class="line"></span><br><span class="line">    public Product(String name, double price, int stock) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.price = price;</span><br><span class="line">        this.stock = stock;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double getPrice() &#123;</span><br><span class="line">        return price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getStock() &#123;</span><br><span class="line">        return stock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class ProductService &#123;</span><br><span class="line"> public void purchase(Product product, int quantity) &#123;</span><br><span class="line"> if (quantity &gt; product.getStock()) &#123;</span><br><span class="line"> throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line"> &#125;</span><br><span class="line"> product.setStock(product.getStock() - quantity);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="优缺点及适用场景"><a href="#优缺点及适用场景" class="headerlink" title="优缺点及适用场景"></a>优缺点及适用场景</h3><p>充血模型的优点：</p>
+<ol>
+<li><strong>面向对象设计，具有良好的封装性和可维护性。</strong></li>
+<li>领域对象自包含业务逻辑，易于理解和扩展。</li>
+<li>可以避免过度依赖外部服务，提高系统的稳定性。</li>
+</ol>
+<p>充血模型的缺点：</p>
+<ol>
+<li>对象可能变得庞大复杂，<strong>维护成本高。</strong></li>
+<li>对象间的协作可能增加，导致设计变得复杂。</li>
+<li>对象的状态可能会变得不一致，需要特别注意。</li>
+</ol>
+<p>贫血模型的优点：</p>
+<ol>
+<li><strong>数据与行为分离，降低了对象的复杂度。</strong></li>
+<li>可以提高代码的重用性和可测试性。</li>
+<li>可以更好地利用现有的服务和框架。</li>
+</ol>
+<p>贫血模型的缺点：</p>
+<ol>
+<li><strong>对象缺乏封装性，易于出现耦合性和脆弱性。</strong></li>
+<li>业务逻辑被分散在多个类中，<strong>难以维护和理解。</strong></li>
+<li><strong>过度依赖外部服务，可能导致系统的不稳定性。</strong></li>
+</ol>
+<p>一般来说，对于较小的应用系统或者简单的业务流程，可以使用贫血模型；对于较大的应用系统或者复杂的业务流程，建议使用充血模型。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>冷备、热备，暖备</title>
+    <url>/2023/05/26/%E5%86%B7%E5%A4%87%E3%80%81%E7%83%AD%E5%A4%87%EF%BC%8C%E6%9A%96%E5%A4%87/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>冷备、热备和暖备是备份和恢复方案中常见的术语，它们表示备份和恢复方案的不同类型和不同级别。</p>
+<ol>
+<li><strong>冷备（Cold Backup）</strong>：冷备是指在<strong>关闭</strong>系统或服务后，将数据备份到<strong>离线</strong>介质中的一种备份方式。在备份过程中，系统或服务不可用。恢复时需要将备份的数据还原到系统中，并启动系统或服务。由于备份和恢复过程中系统处于离线状态，因此<strong>冷备的恢复时间较长，但成本相对较低</strong>。</li>
+<li><strong>热备（Hot Backup）</strong>：热备是指在系统或服务运行期间，对数据进行备份的一种备份方式。<strong>在备份过程中，系统或服务仍然可以提供服务。热备的恢复时间相对较短，但需要额外的资源来支持备份和恢复，因此成本较高。</strong></li>
+<li><strong>暖备（Warm Backup）</strong>：暖备是介于冷备和热备之间的备份方式。在进行暖备时，备份数据与原始数据之间的同步是定期进行的，<strong>备份数据的时间间隔通常比热备长，但比冷备短</strong>。暖备的恢复时间比热备长，但比冷备短，因为需要将备份数据还原到原来的位置，并进行一些必要的同步操作。</li>
+</ol>
+<p>综合来看，冷备、热备和暖备的选择应该根据具体的业务需求和资源限制来进行综合考虑。一般而言，如果数据要求高可用性和实时性，应该采用热备方式；如果数据要求较高，但可用性和实时性要求相对较低，可以采用暖备方式；如果数据要求不是很高，可以采用冷备方式。</p>
+]]></content>
+      <categories>
+        <category>高可用</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>如何设计一个高可用架构</title>
+    <url>/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>设计一个高可用架构需要考虑多个方面，包括可用性、可靠性、性能、扩展性、安全性等。下面是一些设计高可用架构的一般性原则和方法：</p>
+<ol>
+<li><strong>设计集群架构</strong>：采用多节点的集群架构可以提高系统的可用性和可靠性，从而避免单点故障导致系统不可用。</li>
+<li>采用<strong>分布式架构</strong>：采用分布式架构可以将系统的负载分散到多个节点上，从而提高系统的性能和可扩展性。</li>
+<li>实现<strong>故障转移</strong>和<strong>容错机制</strong>：通过使用冗余组件、备份数据等技术手段，可以实现故障转移和容错机制。例如，采用主从复制、备份、快速切换等技术来确保数据不丢失、系统快速恢复。</li>
+<li><strong>可靠的服务器和网络</strong>：选择可靠的服务器和网络设备，以确保它们能够在故障时正常运行。可以采用多个服务器进行冗余备份，以实现故障转移和负载均衡。可以选择高可靠性网络设备和路由器，以避免网络故障。</li>
+<li><strong>容灾和备份</strong>：需要设置容灾和备份计划，以确保在自然灾害、人为错误或其他紧急情况下能够快速恢复服务。可以使用云备份和容灾服务，以提高备份和恢复的效率和可靠性。</li>
+<li>设计<strong>监控</strong>和自动化工具：通过使用监控工具和自动化工具可以实现对系统的实时监控和自动化维护。例如，通过使用系统监控工具、自动化运维工具等来实现自动化运维、自动化扩容等功能，从而减少手动操作和人为错误。</li>
+<li>实现<strong>数据安全保护</strong>：通过采用多层次的安全策略来保护数据的安全性。例如，使用加密技术、防火墙、入侵检测等技术来保护系统和数据的安全。</li>
+<li>进行<strong>容量规划和性能优化</strong>：通过进行容量规划和性能优化，可以提高系统的性能和可扩展性。例如，通过使用缓存、调整配置参数、优化代码等技术手段来提高系统的性能和稳定性。</li>
+<li>设计<strong>自动化扩容和弹性伸缩</strong>：通过设计自动化扩容和弹性伸缩功能，可以根据业务需求和系统负载情况来自动调整系统资源。例如，通过使用自动化扩容工具和自动化弹性伸缩策略来实现系统资源的自动分配和调整。</li>
+</ol>
+<p>需要注意的是，设计高可用架构需要综合考虑业务需求、技术方案、资源投入等因素，同时需要不断进行优化和改进，以实现最优的性能和可用性。</p>
+]]></content>
+      <categories>
+        <category>高可用</category>
+      </categories>
   </entry>
   <entry>
     <title>如何破坏单例模式</title>
@@ -797,77 +989,84 @@
       </tags>
   </entry>
   <entry>
-    <title>什么是聚合，什么是聚合根</title>
-    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%E6%A0%B9/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在软件开发中，聚合是指将多个相关的对象或实体组合在一起形成一个单独的整体。这个整体可以是一个具有单一标识符的对象，它代表了一组相关的子对象或属性，而这些子对象或属性在整个系统中具有特定的上下文和含义。</p>
-<p>聚合根是聚合中最重要的对象，它代表了聚合的根实体。聚合根是聚合中的唯一标识符，并且控制着聚合中其他对象的生命周期。聚合根是整个聚合的唯一入口点，所有的操作都是通过聚合根来进行的。</p>
-<p>例如，如果我们有一个订单聚合，那么订单就是聚合根，它包含了发件人信息、商品信息、发票信息等子对象。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261228279.png" alt="img"></p>
+    <title>如何设计一个能够支持高并发的系统</title>
+    <url>/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E8%83%BD%E5%A4%9F%E6%94%AF%E6%8C%81%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>设计一个能够支持高并发的系统需要考虑多方面的因素，包括架构、性能优化、容错和可伸缩性等</strong>。以下是一些一般性的建议和实践：</p>
+<ol>
+<li><strong>分布式架构</strong>：将系统分解成多个模块，采用分布式架构来降低单点故障的风险，并提高系统的可伸缩性和性能。</li>
+<li><strong>集群部署</strong>：将一个服务通过集群进行部署，来提升系统整体的吞吐量及响应速度，并使用<strong>负载均衡</strong>技术将请求均衡分配给多个服务器，以提高系统的性能和可用性。</li>
+<li><strong>利用缓存</strong>：使用缓存、NoSQL等技术，以提高数据读写的性能和可靠性。</li>
+<li><strong>异步处理</strong>：采用异步处理机制，如使用<strong>消息队列</strong>、事件驱动等技术，以降低请求响应时间和提高系统吞吐量。</li>
+<li><strong>预加载</strong>：使用预加载技术来提前加载需要的资源，以减少用户等待时间。</li>
+<li><strong>代码优化和调优</strong>：对系统代码进行优化和调优，如采用<strong>异步I&#x2F;O、避免锁（减小锁的粒度）、减少循环和递归、避免长事务</strong>等，以提高系统性能。</li>
+<li><strong>数据库优化</strong>：合理的数据库设计和优化，包括<strong>合理的索引设计、分库分表、读写分离、缓存优化</strong>等，可以有效提高系统的并发度和响应速度。</li>
+<li><strong>分库分表</strong>：，将一个大型的数据库拆分成多个小型的数据库（分库），然后将每个小型数据库中的表再进行拆分（分表），从而减轻单个数据库或表的读写压力，通过分库分表，可以将大量的读写操作分散到多个数据库或表中，从而提高系统的并发度和响应速度。</li>
+<li><strong>读写分离</strong>：读写分离是一种常用的数据库优化技术，它将读操作和写操作分配到不同的数据库实例上处理。通过读写分离，主库主要负责写操作，从库则负责读操作，从而提高了系统的并发度和可扩展性。同时，读写分离还可以提高系统的可用性和容错能力，因为即使主库出现故障，从库仍然可以提供读服务。</li>
+<li><strong>防止雪崩</strong>：通过使用<strong>限流、熔断、降级</strong>等技术，可以防止系统因为某个组件出现故障而导致整个系统崩溃的雪崩效应。</li>
+<li><strong>容错和监控</strong>：实现容错机制，如<strong>备份、容灾</strong>、负载降级等，以保障系统的可用性。同时，使用监控工具来实时监测系统的运行状况和性能瓶颈，及时做出调整和优化。</li>
+<li><strong>测试和评估</strong>：进行全面的性能测试和评估，包括<strong>压力测试、负载测试、安全测试</strong>等，以发现并解决系统的性能瓶颈和安全隐患。</li>
+</ol>
+<p>综上所述，设计高并发系统需要从多个方面考虑，需要综合运用各种技术和工具，进行全面的测试和评估，以实现系统的高可用、高性能和高安全性。</p>
 ]]></content>
       <categories>
-        <category>DDD</category>
+        <category>高并发</category>
       </categories>
   </entry>
   <entry>
-    <title>充血模型和贫血模型</title>
-    <url>/2023/05/26/%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%9E%8B/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>充血模型（Domain Driven Design）是一种面向对象的软件设计方法，它强调将业务逻辑封装在领域对象中。</p>
-<p>假设有一个电商网站，需要对商品进行购买、库存管理等操作。在充血模型中，我们可以定义一个Product类来表示商品。Product类会包含商品的属性（例如名称、价格、库存等），并且也会包含一些行为（例如购买商品、更新库存等）。这些行为是直接封装在Product类中的，以便于对商品进行操作。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product&#123;</span><br><span class="line">	private String productName;</span><br><span class="line">	private BigDecimal price;</span><br><span class="line">	private Long stock;</span><br><span class="line"></span><br><span class="line">	 public void purchase(int quantity) &#123;</span><br><span class="line">      if (quantity &gt; stock) &#123;</span><br><span class="line">          throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      stock -= quantity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>贫血模型（Anemic Domain Model）则是一种将数据与行为分离的模型，其中数据由对象持有，而行为则由外部服务提供。</p>
-<p>在贫血模型中，Product类可能只包含商品的属性（例如名称、价格、库存等），而行为则由其他类或服务提供。例如，我们可能会创建一个ProductService类来提供购买商品、更新库存等操作，而Product类只用于存储数据。这种方式下，Product类只是一个被动的数据持有者，而没有自己的行为。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private double price;</span><br><span class="line">    private int stock;</span><br><span class="line"></span><br><span class="line">    public Product(String name, double price, int stock) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.price = price;</span><br><span class="line">        this.stock = stock;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double getPrice() &#123;</span><br><span class="line">        return price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getStock() &#123;</span><br><span class="line">        return stock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class ProductService &#123;</span><br><span class="line"> public void purchase(Product product, int quantity) &#123;</span><br><span class="line"> if (quantity &gt; product.getStock()) &#123;</span><br><span class="line"> throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line"> &#125;</span><br><span class="line"> product.setStock(product.getStock() - quantity);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="优缺点及适用场景"><a href="#优缺点及适用场景" class="headerlink" title="优缺点及适用场景"></a>优缺点及适用场景</h3><p>充血模型的优点：</p>
+    <title>如何设计一个高性能的分布式系统</title>
+    <url>/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>设计高性能的分布式系统需要考虑多个因素，包括架构设计、负载均衡、数据一致性、容错处理、消息队列、缓存、性能监控和安全性等。下面是一些可以帮助设计高性能分布式系统的方法：</p>
 <ol>
-<li><strong>面向对象设计，具有良好的封装性和可维护性。</strong></li>
-<li>领域对象自包含业务逻辑，易于理解和扩展。</li>
-<li>可以避免过度依赖外部服务，提高系统的稳定性。</li>
+<li>架构设计：选择合适的分布式系统架构，例如<strong>微服务架构、SOA架构</strong>等，可以有效地提高系统性能。</li>
+<li><strong>负载均衡</strong>：使用负载均衡技术可以将请求分布到多个节点上，提高系统的性能和可用性。可以使用硬件负载均衡器或软件负载均衡器来实现。</li>
+<li>数据一致性：<strong>保证数据一致性</strong>是设计分布式系统的一个重要方面，可以使用<strong>一致性哈希、副本复制、分片</strong>等技术来保证数据一致性。</li>
+<li>容错处理：设计分布式系统时必须考虑<strong>容错</strong>处理，以<strong>防止单点故障</strong>。可以使用备份、自动故障转移、容器化等技术来实现容错处理。</li>
+<li>消息队列：使用<strong>消息队列</strong>可以<strong>解耦</strong>系统组件，提高系统的可伸缩性和性能。</li>
+<li>缓存：使用<strong>缓存技术</strong>可以减轻数据库的负载，提高系统性能。</li>
+<li>性能监控：使用性能监控工具可以监测系统的性能瓶颈，提高系统的性能和可用性。</li>
+<li>安全性：分布式系统的安全性是至关重要的，可以使用身份验证、访问控制等技术来保证系统的安全性。</li>
 </ol>
-<p>充血模型的缺点：</p>
-<ol>
-<li>对象可能变得庞大复杂，<strong>维护成本高。</strong></li>
-<li>对象间的协作可能增加，导致设计变得复杂。</li>
-<li>对象的状态可能会变得不一致，需要特别注意。</li>
-</ol>
-<p>贫血模型的优点：</p>
-<ol>
-<li><strong>数据与行为分离，降低了对象的复杂度。</strong></li>
-<li>可以提高代码的重用性和可测试性。</li>
-<li>可以更好地利用现有的服务和框架。</li>
-</ol>
-<p>贫血模型的缺点：</p>
-<ol>
-<li><strong>对象缺乏封装性，易于出现耦合性和脆弱性。</strong></li>
-<li>业务逻辑被分散在多个类中，<strong>难以维护和理解。</strong></li>
-<li><strong>过度依赖外部服务，可能导致系统的不稳定性。</strong></li>
-</ol>
-<p>一般来说，对于较小的应用系统或者简单的业务流程，可以使用贫血模型；对于较大的应用系统或者复杂的业务流程，建议使用充血模型。</p>
 ]]></content>
       <categories>
-        <category>DDD</category>
+        <category>高性能</category>
       </categories>
   </entry>
   <entry>
-    <title>日志文件</title>
-    <url>/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
-<span id="more"></span>
-<h2 id="redolog"><a href="#redolog" class="headerlink" title="redolog"></a>redolog</h2><p>redo log是MySQL中的重做日志，用于记录将来需要进行回滚操作的更改操作。当MySQL执行一个事务时，它会首先将更改操作记录到redolog中，然后再将更改写入磁盘。如果MySQL在写入磁盘之前崩溃，则可以使用redolog来恢复未完成的事务。用于实现崩溃恢复和数据持久性的一种机制。</p>
-<h2 id="undolog"><a href="#undolog" class="headerlink" title="undolog"></a>undolog</h2><p>undolog是MySQL中的撤销日志，用于事务回滚或系统崩溃时撤销(回滚)事务所做的修改。当MySQL执行一个事务时，它会将更改操作记录到redolog中，并且将旧值记录到undolog中。如果需要回滚该事务，则可以使用undolog中的旧值来还原修改操作。支持MVCC机制，用于在并发事务时提供一定的隔离性。</p>
-<p>注：redolog和undolog只适用于innodb引擎，因为要支持事务。</p>
+    <title>布隆过滤器</title>
+    <url>/2023/05/26/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>布隆过滤器是一种数据结构，用于快速检索一个元素是否可能存在于一个集合(bit 数组)中。</p>
+<p>它的基本原理是利用多个哈希函数，将一个元素映射成多个位，然后将这些位设置为 1。当查询一个元素时，如果这些位都被设置为 1，则认为元素<strong>可能</strong>存在于集合中，否则<strong>肯定</strong>不存在。</p>
+<p>所以，布隆过滤器可以准确的判断一个元素是否一定不存在，但是因为哈希冲突的存在，所以他没办法判断一个元素一定存在。只能判断可能存在。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261524719.png" alt="image.png"></p>
+<p>所以，布隆过滤器是存在误判的可能的，也就是当一个不存在的Hero元素，经过hash1、hash2和hash3之后，刚好和其他的值的哈希结果冲突了。那么就会被误判为存在，但是其实他并不存在。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261524261.png" alt="image.png"></p>
+<p>想要降低这种误判的概率，主要的办法就是降低哈希冲突的概率及引入更多的哈希算法。</p>
+<p>下面是布隆过滤器的工作过程：</p>
+<p>1初始化布隆过滤器<br>在初始化布隆过滤器时，需要指定集合的大小和误判率。布隆过滤器内部包含一个bit数组和多个哈希函数，每个哈希函数都会生成一个索引值。</p>
+<p>2添加元素到布隆过滤器<br>要将一个元素添加到布隆过滤器中，首先需要将该元素通过多个哈希函数生成多个索引值，然后将这些索引值对应的位设置为 1。如果这些索引值已经被设置为 1，则不需要再次设置。</p>
+<p>3查询元素是否存在于布隆过滤器中<br>要查询一个元素是否存在于布隆过滤器中，需要将该元素通过多个哈希函数生成多个索引值，并判断这些索引值对应的位是否都被设置为 1。如果这些位都被设置为 1，则认为元素可能存在于集合中，否则肯定不存在。</p>
+<p>布隆过滤器的主要优点是可以快速判断一个元素是否属于某个集合，并且可以在空间和时间上实现较高的效率。但是，它也存在一些缺点，例如：</p>
+<p>1布隆过滤器在判断元素是否存在时，有一定的误判率。<br>2布隆过滤器删除元素比较困难，因为删除一个元素需要将其对应的多个位设置为 0，但这些位可能被其他元素共享。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>布隆过滤器因为他的效率非常高，所以被广泛的使用，比较典型的场景有以下几个：</p>
+<p>1网页爬虫：爬虫程序可以使用布隆过滤器来过滤掉已经爬取过的网页，避免重复爬取和浪费资源。<br>2缓存系统：缓存系统可以使用布隆过滤器来判断一个查询是否可能存在于缓存中，从而减少查询缓存的次数，提高查询效率。布隆过滤器也经常用来解决缓存穿透的问题。<br>3分布式系统：在分布式系统中，可以使用布隆过滤器来判断一个元素是否存在于分布式缓存中，避免在所有节点上进行查询，减少网络负载。<br>4垃圾邮件过滤：布隆过滤器可以用于判断一个邮件地址是否在垃圾邮件列表中，从而过滤掉垃圾邮件。<br>5黑名单过滤：布隆过滤器可以用于判断一个IP地址或手机号码是否在黑名单中，从而阻止恶意请求。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>Java中可以使用第三方库来实现布隆过滤器，常见的有Google Guava库和Apache Commons库以及Redis。</p>
+<p>如Guava：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import com.google.common.hash.BloomFilter;</span><br><span class="line">import com.google.common.hash.Funnels;</span><br><span class="line"></span><br><span class="line">public class BloomFilterExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 创建布隆过滤器，预计插入100个元素，误判率为0.01</span><br><span class="line">        BloomFilter&lt;String&gt; bloomFilter = BloomFilter.create(Funnels.stringFunnel(), 100, 0.01);</span><br><span class="line"></span><br><span class="line">        // 插入元素</span><br><span class="line">        bloomFilter.put(&quot;Hollis&quot;);</span><br><span class="line">        bloomFilter.put(&quot;666&quot;);</span><br><span class="line">        bloomFilter.put(&quot;八股文&quot;);</span><br><span class="line"></span><br><span class="line">        // 判断元素是否存在</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;Hollis&quot;)); // true</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;王星星&quot;));  // false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Apache Commons：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import org.apache.commons.collections4.BloomFilter;</span><br><span class="line">import org.apache.commons.collections4.functors.HashFunctionIdentity;</span><br><span class="line"></span><br><span class="line">public class BloomFilterExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 创建布隆过滤器，预计插入100个元素，误判率为0.01</span><br><span class="line">        BloomFilter&lt;String&gt; bloomFilter = new BloomFilter&lt;&gt;(HashFunctionIdentity.hashFunction(StringUtils::hashCode), 100, 0.01);</span><br><span class="line"></span><br><span class="line">        bloomFilter.put(&quot;Hollis&quot;);</span><br><span class="line">        bloomFilter.put(&quot;666&quot;);</span><br><span class="line">        bloomFilter.put(&quot;八股文&quot;);</span><br><span class="line"></span><br><span class="line">        // 判断元素是否存在</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;Hollis&quot;)); // true</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;王星星&quot;));  // false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Redis中可以通过Bloom模块来使用，使用Redisson可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Config config = new Config();</span><br><span class="line">config.useSingleServer().setAddress(&quot;redis://127.0.0.1:6379&quot;);</span><br><span class="line"></span><br><span class="line">RedissonClient redisson = Redisson.create(config);</span><br><span class="line">RBloomFilter&lt;String&gt; bloomFilter = redisson.getBloomFilter(&quot;myfilter&quot;);</span><br><span class="line">bloomFilter.tryInit(100, 0.01);</span><br><span class="line">bloomFilter.add(&quot;Hollis&quot;);</span><br><span class="line">bloomFilter.add(&quot;666&quot;);</span><br><span class="line">bloomFilter.add(&quot;八股文&quot;);</span><br><span class="line">System.out.println(bloomFilter.contains(&quot;Hollis&quot;));</span><br><span class="line">System.out.println(bloomFilter.contains(&quot;王星星&quot;));</span><br><span class="line">redisson.shutdown();</span><br></pre></td></tr></table></figure>
+
+<p>首先创建一个RedissonClient对象，然后通过该对象获取一个RBloomFilter对象，使用tryInit方法来初始化布隆过滤器，<strong>指定了最多能添加的元素数量为100</strong>，<strong>误判率为0.01</strong>。然后，使用add方法将元素”Hollis”、”666”和”八股文”添加到布隆过滤器中，使用contains方法来检查元素是否存在于布隆过滤器中。</p>
+<p>或者Jedis也可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Jedis jedis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">jedis.bfCreate(&quot;myfilter&quot;, 100, 0.01);</span><br><span class="line">jedis.bfAdd(&quot;myfilter&quot;, &quot;Hollis&quot;);</span><br><span class="line">jedis.bfAdd(&quot;myfilter&quot;, &quot;666&quot;);</span><br><span class="line">jedis.bfAdd(&quot;myfilter&quot;, &quot;八股文&quot;);</span><br><span class="line">System.out.println(jedis.bfExists(&quot;myfilter&quot;, &quot;Hollis&quot;));</span><br><span class="line">System.out.println(jedis.bfExists(&quot;myfilter&quot;, &quot;王星星&quot;));</span><br><span class="line">jedis.close();</span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>mysql</category>
+        <category>高性能</category>
       </categories>
-      <tags>
-        <tag>日志</tag>
-      </tags>
   </entry>
   <entry>
     <title>常见的语法糖</title>
@@ -1055,6 +1254,127 @@
       </tags>
   </entry>
   <entry>
+    <title>日志文件</title>
+    <url>/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
+<span id="more"></span>
+<h2 id="redolog"><a href="#redolog" class="headerlink" title="redolog"></a>redolog</h2><p>redo log是MySQL中的重做日志，用于记录将来需要进行回滚操作的更改操作。当MySQL执行一个事务时，它会首先将更改操作记录到redolog中，然后再将更改写入磁盘。如果MySQL在写入磁盘之前崩溃，则可以使用redolog来恢复未完成的事务。用于实现崩溃恢复和数据持久性的一种机制。</p>
+<h2 id="undolog"><a href="#undolog" class="headerlink" title="undolog"></a>undolog</h2><p>undolog是MySQL中的撤销日志，用于事务回滚或系统崩溃时撤销(回滚)事务所做的修改。当MySQL执行一个事务时，它会将更改操作记录到redolog中，并且将旧值记录到undolog中。如果需要回滚该事务，则可以使用undolog中的旧值来还原修改操作。支持MVCC机制，用于在并发事务时提供一定的隔离性。</p>
+<p>注：redolog和undolog只适用于innodb引擎，因为要支持事务。</p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>服务端接口性能优化有哪些方案</title>
+    <url>/2023/05/26/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>作为一个Java后端开发，我们写出的大部分代码都决定着用户的使用体验。如果我们的后端代码性能不好，那么用户在访问我们的网站时就要浪费一些时间等待服务器的响应。这就可能导致用户投诉甚至用户的流失。</p>
+<p>关于性能优化是一个很大的话题。《Java程序性能优化》说性能优化包含五个层次：设计调优、代码调优、JVM调优、数据库调优、操作系统调优等。而每一个层次又包含很多方法论和最佳实践。本文不想大而广的概述这些内容。只是举几个常用的Java代码优化方案，读者看完之后可以真正的实践到自己代码中的方案。</p>
+<h2 id="使用单例"><a href="#使用单例" class="headerlink" title="使用单例"></a>使用单例</h2><p>对于IO处理、数据库连接、配置文件解析加载等一些非常耗费系统资源的操作,我们必须对这些实例的创建进行限制,或者是始终使用一个公用的实例,以节约系统开销,这种情况下就需要用到单例模式。</p>
+<h2 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h2><p>有100个请求，每个请求单独执行那肯定很慢，如果有办法把这个100个请求合并成一个请求，进行批量操作，那么效率就会高很多。</p>
+<p>尤其是在数据库操作的时候，批量操作不仅比单条执行效率高，而且还能有效的降低数据库连接数，提升应用的QPS上限。</p>
+<h2 id="使用Future模式"><a href="#使用Future模式" class="headerlink" title="使用Future模式"></a>使用Future模式</h2><p>假设一个任务执行起来需要花费一些时间,为了省去不必要的等待时间,可以先获取一个“提货单”,即Future,然后继续处理别的任务,直到“货物”到达,即任务执行完得到结果,此时便可以用“提货单”进行提货,即通过Future对象得到返回值。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class RealData implements Callable&lt;String&gt; &#123;  </span><br><span class="line">    protected String data;  </span><br><span class="line"></span><br><span class="line">    public RealData(String data) &#123;  </span><br><span class="line">        this.data = data;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    @Override  </span><br><span class="line">    public String call() throws Exception &#123;  </span><br><span class="line">        //利用sleep方法来表示真是业务是非常缓慢的  </span><br><span class="line">        try &#123;  </span><br><span class="line">            Thread.sleep(1000);  </span><br><span class="line">        &#125; catch (InterruptedException e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        return data;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">public class Application &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        FutureTask&lt;String&gt; futureTask =   </span><br><span class="line">                new FutureTask&lt;String&gt;(new RealData(&quot;name&quot;));  </span><br><span class="line">        ExecutorService executor =   </span><br><span class="line">                Executors.newFixedThreadPool(1); //使用线程池  </span><br><span class="line">        //执行FutureTask，相当于上例中的client.request(&quot;name&quot;)发送请求  </span><br><span class="line">        executor.submit(futureTask);  </span><br><span class="line">        //这里可以用一个sleep代替对其他业务逻辑的处理  </span><br><span class="line">        //在处理这些业务逻辑过程中，RealData也正在创建，从而充分了利用等待时间  </span><br><span class="line">        Thread.sleep(2000);  </span><br><span class="line">        //使用真实数据  </span><br><span class="line">        //如果call()没有执行完成依然会等待  </span><br><span class="line">        System.out.println(&quot;数据=&quot; + futureTask.get());  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用线程池"><a href="#使用线程池" class="headerlink" title="使用线程池"></a>使用线程池</h2><p>合理利用线程池能够带来三个好处。第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</p>
+<p>在 Java 5 之后，并发编程引入了一堆新的启动、调度和管理线程的API。Executor 框架便是 Java 5 中引入的，其内部使用了线程池机制，它在 java.util.cocurrent 包下，通过该框架来控制线程的启动、执行和关闭，可以简化并发编程的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class MultiThreadTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat(&quot;thread-%d&quot;).build();</span><br><span class="line">        ExecutorService executor = new ThreadPoolExecutor(2, 5, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;Runnable&gt;(), threadFactory);</span><br><span class="line">        executor.execute(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">               System.out.println(&quot;hello world !&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(&quot; ===&gt; main Thread! &quot; );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用NIO"><a href="#使用NIO" class="headerlink" title="使用NIO"></a>使用NIO</h2><p>JDK自1.4起开始提供全新的I&#x2F;O编程类库,简称NIO,其不但引入了全新高效的Buffer和Channel,同时,还引入了基于Selector的非阻塞 I&#x2F;O机制,将多个异步的I&#x2F;O操作集中到一个或几个线程当中进行处理,使用NIO代替阻塞I&#x2F;O能提高程序的并发吞吐能力,降低系统的开销。</p>
+<p>对于每一个请求,如果单独开一个线程进行相应的逻辑处理,当客户端的数据传递并不是一直进行,而是断断续续的,则相应的线程需要 I&#x2F;O等待,并进行上下文切换。而使用NIO引入的Selector机制后,可以提升程序的并发效率,改善这一状况。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class NioTest &#123;  </span><br><span class="line">    static public void main( String args[] ) throws Exception &#123;  </span><br><span class="line">        FileInputStream fin = new FileInputStream(&quot;c:\\test.txt&quot;);  </span><br><span class="line">        // 获取通道  </span><br><span class="line">        FileChannel fc = fin.getChannel();  </span><br><span class="line">        // 创建缓冲区  </span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(1024);  </span><br><span class="line">        // 读取数据到缓冲区  </span><br><span class="line">        fc.read(buffer);  </span><br><span class="line">        buffer.flip();  </span><br><span class="line">        while (buffer.remaining()&gt;0) &#123;  </span><br><span class="line">            byte b = buffer.get();  </span><br><span class="line">            System.out.print(((char)b));  </span><br><span class="line">        &#125;  </span><br><span class="line">        fin.close();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h2><p>在并发场景中，我们的代码中经常会用到锁。存在锁，就必然存在锁的竞争，存在锁的竞争，就会消耗很多资源。那么，如何优化我们Java代码中的锁呢？主要可以从以下几个方面考虑：</p>
+<p>●减少锁持有时间 </p>
+<p>​		○可以使用同步代码块来代替同步方法。这样既可以减少锁持有的时间。</p>
+<p>●减少锁粒度 </p>
+<p>​		○要在并发场景中使用Map的时候，记得使用ConcurrentHashMap来代替HashTable和HashMap。</p>
+<p>●锁分离 </p>
+<p>​		○普通锁（如syncronized）会导致读阻塞写、写也会阻塞读，同时读读与写写之间也会进行阻塞，可以想办法将读操作和写操作分离开。</p>
+<p>●锁粗化 </p>
+<p>​		○有些情况下我们希望把很多次锁的请求合并成一个请求，以降低短时间内大量锁请求、同步、释放带来的性能损耗。</p>
+<p>●锁消除 </p>
+<p>​		○锁消除是Java虚拟机在JIT编译是，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过锁消除，可以节省毫无意义的请求锁时间。</p>
+<h2 id="压缩传输"><a href="#压缩传输" class="headerlink" title="压缩传输"></a>压缩传输</h2><p>在进行数据传输之前,可以先将数据进行压缩,以减少网络传输的字节数,提升数据传输的速度,接收端可以将数据进行解压,以还原出传递的数据,并且,经过压缩的数据还可以节约所耗费的存储介质(磁盘或内存)的空间以及网络带宽,降低成本。当然,压缩也并不是没有开销的,数据压缩需要大量的CPU计算,并且,根据压缩算法的不同,计算的复杂度以及数据的压缩比也存在较大差异。一般情况下,需要根据不同的业务场景,选择不同的压缩算法。</p>
+<h2 id="缓存结果"><a href="#缓存结果" class="headerlink" title="缓存结果"></a>缓存结果</h2><p>对于相同的用户请求,如果每次都重复的查询数据库,重复的进行计算,将浪费很多的时间和资源。将计算后的结果缓存到本地内存,或者是通过分布式缓存来进行结果的缓存,可以节约宝贵的CPU计算资源,减少重复的数据库查询或者是磁盘I&#x2F;O,将原本磁头的物理转动变成内存的电子运动,提高响应速度,并且线程的迅速释放也使得应用的吞吐能力得到提升。</p>
+<h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2>]]></content>
+      <categories>
+        <category>高性能</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>服务降级</title>
+    <url>/2023/05/26/%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>限流和降级都是对系统的保护功能，一般用户在流量高峰时期，比如双十一大促。</p>
+<p>降级是通过开关配置将某些不重要的业务功能屏蔽掉，以提高服务处理能力。在大促场景中经常会对某些服务进行降级处理，大促结束之后再进行复原。</p>
+<p><strong>区别于熔断机制，降级一般并不是彻底功能不可用，而是用一种默认返回、异步执行、延迟处理等方式进行降低处理。</strong></p>
+<h2 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h2><p>服务降级的概念听起来可能不是很容易理解，举一个生活中的例子就很好理解了。</p>
+<p>有的时候我们去饭店吃饭，吃完饭以后服务员会拿一张问卷，让就餐者填写一下用户反馈。但是，这种让用户填写反馈的请求，只有在店里不忙的时候才会出现。如果店里非常忙，顾客很多的话，店员就不会再找就餐者填写问卷了。</p>
+<p>其实，这种就是服务降级。在人流量大的时候，用户反馈这个功能就被降级了。因为他相对来说并没有那么重要。</p>
+<p>接着再来看分布式系统的降级。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261600969.jpg" alt="img"></p>
+<p>上图是一张淘宝商品的详情页，对于很多剁手党来说这个页面真的是再熟悉不过了。</p>
+<p>但是，这个页面我粗略的大致数了一下，至少有15个以上的功能模块，如：图片、标题、定价、库存、推荐、评价、物流、收藏、下单等。</p>
+<p>虽然这些功能都展示在同一个页面上，但是其实这些功能并不都是在同一个应用里面的。这十几个模块可能分别在十几个应用中实现的。</p>
+<p>详情页在渲染的时候，要和十几个应用进行网络交互。</p>
+<p>这些功能中，有一些是非常重要的，比如：定价、库存、下单等。还有一些是相对来说没那么重要的，比如：推荐、收藏等。</p>
+<p>这个识别哪些功能是核心功能、哪些功能是非核心功能，然后对非核心功能采取不同的降级方案制定的过程叫做降级预案。</p>
+<p>双十一当天，整个网站的流量十分巨大的，详情页的访问量更是整个网站的重灾之地。所以，一旦有大促的时候，需要有限保证主要功能的可用，至于那些次要的功能就可以被降级掉，即不显示某些模块，或者返回一些默认内容。</p>
+<h3 id="降级的方式"><a href="#降级的方式" class="headerlink" title="降级的方式"></a>降级的方式</h3><p>还拿之前的饭店中给用户做问卷调查的例子来说。当人流量大的时候，直接取消问卷调查只是一种方式。还有很多其他方式可以选择的。比如：</p>
+<p>1、先让用户填写一下手机号，然后离店后，给用户发短信，让其填写电子问卷。</p>
+<p>2、在店门口放一个问卷，用户离店时自己去填写问卷。 等等，只要愿意想，其实是有很多种方案的。</p>
+<p>同样，对于大型网站来说，服务的降级其实也是有很多方式可以选的，常见的几种如下：</p>
+<h4 id="延迟服务"><a href="#延迟服务" class="headerlink" title="延迟服务"></a>延迟服务</h4><p>比如发表了评论，重要服务，比如在文章中显示正常，但是延迟给用户增加积分，只是放到一个缓存中，等服务平稳之后再执行。</p>
+<h4 id="在粒度范围内关闭服务（片段降级或服务功能降级）"><a href="#在粒度范围内关闭服务（片段降级或服务功能降级）" class="headerlink" title="在粒度范围内关闭服务（片段降级或服务功能降级）"></a>在粒度范围内关闭服务（片段降级或服务功能降级）</h4><p>比如关闭相关文章的推荐，直接关闭推荐区</p>
+<h4 id="页面异步请求降级"><a href="#页面异步请求降级" class="headerlink" title="页面异步请求降级"></a>页面异步请求降级</h4><p>比如商品详情页上有推荐信息&#x2F;配送至等异步加载的请求，如果这些信息响应慢或者后端服务有问题，可以进行降级； <strong>页面跳转（页面降级）</strong></p>
+<p>比如可以有相关文章推荐，但是更多的页面则直接跳转到某一个地址。</p>
+<h4 id="写降级"><a href="#写降级" class="headerlink" title="写降级"></a>写降级</h4><p>比如秒杀抢购，我们可以只进行Cache的更新，然后异步同步扣减库存到DB，保证最终一致性即可，此时可以将DB降级为Cache。</p>
+<h4 id="读降级"><a href="#读降级" class="headerlink" title="读降级"></a>读降级</h4><p>比如多级缓存模式，如果后端服务有问题，可以降级为只读缓存，这种方式适用于对读一致性要求不高的场景；</p>
+<p>Q：那无法退款，其实是采用了关闭服务这种降级方式咯 A：嗯嗯是的。 Q：11月11日的零点到11月12日的零点之间无法退款，这个降级是自动发生的吗？ A：这就涉及到降级的介入方式了。听我继续说。</p>
+<h3 id="降级的介入方式"><a href="#降级的介入方式" class="headerlink" title="降级的介入方式"></a>降级的介入方式</h3><p>按照是不是可以自动化降级，降级共有两种介入方式，分别是：<strong>自动开关降级</strong>和<strong>人工开关降级</strong>。</p>
+<h4 id="自动开关降级"><a href="#自动开关降级" class="headerlink" title="自动开关降级"></a>自动开关降级</h4><p>自动开关降级的方式一般是当系统达到某些设定的条件（系统负载、资源使用情况、SLA等指标）之后，自动执行一些策略。</p>
+<p>常见的可以作为自动降级条件的指标有以下几个：</p>
+<p> <strong>服务超时</strong> </p>
+<p>当访问的数据库&#x2F;http服务&#x2F;远程调用响应慢或者长时间响应慢，且该服务不是核心服务的话可以在超时后自动降级；</p>
+<p>比如前面提到的详情页上有推荐和收藏功能，即使出现问题也不会影响用户的正常下单。如果是调用别人的远程服务，和对方定义一个服务响应最大时间，如果超时了则可以自动降级。</p>
+<p> <strong>失败次数</strong> </p>
+<p>调用外部服务的时候，除了超时意外，最常见的异常情况就是调用失败。比如详情页中的库存信息，如果是某一次查询请求失败了，那么可以那么就可以通过读取缓存数据等方式直接降级掉。</p>
+<p>但是，这种降级可能存在一个问题，就是虽然一次请求展示了缓存，但是其他用户访问的时候还是会查询库存信息，这对于库存系统来说就是雪上加霜。因为他可能已经有问题了，但是上游系统还是在不断的对他发送请求。</p>
+<p>所以，可以针对这个查询库存的接口做统一的降级。设定一个失败次数的阈值，一旦整体失败次数达到这个阈值了，就对后续一段时间内的该查询接口做降级。直到其功能恢复。</p>
+<p><strong>发生故障</strong></p>
+<p>上面提到的失败可能是服务不稳定造成的，过一段时间可以自动恢复的。还有一种情况可能是依赖的服务彻底跪了、或者网络不通了等等。这种情况就可以直接降级了。</p>
+<p>当HTTP请求返回固定的错误码、或者一个RPC请求的时候底层服务抛了异常以后，就认为有故障发生，对其进行降级即可。</p>
+<p> <strong>限流降级</strong> </p>
+<p>还有种电商网站常见的策略，那就是限流降级。对于某些功能，设定一个流量阈值，一旦流量达到阈值的话，就进行降级。</p>
+<p>比如秒杀功能，如果一瞬间流量太大，就可以进行限流降级。对于后续访问的用户直接提示已售空、跳转错误页、或者让他输入验证码重试等。</p>
+<h4 id="人工开关降级"><a href="#人工开关降级" class="headerlink" title="人工开关降级"></a>人工开关降级</h4><p>还有一种降级方式，那就是人工开关降级。</p>
+<p>人工开关降级的方式是指当系统维护人员在发现系统异常之后，通过人工修改参数、关闭服务等方式进行降级的方法。</p>
+<p>这种方式的好处是比较灵活，能够根据异常情况灵活应对；但弊端是对人的要求比较高，一来需要维护人员对系统有足够的了解，另外要求维护人员在系统异常时能够在第一时间进行处置。</p>
+<p>还有一种情况，可能也会人工介入，那就是在大促之前，预估到流量会十分巨大，提早的识别出风险，为了节省资源保证主流程的可用，开发人员可以手动将某个功能降级掉。</p>
+<p>这里说的人工开关降级，并不一定是一定要人工操作，也可能是人工通过一个定时任务进行定时触发的。</p>
+<h2 id="降级工具"><a href="#降级工具" class="headerlink" title="降级工具"></a>降级工具</h2><p>目前市面上，针对流量控制，限流降级主要有以下两种选择：Netflix Hystrix 和 Alibaba Sentinal。</p>
+<h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><p>Hystrix是一个库，它提供了服务与服务之间的容错功能，主要体现在延迟容错和容错，从而做到控制分布式系统中的联动故障。Hystrix通过隔离服务的访问点，阻止联动故障，并提供故障的解决方案，从而提高了这个分布式系统的弹性。</p>
+<p>Hystrix 的关注点在于以 隔离 和 熔断 为主的容错机制，超时或被熔断的调用将会快速失败，并可以提供 fallback 机制。</p>
+<h3 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h3><p>Sentinel 是阿里中间件团队开源的，面向分布式服务架构的轻量级高可用流量控制组件，主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度来帮助用户保护服务的稳定性。</p>
+<p>Sentinel 的侧重点在于：多样化的流量控制、熔断降级、系统负载保护、实时监控和控制台等</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261607068.png" alt="image-20230526160754915"></p>
+<p>上图是Sentinel的文档中，关于Sentinel-与-Hystrix-的对比。详情地址：<a href="https://github.com/alibaba/Sentinel/wiki/Sentinel-%E4%B8%8E-Hystrix-%E7%9A%84%E5%AF%B9%E6%AF%94">https://github.com/alibaba/Sentinel/wiki/Sentinel-与-Hystrix-的对比</a></p>
+]]></content>
+      <categories>
+        <category>高并发</category>
+      </categories>
+  </entry>
+  <entry>
     <title>泛型中K T V E ？ Object等分别代表什么含义</title>
     <url>/2023/05/23/%E6%B3%9B%E5%9E%8B%E4%B8%ADK-T-V-E-%EF%BC%9F-Object%E7%AD%89%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>E – Element (在集合中使用，因为集合中存放的是元素)<br>T – Type（Java 类）<br>K – Key（键）<br>V – Value（值）<br>N – Number（数值类型）<br>？ – 表示不确定的java类型（无限制通配符类型）<br>S、U、V – 2nd、3rd、4th types<br>Object – 是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是用使用了泛型T、E等这些标识符后，在实际用之前类型就已经确定了，不需要再进行类型强制转换。</p>
@@ -1068,6 +1388,113 @@
       <tags>
         <tag>泛型</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>熔断</title>
+    <url>/2023/05/26/%E7%86%94%E6%96%AD/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>现在很多网站的背后都是一个庞大的分布式系统，多个系统之间的交互大多数都是采用RPC的方式，但是因为是远程调用，所以被调用者的服务的可用情况其实是不可控的。</p>
+<p>而越是庞大的系统，上下游的调用链就会越长，而如果在一个很长的调用链中，某一个服务由于某种原因导致响应时间很长，或者完全无响应，那么就可能把整个分布式系统都拖垮。</p>
+<p>如果其中某一个服务由于自身原因导致响应很慢，那么就可能导致上游的服务影响也很慢，这样循环往复，就会导致整个系统全线崩溃，这就是<strong>服务雪崩</strong>。</p>
+<p>在服务的依赖调用中，当被调用方出现故障时，出于自我保护的目的，调用方会主动停止调用，并根据业务需要进行相应处理。调用方这种主动停止调用的行为我们称之为熔断。</p>
+<h2 id="为什么需要熔断"><a href="#为什么需要熔断" class="headerlink" title="为什么需要熔断"></a>为什么需要熔断</h2><p>其实，在分布式系统中，为了保证整体服务可用性和一致性，很多系统都会引入重试机制，在有些情况下，重试其实是可以解决问题的，比如网络问题等，都可以通过重试来解决。</p>
+<p>但是，有些情况下，重试并不能解决问题，返回会加剧问题的严重性，比如下游系统因为请求量太大，导致CPU已经被打满，说着数据库连接池被占满，这时候上游系统调不通就会不断进行重试，这种重试请求，对于下游系统来说，无疑是雪上加霜，给下游系统造成二次伤害。</p>
+<p>而分布式系统，大多数的服务雪崩也都是因为不断重试导致的，这种重试有可能是框架级别的自动重试、有可能是代码级别的重试逻辑、还有可能是用户的主动重试。</p>
+<p>有些重试是无法避免的，而且如果因为防止雪崩，就不设计重试机制，也是一种因噎废食。</p>
+<h2 id="熔断器模式"><a href="#熔断器模式" class="headerlink" title="熔断器模式"></a>熔断器模式</h2><p>熔断器模式（Circuit Breaker Pattern），是一个现代软件开发的设计模式。用以侦测错误，并避免不断地触发相同的错误（如维护时服务不可用、暂时性的系统问题或是未知的系统错误）。</p>
+<p>假设有个应用程序每秒会与数据库沟通数百次，此时数据库突然发生了错误，程序员并不会希望在错误时还不断地访问数据库。因此会想办法直接处理这个错误，并进入正常的结束程序。简单来说，</p>
+<p>熔断器会侦测错误并且“预防”应用程序不断地重试调用一个近乎毫无回应的服务（除非该服务已经安全到可重试连线了）。</p>
+<p>熔断器模式是防止微服务系统雪崩的一种重要手段。</p>
+<p>一个比较完善的熔断器，一般包含三种状态：</p>
+<p>●关闭<br>        ○熔断器在默认情况下下是呈现关闭的状态，而熔断器本身带有计数功能，每当错误发生一次，计数器也就会进行“累加”的动作，到了一定的错误发生次数断路器就会被“开启”，这个时候亦会在内部启用一个计时器，一旦时间到了就会切换成半开启的状态。<br>●开启<br>        ○在开启的状态下任何请求都会“直接”被拒绝并且抛出异常讯息。<br>●半开启<br>        ○在此状态下断路器会允许部分的请求，如果这些请求都能成功通过，那么就意味着错误已经不存在，则会被切换回关闭状态并重置计数。倘若请求中有“任一”的错误发生，则会回复到“开启”状态，并且重新计时，给予系统一段休息时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261614631.jpg" alt="img"></p>
+<p>上图是熔断器的三种状态的转换情况。</p>
+<p>如果在微服务系统的调用过程中，引入熔断器，那么整个系统将天然具备以下能力：</p>
+<ul>
+<li>快速失败：当因为调用远程服务失败次数过多，熔断器开启时，上游服务对于下游服务的调用就会快速失败，这样可以避免上游服务被拖垮。</li>
+<li>无缝恢复：因为熔断器可以定期检查下游系统是否恢复，一旦恢复就可以重新回到关闭状态，所有请求便可以正常请求到下游服务。使得系统不需要认为干预。</li>
+</ul>
+<h2 id="熔断工具"><a href="#熔断工具" class="headerlink" title="熔断工具"></a>熔断工具</h2><p>熔断器为了实现快速失败和无缝恢复，就需要进行服务调用次数统计、服务调用切断等操作，如果想要自己实现一个熔断器其实也是可以的。</p>
+<p>但是，市面上有一些框架已经帮我们做了这些事情。如Hystrix和Sentinel、resilience4j等。</p>
+<h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><p>Hystrix（<a href="https://github.com/Netflix/Hystrix">https://github.com/Netflix/Hystrix</a> ）是Netflix开源的一款容错系统，能帮助使用者码出具备强大的容错能力和鲁棒性的程序。提供降级，熔断等功能。</p>
+<p>但是，在2018年底，Hystrix在其Github主页宣布，不再开放新功能，推荐开发者使用其他仍然活跃的开源项目。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261615350.jpg" alt="img"></p>
+<p>Hystrix虽然不再开发新功能 ，但对用户的影响应该不会太大，一是因为开发者可以继续使用Hystrix的最新版本1.5.18</p>
+<h3 id="resilience4j"><a href="#resilience4j" class="headerlink" title="resilience4j"></a>resilience4j</h3><p>Hystrix停更之后，Netflix官方推荐使用resilience4j（<a href="https://github.com/resilience4j/resilience4j">https://github.com/resilience4j/resilience4j</a> ），它是一个轻量、易用、可组装的高可用框架，支持熔断、高频控制、隔离、限流、限时、重试等多种高可用机制。</p>
+<p>与Hystrix相比，它有以下一些主要的区别：</p>
+<ul>
+<li>Hystrix调用必须被封装到HystrixCommand里，而resilience4j以装饰器的方式提供对函数式接口、lambda表达式等的嵌套装饰，因此你可以用简洁的方式组合多种高可用机制</li>
+<li>Hystrix的频次统计采用滑动窗口的方式，而resilience4j采用环状缓冲区的方式</li>
+<li>关于熔断器在半开状态时的状态转换，Hystrix仅使用一次执行判定是否进行状态转换，而resilience4j则采用可配置的执行次数与阈值，来决定是否进行状态转换，这种方式提高了熔断机制的稳定性</li>
+<li>关于隔离机制，Hystrix提供基于线程池和信号量的隔离，而resilience4j只提供基于信号量的隔离</li>
+</ul>
+<h3 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h3><p>Sentinel（<a href="https://github.com/alibaba/Sentinel">https://github.com/alibaba/Sentinel</a> ）是阿里中间件团队开源的，面向分布式服务架构的轻量级高可用流量控制组件，主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度来帮助用户保护服务的稳定性。</p>
+<p>Hystrix 的关注点在于以隔离和熔断为主的容错机制，超时或被熔断的调用将会快速失败，并可以提供 fallback 机制。</p>
+<p>而 Sentinel 的侧重点在于：</p>
+<ul>
+<li>多样化的流量控制</li>
+<li>熔断降级</li>
+<li>系统负载保护</li>
+<li>实时监控和控制台</li>
+</ul>
+]]></content>
+      <categories>
+        <category>高并发</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>限流</title>
+    <url>/2023/05/26/%E9%99%90%E6%B5%81/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>限流是一种控制流量的技术，用于保护系统免受突发流量或恶意流量的影响。其基本原理是通过控制请求的速率或数量，确保系统在可承受的范围内运行。</p>
+<p>常见的限流算法有：</p>
+<ol>
+<li><strong>漏桶算法</strong>：系统请求先进入漏桶，再从漏桶中逐一取出请求执行，控制漏桶的流量。</li>
+<li><strong>令牌桶算法</strong>：系统请求会得到一个令牌，从令牌桶中取出一个令牌执行，控制令牌桶中令牌的数量。</li>
+<li><strong>计数器算法</strong>：系统请求被计数，通过比较当前请求数与限流阈值来判断是否限流。</li>
+<li><strong>可以阻塞算法</strong>：当系统达到限流阈值时，不再接受新请求，等到限流阈值降下来再接受请求。</li>
+<li><strong>令牌环算法</strong>：与令牌桶算法类似，但是在多个令牌桶之间形成环形结构，以便在不同的请求处理速率之间进行平衡。</li>
+<li><strong>最小延迟算法</strong>：基于预测每个请求的处理时间，并在处理完请求后进行延迟，以控制请求的速率。</li>
+</ol>
+<p><strong>其中比较常见的就是漏桶和令牌桶，他们之间最大的区别就是应对突发流量的能力</strong>。</p>
+<h2 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h2><p>漏桶算法是一种流量控制算法，可以平滑控制流量的进出，原理比较简单：假设我们有一个水桶按固定的速率向下方滴落一滴水，无论有多少请求，请求的速率有多大，都按照固定的速率流出，对应到系统中就是按照固定的速率处理请求。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261631208.png" alt="image-20230526163124139"></p>
+<p>漏桶算法通过一个固定容量的漏桶来控制请求的处理速率，每个请求被看作是一定数量的水，需要先放到漏桶中。当漏桶满时，请求将被拒绝或延迟处理，从而保证了系统的稳定性。</p>
+<p>漏桶通过定时器的方式将水以恒定的速率流出，与请求的数量无关，从而平滑控制了请求的处理速率。当请求到来时，先将请求看作是一定数量的水，需要将这些水放入漏桶中。</p>
+<p>如果漏桶未满，请求将被立即处理并从漏桶中取出对应数量的水。如果漏桶已满，请求将被拒绝或被延迟处理，直到漏桶中有足够的空间存放请求对应数量的水。</p>
+<p>当定时器触发时，漏桶中的水以恒定的速率流出，此时可以继续处理请求。</p>
+<p>总之，<strong>漏桶算法通过一个固定容量的漏桶来控制请求的处理速率，可以平滑控制流量的进出，保证系统的稳定性和安全性。</strong></p>
+<p>但需要注意的是，<strong>漏桶算法无法处理突发流量</strong>，因为他只能按照固定的速度来处理请求，如果某个请求的流量突增，因为漏桶的机制就导致了他还是只能一个一个的按照固定速度进行消费。</p>
+<p>为了解决这种突发流量的问题，就有了<strong>令牌桶算法</strong>。</p>
+<h2 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h2><p>令牌桶其实和漏桶的原理类似，<strong>令牌桶按固定的速率往桶里放入令牌，并且只要能从桶里取出令牌就能通过。</strong></p>
+<p>也就是说，我不管现在请求量是多还是少，都有一个线程以固定的速率再往桶里放入令牌，而有请求过来的时候，就会去桶里取出令牌，能取到就执行，取不到就拒绝或者阻塞。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261630888.png" alt="image-20230526163050819"></p>
+<p>牌桶通过定时器的方式向桶中添加令牌，每秒钟添加一定数量的令牌，从而平滑控制了请求的处理速率。这样如果突发流量过来了，只要令牌桶中还有足够的令牌，就可以快速的执行，而不是像漏桶一样还要按照固定速率执行。</p>
+<p>令牌桶的好处就是把流量给平滑掉了，在流量不高的时候也会不断的向桶中增加令牌，这样就有足够的令牌可供请求消费。</p>
+<p><strong>在Java中，我们可以借助Guava提供的RateLimiter来实现令牌桶。</strong></p>
+]]></content>
+      <categories>
+        <category>高并发</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>预热</title>
+    <url>/2023/05/26/%E9%A2%84%E7%83%AD/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>预热一般指<strong>缓存预热</strong>，一般用在高并发系统中，为了提升系统在高并发情况下的稳定性的一种手段。</p>
+<p>缓存预热是指在系统启动之前或系统达到高峰期之前，通过预先将常用数据加载到缓存中，<strong>以提高缓存命中率和系统性能的过程</strong>。缓存预热的目的是<strong>尽可能地避免缓存穿透和缓存雪崩</strong>，还可以减轻后端存储系统的负载，提高系统的响应速度和吞吐量。</p>
+<p>比如秒杀商品、大促活动等，这些是可以提前预知哪些key会变成热key的，所以就可以做提前的预热。</p>
+<p>缓存预热的一般做法是在系统启动或系统空闲期间，将常用的数据加载到缓存中，主要做法有以下几种：</p>
+<p>1系统启动时加载：在系统启动时，将常用的数据加载到缓存中，以便后续的访问可以直接从缓存中获取。</p>
+<p>2定时任务加载：定时执行任务，将常用的数据加载到缓存中，以保持缓存中数据的实时性和准确性。</p>
+<p>3手动触发加载：在系统达到高峰期之前，手动触发加载常用数据到缓存中，以提高缓存命中率和系统性能。</p>
+<p>缓存预热是一种提高高并发系统性能和可靠性的重要方法，通过预先将常用的数据加载到缓存中，避免缓存穿透和缓存雪崩等问题，从而保证系统的稳定性和可靠性。</p>
+<p><strong>缓存预热的方法</strong></p>
+<p>在进行缓存预热时，有一些工具可供使用。常见的是以下这几个：</p>
+<p>RedisBloom：RedisBloom是Redis的一个模块，提供了多个数据结构，包括布隆过滤器、计数器、和TopK数据结构等。其中，布隆过滤器可以用于Redis缓存预热，通过将预热数据添加到布隆过滤器中，可以快速判断一个键是否存在于缓存中。（<a href="https://oss.redislabs.com/redisbloom/%EF%BC%89">https://oss.redislabs.com/redisbloom/）</a></p>
+<p>Redis Bulk loading：这是一个官方出的，基于Redis协议批量写入数据的工具（<a href="https://redis.io/docs/manual/patterns/bulk-loading/%EF%BC%89">https://redis.io/docs/manual/patterns/bulk-loading/）</a></p>
+<p>Redis Desktop Manager：Redis Desktop Manager是一个图形化的Redis客户端，可以用于管理Redis数据库和进行缓存预热。通过Redis Desktop Manager，可以轻松地将预热数据批量导入到Redis缓存中。</p>
+]]></content>
+      <categories>
+        <category>高并发</category>
+      </categories>
   </entry>
   <entry>
     <title>领域驱动设计</title>

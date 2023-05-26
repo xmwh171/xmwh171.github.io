@@ -158,13 +158,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -225,7 +225,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E8%83%BD%E5%A4%9F%E6%94%AF%E6%8C%81%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -243,248 +243,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/Java%E4%B8%AD%E6%9C%89%E4%BA%86%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B%E4%B8%BA%E4%BB%80%E4%B9%88%E8%BF%98%E9%9C%80%E8%A6%81%E5%8C%85%E8%A3%85%E7%B1%BB/" class="post-title-link" itemprop="url">Java中有了基本类型为什么还需要包装类</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-24 18:01:52" itemprop="dateCreated datePublished" datetime="2023-05-24T18:01:52+08:00">2023-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-26 10:05:05" itemprop="dateModified" datetime="2023-05-26T10:05:05+08:00">2023-05-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>7 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java中有8种基本数据类型，这些基本类型又都有对应的包装类。  </p>
-<table>
-<thead>
-<tr>
-<th>分类</th>
-<th>基本数据类型</th>
-<th>包装类</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>布尔型</td>
-<td>boolean</td>
-<td>Boolean</td>
-</tr>
-<tr>
-<td>整型</td>
-<td>byte</td>
-<td>Byte</td>
-</tr>
-<tr>
-<td></td>
-<td>short</td>
-<td>Short</td>
-</tr>
-<tr>
-<td></td>
-<td>int</td>
-<td>Integer</td>
-</tr>
-<tr>
-<td></td>
-<td>long</td>
-<td>Long</td>
-</tr>
-<tr>
-<td>字符型</td>
-<td>char</td>
-<td>Character</td>
-</tr>
-<tr>
-<td>浮点型</td>
-<td>float</td>
-<td>Float</td>
-</tr>
-<tr>
-<td></td>
-<td>double</td>
-<td>Double</td>
-</tr>
-</tbody></table>
-<p>因为Java是一种面向对象语言，很多地方都需要使用对象而不是基本数据类型。比如，在集合类中，我们是无法将int 、double等类型放进去的。因为集合的容器要求元素是Object类型。</p>
-<p>为了让基本类型也具有对象的特征，就出现了包装类型，它相当于将基本类型“包装起来”，使得它具有了对象的性质，并且为其添加了属性和方法，丰富了基本类型的操作。 </p>
-<h2 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h2><h3 id="基本类型和包装类型的区别"><a href="#基本类型和包装类型的区别" class="headerlink" title="基本类型和包装类型的区别"></a>基本类型和包装类型的区别</h3><ol>
-<li><p>默认值不同，基本类型的默认值为0, false或\u0000等，包装类默认为null</p>
-</li>
-<li><p>初始化方式不同，一个需要new，一个不需要</p>
-</li>
-<li><p>存储方式不同，基本类型保存在栈上，包装类对象保存在堆上（通常情况下，在没有JIT优化栈上分配时）</p>
-</li>
-</ol>
-<h3 id="如何理解自动拆装箱"><a href="#如何理解自动拆装箱" class="headerlink" title="如何理解自动拆装箱"></a>如何理解自动拆装箱</h3><h4 id="拆箱与装箱"><a href="#拆箱与装箱" class="headerlink" title="拆箱与装箱"></a>拆箱与装箱</h4><p>包装类是对基本类型的包装，所以，把基本数据类型转换成包装类的过程就是<strong>装箱</strong>；反之，把包装类转换成基本数据类型的过程就是<strong>拆箱</strong>。</p>
-<h4 id="自动拆装箱"><a href="#自动拆装箱" class="headerlink" title="自动拆装箱"></a>自动拆装箱</h4><p>在Java SE5中，为了减少开发人员的工作，Java提供了自动拆箱与自动装箱功能。</p>
-<p>自动装箱: 就是将基本数据类型自动转换成对应的包装类。</p>
-<p>自动拆箱：就是将包装类自动转换成对应的基本数据类型。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Integer i =10; //自动装箱</span><br><span class="line">int b= i; //自动拆箱</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="自动拆装箱原理"><a href="#自动拆装箱原理" class="headerlink" title="自动拆装箱原理"></a>自动拆装箱原理</h4><p>自动装箱都是通过包装类的valueOf()方法来实现的.自动拆箱都是通过包装类对象的xxxValue()来实现的。</p>
-<p>如：int的自动装箱都是通过Integer.valueOf()方法来实现的，Integer的自动拆箱都是通过integer.intValue()来实现的。</p>
-<h3 id="哪些地方会自动拆装箱"><a href="#哪些地方会自动拆装箱" class="headerlink" title="哪些地方会自动拆装箱"></a>哪些地方会自动拆装箱</h3><p>我们了解过原理之后，在来看一下，什么情况下，Java会帮我们进行自动拆装箱。前面提到的变量的初始化和赋值的场景就不介绍了，那是最简单的也最容易理解的。</p>
-<p>我们主要来看一下，那些可能被忽略的场景。</p>
-<h4 id="场景一、将基本数据类型放入集合类"><a href="#场景一、将基本数据类型放入集合类" class="headerlink" title="场景一、将基本数据类型放入集合类"></a>场景一、将基本数据类型放入集合类</h4><p>我们知道，Java中的集合类只能接收对象类型，那么以下代码为什么会不报错呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; li = new ArrayList&lt;&gt;();</span><br><span class="line">for (int i = 1; i &lt; 50; i ++)&#123;</span><br><span class="line">	li.add(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<p>将上面代码进行反编译，可以得到以下代码：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; li = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">1</span>; i &lt; <span class="number">50</span>; i += <span class="number">2</span>)&#123;</span><br><span class="line">	li.add(Integer.valueOf(i));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上，我们可以得出结论，当我们把基本数据类型放入集合类中的时候，会进行自动装箱。</p>
-<h4 id="场景二、包装类型和基本类型的大小比较"><a href="#场景二、包装类型和基本类型的大小比较" class="headerlink" title="场景二、包装类型和基本类型的大小比较"></a>场景二、包装类型和基本类型的大小比较</h4><p>有没有人想过，当我们对Integer对象与基本类型进行大小比较的时候，实际上比较的是什么内容呢？看以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer a=1;</span><br><span class="line">System.out.println(a==1?&quot;等于&quot;:&quot;不等于&quot;);</span><br><span class="line">Boolean bool=false;</span><br><span class="line">System.out.println(bool?&quot;真&quot;:&quot;假&quot;);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>对以上代码进行反编译，得到以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Integer a=1;</span><br><span class="line">System.out.println(a.intValue()==1?&quot;等于&quot;:&quot;不等于&quot;);</span><br><span class="line">Boolean bool=false;</span><br><span class="line">System.out.println(bool.booleanValue?&quot;真&quot;:&quot;假&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，包装类与基本数据类型进行比较运算，是先将包装类进行拆箱成基本数据类型，然后进行比较的。</p>
-<h4 id="场景三、包装类型的运算"><a href="#场景三、包装类型的运算" class="headerlink" title="场景三、包装类型的运算"></a>场景三、包装类型的运算</h4><p>有没有人想过，当我们对Integer对象进行四则运算的时候，是如何进行的呢？看以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer i = 10;</span><br><span class="line">Integer j = 20;</span><br><span class="line">System.out.println(i+j);</span><br></pre></td></tr></table></figure>
-
-
-
-<p>反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Integer i = Integer.valueOf(10);</span><br><span class="line">Integer j = Integer.valueOf(20);</span><br><span class="line">System.out.println(i.intValue() + j.intValue());</span><br></pre></td></tr></table></figure>
-
-<p>我们发现，两个包装类型之间的运算，会被自动拆箱成基本类型进行。</p>
-<h4 id="场景四、三目运算符的使用"><a href="#场景四、三目运算符的使用" class="headerlink" title="场景四、三目运算符的使用"></a>场景四、三目运算符的使用</h4><p>这是很多人不知道的一个场景，作者也是一次线上的血淋淋的Bug发生后才了解到的一种案例。看一个简单的三目运算符的代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">boolean flag = true;</span><br><span class="line">Integer i = 0;</span><br><span class="line">int j = 1;</span><br><span class="line">int k = flag ? i : j;</span><br></pre></td></tr></table></figure>
-
-<p>很多人不知道，其实在<code>int k = flag ? i : j</code>;这一行，会发生自动拆箱。反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">boolean flag = true;</span><br><span class="line">Integer i = Integer.valueOf(0);</span><br><span class="line">int j = 1;</span><br><span class="line">int k = flag ? i.intValue() : j;</span><br><span class="line">System.out.println(k);</span><br></pre></td></tr></table></figure>
-
-<p>这其实是三目运算符的语法规范。当第二，第三位操作数分别为基本类型和对象时，其中的对象就会拆箱为基本类型进行操作。</p>
-<p>因为例子中，<code>flag ? i : j;</code><strong>片段中，第二段的i是一个包装类型的对象，而第三段的j是一个基本类型，所以会对包装类进行自动拆箱。如果这个时候i的值为</strong><code>null</code>，那么就会发生NPE。（自动拆箱导致空指针异常）</p>
-<h4 id="场景五、函数参数与返回值"><a href="#场景五、函数参数与返回值" class="headerlink" title="场景五、函数参数与返回值"></a>场景五、函数参数与返回值</h4><p>这个比较容易理解，直接上代码了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//自动拆箱</span><br><span class="line">public int getNum1(Integer num) &#123;</span><br><span class="line">	return num;</span><br><span class="line">&#125;</span><br><span class="line">//自动装箱</span><br><span class="line">public Integer getNum2(int num) &#123;</span><br><span class="line">	return num;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="自动拆装箱与缓存"><a href="#自动拆装箱与缓存" class="headerlink" title="自动拆装箱与缓存"></a>自动拆装箱与缓存</h3><p>Java SE的自动拆装箱还提供了一个和缓存有关的功能，我们先来看以下代码，猜测一下输出结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... strings) &#123;</span><br><span class="line">	Integer integer1 = 3;</span><br><span class="line">	Integer integer2 = 3;</span><br><span class="line">	if (integer1 == integer2)</span><br><span class="line">		System.out.println(&quot;integer1 == integer2&quot;);</span><br><span class="line">	else</span><br><span class="line">		System.out.println(&quot;integer1 != integer2&quot;);</span><br><span class="line">		</span><br><span class="line">	Integer integer3 = 300;</span><br><span class="line">	Integer integer4 = 300;</span><br><span class="line">	if (integer3 == integer4)</span><br><span class="line">		System.out.println(&quot;integer3 == integer4&quot;);</span><br><span class="line">	else</span><br><span class="line">		System.out.println(&quot;integer3 != integer4&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们普遍认为上面的两个判断的结果都是false。虽然比较的值是相等的，但是由于比较的是对象，而对象的引用不一样，所以会认为两个if判断都是false的。在Java中，&#x3D;&#x3D;比较的是对象引用，而equals比较的是值。所以，在这个例子中，不同的对象有不同的引用，所以在进行比较的时候都将返回false。奇怪的是，这里两个类似的if条件判断返回不同的布尔值。</p>
-<p>上面这段代码真正的输出结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">integer1 == integer2</span><br><span class="line">integer3 != integer4</span><br></pre></td></tr></table></figure>
-
-<p>原因就和Integer中的缓存机制有关。在Java 5中，在Integer的操作上引入了一个新功能来节省内存和提高性能。整型对象通过使用相同的对象引用实现了缓存和重用。</p>
-<blockquote>
-<p>适用于整数值区间-128 至 +127。</p>
-</blockquote>
-<blockquote>
-<p>只适用于自动装箱。使用构造函数创建对象不适用。</p>
-</blockquote>
-<p>我们只需要知道，当需要进行自动装箱时，如果数字在-128至127之间时，会直接使用缓存中的对象，而不是重新创建一个对象。</p>
-<p>其中的javadoc详细的说明了缓存支持-128到127之间的自动装箱过程。最大值127可以通过<code>-XX:AutoBoxCacheMax=size</code>修改。</p>
-<p>实际上这个功能在Java 5中引入的时候,范围是固定的-128 至 +127。后来在Java 6中，可以通过<code>java.lang.Integer.IntegerCache.high</code>设置最大值。</p>
-<p>这使我们可以根据应用程序的实际情况灵活地调整来提高性能。到底是什么原因选择这个-128到127范围呢？因为这个范围的数字是最被广泛使用的。 在程序中，第一次使用Integer的时候也需要一定的额外时间来初始化这个缓存。</p>
-<p>在Boxing Conversion部分的Java语言规范(JLS)规定如下：</p>
-<p>如果一个变量p的值是：</p>
-<blockquote>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;-128至127之间的整数(§3.10.1)</span><br><span class="line">&gt;true 和 false的布尔值 (§3.10.3)</span><br><span class="line">&gt;‘\u0000’至 ‘\u007f’之间的字符(§3.10.4)</span><br></pre></td></tr></table></figure>
-</blockquote>
-<p>范围内的时，将p包装成a和b两个对象时，可以直接使用a&#x3D;&#x3D;b判断a和b的值是否相等。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">为什么Java不支持多继承</a>
+          <a href="/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E8%83%BD%E5%A4%9F%E6%94%AF%E6%8C%81%E9%AB%98%E5%B9%B6%E5%8F%91%E7%9A%84%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">如何设计一个能够支持高并发的系统</a>
         </h2>
 
         <div class="post-meta-container">
@@ -496,7 +255,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-24 16:01:52 / 修改时间：18:17:50" itemprop="dateCreated datePublished" datetime="2023-05-24T16:01:52+08:00">2023-05-24</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:57:29" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,7 +263,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+          <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a>
         </span>
     </span>
 
@@ -515,144 +274,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
-<p>在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。但是，Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，但是，Java8中为了避免菱形继承的问题，在实现的多个接口中如果有相同方法，就会要求该类必须重写这个方法。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>Java的创始人James Gosling曾经回答过，他表示：</p>
-<p>“Java之所以不支持一个类继承多个类，主要是因为在设计之初我们听取了来自C++和Objective-C登阵营的人的意见。因为多继承会产生很多歧义问题。”</p>
-<p>Gosling老人家提到的歧义问题，其实是C++因为支持多继承之后带来的菱形继承问题。</p>
-<p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png" alt="image-20230524180528863"></p>
-<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
-<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
-<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
-<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
-<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
-<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8之前），这就避免了 C++ 中多继承的歧义问题。</p>
-<h2 id="Java-8中的多继承"><a href="#Java-8中的多继承" class="headerlink" title="Java 8中的多继承"></a>Java 8中的多继承</h2><p>Java不支持多继承，但是是支持多实现的，也就是说，同一个类可以同时实现多个类。</p>
-<p>我们知道，在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。</p>
-<p>那么问题来了。</p>
-<p>Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Pet &#123;</span><br><span class="line">    public default void eat()&#123;</span><br><span class="line">        System.out.println(&quot;Pet Is Eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，这不就是变相支持了多继承么。<br>那么，Java是怎么解决菱形继承问题的呢？我们再定义一个哺乳动物接口，也定义一个eat方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public interface Mammal &#123;	</span><br><span class="line">	  public default void eat()&#123;</span><br><span class="line">	      System.out.println(&quot;Mammal Is Eating&quot;);</span><br><span class="line">	  &#125;        </span><br><span class="line">&#125;	    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后定义一个Cat，让他分别实现两个接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时候，编译期会报错：</p>
-<blockquote>
-<p>error: class Cat inherits unrelated defaults for eat() from types Mammal and Pet</p>
-</blockquote>
-<p>这时候，就要求Cat类中，必须重写eat()方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat Is Eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>所以可以看到，Java并没有帮我们解决多继承的歧义问题，而是把这个问题留给开发人员，通过重写方法的方式自己解决。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/" class="post-title-link" itemprop="url">Java是如何实现平台无关性的</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-24 15:01:52 / 修改时间：17:56:58" itemprop="dateCreated datePublished" datetime="2023-05-24T15:01:52+08:00">2023-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>737</span>
+      <span>837</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -670,19 +292,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
-<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
-<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
-<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
-<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
-<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
-<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
-<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
-<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
-<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
-<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
-<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
+          <p><strong>设计一个能够支持高并发的系统需要考虑多方面的因素，包括架构、性能优化、容错和可伸缩性等</strong>。以下是一些一般性的建议和实践：</p>
+<ol>
+<li><strong>分布式架构</strong>：将系统分解成多个模块，采用分布式架构来降低单点故障的风险，并提高系统的可伸缩性和性能。</li>
+<li><strong>集群部署</strong>：将一个服务通过集群进行部署，来提升系统整体的吞吐量及响应速度，并使用<strong>负载均衡</strong>技术将请求均衡分配给多个服务器，以提高系统的性能和可用性。</li>
+<li><strong>利用缓存</strong>：使用缓存、NoSQL等技术，以提高数据读写的性能和可靠性。</li>
+<li><strong>异步处理</strong>：采用异步处理机制，如使用<strong>消息队列</strong>、事件驱动等技术，以降低请求响应时间和提高系统吞吐量。</li>
+<li><strong>预加载</strong>：使用预加载技术来提前加载需要的资源，以减少用户等待时间。</li>
+<li><strong>代码优化和调优</strong>：对系统代码进行优化和调优，如采用<strong>异步I&#x2F;O、避免锁（减小锁的粒度）、减少循环和递归、避免长事务</strong>等，以提高系统性能。</li>
+<li><strong>数据库优化</strong>：合理的数据库设计和优化，包括<strong>合理的索引设计、分库分表、读写分离、缓存优化</strong>等，可以有效提高系统的并发度和响应速度。</li>
+<li><strong>分库分表</strong>：，将一个大型的数据库拆分成多个小型的数据库（分库），然后将每个小型数据库中的表再进行拆分（分表），从而减轻单个数据库或表的读写压力，通过分库分表，可以将大量的读写操作分散到多个数据库或表中，从而提高系统的并发度和响应速度。</li>
+<li><strong>读写分离</strong>：读写分离是一种常用的数据库优化技术，它将读操作和写操作分配到不同的数据库实例上处理。通过读写分离，主库主要负责写操作，从库则负责读操作，从而提高了系统的并发度和可扩展性。同时，读写分离还可以提高系统的可用性和容错能力，因为即使主库出现故障，从库仍然可以提供读服务。</li>
+<li><strong>防止雪崩</strong>：通过使用<strong>限流、熔断、降级</strong>等技术，可以防止系统因为某个组件出现故障而导致整个系统崩溃的雪崩效应。</li>
+<li><strong>容错和监控</strong>：实现容错机制，如<strong>备份、容灾</strong>、负载降级等，以保障系统的可用性。同时，使用监控工具来实时监测系统的运行状况和性能瓶颈，及时做出调整和优化。</li>
+<li><strong>测试和评估</strong>：进行全面的性能测试和评估，包括<strong>压力测试、负载测试、安全测试</strong>等，以发现并解决系统的性能瓶颈和安全隐患。</li>
+</ol>
+<p>综上所述，设计高并发系统需要从多个方面考虑，需要综合运用各种技术和工具，进行全面的测试和评估，以实现系统的高可用、高性能和高安全性。</p>
 
       
     </div>
@@ -713,7 +338,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -731,7 +356,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/" class="post-title-link" itemprop="url">为什么不能用浮点数表示金额</a>
+          <a href="/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E6%80%A7%E8%83%BD%E7%9A%84%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">如何设计一个高性能的分布式系统</a>
         </h2>
 
         <div class="post-meta-container">
@@ -743,7 +368,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-24 14:01:52 / 修改时间：17:43:18" itemprop="dateCreated datePublished" datetime="2023-05-24T14:01:52+08:00">2023-05-24</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:42:44" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -751,7 +376,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+          <a href="/categories/%E9%AB%98%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">高性能</span></a>
         </span>
     </span>
 
@@ -762,7 +387,115 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
+      <span>414</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>设计高性能的分布式系统需要考虑多个因素，包括架构设计、负载均衡、数据一致性、容错处理、消息队列、缓存、性能监控和安全性等。下面是一些可以帮助设计高性能分布式系统的方法：</p>
+<ol>
+<li>架构设计：选择合适的分布式系统架构，例如<strong>微服务架构、SOA架构</strong>等，可以有效地提高系统性能。</li>
+<li><strong>负载均衡</strong>：使用负载均衡技术可以将请求分布到多个节点上，提高系统的性能和可用性。可以使用硬件负载均衡器或软件负载均衡器来实现。</li>
+<li>数据一致性：<strong>保证数据一致性</strong>是设计分布式系统的一个重要方面，可以使用<strong>一致性哈希、副本复制、分片</strong>等技术来保证数据一致性。</li>
+<li>容错处理：设计分布式系统时必须考虑<strong>容错</strong>处理，以<strong>防止单点故障</strong>。可以使用备份、自动故障转移、容器化等技术来实现容错处理。</li>
+<li>消息队列：使用<strong>消息队列</strong>可以<strong>解耦</strong>系统组件，提高系统的可伸缩性和性能。</li>
+<li>缓存：使用<strong>缓存技术</strong>可以减轻数据库的负载，提高系统性能。</li>
+<li>性能监控：使用性能监控工具可以监测系统的性能瓶颈，提高系统的性能和可用性。</li>
+<li>安全性：分布式系统的安全性是至关重要的，可以使用身份验证、访问控制等技术来保证系统的安全性。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/26/%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8/" class="post-title-link" itemprop="url">布隆过滤器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:42:57" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">高性能</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -780,15 +513,36 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>布隆过滤器是一种数据结构，用于快速检索一个元素是否可能存在于一个集合(bit 数组)中。</p>
+<p>它的基本原理是利用多个哈希函数，将一个元素映射成多个位，然后将这些位设置为 1。当查询一个元素时，如果这些位都被设置为 1，则认为元素<strong>可能</strong>存在于集合中，否则<strong>肯定</strong>不存在。</p>
+<p>所以，布隆过滤器可以准确的判断一个元素是否一定不存在，但是因为哈希冲突的存在，所以他没办法判断一个元素一定存在。只能判断可能存在。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261524719.png" alt="image.png"></p>
+<p>所以，布隆过滤器是存在误判的可能的，也就是当一个不存在的Hero元素，经过hash1、hash2和hash3之后，刚好和其他的值的哈希结果冲突了。那么就会被误判为存在，但是其实他并不存在。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261524261.png" alt="image.png"></p>
+<p>想要降低这种误判的概率，主要的办法就是降低哈希冲突的概率及引入更多的哈希算法。</p>
+<p>下面是布隆过滤器的工作过程：</p>
+<p>1初始化布隆过滤器<br>在初始化布隆过滤器时，需要指定集合的大小和误判率。布隆过滤器内部包含一个bit数组和多个哈希函数，每个哈希函数都会生成一个索引值。</p>
+<p>2添加元素到布隆过滤器<br>要将一个元素添加到布隆过滤器中，首先需要将该元素通过多个哈希函数生成多个索引值，然后将这些索引值对应的位设置为 1。如果这些索引值已经被设置为 1，则不需要再次设置。</p>
+<p>3查询元素是否存在于布隆过滤器中<br>要查询一个元素是否存在于布隆过滤器中，需要将该元素通过多个哈希函数生成多个索引值，并判断这些索引值对应的位是否都被设置为 1。如果这些位都被设置为 1，则认为元素可能存在于集合中，否则肯定不存在。</p>
+<p>布隆过滤器的主要优点是可以快速判断一个元素是否属于某个集合，并且可以在空间和时间上实现较高的效率。但是，它也存在一些缺点，例如：</p>
+<p>1布隆过滤器在判断元素是否存在时，有一定的误判率。<br>2布隆过滤器删除元素比较困难，因为删除一个元素需要将其对应的多个位设置为 0，但这些位可能被其他元素共享。</p>
+<h2 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h2><p>布隆过滤器因为他的效率非常高，所以被广泛的使用，比较典型的场景有以下几个：</p>
+<p>1网页爬虫：爬虫程序可以使用布隆过滤器来过滤掉已经爬取过的网页，避免重复爬取和浪费资源。<br>2缓存系统：缓存系统可以使用布隆过滤器来判断一个查询是否可能存在于缓存中，从而减少查询缓存的次数，提高查询效率。布隆过滤器也经常用来解决缓存穿透的问题。<br>3分布式系统：在分布式系统中，可以使用布隆过滤器来判断一个元素是否存在于分布式缓存中，避免在所有节点上进行查询，减少网络负载。<br>4垃圾邮件过滤：布隆过滤器可以用于判断一个邮件地址是否在垃圾邮件列表中，从而过滤掉垃圾邮件。<br>5黑名单过滤：布隆过滤器可以用于判断一个IP地址或手机号码是否在黑名单中，从而阻止恶意请求。</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><p>Java中可以使用第三方库来实现布隆过滤器，常见的有Google Guava库和Apache Commons库以及Redis。</p>
+<p>如Guava：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import com.google.common.hash.BloomFilter;</span><br><span class="line">import com.google.common.hash.Funnels;</span><br><span class="line"></span><br><span class="line">public class BloomFilterExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 创建布隆过滤器，预计插入100个元素，误判率为0.01</span><br><span class="line">        BloomFilter&lt;String&gt; bloomFilter = BloomFilter.create(Funnels.stringFunnel(), 100, 0.01);</span><br><span class="line"></span><br><span class="line">        // 插入元素</span><br><span class="line">        bloomFilter.put(&quot;Hollis&quot;);</span><br><span class="line">        bloomFilter.put(&quot;666&quot;);</span><br><span class="line">        bloomFilter.put(&quot;八股文&quot;);</span><br><span class="line"></span><br><span class="line">        // 判断元素是否存在</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;Hollis&quot;)); // true</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;王星星&quot;));  // false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Apache Commons：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">import org.apache.commons.lang3.StringUtils;</span><br><span class="line">import org.apache.commons.collections4.BloomFilter;</span><br><span class="line">import org.apache.commons.collections4.functors.HashFunctionIdentity;</span><br><span class="line"></span><br><span class="line">public class BloomFilterExample &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 创建布隆过滤器，预计插入100个元素，误判率为0.01</span><br><span class="line">        BloomFilter&lt;String&gt; bloomFilter = new BloomFilter&lt;&gt;(HashFunctionIdentity.hashFunction(StringUtils::hashCode), 100, 0.01);</span><br><span class="line"></span><br><span class="line">        bloomFilter.put(&quot;Hollis&quot;);</span><br><span class="line">        bloomFilter.put(&quot;666&quot;);</span><br><span class="line">        bloomFilter.put(&quot;八股文&quot;);</span><br><span class="line"></span><br><span class="line">        // 判断元素是否存在</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;Hollis&quot;)); // true</span><br><span class="line">        System.out.println(bloomFilter.mightContain(&quot;王星星&quot;));  // false</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Redis中可以通过Bloom模块来使用，使用Redisson可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">Config config = new Config();</span><br><span class="line">config.useSingleServer().setAddress(&quot;redis://127.0.0.1:6379&quot;);</span><br><span class="line"></span><br><span class="line">RedissonClient redisson = Redisson.create(config);</span><br><span class="line">RBloomFilter&lt;String&gt; bloomFilter = redisson.getBloomFilter(&quot;myfilter&quot;);</span><br><span class="line">bloomFilter.tryInit(100, 0.01);</span><br><span class="line">bloomFilter.add(&quot;Hollis&quot;);</span><br><span class="line">bloomFilter.add(&quot;666&quot;);</span><br><span class="line">bloomFilter.add(&quot;八股文&quot;);</span><br><span class="line">System.out.println(bloomFilter.contains(&quot;Hollis&quot;));</span><br><span class="line">System.out.println(bloomFilter.contains(&quot;王星星&quot;));</span><br><span class="line">redisson.shutdown();</span><br></pre></td></tr></table></figure>
+
+<p>首先创建一个RedissonClient对象，然后通过该对象获取一个RBloomFilter对象，使用tryInit方法来初始化布隆过滤器，<strong>指定了最多能添加的元素数量为100</strong>，<strong>误判率为0.01</strong>。然后，使用add方法将元素”Hollis”、”666”和”八股文”添加到布隆过滤器中，使用contains方法来检查元素是否存在于布隆过滤器中。</p>
+<p>或者Jedis也可以：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Jedis jedis = new Jedis(&quot;localhost&quot;);</span><br><span class="line">jedis.bfCreate(&quot;myfilter&quot;, 100, 0.01);</span><br><span class="line">jedis.bfAdd(&quot;myfilter&quot;, &quot;Hollis&quot;);</span><br><span class="line">jedis.bfAdd(&quot;myfilter&quot;, &quot;666&quot;);</span><br><span class="line">jedis.bfAdd(&quot;myfilter&quot;, &quot;八股文&quot;);</span><br><span class="line">System.out.println(jedis.bfExists(&quot;myfilter&quot;, &quot;Hollis&quot;));</span><br><span class="line">System.out.println(jedis.bfExists(&quot;myfilter&quot;, &quot;王星星&quot;));</span><br><span class="line">jedis.close();</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -818,7 +572,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -836,7 +590,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">String str=new String("hollis")创建了几个对象</a>
+          <a href="/2023/05/26/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A5%E5%8F%A3%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E6%A1%88/" class="post-title-link" itemprop="url">服务端接口性能优化有哪些方案</a>
         </h2>
 
         <div class="post-meta-container">
@@ -846,15 +600,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-05-23 10:48:03" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-24 21:26:41" itemprop="dateModified" datetime="2023-05-24T21:26:41+08:00">2023-05-24</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:41:41" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -862,7 +610,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+          <a href="/categories/%E9%AB%98%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">高性能</span></a>
         </span>
     </span>
 
@@ -891,61 +639,192 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>创建的对象数应该是1个或者2个。</p>
-<p>首先要清楚什么是对象？</p>
-<p>Java是一种面向对象的语言，而Java对象在JVM中的存储也是有一定的结构的，在HotSpot虚拟机中，存储的形式就是oop-klass model，即Java对象模型。我们在Java代码中，使用new创建一个对象的时候，JVM会创建一个instanceOopDesc对象，这个对象中包含了两部分信息，对象头以及元数据。对象头中有一些运行时数据，其中就包括和多线程相关的锁的信息。元数据其实维护的是指针，指向的是对象所属的类的instanceKlass。</p>
-<p>这才叫对象。其他的，一概都不叫对象。</p>
-<p>那么不管怎么样，一次new的过程，都会在堆上创建一个对象，那么就是起码有一个对象了。至于另外一个对象，到底有没有要看具体情况了。</p>
-<p>另外这一个对象就是常量池中的字符串常量，这个字符串其实是类编译阶段就进到Class常量池的，那么当这个类第一次被ClassLoader加载的时候，会从Class常量池进入到运行时常量池。</p>
-<p>在运行时常量池中，也并不是会立刻被解析成对象，而是会先以JVM_CONSTANT_UnresolveString_info的形式驻留在常量池。在后面，该引用第一次被LDC指令执行到的时候，就尝试在堆上创建字符串对象，并将对象的引用驻留在字符串常量池中。</p>
-<p>通过看上面的过程，你也能发现，这个过程的触发条件是我们没办法决定的，问题的题干中也没提到。有可能执行这段代码的时候是第一次LDC指令执行，也许在前面就执行过了。</p>
-<p>所以，如果是第一次执行，那么就是会同时创建两个对象。一个字符串常量引用指向的对象，一个我们new出来的对象。</p>
-<p>如果不是第一次执行，那么就只会创建我们自己new出来的对象。</p>
-<p>至于有人说什么在字符串池内还有在栈上还有一个引用对象，你听听这说法，引用就是引用。别往对象上面扯。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="字面量和运行时常量池"><a href="#字面量和运行时常量池" class="headerlink" title="字面量和运行时常量池"></a>字面量和运行时常量池</h3><p>JVM为了提高性能和减少内存开销，在实例化字符串常量的时候进行了一些优化。为了减少在JVM中创建的字符串的数量，字符串类维护了一个字符串常量池。</p>
-<p>在JVM运行时区域的方法区中，有一块区域是运行时常量池，主要用来存储<strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>。</p>
-<p>了解Class文件结构或者做过Java代码的反编译的朋友可能都知道，在java代码被javac编译之后，文件结构中是包含一部分Constant pool的。比如以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">	String s = &quot;Hollis&quot;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <p>作为一个Java后端开发，我们写出的大部分代码都决定着用户的使用体验。如果我们的后端代码性能不好，那么用户在访问我们的网站时就要浪费一些时间等待服务器的响应。这就可能导致用户投诉甚至用户的流失。</p>
+<p>关于性能优化是一个很大的话题。《Java程序性能优化》说性能优化包含五个层次：设计调优、代码调优、JVM调优、数据库调优、操作系统调优等。而每一个层次又包含很多方法论和最佳实践。本文不想大而广的概述这些内容。只是举几个常用的Java代码优化方案，读者看完之后可以真正的实践到自己代码中的方案。</p>
+<h2 id="使用单例"><a href="#使用单例" class="headerlink" title="使用单例"></a>使用单例</h2><p>对于IO处理、数据库连接、配置文件解析加载等一些非常耗费系统资源的操作,我们必须对这些实例的创建进行限制,或者是始终使用一个公用的实例,以节约系统开销,这种情况下就需要用到单例模式。</p>
+<h2 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h2><p>有100个请求，每个请求单独执行那肯定很慢，如果有办法把这个100个请求合并成一个请求，进行批量操作，那么效率就会高很多。</p>
+<p>尤其是在数据库操作的时候，批量操作不仅比单条执行效率高，而且还能有效的降低数据库连接数，提升应用的QPS上限。</p>
+<h2 id="使用Future模式"><a href="#使用Future模式" class="headerlink" title="使用Future模式"></a>使用Future模式</h2><p>假设一个任务执行起来需要花费一些时间,为了省去不必要的等待时间,可以先获取一个“提货单”,即Future,然后继续处理别的任务,直到“货物”到达,即任务执行完得到结果,此时便可以用“提货单”进行提货,即通过Future对象得到返回值。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">public class RealData implements Callable&lt;String&gt; &#123;  </span><br><span class="line">    protected String data;  </span><br><span class="line"></span><br><span class="line">    public RealData(String data) &#123;  </span><br><span class="line">        this.data = data;  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    @Override  </span><br><span class="line">    public String call() throws Exception &#123;  </span><br><span class="line">        //利用sleep方法来表示真是业务是非常缓慢的  </span><br><span class="line">        try &#123;  </span><br><span class="line">            Thread.sleep(1000);  </span><br><span class="line">        &#125; catch (InterruptedException e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">        return data;  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;  </span><br><span class="line"></span><br><span class="line">public class Application &#123;  </span><br><span class="line">    public static void main(String[] args) throws Exception &#123;  </span><br><span class="line">        FutureTask&lt;String&gt; futureTask =   </span><br><span class="line">                new FutureTask&lt;String&gt;(new RealData(&quot;name&quot;));  </span><br><span class="line">        ExecutorService executor =   </span><br><span class="line">                Executors.newFixedThreadPool(1); //使用线程池  </span><br><span class="line">        //执行FutureTask，相当于上例中的client.request(&quot;name&quot;)发送请求  </span><br><span class="line">        executor.submit(futureTask);  </span><br><span class="line">        //这里可以用一个sleep代替对其他业务逻辑的处理  </span><br><span class="line">        //在处理这些业务逻辑过程中，RealData也正在创建，从而充分了利用等待时间  </span><br><span class="line">        Thread.sleep(2000);  </span><br><span class="line">        //使用真实数据  </span><br><span class="line">        //如果call()没有执行完成依然会等待  </span><br><span class="line">        System.out.println(&quot;数据=&quot; + futureTask.get());  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用线程池"><a href="#使用线程池" class="headerlink" title="使用线程池"></a>使用线程池</h2><p>合理利用线程池能够带来三个好处。第一：降低资源消耗。通过重复利用已创建的线程降低线程创建和销毁造成的消耗。第二：提高响应速度。当任务到达时，任务可以不需要等到线程创建就能立即执行。第三：提高线程的可管理性。线程是稀缺资源，如果无限制的创建，不仅会消耗系统资源，还会降低系统的稳定性，使用线程池可以进行统一的分配，调优和监控。</p>
+<p>在 Java 5 之后，并发编程引入了一堆新的启动、调度和管理线程的API。Executor 框架便是 Java 5 中引入的，其内部使用了线程池机制，它在 java.util.cocurrent 包下，通过该框架来控制线程的启动、执行和关闭，可以简化并发编程的操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class MultiThreadTest &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        ThreadFactory threadFactory = new ThreadFactoryBuilder().setNameFormat(&quot;thread-%d&quot;).build();</span><br><span class="line">        ExecutorService executor = new ThreadPoolExecutor(2, 5, 60L, TimeUnit.SECONDS, new LinkedBlockingQueue&lt;Runnable&gt;(), threadFactory);</span><br><span class="line">        executor.execute(new Runnable() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void run() &#123;</span><br><span class="line">               System.out.println(&quot;hello world !&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        System.out.println(&quot; ===&gt; main Thread! &quot; );</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="使用NIO"><a href="#使用NIO" class="headerlink" title="使用NIO"></a>使用NIO</h2><p>JDK自1.4起开始提供全新的I&#x2F;O编程类库,简称NIO,其不但引入了全新高效的Buffer和Channel,同时,还引入了基于Selector的非阻塞 I&#x2F;O机制,将多个异步的I&#x2F;O操作集中到一个或几个线程当中进行处理,使用NIO代替阻塞I&#x2F;O能提高程序的并发吞吐能力,降低系统的开销。</p>
+<p>对于每一个请求,如果单独开一个线程进行相应的逻辑处理,当客户端的数据传递并不是一直进行,而是断断续续的,则相应的线程需要 I&#x2F;O等待,并进行上下文切换。而使用NIO引入的Selector机制后,可以提升程序的并发效率,改善这一状况。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class NioTest &#123;  </span><br><span class="line">    static public void main( String args[] ) throws Exception &#123;  </span><br><span class="line">        FileInputStream fin = new FileInputStream(&quot;c:\\test.txt&quot;);  </span><br><span class="line">        // 获取通道  </span><br><span class="line">        FileChannel fc = fin.getChannel();  </span><br><span class="line">        // 创建缓冲区  </span><br><span class="line">        ByteBuffer buffer = ByteBuffer.allocate(1024);  </span><br><span class="line">        // 读取数据到缓冲区  </span><br><span class="line">        fc.read(buffer);  </span><br><span class="line">        buffer.flip();  </span><br><span class="line">        while (buffer.remaining()&gt;0) &#123;  </span><br><span class="line">            byte b = buffer.get();  </span><br><span class="line">            System.out.print(((char)b));  </span><br><span class="line">        &#125;  </span><br><span class="line">        fin.close();  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="锁优化"><a href="#锁优化" class="headerlink" title="锁优化"></a>锁优化</h2><p>在并发场景中，我们的代码中经常会用到锁。存在锁，就必然存在锁的竞争，存在锁的竞争，就会消耗很多资源。那么，如何优化我们Java代码中的锁呢？主要可以从以下几个方面考虑：</p>
+<p>●减少锁持有时间 </p>
+<p>​		○可以使用同步代码块来代替同步方法。这样既可以减少锁持有的时间。</p>
+<p>●减少锁粒度 </p>
+<p>​		○要在并发场景中使用Map的时候，记得使用ConcurrentHashMap来代替HashTable和HashMap。</p>
+<p>●锁分离 </p>
+<p>​		○普通锁（如syncronized）会导致读阻塞写、写也会阻塞读，同时读读与写写之间也会进行阻塞，可以想办法将读操作和写操作分离开。</p>
+<p>●锁粗化 </p>
+<p>​		○有些情况下我们希望把很多次锁的请求合并成一个请求，以降低短时间内大量锁请求、同步、释放带来的性能损耗。</p>
+<p>●锁消除 </p>
+<p>​		○锁消除是Java虚拟机在JIT编译是，通过对运行上下文的扫描，去除不可能存在共享资源竞争的锁，通过锁消除，可以节省毫无意义的请求锁时间。</p>
+<h2 id="压缩传输"><a href="#压缩传输" class="headerlink" title="压缩传输"></a>压缩传输</h2><p>在进行数据传输之前,可以先将数据进行压缩,以减少网络传输的字节数,提升数据传输的速度,接收端可以将数据进行解压,以还原出传递的数据,并且,经过压缩的数据还可以节约所耗费的存储介质(磁盘或内存)的空间以及网络带宽,降低成本。当然,压缩也并不是没有开销的,数据压缩需要大量的CPU计算,并且,根据压缩算法的不同,计算的复杂度以及数据的压缩比也存在较大差异。一般情况下,需要根据不同的业务场景,选择不同的压缩算法。</p>
+<h2 id="缓存结果"><a href="#缓存结果" class="headerlink" title="缓存结果"></a>缓存结果</h2><p>对于相同的用户请求,如果每次都重复的查询数据库,重复的进行计算,将浪费很多的时间和资源。将计算后的结果缓存到本地内存,或者是通过分布式缓存来进行结果的缓存,可以节约宝贵的CPU计算资源,减少重复的数据库查询或者是磁盘I&#x2F;O,将原本磁头的物理转动变成内存的电子运动,提高响应速度,并且线程的迅速释放也使得应用的吞吐能力得到提升。</p>
+<h2 id="SQL优化"><a href="#SQL优化" class="headerlink" title="SQL优化"></a>SQL优化</h2>
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
 
 
 
 
-
-<p>经过编译后，常量池内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Constant pool:</span><br><span class="line">	#1 = Methodref 		#4.#20   // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">	#2 = String 		#21		 // Hollis</span><br><span class="line">	#3 = Class 			#22 	// StringDemo</span><br><span class="line">	#4 = Class 			#23 	// java/lang/Object</span><br><span class="line">	...</span><br><span class="line">	#16 = Utf8 			s</span><br><span class="line">	..</span><br><span class="line">	#21 = Utf8 			Hollis</span><br><span class="line">	#22 = Utf8 			StringDemo</span><br><span class="line">	#23 = Utf8 			java/lang/Object</span><br></pre></td></tr></table></figure>
-
-<p>上面的Class文件中的常量池中，比较重要的几个内容：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#16 = Utf8 			s</span><br><span class="line">#21 = Utf8 			Hollis</span><br><span class="line">#22 = Utf8 			StringDemo</span><br></pre></td></tr></table></figure>
+    
 
 
+<div class="post-block">
+  
+  
 
-<p>上面几个常量中，s就是前面提到的<strong>符号引用</strong>，而Hollis就是前面提到的字面量。而Class文件中的常量池部分的内容，会在运行期被运行时常量池加载进去。关于字面量，详情参考<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jls/se8/html/jls-3.html#jls-3.10.5">Java SE Specifications</a></p>
-<h3 id="intern"><a href="#intern" class="headerlink" title="intern"></a>intern</h3><p><strong>编译期</strong>生成的各种<strong>字面量</strong>和<strong>符号引用</strong>是运行时常量池中比较重要的一部分来源，但是并不是全部。那么还有一种情况，可以在运行期向运行时常量池中增加常量。那就是String的intern方法。</p>
-<p>当一个String实例调用intern()方法时，Java查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用；</p>
-<p><strong>intern()有两个作用，第一个是将字符串字面量放入常量池（如果池没有的话），第二个是返回这个常量的引用</strong>。</p>
-<h4 id="intern的正确用法"><a href="#intern的正确用法" class="headerlink" title="intern的正确用法"></a>intern的正确用法</h4><p>不知道，你有没有发现，在String s3 &#x3D; new String(“Hollis”).intern();中，其实intern是多余的？</p>
-<p>因为就算不用intern，Hollis作为一个字面量也会被加载到Class文件的常量池，进而加入到运行时常量池中，为啥还要多此一举呢？到底什么场景下才需要使用intern呢？</p>
-<p>在解释这个之前，我们先来看下以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = s1 + s2;</span><br><span class="line">String s4 = &quot;Hollis&quot; + &quot;Chuang&quot;;</span><br></pre></td></tr></table></figure>
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7/">
 
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
 
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
 
-<p>在经过反编译后，得到代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String s1 = &quot;Hollis&quot;;</span><br><span class="line">String s2 = &quot;Chuang&quot;;</span><br><span class="line">String s3 = (new StringBuilder()).append(s1).append(s2).toString();</span><br><span class="line">String s4 = &quot;HollisChuang&quot;;</span><br></pre></td></tr></table></figure>
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/26/%E6%9C%8D%E5%8A%A1%E9%99%8D%E7%BA%A7/" class="post-title-link" itemprop="url">服务降级</a>
+        </h2>
 
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
 
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：16:08:22" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a>
+        </span>
+    </span>
 
-<p>可以发现，同样是字符串拼接，s3和s4在经过编译器编译后的实现方式并不一样。s3被转化成StringBuilder及append，而s4被直接拼接成新的字符串。</p>
-<p>如果你感兴趣，你还能发现，String s3 &#x3D; s1 + s2; 经过编译之后，常量池中是有两个字符串常量的分别是 Hollis、Chuang（其实Hollis和Chuang是String s1 &#x3D; “Hollis”;和String s2 &#x3D; “Chuang”;定义出来的），拼接结果HollisChuang并不在常量池中。</p>
-<p>如果代码只有String s4 &#x3D; “Hollis” + “Chuang”;，那么常量池中将只有HollisChuang而没有”Hollis” 和 “Chuang”。</p>
-<p>究其原因，是因为常量池要保存的是<strong>已确定</strong>的字面量值。也就是说，对于字符串的拼接，纯字面量和字面量的拼接，会把拼接结果作为常量保存到字符串池。</p>
-<p>如果在字符串拼接中，有一个参数是非字面量，而是一个变量的话，整个拼接操作会被编译成StringBuilder.append，这种情况编译器是无法知道其确定值的。只有在运行期才能确定。</p>
-<p>那么，有了这个特性了，intern就有用武之地了。那就是很多时候，我们在程序中得到的字符串是只有在运行期才能确定的，在编译期是无法确定的，那么也就没办法在编译期被加入到常量池中。</p>
-<p>这时候，对于那种可能经常使用的字符串，使用intern进行定义，每次JVM运行到这段代码的时候，就会直接把常量池中该字面值的引用返回，这样就可以减少大量字符串对象的创建了。</p>
-<p>如一<a target="_blank" rel="noopener" href="https://tech.meituan.com/in_depth_understanding_string_intern.html">深入解析String#intern</a>文中举的一个例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">static final int MAX = 1000 * 10000;</span><br><span class="line">static final String[] arr = new String[MAX];</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Integer[] DB_DATA = new Integer[10];</span><br><span class="line">	Random random = new Random(10 * 10000);</span><br><span class="line">	for (int i = 0; i &lt; DB_DATA.length; i++) &#123;</span><br><span class="line">		DB_DATA[i] = random.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line">	long t = System.currentTimeMillis();</span><br><span class="line">	for (int i = 0; i &lt; MAX; i++) &#123;</span><br><span class="line">		arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	System.out.println((System.currentTimeMillis() - t) + &quot;ms&quot;);</span><br><span class="line">	System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>9 分钟</span>
+    </span>
+</div>
 
-<p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过intern显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>限流和降级都是对系统的保护功能，一般用户在流量高峰时期，比如双十一大促。</p>
+<p>降级是通过开关配置将某些不重要的业务功能屏蔽掉，以提高服务处理能力。在大促场景中经常会对某些服务进行降级处理，大促结束之后再进行复原。</p>
+<p><strong>区别于熔断机制，降级一般并不是彻底功能不可用，而是用一种默认返回、异步执行、延迟处理等方式进行降低处理。</strong></p>
+<h2 id="服务降级"><a href="#服务降级" class="headerlink" title="服务降级"></a>服务降级</h2><p>服务降级的概念听起来可能不是很容易理解，举一个生活中的例子就很好理解了。</p>
+<p>有的时候我们去饭店吃饭，吃完饭以后服务员会拿一张问卷，让就餐者填写一下用户反馈。但是，这种让用户填写反馈的请求，只有在店里不忙的时候才会出现。如果店里非常忙，顾客很多的话，店员就不会再找就餐者填写问卷了。</p>
+<p>其实，这种就是服务降级。在人流量大的时候，用户反馈这个功能就被降级了。因为他相对来说并没有那么重要。</p>
+<p>接着再来看分布式系统的降级。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261600969.jpg" alt="img"></p>
+<p>上图是一张淘宝商品的详情页，对于很多剁手党来说这个页面真的是再熟悉不过了。</p>
+<p>但是，这个页面我粗略的大致数了一下，至少有15个以上的功能模块，如：图片、标题、定价、库存、推荐、评价、物流、收藏、下单等。</p>
+<p>虽然这些功能都展示在同一个页面上，但是其实这些功能并不都是在同一个应用里面的。这十几个模块可能分别在十几个应用中实现的。</p>
+<p>详情页在渲染的时候，要和十几个应用进行网络交互。</p>
+<p>这些功能中，有一些是非常重要的，比如：定价、库存、下单等。还有一些是相对来说没那么重要的，比如：推荐、收藏等。</p>
+<p>这个识别哪些功能是核心功能、哪些功能是非核心功能，然后对非核心功能采取不同的降级方案制定的过程叫做降级预案。</p>
+<p>双十一当天，整个网站的流量十分巨大的，详情页的访问量更是整个网站的重灾之地。所以，一旦有大促的时候，需要有限保证主要功能的可用，至于那些次要的功能就可以被降级掉，即不显示某些模块，或者返回一些默认内容。</p>
+<h3 id="降级的方式"><a href="#降级的方式" class="headerlink" title="降级的方式"></a>降级的方式</h3><p>还拿之前的饭店中给用户做问卷调查的例子来说。当人流量大的时候，直接取消问卷调查只是一种方式。还有很多其他方式可以选择的。比如：</p>
+<p>1、先让用户填写一下手机号，然后离店后，给用户发短信，让其填写电子问卷。</p>
+<p>2、在店门口放一个问卷，用户离店时自己去填写问卷。 等等，只要愿意想，其实是有很多种方案的。</p>
+<p>同样，对于大型网站来说，服务的降级其实也是有很多方式可以选的，常见的几种如下：</p>
+<h4 id="延迟服务"><a href="#延迟服务" class="headerlink" title="延迟服务"></a>延迟服务</h4><p>比如发表了评论，重要服务，比如在文章中显示正常，但是延迟给用户增加积分，只是放到一个缓存中，等服务平稳之后再执行。</p>
+<h4 id="在粒度范围内关闭服务（片段降级或服务功能降级）"><a href="#在粒度范围内关闭服务（片段降级或服务功能降级）" class="headerlink" title="在粒度范围内关闭服务（片段降级或服务功能降级）"></a>在粒度范围内关闭服务（片段降级或服务功能降级）</h4><p>比如关闭相关文章的推荐，直接关闭推荐区</p>
+<h4 id="页面异步请求降级"><a href="#页面异步请求降级" class="headerlink" title="页面异步请求降级"></a>页面异步请求降级</h4><p>比如商品详情页上有推荐信息&#x2F;配送至等异步加载的请求，如果这些信息响应慢或者后端服务有问题，可以进行降级； <strong>页面跳转（页面降级）</strong></p>
+<p>比如可以有相关文章推荐，但是更多的页面则直接跳转到某一个地址。</p>
+<h4 id="写降级"><a href="#写降级" class="headerlink" title="写降级"></a>写降级</h4><p>比如秒杀抢购，我们可以只进行Cache的更新，然后异步同步扣减库存到DB，保证最终一致性即可，此时可以将DB降级为Cache。</p>
+<h4 id="读降级"><a href="#读降级" class="headerlink" title="读降级"></a>读降级</h4><p>比如多级缓存模式，如果后端服务有问题，可以降级为只读缓存，这种方式适用于对读一致性要求不高的场景；</p>
+<p>Q：那无法退款，其实是采用了关闭服务这种降级方式咯 A：嗯嗯是的。 Q：11月11日的零点到11月12日的零点之间无法退款，这个降级是自动发生的吗？ A：这就涉及到降级的介入方式了。听我继续说。</p>
+<h3 id="降级的介入方式"><a href="#降级的介入方式" class="headerlink" title="降级的介入方式"></a>降级的介入方式</h3><p>按照是不是可以自动化降级，降级共有两种介入方式，分别是：<strong>自动开关降级</strong>和<strong>人工开关降级</strong>。</p>
+<h4 id="自动开关降级"><a href="#自动开关降级" class="headerlink" title="自动开关降级"></a>自动开关降级</h4><p>自动开关降级的方式一般是当系统达到某些设定的条件（系统负载、资源使用情况、SLA等指标）之后，自动执行一些策略。</p>
+<p>常见的可以作为自动降级条件的指标有以下几个：</p>
+<p> <strong>服务超时</strong> </p>
+<p>当访问的数据库&#x2F;http服务&#x2F;远程调用响应慢或者长时间响应慢，且该服务不是核心服务的话可以在超时后自动降级；</p>
+<p>比如前面提到的详情页上有推荐和收藏功能，即使出现问题也不会影响用户的正常下单。如果是调用别人的远程服务，和对方定义一个服务响应最大时间，如果超时了则可以自动降级。</p>
+<p> <strong>失败次数</strong> </p>
+<p>调用外部服务的时候，除了超时意外，最常见的异常情况就是调用失败。比如详情页中的库存信息，如果是某一次查询请求失败了，那么可以那么就可以通过读取缓存数据等方式直接降级掉。</p>
+<p>但是，这种降级可能存在一个问题，就是虽然一次请求展示了缓存，但是其他用户访问的时候还是会查询库存信息，这对于库存系统来说就是雪上加霜。因为他可能已经有问题了，但是上游系统还是在不断的对他发送请求。</p>
+<p>所以，可以针对这个查询库存的接口做统一的降级。设定一个失败次数的阈值，一旦整体失败次数达到这个阈值了，就对后续一段时间内的该查询接口做降级。直到其功能恢复。</p>
+<p><strong>发生故障</strong></p>
+<p>上面提到的失败可能是服务不稳定造成的，过一段时间可以自动恢复的。还有一种情况可能是依赖的服务彻底跪了、或者网络不通了等等。这种情况就可以直接降级了。</p>
+<p>当HTTP请求返回固定的错误码、或者一个RPC请求的时候底层服务抛了异常以后，就认为有故障发生，对其进行降级即可。</p>
+<p> <strong>限流降级</strong> </p>
+<p>还有种电商网站常见的策略，那就是限流降级。对于某些功能，设定一个流量阈值，一旦流量达到阈值的话，就进行降级。</p>
+<p>比如秒杀功能，如果一瞬间流量太大，就可以进行限流降级。对于后续访问的用户直接提示已售空、跳转错误页、或者让他输入验证码重试等。</p>
+<h4 id="人工开关降级"><a href="#人工开关降级" class="headerlink" title="人工开关降级"></a>人工开关降级</h4><p>还有一种降级方式，那就是人工开关降级。</p>
+<p>人工开关降级的方式是指当系统维护人员在发现系统异常之后，通过人工修改参数、关闭服务等方式进行降级的方法。</p>
+<p>这种方式的好处是比较灵活，能够根据异常情况灵活应对；但弊端是对人的要求比较高，一来需要维护人员对系统有足够的了解，另外要求维护人员在系统异常时能够在第一时间进行处置。</p>
+<p>还有一种情况，可能也会人工介入，那就是在大促之前，预估到流量会十分巨大，提早的识别出风险，为了节省资源保证主流程的可用，开发人员可以手动将某个功能降级掉。</p>
+<p>这里说的人工开关降级，并不一定是一定要人工操作，也可能是人工通过一个定时任务进行定时触发的。</p>
+<h2 id="降级工具"><a href="#降级工具" class="headerlink" title="降级工具"></a>降级工具</h2><p>目前市面上，针对流量控制，限流降级主要有以下两种选择：Netflix Hystrix 和 Alibaba Sentinal。</p>
+<h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><p>Hystrix是一个库，它提供了服务与服务之间的容错功能，主要体现在延迟容错和容错，从而做到控制分布式系统中的联动故障。Hystrix通过隔离服务的访问点，阻止联动故障，并提供故障的解决方案，从而提高了这个分布式系统的弹性。</p>
+<p>Hystrix 的关注点在于以 隔离 和 熔断 为主的容错机制，超时或被熔断的调用将会快速失败，并可以提供 fallback 机制。</p>
+<h3 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h3><p>Sentinel 是阿里中间件团队开源的，面向分布式服务架构的轻量级高可用流量控制组件，主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度来帮助用户保护服务的稳定性。</p>
+<p>Sentinel 的侧重点在于：多样化的流量控制、熔断降级、系统负载保护、实时监控和控制台等</p>
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261607068.png" alt="image-20230526160754915"></p>
+<p>上图是Sentinel的文档中，关于Sentinel-与-Hystrix-的对比。详情地址：<a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel/wiki/Sentinel-%E4%B8%8E-Hystrix-%E7%9A%84%E5%AF%B9%E6%AF%94">https://github.com/alibaba/Sentinel/wiki/Sentinel-与-Hystrix-的对比</a></p>
 
       
     </div>
@@ -976,7 +855,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/String%E3%80%81StringBuilder%E5%92%8CStringBuffer%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E7%86%94%E6%96%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -994,7 +873,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/String%E3%80%81StringBuilder%E5%92%8CStringBuffer%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">String、StringBuilder和StringBuffer的区别</a>
+          <a href="/2023/05/26/%E7%86%94%E6%96%AD/" class="post-title-link" itemprop="url">熔断</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1004,15 +883,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-05-23 10:48:03" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-24 20:55:06" itemprop="dateModified" datetime="2023-05-24T20:55:06+08:00">2023-05-24</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：16:18:10" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1020,7 +893,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+          <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a>
         </span>
     </span>
 
@@ -1031,7 +904,148 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.2k</span>
+      <span>1.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>现在很多网站的背后都是一个庞大的分布式系统，多个系统之间的交互大多数都是采用RPC的方式，但是因为是远程调用，所以被调用者的服务的可用情况其实是不可控的。</p>
+<p>而越是庞大的系统，上下游的调用链就会越长，而如果在一个很长的调用链中，某一个服务由于某种原因导致响应时间很长，或者完全无响应，那么就可能把整个分布式系统都拖垮。</p>
+<p>如果其中某一个服务由于自身原因导致响应很慢，那么就可能导致上游的服务影响也很慢，这样循环往复，就会导致整个系统全线崩溃，这就是<strong>服务雪崩</strong>。</p>
+<p>在服务的依赖调用中，当被调用方出现故障时，出于自我保护的目的，调用方会主动停止调用，并根据业务需要进行相应处理。调用方这种主动停止调用的行为我们称之为熔断。</p>
+<h2 id="为什么需要熔断"><a href="#为什么需要熔断" class="headerlink" title="为什么需要熔断"></a>为什么需要熔断</h2><p>其实，在分布式系统中，为了保证整体服务可用性和一致性，很多系统都会引入重试机制，在有些情况下，重试其实是可以解决问题的，比如网络问题等，都可以通过重试来解决。</p>
+<p>但是，有些情况下，重试并不能解决问题，返回会加剧问题的严重性，比如下游系统因为请求量太大，导致CPU已经被打满，说着数据库连接池被占满，这时候上游系统调不通就会不断进行重试，这种重试请求，对于下游系统来说，无疑是雪上加霜，给下游系统造成二次伤害。</p>
+<p>而分布式系统，大多数的服务雪崩也都是因为不断重试导致的，这种重试有可能是框架级别的自动重试、有可能是代码级别的重试逻辑、还有可能是用户的主动重试。</p>
+<p>有些重试是无法避免的，而且如果因为防止雪崩，就不设计重试机制，也是一种因噎废食。</p>
+<h2 id="熔断器模式"><a href="#熔断器模式" class="headerlink" title="熔断器模式"></a>熔断器模式</h2><p>熔断器模式（Circuit Breaker Pattern），是一个现代软件开发的设计模式。用以侦测错误，并避免不断地触发相同的错误（如维护时服务不可用、暂时性的系统问题或是未知的系统错误）。</p>
+<p>假设有个应用程序每秒会与数据库沟通数百次，此时数据库突然发生了错误，程序员并不会希望在错误时还不断地访问数据库。因此会想办法直接处理这个错误，并进入正常的结束程序。简单来说，</p>
+<p>熔断器会侦测错误并且“预防”应用程序不断地重试调用一个近乎毫无回应的服务（除非该服务已经安全到可重试连线了）。</p>
+<p>熔断器模式是防止微服务系统雪崩的一种重要手段。</p>
+<p>一个比较完善的熔断器，一般包含三种状态：</p>
+<p>●关闭<br>        ○熔断器在默认情况下下是呈现关闭的状态，而熔断器本身带有计数功能，每当错误发生一次，计数器也就会进行“累加”的动作，到了一定的错误发生次数断路器就会被“开启”，这个时候亦会在内部启用一个计时器，一旦时间到了就会切换成半开启的状态。<br>●开启<br>        ○在开启的状态下任何请求都会“直接”被拒绝并且抛出异常讯息。<br>●半开启<br>        ○在此状态下断路器会允许部分的请求，如果这些请求都能成功通过，那么就意味着错误已经不存在，则会被切换回关闭状态并重置计数。倘若请求中有“任一”的错误发生，则会回复到“开启”状态，并且重新计时，给予系统一段休息时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261614631.jpg" alt="img"></p>
+<p>上图是熔断器的三种状态的转换情况。</p>
+<p>如果在微服务系统的调用过程中，引入熔断器，那么整个系统将天然具备以下能力：</p>
+<ul>
+<li>快速失败：当因为调用远程服务失败次数过多，熔断器开启时，上游服务对于下游服务的调用就会快速失败，这样可以避免上游服务被拖垮。</li>
+<li>无缝恢复：因为熔断器可以定期检查下游系统是否恢复，一旦恢复就可以重新回到关闭状态，所有请求便可以正常请求到下游服务。使得系统不需要认为干预。</li>
+</ul>
+<h2 id="熔断工具"><a href="#熔断工具" class="headerlink" title="熔断工具"></a>熔断工具</h2><p>熔断器为了实现快速失败和无缝恢复，就需要进行服务调用次数统计、服务调用切断等操作，如果想要自己实现一个熔断器其实也是可以的。</p>
+<p>但是，市面上有一些框架已经帮我们做了这些事情。如Hystrix和Sentinel、resilience4j等。</p>
+<h3 id="Hystrix"><a href="#Hystrix" class="headerlink" title="Hystrix"></a>Hystrix</h3><p>Hystrix（<a target="_blank" rel="noopener" href="https://github.com/Netflix/Hystrix">https://github.com/Netflix/Hystrix</a> ）是Netflix开源的一款容错系统，能帮助使用者码出具备强大的容错能力和鲁棒性的程序。提供降级，熔断等功能。</p>
+<p>但是，在2018年底，Hystrix在其Github主页宣布，不再开放新功能，推荐开发者使用其他仍然活跃的开源项目。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261615350.jpg" alt="img"></p>
+<p>Hystrix虽然不再开发新功能 ，但对用户的影响应该不会太大，一是因为开发者可以继续使用Hystrix的最新版本1.5.18</p>
+<h3 id="resilience4j"><a href="#resilience4j" class="headerlink" title="resilience4j"></a>resilience4j</h3><p>Hystrix停更之后，Netflix官方推荐使用resilience4j（<a target="_blank" rel="noopener" href="https://github.com/resilience4j/resilience4j">https://github.com/resilience4j/resilience4j</a> ），它是一个轻量、易用、可组装的高可用框架，支持熔断、高频控制、隔离、限流、限时、重试等多种高可用机制。</p>
+<p>与Hystrix相比，它有以下一些主要的区别：</p>
+<ul>
+<li>Hystrix调用必须被封装到HystrixCommand里，而resilience4j以装饰器的方式提供对函数式接口、lambda表达式等的嵌套装饰，因此你可以用简洁的方式组合多种高可用机制</li>
+<li>Hystrix的频次统计采用滑动窗口的方式，而resilience4j采用环状缓冲区的方式</li>
+<li>关于熔断器在半开状态时的状态转换，Hystrix仅使用一次执行判定是否进行状态转换，而resilience4j则采用可配置的执行次数与阈值，来决定是否进行状态转换，这种方式提高了熔断机制的稳定性</li>
+<li>关于隔离机制，Hystrix提供基于线程池和信号量的隔离，而resilience4j只提供基于信号量的隔离</li>
+</ul>
+<h3 id="Sentinel"><a href="#Sentinel" class="headerlink" title="Sentinel"></a>Sentinel</h3><p>Sentinel（<a target="_blank" rel="noopener" href="https://github.com/alibaba/Sentinel">https://github.com/alibaba/Sentinel</a> ）是阿里中间件团队开源的，面向分布式服务架构的轻量级高可用流量控制组件，主要以流量为切入点，从流量控制、熔断降级、系统负载保护等多个维度来帮助用户保护服务的稳定性。</p>
+<p>Hystrix 的关注点在于以隔离和熔断为主的容错机制，超时或被熔断的调用将会快速失败，并可以提供 fallback 机制。</p>
+<p>而 Sentinel 的侧重点在于：</p>
+<ul>
+<li>多样化的流量控制</li>
+<li>熔断降级</li>
+<li>系统负载保护</li>
+<li>实时监控和控制台</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E9%99%90%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/26/%E9%99%90%E6%B5%81/" class="post-title-link" itemprop="url">限流</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：16:31:50" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>1.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1049,64 +1063,32 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>String是不可变的，StringBuilder和StringBuffer是可变的。而StringBuffer是线程安全的，而StringBuilder是非线程安全的。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="String的不可变性"><a href="#String的不可变性" class="headerlink" title="String的不可变性"></a>String的不可变性</h3><p>String在Java中特别常用，相信很多人都看过他的源码，在JDK中，关于String的类声明是这样的：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public final class String</span><br><span class="line"></span><br><span class="line">implements java.io.Serializable, Comparable&lt;String&gt;, CharSequence &#123;</span><br><span class="line">  	private final char value[]；</span><br><span class="line">		private int hash；</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，String类是final类型的，表示这个类不可以被继承。<br>其次，String中存储值的char[]也是被final修饰的，表示他也是不能修改的。<br>所以，String是一个不可变对象。</p>
-<blockquote>
-<p>不可变对象是在完全创建后其内部状态保持不变的对象。这意味着，一旦对象被赋值给变量，我们既不能更新引用，也不能通过任何方式改变内部状态。</p>
-</blockquote>
-<p>可是有人会有疑惑，String为什么不可变，我的代码中经常改变String的值啊，如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;abcd&quot;;</span><br><span class="line">s = s.concat(&quot;ef&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>这样，操作，不就将原本的”abcd”的字符串改变成”abcdef”了么？</p>
-<p>但是，虽然字符串内容看上去从”abcd”变成了”abcdef”，但是实际上，我们得到的已经是一个新的字符串了。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242042723.jpg" alt="img"></p>
-<p>如上图，在堆中重新创建了一个”abcdef”字符串，和”abcd”并不是同一个对象。</p>
-<p>所以，一旦一个string对象在内存(堆)中被创建出来，他就无法被修改。而且，String类的所有方法都没有改变字符串本身的值，都是返回了一个新的对象。</p>
-<p>如果我们想要一个可修改的字符串，可以选择StringBuffer 或者 StringBuilder这两个代替String。</p>
-<h3 id="String的”-”是如何实现的"><a href="#String的”-”是如何实现的" class="headerlink" title="String的”+”是如何实现的"></a>String的”+”是如何实现的</h3><p>使用+拼接字符串，其实只是Java提供的一个语法糖， 那么，我们就来解一解这个语法糖，看看他的内部原理到底是如何实现的。<br>还是这样一段代码。我们把他生成的字节码进行反编译，看看结果。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String wechat = &quot;Hollis&quot;;</span><br><span class="line">String introduce = &quot;Chuang&quot;;</span><br><span class="line">String hollis = wechat + &quot;,&quot; + introduce;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后的内容如下，反编译工具为jad。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String wechat = &quot;Hollis&quot;;</span><br><span class="line">String introduce = &quot;Chuang&quot;;</span><br><span class="line">String hollis = (new StringBuilder()).append(wechat).append(&quot;,&quot;).append(introduce).toString();</span><br></pre></td></tr></table></figure>
-
-<p>通过查看反编译以后的代码，我们可以发现，原来字符串常量在拼接过程中，是将String转成了StringBuilder后，使用其append方法进行处理的。</p>
-<p>那么也就是说，Java中的+对字符串的拼接，其实现原理是使用StringBuilder.append。</p>
-<h3 id="StringBuffer和StringBuilder"><a href="#StringBuffer和StringBuilder" class="headerlink" title="StringBuffer和StringBuilder"></a>StringBuffer和StringBuilder</h3><p>接下来我们看看StringBuffer和StringBuilder的实现原理。</p>
-<p>和String类类似，StringBuilder类也封装了一个字符数组，定义如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">char[] value;</span><br></pre></td></tr></table></figure>
-
-<p>与String不同的是，它并不是final的，所以他是可以修改的。另外，与String不同，字符数组中不一定所有位置都已经被使用，它有一个实例变量，表示数组中已经使用的字符个数，定义如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int count;</span><br></pre></td></tr></table></figure>
-
-<p>其append源码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public StringBuilder append(String str) &#123;</span><br><span class="line">	super.append(str);</span><br><span class="line">	return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>该类继承了<code>AbstractStringBuilder</code>类，看下其<code>append</code>方法：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public AbstractStringBuilder append(String str) &#123;</span><br><span class="line">if (str == null)</span><br><span class="line">	return appendNull();</span><br><span class="line">	int len = str.length();</span><br><span class="line">	ensureCapacityInternal(count + len);</span><br><span class="line">	str.getChars(0, len, value, count);</span><br><span class="line">	count += len;</span><br><span class="line">	return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>append会直接拷贝字符到内部的字符数组中，如果字符数组长度不够，会进行扩展。</p>
-<p>StringBuffer和StringBuilder类似，最大的区别就是StringBuffer是线程安全的，看一下StringBuffer的<code>append</code>方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public synchronized StringBuffer append(String str) &#123;</span><br><span class="line">	toStringCache = null;</span><br><span class="line">	super.append(str);</span><br><span class="line">	return this;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>该方法使用synchronized进行声明，说明是一个线程安全的方法。而StringBuilder则不是线程安全的。</p>
-<h3 id="不要在for循环中使用-拼接字符串"><a href="#不要在for循环中使用-拼接字符串" class="headerlink" title="不要在for循环中使用+拼接字符串"></a>不要在for循环中使用+拼接字符串</h3><p>前面我们分析过，其实使用<code>+</code>拼接字符串的实现原理也是使用的<code>StringBuilder</code>，那为什么不建议大家在for循环中使用呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">long t1 = System.currentTimeMillis();</span><br><span class="line">	String str = &quot;hollis&quot;;</span><br><span class="line">	for (int i = 0; i &lt; 50000; i++) &#123;</span><br><span class="line">	String s = String.valueOf(i);</span><br><span class="line">	str += s;</span><br><span class="line">&#125;</span><br><span class="line">long t2 = System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">System.out.println(&quot;+ cost:&quot; + (t2 - t1));</span><br></pre></td></tr></table></figure>
-
-<p>反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">long t1 = System.currentTimeMillis();</span><br><span class="line">String str = &quot;hollis&quot;;</span><br><span class="line">for(int i = 0; i &amp;lt; 50000; i++)</span><br><span class="line">&#123;</span><br><span class="line">	String s = String.valueOf(i);</span><br><span class="line">	str = (new StringBuilder()).append(str).append(s).toString();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">long t2 = System.currentTimeMillis();</span><br><span class="line">System.out.println((new StringBuilder()).append(&quot;+ cost:&quot;).append(t2 - t1).toString());</span><br></pre></td></tr></table></figure>
-
-
-
-<p>我们可以看到，反编译后的代码，在for循环中，每次都是new了一个StringBuilder，然后再把String转成StringBuilder，再进行append。</p>
-<p>而频繁的新建对象当然要耗费很多时间了，不仅仅会耗费时间，频繁的创建对象，还会造成内存资源的浪费。</p>
-<p>所以，阿里巴巴Java开发手册建议：循环体内，字符串的连接方式，使用 StringBuilder 的 append 方法进行扩展。而不要使用+。</p>
+          <p>限流是一种控制流量的技术，用于保护系统免受突发流量或恶意流量的影响。其基本原理是通过控制请求的速率或数量，确保系统在可承受的范围内运行。</p>
+<p>常见的限流算法有：</p>
+<ol>
+<li><strong>漏桶算法</strong>：系统请求先进入漏桶，再从漏桶中逐一取出请求执行，控制漏桶的流量。</li>
+<li><strong>令牌桶算法</strong>：系统请求会得到一个令牌，从令牌桶中取出一个令牌执行，控制令牌桶中令牌的数量。</li>
+<li><strong>计数器算法</strong>：系统请求被计数，通过比较当前请求数与限流阈值来判断是否限流。</li>
+<li><strong>可以阻塞算法</strong>：当系统达到限流阈值时，不再接受新请求，等到限流阈值降下来再接受请求。</li>
+<li><strong>令牌环算法</strong>：与令牌桶算法类似，但是在多个令牌桶之间形成环形结构，以便在不同的请求处理速率之间进行平衡。</li>
+<li><strong>最小延迟算法</strong>：基于预测每个请求的处理时间，并在处理完请求后进行延迟，以控制请求的速率。</li>
+</ol>
+<p><strong>其中比较常见的就是漏桶和令牌桶，他们之间最大的区别就是应对突发流量的能力</strong>。</p>
+<h2 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h2><p>漏桶算法是一种流量控制算法，可以平滑控制流量的进出，原理比较简单：假设我们有一个水桶按固定的速率向下方滴落一滴水，无论有多少请求，请求的速率有多大，都按照固定的速率流出，对应到系统中就是按照固定的速率处理请求。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261631208.png" alt="image-20230526163124139"></p>
+<p>漏桶算法通过一个固定容量的漏桶来控制请求的处理速率，每个请求被看作是一定数量的水，需要先放到漏桶中。当漏桶满时，请求将被拒绝或延迟处理，从而保证了系统的稳定性。</p>
+<p>漏桶通过定时器的方式将水以恒定的速率流出，与请求的数量无关，从而平滑控制了请求的处理速率。当请求到来时，先将请求看作是一定数量的水，需要将这些水放入漏桶中。</p>
+<p>如果漏桶未满，请求将被立即处理并从漏桶中取出对应数量的水。如果漏桶已满，请求将被拒绝或被延迟处理，直到漏桶中有足够的空间存放请求对应数量的水。</p>
+<p>当定时器触发时，漏桶中的水以恒定的速率流出，此时可以继续处理请求。</p>
+<p>总之，<strong>漏桶算法通过一个固定容量的漏桶来控制请求的处理速率，可以平滑控制流量的进出，保证系统的稳定性和安全性。</strong></p>
+<p>但需要注意的是，<strong>漏桶算法无法处理突发流量</strong>，因为他只能按照固定的速度来处理请求，如果某个请求的流量突增，因为漏桶的机制就导致了他还是只能一个一个的按照固定速度进行消费。</p>
+<p>为了解决这种突发流量的问题，就有了<strong>令牌桶算法</strong>。</p>
+<h2 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h2><p>令牌桶其实和漏桶的原理类似，<strong>令牌桶按固定的速率往桶里放入令牌，并且只要能从桶里取出令牌就能通过。</strong></p>
+<p>也就是说，我不管现在请求量是多还是少，都有一个线程以固定的速率再往桶里放入令牌，而有请求过来的时候，就会去桶里取出令牌，能取到就执行，取不到就拒绝或者阻塞。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261630888.png" alt="image-20230526163050819"></p>
+<p>牌桶通过定时器的方式向桶中添加令牌，每秒钟添加一定数量的令牌，从而平滑控制了请求的处理速率。这样如果突发流量过来了，只要令牌桶中还有足够的令牌，就可以快速的执行，而不是像漏桶一样还要按照固定速率执行。</p>
+<p>令牌桶的好处就是把流量给平滑掉了，在流量不高的时候也会不断的向桶中增加令牌，这样就有足够的令牌可供请求消费。</p>
+<p><strong>在Java中，我们可以借助Guava提供的RateLimiter来实现令牌桶。</strong></p>
 
       
     </div>
@@ -1137,7 +1119,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E9%A2%84%E7%83%AD/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -1155,7 +1137,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/" class="post-title-link" itemprop="url">String为什么设计成不可变的</a>
+          <a href="/2023/05/26/%E9%A2%84%E7%83%AD/" class="post-title-link" itemprop="url">预热</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1165,15 +1147,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2023-05-23 10:48:03" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-24 21:08:55" itemprop="dateModified" datetime="2023-05-24T21:08:55+08:00">2023-05-24</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：16:19:52" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1181,7 +1157,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+          <a href="/categories/%E9%AB%98%E5%B9%B6%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">高并发</span></a>
         </span>
     </span>
 
@@ -1192,292 +1168,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>948</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>为什么要把String设计成不可变的呢？有什么好处呢？</p>
-<p>这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。</p>
-<p>在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:</p>
-<blockquote>
-<p>I would use an immutable whenever I can.</p>
-</blockquote>
-<p>那么，他给出这个答案背后的原因是什么呢？是基于哪些思考的呢？</p>
-<p>其实，主要是从缓存、安全性、线程安全和性能等角度出发的。</p>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>字符串是使用最广泛的数据结构。大量的字符串的创建是非常耗费资源的，所以，Java提供了对字符串的缓存功能，可以大大的节省堆空间。</p>
-<p>JVM中专门开辟了一部分空间来存储Java字符串，那就是字符串池。</p>
-<p>通过字符串池，两个内容相同的字符串变量，可以从池中指向同一个字符串对象，从而节省了关键的内存资源。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;abcd&quot;;</span><br><span class="line">String s2 = s;</span><br></pre></td></tr></table></figure>
-
-<p>对于这个例子，s和s2都表示”abcd”，所以他们会指向字符串池中的同一个字符串对象：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242104703.jpg" alt="img"></p>
-<p>但是，之所以可以这么做，主要是因为字符串的不变性。试想一下，如果字符串是可变的，我们一旦修改了s的内容，那必然导致s2的内容也被动的改变了，这显然不是我们想看到的。</p>
-<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>字符串在Java应用程序中广泛用于存储敏感信息，如用户名、密码、连接url、网络连接等。JVM类加载器在加载类的时也广泛地使用它。</p>
-<p>因此，保护String类对于提升整个应用程序的安全性至关重要。</p>
-<p>当我们在程序中传递一个字符串的时候，如果这个字符串的内容是不可变的，那么我们就可以相信这个字符串中的内容。</p>
-<p>但是，如果是可变的，那么这个字符串内容就可能随时都被修改。那么这个字符串内容就完全不可信了。这样整个系统就没有安全性可言了。</p>
-<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>不可变会自动使字符串成为线程安全的，因为当从多个线程访问它们时，它们不会被更改。</p>
-<p>因此，一般来说，不可变对象可以在同时运行的多个线程之间共享。它们也是线程安全的，因为如果线程更改了值，那么将在字符串池中创建一个新的字符串，而不是修改相同的值。因此，字符串对于多线程来说是安全的。</p>
-<h2 id="hashcode缓存"><a href="#hashcode缓存" class="headerlink" title="hashcode缓存"></a>hashcode缓存</h2><p>由于字符串对象被广泛地用作数据结构，它们也被广泛地用于哈希实现，如HashMap、HashTable、HashSet等。在对这些散列实现进行操作时，经常调用hashCode()方法。</p>
-<p>不可变性保证了字符串的值不会改变。因此，hashCode()方法在String类中被重写，以方便缓存，这样在第一次hashCode()调用期间计算和缓存散列，并从那时起返回相同的值。</p>
-<p>在String类中，有以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private int hash;//this is used to cache hash code.</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>前面提到了的字符串池、hashcode缓存等，都是提升性能的体现。</p>
-<p>因为字符串不可变，所以可以用字符串池缓存，可以大大节省堆内存。而且还可以提前对hashcode进行缓存，更加高效</p>
-<p>由于字符串是应用最广泛的数据结构，提高字符串的性能对提高整个应用程序的总体性能有相当大的影响。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E6%B3%9B%E5%9E%8B%EF%BC%9F%E6%9C%89%E4%BB%80%E4%B9%88%E5%A5%BD%E5%A4%84/" class="post-title-link" itemprop="url">什么是泛型？有什么好处</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-23 10:48:03" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-25 17:42:03" itemprop="dateModified" datetime="2023-05-25T17:42:03+08:00">2023-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>992</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>4 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>Java泛型（generics） 是JDK 5中引入的一个新特性，允许在定义类和接口的时候使用类型参数（type parameter）。声明的类型参数在使用时用具体的类型来替换。泛型最主要的应用是在JDK 5中的新集合类框架中。</p>
-<p>泛型的好处有两个：</p>
-<ol>
-<li><p>方便：可以提高代码的复用性。以List接口为例，我们可以将String、Integer等类型放入List中，如不用泛型，存放String类型要写一个List接口，存放Integer要写另外一个List接口，泛型可以很好的解决这个问题</p>
-</li>
-<li><p>安全：在泛型出之前，通过Object实现的类型转换需要在运行时检查，如果类型转换出错，程序直接GG，可能会带来毁灭性打击。而泛型的作用就是在编译时做类型检查，这无疑增加程序的安全性</p>
-</li>
-</ol>
-<h2 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h2><h3 id="泛型是如何实现的"><a href="#泛型是如何实现的" class="headerlink" title="泛型是如何实现的"></a>泛型是如何实现的</h3><p>Java中的泛型通过<strong>类型擦除</strong>的方式来实现，通俗点理解，就是通过语法糖的形式，在.java-&gt;.class转换的阶段，将List<String>擦除调转为List的手段。换句话说，Java的泛型只在编译期，Jvm是不会感知到泛型的。</p>
-<h3 id="类型擦除的缺点有哪些？"><a href="#类型擦除的缺点有哪些？" class="headerlink" title="类型擦除的缺点有哪些？"></a>类型擦除的缺点有哪些？</h3><ol>
-<li>泛型不可以重载</li>
-<li>泛型异常类不可以多次catch</li>
-<li>泛型类中的静态变量也只有一份，不会有多份</li>
-</ol>
-<h3 id="对通配符的理解"><a href="#对通配符的理解" class="headerlink" title="对通配符的理解"></a>对通配符的理解</h3><p><strong>泛型中上下界限定符extends 和 super有什么区别？</strong></p>
-<? extends T> 表示类型的上界，表示参数化类型的可能是T 或是 T的子类
-<? super T> 表示类型下界（Java Core中叫超类型限定），表示参数化类型是此类型的超类型（父类型），直至Object
-
-在使用 限定通配符的时候，需要遵守PECS原则，即Producer Extends, Consumer Super；上界生产，下界消费
-如果要从集合中读取类型T的数据，并且不能写入，可以使用 ? extends 通配符；(Producer Extends)
-如果要从集合中写入类型T的数据，并且不需要读取，可以使用 ? super 通配符；(Consumer Super)
-
-如果既要存又要取，那么就不要使用任何通配符。
-
-
-
-### List<?><p>, List<Object>, List之间的区别</p>
-<ol>
-<li><p>List<?> 是一个未知类型的List，而List<Object> 其实是任意类型的List。可以把List<String>, List<Integer>赋值给List<?>，却不能把List<String>赋值给 List<Object></p>
-</li>
-<li><p>可以把任何带参数的类型传递给原始类型List，但却不能把List<String>赋值给List<Object>，因为会产生编译错误（不支持协变）</p>
-</li>
-</ol>
-<h3 id="在泛型为Integer的ArrayList中存放一个String类型的对象"><a href="#在泛型为Integer的ArrayList中存放一个String类型的对象" class="headerlink" title="在泛型为Integer的ArrayList中存放一个String类型的对象"></a>在泛型为Integer的ArrayList中存放一个String类型的对象</h3><p>通过反射可以实现：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public void test() throws Exception &#123;</span><br><span class="line">    ArrayList&lt;Integer&gt; list = new ArrayList&lt;Integer&gt;();</span><br><span class="line">    Method method = list.getClass().getMethod(&quot;add&quot;, Object.class);</span><br><span class="line">    method.invoke(list, &quot;Java反射机制实例&quot;);</span><br><span class="line">    System.out.println(list.get(0));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="对数组协变和泛型非协变的理解"><a href="#对数组协变和泛型非协变的理解" class="headerlink" title="对数组协变和泛型非协变的理解"></a>对数组协变和泛型非协变的理解</h3><p>所谓协变，可以简单理解为因为Object是String的父类，所以Object[]同样是String[]的父类，这种情况Java是允许的；但是对于泛型来说，List<Object>和List<String>半毛钱关系都没有</p>
-<p>为什么要这样设计呢，如果泛型允许协变，考虑如下例子：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Object&gt; a = new List&lt;String&gt;();</span><br><span class="line">a.add(1); // 允许协变，可以装进来</span><br><span class="line">String s = a.get(0); // 运行时异常，get失败，对于客户端来说是致命的</span><br></pre></td></tr></table></figure>
-
-<p>但是，为什么泛型不允许协变，而数组允许协变呢？原因有二：</p>
-<ol>
-<li><p>因为数组设计之初没有泛型，为了兼容考虑，如Arrays.equals(Object[], Object[])方法，是时代无奈的产物</p>
-</li>
-<li><p>数组也属于对象，它记录了引用实际的类型，在放入数组的时候，如果类型不一样就会报错，而不是等到拿出来的时候才发现问题，相对来说安全一点</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/" class="post-title-link" itemprop="url">什么是类型擦除</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-23 10:48:03" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-25 17:39:32" itemprop="dateModified" datetime="2023-05-25T17:39:32+08:00">2023-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>577</span>
+      <span>633</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1495,24 +1186,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>类型擦除是Java在处理泛型的一种方式，如Java的编译器在编译以下代码时：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Foo&lt;T&gt; &#123;</span><br><span class="line">    T bar;</span><br><span class="line">    void doSth(T param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo&lt;String&gt; f1;</span><br><span class="line">Foo&lt;Integer&gt; f2;</span><br></pre></td></tr></table></figure>
-
-<p>在编译后的字节码文件中，会把泛型的信息擦除掉：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class Foo &#123;</span><br><span class="line">    Object bar;</span><br><span class="line">    void doSth(Object param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>也就是说，在代码中的Foo 和 Foo使用的类，经过编译后都是同一个类。</p>
-<p>所以说泛型技术实际上是Java语言的一颗语法糖，因为泛型经过编译器处理之后就被擦除了，编译器根本不认识泛型。</p>
-<p>这种擦除的过程，被称之为——类型擦除。所以类型擦除指的是通过类型参数合并，将泛型类型实例关联到同一份字节码上。编译器只为泛型类型生成一份字节码，并将其实例关联到这份字节码上。类型擦除的关键在于从泛型类型中清除类型参数的相关信息，并且再必要的时候添加类型检查和类型转换的方法。</p>
-<p><strong>类型擦除可以简单的理解为将泛型java代码转换为普通java代码，只不过编译器更直接点，将泛型java代码直接转换成普通java字节码</strong>。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="C语言对泛型的支持"><a href="#C语言对泛型的支持" class="headerlink" title="C语言对泛型的支持"></a>C语言对泛型的支持</h3><p>泛型是一种编程范式，在不同的语言和编译器中的实现和支持方式都不一样。</p>
-<p>通常情况下，一个编译器处理泛型有多种方式，在C++中，当编译器对以下代码编译时：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">template&lt;typename T&gt;</span><br><span class="line">struct Foo</span><br><span class="line">&#123;</span><br><span class="line">    T bar;</span><br><span class="line">    void doSth(T param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Foo&lt;int&gt; f1;</span><br><span class="line">Foo&lt;float&gt; f2;</span><br></pre></td></tr></table></figure>
-
-<p>当编译器对其进行编译时，编译器发现要用到Foo和Foo，这时候就会为每一个泛型类新生成一份执行代码。相当于新创建了如下两个类：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">struct FooInt</span><br><span class="line">&#123;</span><br><span class="line">    int bar;</span><br><span class="line">    void doSth(int param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">struct FooFloat</span><br><span class="line">&#123;</span><br><span class="line">    float bar;</span><br><span class="line">    void doSth(float param) &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>这种做法，用起来的时候很方便，只需要根据具体类型找到具体的的类和方法就行了。但是问题是，当我们多次使用不同类型的模板时，就会创建出来的很多新的类，就会导致代码膨胀。</p>
+          <p>预热一般指<strong>缓存预热</strong>，一般用在高并发系统中，为了提升系统在高并发情况下的稳定性的一种手段。</p>
+<p>缓存预热是指在系统启动之前或系统达到高峰期之前，通过预先将常用数据加载到缓存中，<strong>以提高缓存命中率和系统性能的过程</strong>。缓存预热的目的是<strong>尽可能地避免缓存穿透和缓存雪崩</strong>，还可以减轻后端存储系统的负载，提高系统的响应速度和吞吐量。</p>
+<p>比如秒杀商品、大促活动等，这些是可以提前预知哪些key会变成热key的，所以就可以做提前的预热。</p>
+<p>缓存预热的一般做法是在系统启动或系统空闲期间，将常用的数据加载到缓存中，主要做法有以下几种：</p>
+<p>1系统启动时加载：在系统启动时，将常用的数据加载到缓存中，以便后续的访问可以直接从缓存中获取。</p>
+<p>2定时任务加载：定时执行任务，将常用的数据加载到缓存中，以保持缓存中数据的实时性和准确性。</p>
+<p>3手动触发加载：在系统达到高峰期之前，手动触发加载常用数据到缓存中，以提高缓存命中率和系统性能。</p>
+<p>缓存预热是一种提高高并发系统性能和可靠性的重要方法，通过预先将常用的数据加载到缓存中，避免缓存穿透和缓存雪崩等问题，从而保证系统的稳定性和可靠性。</p>
+<p><strong>缓存预热的方法</strong></p>
+<p>在进行缓存预热时，有一些工具可供使用。常见的是以下这几个：</p>
+<p>RedisBloom：RedisBloom是Redis的一个模块，提供了多个数据结构，包括布隆过滤器、计数器、和TopK数据结构等。其中，布隆过滤器可以用于Redis缓存预热，通过将预热数据添加到布隆过滤器中，可以快速判断一个键是否存在于缓存中。（<a target="_blank" rel="noopener" href="https://oss.redislabs.com/redisbloom/%EF%BC%89">https://oss.redislabs.com/redisbloom/）</a></p>
+<p>Redis Bulk loading：这是一个官方出的，基于Redis协议批量写入数据的工具（<a target="_blank" rel="noopener" href="https://redis.io/docs/manual/patterns/bulk-loading/%EF%BC%89">https://redis.io/docs/manual/patterns/bulk-loading/）</a></p>
+<p>Redis Desktop Manager：Redis Desktop Manager是一个图形化的Redis客户端，可以用于管理Redis数据库和进行缓存预热。通过Redis Desktop Manager，可以轻松地将预热数据批量导入到Redis缓存中。</p>
 
       
     </div>
@@ -1543,7 +1229,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -1561,7 +1247,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">日志文件</a>
+          <a href="/2023/05/26/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">领域驱动设计</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1573,7 +1259,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-23 10:48:03 / 修改时间：15:31:06" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：11:43:55" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1581,7 +1267,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/mysql/" itemprop="url" rel="index"><span itemprop="name">mysql</span></a>
+          <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
         </span>
     </span>
 
@@ -1592,14 +1278,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>344</span>
+      <span>829</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
@@ -1610,15 +1296,146 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>领域驱动设计（Domain-Driven Design，DDD）是一种<strong>软件开发方法论</strong>，强调将业务领域作为软件设计的核心，以便更好地满足业务需求。</p>
+<p><strong>DDD认为，软件开发的核心是理解业务，而不是实现技术。</strong>在DDD中，软件开发人员应该与业务人员密切合作，了解业务需求，理解业务模型。通过抽象出业务领域模型、领域服务和领域事件等概念，将业务模型映射到软件系统中，以实现更好的业务价值。</p>
+<p><strong>在不使用DDD的软件开发过程中，来了一个需求，开发会首先考虑如何设计表结构，然后再根据表结构设计实体类以及对应的Service服务。但是在DDD中，提倡通过领域驱动设计，要先进行领域建模，最后在考虑持久化存储。</strong></p>
+<p>具体而言，DDD的主要思想包括：</p>
+<ul>
+<li><p>领域建模：领域建模是DDD的核心概念，其目的是将业务领域抽象出来，通过对领域对象、领域服务、领域事件等概念的定义，实现业务需求。</p>
+</li>
+<li><p>领域驱动架构：DDD中有一套自己的架构分层，将应用程序划分为四个层次，包括应用层、领域层、基础设施层和用户接口层，以实现业务领域的清晰分离。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261056343.png" alt="image.png"></p>
+</li>
+<li><p>领域事件驱动：领域事件是领域模型中的一种交互机制，可以用于在模块之间传递信息，实现领域模型的解耦。领域事件驱动是一种基于领域事件的系统架构风格，通过领域事件的发布和订阅机制，来实现系统的解耦。</p>
+</li>
+</ul>
+<h2 id="DDD带来的好处"><a href="#DDD带来的好处" class="headerlink" title="DDD带来的好处"></a>DDD带来的好处</h2><p>DDD强调业务领域的概念，术语和关系。通过深入了解业务领域，<strong>开发人员可以更好地理解和反映业务需求，从而开发出更符合业务需求的软件系统</strong>。能够更好的理解业务领域。</p>
+<p>DDD鼓励将软件系统划分为可重用的模块，这些模块基于业务领域的概念和语言进行组织。这样可以使代码更加模块化，<strong>易于维护和重构，并且可以更好地支持业务需求的变化。</strong></p>
+<p><strong>DDD倡导业务人员，开发人员和其他技术人员之间的紧密协作。</strong>通过这种协作，业务需求可以更好地传达给开发团队，同时开发人员也可以向业务人员解释他们正在开发的软件系统的工作方式。</p>
+<h2 id="DDD的不足"><a href="#DDD的不足" class="headerlink" title="DDD的不足"></a>DDD的不足</h2><p><strong>DDD是一种复杂的方法论，需要较长的学习曲线来理解和应用</strong>。因此，它可能不适合所有的开发团队。</p>
+<p>由于DDD需要更深入的业务领域知识和更好的模块化，因此它可能<strong>需要更多的开发成本</strong>。这可能会使它不适合一些较小的项目或团队。</p>
+<p>虽然DDD可以在许多项目中得到应用，但并不是所有项目都适合使用DDD。因此，在应用DDD之前，需要评估项目的需求和适用性</p>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Java中创建对象有哪些种方式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：19:00:07" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>572</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
+<p>User user &#x3D; new User();</p>
+<h3 id="使用反射机制"><a href="#使用反射机制" class="headerlink" title="使用反射机制"></a>使用反射机制</h3><p>运用反射手段，调用Java.lang.Class或者java.lang.reflect.Constructor类的newInstance()实例方法。</p>
+<p>1 使用Class类的newInstance方法</p>
+<p>可以使用Class类的newInstance方法创建对象。这个newInstance方法调用无参的构造函数创建对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = (User)Class.forName(&quot;xxx.xxx.User&quot;).newInstance(); </span><br><span class="line">User user = User.class.newInstance();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2 使用Constructor类的newInstance方法</p>
+<p>和Class类的newInstance方法很像， java.lang.reflect.Constructor类里也有一个newInstance方法可以创建对象。我们可以通过这个newInstance方法调用有参数的和私有的构造函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor  constructor = User.class.getConstructor();</span><br><span class="line">User user = constructor.newInstance();</span><br></pre></td></tr></table></figure>
+
+<p>这两种newInstance方法就是大家所说的反射。事实上Class的newInstance方法内部调用Constructor的newInstance方法。</p>
+<h3 id="使用clone方法"><a href="#使用clone方法" class="headerlink" title="使用clone方法"></a>使用clone方法</h3><p>无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。 </p>
+<p>要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。如果只实现了Cloneable接口，并没有重写clone方法的话，会默认使用Object类中的clone方法，这是一个native的方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class CloneTest implements Cloneable&#123;</span><br><span class="line">    private String name; </span><br><span class="line">    private int age; </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">    	this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">    	return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">    	this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public CloneTest(String name, int age) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            CloneTest cloneTest = new CloneTest(&quot;wangql&quot;,18);</span><br><span class="line">            CloneTest copyClone = (CloneTest) cloneTest.clone();</span><br><span class="line">            System.out.println(&quot;newclone:&quot;+cloneTest.getName());</span><br><span class="line">            System.out.println(&quot;copyClone:&quot;+copyClone.getName());</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">        	e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h3><p>当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。其实反序列化也是基于反射实现的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //Initializes The Object</span><br><span class="line">    User1 user = new User1();</span><br><span class="line">    user.setName(&quot;hollis&quot;);</span><br><span class="line">    user.setAge(23);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    //Write Obj to File</span><br><span class="line">    ObjectOutputStream oos = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(oos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //Read Obj from File</span><br><span class="line">    File file = new File(&quot;tempFile&quot;);</span><br><span class="line">    ObjectInputStream ois = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        User1 newUser = (User1) ois.readObject();</span><br><span class="line">        System.out.println(newUser);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(ois);</span><br><span class="line">        try &#123;</span><br><span class="line">            FileUtils.forceDelete(file);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
       
     </div>
 
@@ -1641,7 +1458,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1666,14 +1483,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">39k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:27</span>
+    <span title="站点阅读时长">2:23</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -1739,10 +1556,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
-
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"xmwh171","repo":"comment","client_id":"ba5f250b57416ca5966e","client_secret":"48c1b5e88e4c37bccc0f64cd132944419664d3a6","admin_user":null,"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"c853ec00cc9d13bc22336b7d45d1416e"}</script>
-<script src="/js/third-party/comments/gitalk.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":350},"mobile":{"show":false},"log":false});</script></body>
 </html>

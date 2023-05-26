@@ -158,13 +158,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -460,6 +460,372 @@
 <li>确保领域模型和业务需求的一致性。例如，修改商品价格时，需要同步更新所有已经下单但未支付的订单的金额。</li>
 <li>实时更新领域模型，以应对业务需求的变化。例如，新增促销活动时，需要修改商品领域模型，增加促销价格属性。）</li>
 </ul>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/QPS%E3%80%81TPS%E4%B8%8ERT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/26/QPS%E3%80%81TPS%E4%B8%8ERT/" class="post-title-link" itemprop="url">QPS、TPS与RT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:42:31" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">高性能</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="RT"><a href="#RT" class="headerlink" title="RT"></a>RT</h2><p>响应时间(Response Time)，是指从客户端发一个请求开始计时，到客户端接收到从服务器端返回的响应结果结束所经历的时间。</p>
+<p>当我们评价一个网站的”快”和”慢”的时候，其实说的就是他的RT时间的长和短。当我们访问某个网站，有时候我们会说这个网站很”卡”，其实言下之意说的就是这个网站的RT很长。</p>
+<p>如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需要重点优化的。</p>
+<p>拿一个游乐园的例子来说明一下可能会比较容易理解，比如我们去迪士尼乐园游玩时候，大多数的项目都是需要排队的。</p>
+<p>为了让游客知道一个项目需要排队多久才能玩上，迪士尼做了很多事情，比如他们有一个App，专门可以提示每个项目的预计排队时间。再有就是每个项目的排队处都有一个小牌牌，上面写着预计排队时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261514980.jpg" alt="img"></p>
+<p>但是，这个时间并不是凭空设定出来的，而是『计算』出来的。</p>
+<p>迪士尼的排队时间计算方法：</p>
+<p>1、迪士尼在每个项目的入口处和出口处都会设置工作人员。 2、入口处工作人员随机寻找游客，给游客一张小纸条，上面记录着游客开始排队的时间。 3、入口处工作人员提醒游客，项目游览玩之后，在出口处把小纸条交还给出口处的工作人员。 4、出口处工作人员在收到游客的小纸条后，会用：当前时间-游客开始排队的时间 &#x3D; 排队时长。 5、为了尽量让数据准确，一般会收集多个排队时长之后，计算一个平均值。</p>
+<p>以上就是迪士尼的排队时间计算法。其实，这也是RT的计算方法。在一个请求开始的时候记录时间，请求结束的时候再记录时间，两个时间的差值，就是RT了。</p>
+<p>如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需要重点优化的。</p>
+<p>服务器响应时间也有多部分组成，一般包含：请求发送时间、网络传输时间和服务器处理时间等三部分。</p>
+<h2 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h2><p>QPS，指的是系统每秒能处理的请求数(Query Per Second) ，在Web应用中我们更关注的是Web应用每秒能处理的request数量。这个是衡量系统性能的重要指标。有时候，我们也称之为<strong>吞吐量</strong>。</p>
+<p>QPS和RT几乎总是成对出现的。当我们评价迪士尼的一个项目的好坏的时候，通常会包含这几个指标：是否好玩、游玩时长以及可以同时容纳多少人。</p>
+<p>这个可以同时容纳多少人，就可以简单的理解为QPS。很大程度上，一个项目同时可以容纳多少人，其实会大大的影响游客的游玩时长。</p>
+<p>所以，QPS和RT之间是有着一定的关系的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RT=并发数/QPS</span><br><span class="line">QPS=并发数/RT</span><br></pre></td></tr></table></figure>
+
+<p>虽然上面的等式看上去，在并发数一定的情况下，想要提升QPS的话就只能降低RT。但其实并不是，以上只是QPS的计算方法。想要提升QPS往往有很多手段。</p>
+<p>就像想要提升游乐设施的吞吐量，最首先想到的办法就是升级设备，比如增加游乐场地的面积，增加设备的座位数目，增加排队的队伍个数等。</p>
+<p>在计算机系统中，想要提升QPS，主要可以在CPU、内存等硬件上面下功夫，比如提升CPU利用率、增加CPU数目、提升内存等。</p>
+<h2 id="TPS"><a href="#TPS" class="headerlink" title="TPS"></a>TPS</h2><p>TPS：是Transactions Per Second的缩写，也就是事务数&#x2F;秒。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数。</p>
+<p>一次事务包含了以下三个过程：</p>
+<p>1）用户请求服务器<br>2）服务器自己的内部处理<br>3）服务器返回给用户</p>
+<p>所以，TPS包含的时长就是三个过程的总和。</p>
+<h2 id="并发用户数"><a href="#并发用户数" class="headerlink" title="并发用户数"></a>并发用户数</h2><p>并发用户数指的就是同时跑到一个项目前面排队的人数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515576.jpg" alt="img"></p>
+<p>关于并发用户数有两种常见的错误观点。</p>
+<p>一种错误观点是把并发用户数量理解为使用系统的全部用户的数量；（比如迪士尼的飞跃地平线项目一天可能会接纳50万人，我们不能说这个50万就是并发用户数）</p>
+<p>还有一种错误观点是把用户在线数量理解为并发用户数量。（比如晚上六点的时候，迪士尼的飞跃地平线项目排队加观看人数共有1万人，我们不能说这个1万就是并发用户数）</p>
+<p>并发用户数量的正确理解为：在<strong>同一时刻</strong>与服务器<strong>进行了交互</strong>的<strong>在线用户数量</strong>。（我们说，晚上六点的时候，共有8000人正在和正在排队使用飞跃地平线这个项目。这才是并发用户数）</p>
+<p>拿系统来说，我们说淘宝详情页的并发用户数，其实说的是同一时刻请求查看详情页的用户个数。有些用户虽然也在浏览详情页，但是它并没有在并发时刻和系统有交互，这就不算的。</p>
+<h2 id="最佳线程数"><a href="#最佳线程数" class="headerlink" title="最佳线程数"></a>最佳线程数</h2><p>最佳线程数指的就是一个项目最多可以容纳的人数，这里的容纳可以包含排队的人数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515366.jpg" alt="img"></p>
+<p>迪士尼每新开一个场馆或者一个游戏项目的时候，都会是一个试运营的阶段。在试运营阶段，通过不断调整并发用户数来观察整个场馆或者项目的运行情况。</p>
+<p>除了上线新场馆和新项目以外，有的是在节假日之前也会有一些类似的实验。</p>
+<p>这和计算机软件的压测很像。就是不断的提高请求数目，来观察系统的QPS和系统的其他指标，如CPU情况、内存情况等。</p>
+<p>性能压测的情况下，起初随着用户数的增加，QPS会上升并对CPU等影响不大，当到了一定的阀值之后，用户数量增加QPS并不会增加，或者增加不明显，同时CPU Load有飙高、内存占用大等情况发生。随之而来的伴随着请求的响应时间大幅增加。这个阀值我们认为是最佳线程数。</p>
+<p>如果并发请求数目，超过了系统的最佳线程数，那么就会导致激烈的资源竞争，随着资源的匮乏甚至枯竭，整个系统也就面临着灾难。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>QPS (Queries Per Second)：是指在一秒钟内完成的查询次数。通常用于衡量系统性能。</li>
+<li>TPS (Transactions Per Second)：是指在一秒钟内完成的事务处理次数，一个事务可以包含一个或多个查询操作。相对于QPS更强调业务处理，如交易系统等。</li>
+<li>RT (Response Time)：是指从发送请求到收到响应的时间。通常用于衡量系统响应速度和用户体验。</li>
+</ul>
+<p>总之，QPS和TPS主要是用来衡量系统的处理能力，而RT则更加关注系统的响应速度和用户体验。</p>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/SLA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/26/SLA/" class="post-title-link" itemprop="url">SLA</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:44:47" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E5%8F%AF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">高可用</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>825</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>SLA是Service Level Agreement的缩写，意为服务等级协议。它是指供应商和客户之间达成的一份正式协议，规定了供应商应该向客户提供的服务水平、质量、可靠性和响应时间等指标。</p>
+<p>SLA通常会涉及到各种服务指标，例如<strong>服务可用性</strong>、服务等待时间、故障修复时间、数据保密性、客户支持等，旨在确保供应商向客户提供高质量、高可靠性、高安全性的服务。</p>
+<p>SLA通常用于云计算、SaaS、PaaS等服务领域，对于企业用户和服务提供商之间的合作非常重要。通过制定合适的SLA，双方可以达成共识，从而更好地维护业务合作关系。</p>
+<p>一般作为甲方在采购乙方的服务的时候，乙方都会提供一些SLA指标，这些指标包括但不限于以下几个方面：</p>
+<ol>
+<li><p><strong>可用性</strong>：指服务在一定时间范围内能够正常使用的时间比例，通常以百分比表示。例如，“四个九”（99.99%）可用性要求表示一年内服务最多只能停机不超过52.56分钟。</p>
+</li>
+<li><p>响应时间：指服务响应请求的时间，通常以毫秒或秒为单位表示。例如，网络服务的响应时间可要求在100毫秒以内。</p>
+</li>
+<li><p><strong>吞吐量</strong>：指系统在单位时间内能够处理的请求量，通常以每秒钟处理的请求量（QPS）或每分钟处理的请求量（RPM）为单位。</p>
+</li>
+<li><p>故障处理时间：指故障发生后系统能够恢复正常运行的时间，通常以分钟或小时为单位。例如，“四个九”（99.99%）可用性要求通常要求故障处理时间在5分钟以内。</p>
+</li>
+<li><p><strong>数据可靠性</strong>：指系统能够保证数据的完整性、一致性、可用性和安全性。例如，在数据库系统中，可要求采用主从同步、备份等技术手段来保证数据的可靠性。</p>
+</li>
+<li><p><strong>服务支持</strong>：指服务提供商提供的技术支持、客户服务等方面的指标。例如，在运营云服务时，可要求服务提供商提供24小时客户服务、及时响应客户请求等。</p>
+</li>
+<li><p><strong>其他指标</strong>：根据具体业务需求和服务类型，还可以定义其他指标，如安全性、可扩展性、性能等。</p>
+<p>SLA的指标需要根据业务需求、技术能力和市场标准等因素来进行制定，同时要具备可量化和可监控的特性，以确保双方都能够达成共识并得到有效执行。</p>
+</li>
+</ol>
+<h3 id="4个9、5个9"><a href="#4个9、5个9" class="headerlink" title="4个9、5个9"></a>4个9、5个9</h3><p>SLA 4个9指的是服务的可用性要求，也被称为“四个九”，通常表示服务的可用性达到99.99%。</p>
+<p>具体地说，四个九表示在一年的时间内，服务最多只能停机不超过52.56分钟（365<em>24</em>60*(1-0.9999)）。这意味着服务需要保持高可用性，并且具备足够的弹性和韧性，以应对突发的故障和异常情况。</p>
+<p>同理，3个9、5个9等也是类似的算法。</p>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%BC%82%E5%9C%B0%E5%A4%9A%E6%B4%BB/" class="post-title-link" itemprop="url">什么是异地多活</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:51:11" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E5%8F%AF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">高可用</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>646</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>异地多活是一种分布式系统架构模式</strong>，可以让多个数据中心在不同地理位置提供相同的服务，并且能够实现数据的实时同步和故障切换。通常用于需要在全球范围内提供高可用性和低延迟的应用程序，例如在线游戏、社交媒体、金融交易等。</p>
+<p><strong>在异地多活架构中，多个数据中心之间通过高速网络连接进行数据同步和负载均衡。每个数据中心都具有完整的应用程序和数据副本，可以同时提供服务并处理客户端请求。当一个数据中心发生故障时，可以通过自动切换和故障转移机制将流量转移到其他健康的数据中心，从而保证系统的可用性和可靠性。</strong></p>
+<p>异地多活架构需要考虑多个因素，例如数据同步和冲突解决、负载均衡和故障切换、安全性和隐私保护等。通常需要采用分布式数据库、消息队列、负载均衡器、DNS解析等技术来支持异地多活架构。</p>
+<h2 id="同城容灾"><a href="#同城容灾" class="headerlink" title="同城容灾"></a>同城容灾</h2><p>同城容灾和异地多活一样，也是一种分布式系统架构模式，可以在同一城市或地理区域内提供高可用性和容灾能力。它通过将不同的服务器和存储设备组合在一起，构建出一个分布式系统，可以实现数据的实时同步和故障切换。</p>
+<p>在同城容灾架构中，多个数据中心之间通过高速网络连接进行数据同步和负载均衡。每个数据中心都具有完整的应用程序和数据副本，可以同时提供服务并处理客户端请求。当一个数据中心发生故障时，可以通过自动切换和故障转移机制将流量转移到其他健康的数据中心，从而保证系统的可用性和可靠性。</p>
+<p><strong>同城容灾架构相比于异地多活架构来说，更加适用于数据中心距离较近的情况。它可以通过使用复制、镜像和数据同步等技术来实现数据的备份和容灾，从而提高系统的可用性和可靠性。同时，同城容灾架构还可以提供低延迟和高带宽的网络连接，以支持高吞吐量的应用程序。</strong></p>
 
       
     </div>
@@ -852,7 +1218,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E5%86%B7%E5%A4%87%E3%80%81%E7%83%AD%E5%A4%87%EF%BC%8C%E6%9A%96%E5%A4%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -870,7 +1236,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/26/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/" class="post-title-link" itemprop="url">领域驱动设计</a>
+          <a href="/2023/05/26/%E5%86%B7%E5%A4%87%E3%80%81%E7%83%AD%E5%A4%87%EF%BC%8C%E6%9A%96%E5%A4%87/" class="post-title-link" itemprop="url">冷备、热备，暖备</a>
         </h2>
 
         <div class="post-meta-container">
@@ -882,7 +1248,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：11:43:55" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:47:10" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -890,7 +1256,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
+          <a href="/categories/%E9%AB%98%E5%8F%AF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">高可用</span></a>
         </span>
     </span>
 
@@ -901,123 +1267,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>829</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>领域驱动设计（Domain-Driven Design，DDD）是一种<strong>软件开发方法论</strong>，强调将业务领域作为软件设计的核心，以便更好地满足业务需求。</p>
-<p><strong>DDD认为，软件开发的核心是理解业务，而不是实现技术。</strong>在DDD中，软件开发人员应该与业务人员密切合作，了解业务需求，理解业务模型。通过抽象出业务领域模型、领域服务和领域事件等概念，将业务模型映射到软件系统中，以实现更好的业务价值。</p>
-<p><strong>在不使用DDD的软件开发过程中，来了一个需求，开发会首先考虑如何设计表结构，然后再根据表结构设计实体类以及对应的Service服务。但是在DDD中，提倡通过领域驱动设计，要先进行领域建模，最后在考虑持久化存储。</strong></p>
-<p>具体而言，DDD的主要思想包括：</p>
-<ul>
-<li><p>领域建模：领域建模是DDD的核心概念，其目的是将业务领域抽象出来，通过对领域对象、领域服务、领域事件等概念的定义，实现业务需求。</p>
-</li>
-<li><p>领域驱动架构：DDD中有一套自己的架构分层，将应用程序划分为四个层次，包括应用层、领域层、基础设施层和用户接口层，以实现业务领域的清晰分离。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261056343.png" alt="image.png"></p>
-</li>
-<li><p>领域事件驱动：领域事件是领域模型中的一种交互机制，可以用于在模块之间传递信息，实现领域模型的解耦。领域事件驱动是一种基于领域事件的系统架构风格，通过领域事件的发布和订阅机制，来实现系统的解耦。</p>
-</li>
-</ul>
-<h2 id="DDD带来的好处"><a href="#DDD带来的好处" class="headerlink" title="DDD带来的好处"></a>DDD带来的好处</h2><p>DDD强调业务领域的概念，术语和关系。通过深入了解业务领域，<strong>开发人员可以更好地理解和反映业务需求，从而开发出更符合业务需求的软件系统</strong>。能够更好的理解业务领域。</p>
-<p>DDD鼓励将软件系统划分为可重用的模块，这些模块基于业务领域的概念和语言进行组织。这样可以使代码更加模块化，<strong>易于维护和重构，并且可以更好地支持业务需求的变化。</strong></p>
-<p><strong>DDD倡导业务人员，开发人员和其他技术人员之间的紧密协作。</strong>通过这种协作，业务需求可以更好地传达给开发团队，同时开发人员也可以向业务人员解释他们正在开发的软件系统的工作方式。</p>
-<h2 id="DDD的不足"><a href="#DDD的不足" class="headerlink" title="DDD的不足"></a>DDD的不足</h2><p><strong>DDD是一种复杂的方法论，需要较长的学习曲线来理解和应用</strong>。因此，它可能不适合所有的开发团队。</p>
-<p>由于DDD需要更深入的业务领域知识和更好的模块化，因此它可能<strong>需要更多的开发成本</strong>。这可能会使它不适合一些较小的项目或团队。</p>
-<p>虽然DDD可以在许多项目中得到应用，但并不是所有项目都适合使用DDD。因此，在应用DDD之前，需要评估项目的需求和适用性</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Java中创建对象有哪些种方式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：19:00:07" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>572</span>
+      <span>462</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1035,29 +1285,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
-<p>User user &#x3D; new User();</p>
-<h3 id="使用反射机制"><a href="#使用反射机制" class="headerlink" title="使用反射机制"></a>使用反射机制</h3><p>运用反射手段，调用Java.lang.Class或者java.lang.reflect.Constructor类的newInstance()实例方法。</p>
-<p>1 使用Class类的newInstance方法</p>
-<p>可以使用Class类的newInstance方法创建对象。这个newInstance方法调用无参的构造函数创建对象。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = (User)Class.forName(&quot;xxx.xxx.User&quot;).newInstance(); </span><br><span class="line">User user = User.class.newInstance();</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2 使用Constructor类的newInstance方法</p>
-<p>和Class类的newInstance方法很像， java.lang.reflect.Constructor类里也有一个newInstance方法可以创建对象。我们可以通过这个newInstance方法调用有参数的和私有的构造函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor  constructor = User.class.getConstructor();</span><br><span class="line">User user = constructor.newInstance();</span><br></pre></td></tr></table></figure>
-
-<p>这两种newInstance方法就是大家所说的反射。事实上Class的newInstance方法内部调用Constructor的newInstance方法。</p>
-<h3 id="使用clone方法"><a href="#使用clone方法" class="headerlink" title="使用clone方法"></a>使用clone方法</h3><p>无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。 </p>
-<p>要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。如果只实现了Cloneable接口，并没有重写clone方法的话，会默认使用Object类中的clone方法，这是一个native的方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class CloneTest implements Cloneable&#123;</span><br><span class="line">    private String name; </span><br><span class="line">    private int age; </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">    	this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">    	return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">    	this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public CloneTest(String name, int age) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            CloneTest cloneTest = new CloneTest(&quot;wangql&quot;,18);</span><br><span class="line">            CloneTest copyClone = (CloneTest) cloneTest.clone();</span><br><span class="line">            System.out.println(&quot;newclone:&quot;+cloneTest.getName());</span><br><span class="line">            System.out.println(&quot;copyClone:&quot;+copyClone.getName());</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">        	e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h3><p>当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。其实反序列化也是基于反射实现的。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //Initializes The Object</span><br><span class="line">    User1 user = new User1();</span><br><span class="line">    user.setName(&quot;hollis&quot;);</span><br><span class="line">    user.setAge(23);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    //Write Obj to File</span><br><span class="line">    ObjectOutputStream oos = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(oos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //Read Obj from File</span><br><span class="line">    File file = new File(&quot;tempFile&quot;);</span><br><span class="line">    ObjectInputStream ois = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        User1 newUser = (User1) ois.readObject();</span><br><span class="line">        System.out.println(newUser);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(ois);</span><br><span class="line">        try &#123;</span><br><span class="line">            FileUtils.forceDelete(file);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+          <p>冷备、热备和暖备是备份和恢复方案中常见的术语，它们表示备份和恢复方案的不同类型和不同级别。</p>
+<ol>
+<li><strong>冷备（Cold Backup）</strong>：冷备是指在<strong>关闭</strong>系统或服务后，将数据备份到<strong>离线</strong>介质中的一种备份方式。在备份过程中，系统或服务不可用。恢复时需要将备份的数据还原到系统中，并启动系统或服务。由于备份和恢复过程中系统处于离线状态，因此<strong>冷备的恢复时间较长，但成本相对较低</strong>。</li>
+<li><strong>热备（Hot Backup）</strong>：热备是指在系统或服务运行期间，对数据进行备份的一种备份方式。<strong>在备份过程中，系统或服务仍然可以提供服务。热备的恢复时间相对较短，但需要额外的资源来支持备份和恢复，因此成本较高。</strong></li>
+<li><strong>暖备（Warm Backup）</strong>：暖备是介于冷备和热备之间的备份方式。在进行暖备时，备份数据与原始数据之间的同步是定期进行的，<strong>备份数据的时间间隔通常比热备长，但比冷备短</strong>。暖备的恢复时间比热备长，但比冷备短，因为需要将备份数据还原到原来的位置，并进行一些必要的同步操作。</li>
+</ol>
+<p>综合来看，冷备、热备和暖备的选择应该根据具体的业务需求和资源限制来进行综合考虑。一般而言，如果数据要求高可用性和实时性，应该采用热备方式；如果数据要求较高，但可用性和实时性要求相对较低，可以采用暖备方式；如果数据要求不是很高，可以采用冷备方式。</p>
 
       
     </div>
@@ -1088,7 +1322,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -1106,7 +1340,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/" class="post-title-link" itemprop="url">什么是反射机制？为什么反射慢？</a>
+          <a href="/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">如何设计一个高可用架构</a>
         </h2>
 
         <div class="post-meta-container">
@@ -1118,7 +1352,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：18:52:01" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:49:36" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1126,7 +1360,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+          <a href="/categories/%E9%AB%98%E5%8F%AF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">高可用</span></a>
         </span>
     </span>
 
@@ -1137,7 +1371,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>762</span>
+      <span>754</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -1155,482 +1389,19 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。  </p>
-<p>Java的反射可以：</p>
+          <p>设计一个高可用架构需要考虑多个方面，包括可用性、可靠性、性能、扩展性、安全性等。下面是一些设计高可用架构的一般性原则和方法：</p>
 <ol>
-<li><p>在运行时判断任意一个对象所属的类。</p>
-</li>
-<li><p>在运行时判断任意一个类所具有的成员变量和方法。</p>
-</li>
-<li><p>在运行时任意调用一个对象的方法</p>
-</li>
-<li><p>在运行时构造任意一个类的对象</p>
-</li>
+<li><strong>设计集群架构</strong>：采用多节点的集群架构可以提高系统的可用性和可靠性，从而避免单点故障导致系统不可用。</li>
+<li>采用<strong>分布式架构</strong>：采用分布式架构可以将系统的负载分散到多个节点上，从而提高系统的性能和可扩展性。</li>
+<li>实现<strong>故障转移</strong>和<strong>容错机制</strong>：通过使用冗余组件、备份数据等技术手段，可以实现故障转移和容错机制。例如，采用主从复制、备份、快速切换等技术来确保数据不丢失、系统快速恢复。</li>
+<li><strong>可靠的服务器和网络</strong>：选择可靠的服务器和网络设备，以确保它们能够在故障时正常运行。可以采用多个服务器进行冗余备份，以实现故障转移和负载均衡。可以选择高可靠性网络设备和路由器，以避免网络故障。</li>
+<li><strong>容灾和备份</strong>：需要设置容灾和备份计划，以确保在自然灾害、人为错误或其他紧急情况下能够快速恢复服务。可以使用云备份和容灾服务，以提高备份和恢复的效率和可靠性。</li>
+<li>设计<strong>监控</strong>和自动化工具：通过使用监控工具和自动化工具可以实现对系统的实时监控和自动化维护。例如，通过使用系统监控工具、自动化运维工具等来实现自动化运维、自动化扩容等功能，从而减少手动操作和人为错误。</li>
+<li>实现<strong>数据安全保护</strong>：通过采用多层次的安全策略来保护数据的安全性。例如，使用加密技术、防火墙、入侵检测等技术来保护系统和数据的安全。</li>
+<li>进行<strong>容量规划和性能优化</strong>：通过进行容量规划和性能优化，可以提高系统的性能和可扩展性。例如，通过使用缓存、调整配置参数、优化代码等技术手段来提高系统的性能和稳定性。</li>
+<li>设计<strong>自动化扩容和弹性伸缩</strong>：通过设计自动化扩容和弹性伸缩功能，可以根据业务需求和系统负载情况来自动调整系统资源。例如，通过使用自动化扩容工具和自动化弹性伸缩策略来实现系统资源的自动分配和调整。</li>
 </ol>
-<p>反射的好处就是可以提升程序的灵活性和扩展性，比较容易在运行期干很多事情。但是他带来的问题更多，主要由以下几个：</p>
-<p>1、代码可读性低及可维护性</p>
-<p>2、反射代码执行的性能低</p>
-<p>3、反射破坏了封装性</p>
-<p>所以，我们应该在业务代码中应该尽量避免使用反射。但是，作为一个合格的Java开发，也要能读懂中间件、框架中的反射代码。在有些场景下，要知道可以使用反射解决部分问题。</p>
-<p>那么，反射为什么慢呢？主要由以下几个原因：</p>
-<p>1、由于反射涉及动态解析的类型，因此不能执行某些Java虚拟机优化，如JIT优化。</p>
-<p>2、在使用反射时，参数需要包装（boxing)成Object[] 类型，但是真正方法执行的时候，又需要再拆包（unboxing)成真正的类型，这些动作不仅消耗时间，而且过程中也会产生很多对象，对象一多就容易导致GC，GC也会导致应用变慢。</p>
-<p>3、反射调用方法时会从方法数组中遍历查找，并且会检查可见性。这些动作都是耗时的。</p>
-<p>4、不仅方法的可见性要做检查，参数也需要做很多额外的检查。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="反射常见的使用方式"><a href="#反射常见的使用方式" class="headerlink" title="反射常见的使用方式"></a>反射常见的使用方式</h3><ol>
-<li><p>动态代理</p>
-</li>
-<li><p>JDBC的class.forName</p>
-</li>
-<li><p>BeanUtils中属性值得拷贝</p>
-</li>
-<li><p>RPC框架</p>
-</li>
-<li><p>ORM框架</p>
-</li>
-<li><p>Spring的IOC&#x2F;DI</p>
-</li>
-</ol>
-<h3 id="反射和Class的关系"><a href="#反射和Class的关系" class="headerlink" title="反射和Class的关系"></a>反射和Class的关系</h3><p>Java的Class类是java反射机制的基础,通过Class类我们可以获得关于一个类的相关信息</p>
-<p>Java.lang.Class是一个比较特殊的类，它用于封装被装入到JVM中的类（包括类和接口）的信息。当一个类或接口被装入的JVM时便会产生一个与之关联的java.lang.Class对象，可以通过这个Class对象对被装入类的详细信息进行访问。</p>
-<p>虚拟机为每种类型管理一个独一无二的Class对象。也就是说，每个类（型）都有一个Class对象。运行程序时，Java虚拟机(JVM)首先检查是否所要加载的类对应的Class对象是否已经加载。如果没有加载，JVM就会根据类名查找.class文件，并将其Class对象载入。</p>
-<h3 id="反射破坏单例"><a href="#反射破坏单例" class="headerlink" title="反射破坏单例"></a>反射破坏单例</h3><p><a href="../%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">如何破坏单例模式</a></p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" class="post-title-link" itemprop="url">如何破坏单例模式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：18:45:33" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>1.4k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>5 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>单例模式主要是通过把一个类的构造方法私有化，来避免重复创建多个对象的。那么，想要破坏单例，只要想办法能够执行到这个私有的构造方法就行了。</p>
-<p>一般来说做法有使用反射及使用反序列化都可以破坏单例。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><p>我们先通过双重校验锁的方式创建一个单例，后文会通过反射及反序列化的方式尝试破坏这个单例。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.Serializable;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> * 使用双重校验锁方式实现单例</span><br><span class="line"> */</span><br><span class="line">public class Singleton implements Serializable&#123;</span><br><span class="line">    private volatile static Singleton singleton;</span><br><span class="line">    private Singleton ()&#123;&#125;</span><br><span class="line">    public static Singleton getSingleton() &#123;</span><br><span class="line">        if (singleton == null) &#123;</span><br><span class="line">            synchronized (Singleton.class) &#123;</span><br><span class="line">                if (singleton == null) &#123;</span><br><span class="line">                    singleton = new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h3 id="反射破坏单例"><a href="#反射破坏单例" class="headerlink" title="反射破坏单例"></a>反射破坏单例</h3><p>我们尝试通过反射技术，来破坏单例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Singleton singleton1 = Singleton.getInstance();</span><br><span class="line"></span><br><span class="line">//通过反射获取到构造函数</span><br><span class="line">Constructor&lt;Singleton&gt; constructor = Singleton.class.getDeclaredConstructor();</span><br><span class="line">//将构造函数设置为可访问类型</span><br><span class="line">constructor.setAccessible(true);</span><br><span class="line">//调用构造函数的newInstance创建一个对象</span><br><span class="line">Singleton singleton2 = constructor.newInstance();</span><br><span class="line">//判断反射创建的对象和之前的对象是不是同一个对象</span><br><span class="line">System.out.println(s1 == s2);</span><br></pre></td></tr></table></figure>
-
-<p>以上代码，输出结果为false，也就是说通过反射技术，我们给单例对象创建出来了一个”兄弟”。</p>
-<p>setAccessible(true)，使得反射对象在使用时应该取消 Java 语言访问检查，使得私有的构造函数能够被访问。</p>
-<h3 id="反序列化破坏单例"><a href="#反序列化破坏单例" class="headerlink" title="反序列化破坏单例"></a>反序列化破坏单例</h3><p>我们尝试通过序列化+反序列化来破坏一下单例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.*;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> */</span><br><span class="line">public class SerializableDemo1 &#123;</span><br><span class="line">    //为了便于理解，忽略关闭流操作及删除文件操作。真正编码时千万不要忘记</span><br><span class="line">    //Exception直接抛出</span><br><span class="line">    public static void main(String[] args) throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        //Write Obj to file</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(Singleton.getSingleton());</span><br><span class="line">        //Read Obj from file</span><br><span class="line">        File file = new File(&quot;tempFile&quot;);</span><br><span class="line">        ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        Singleton newInstance = (Singleton) ois.readObject();</span><br><span class="line">        //判断是否是同一个对象</span><br><span class="line">        System.out.println(newInstance == Singleton.getSingleton());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//false</span><br></pre></td></tr></table></figure>
-
-
-
-<p>输出结构为false，说明：</p>
-<p>通过对Singleton的序列化与反序列化得到的对象是一个新的对象，这就破坏了Singleton的单例性。</p>
-<p>这里，在介绍如何解决这个问题之前，我们先来深入分析一下，为什么会这样？在反序列化的过程中到底发生了什么。</p>
-<h3 id="ObjectInputStream"><a href="#ObjectInputStream" class="headerlink" title="ObjectInputStream"></a>ObjectInputStream</h3><p>对象的序列化过程通过ObjectOutputStream和ObjectInputStream来实现的，那么带着刚刚的问题，分析一下ObjectInputStream 的readObject 方法执行情况到底是怎样的。</p>
-<p>为了节省篇幅，这里给出ObjectInputStream的readObject的调用栈：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305251841292.png" alt="img"></p>
-<p>这里看一下重点代码，readOrdinaryObject方法的代码片段： code 3</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">private Object readOrdinaryObject(boolean unshared)</span><br><span class="line">        throws IOException</span><br><span class="line">    &#123;</span><br><span class="line">        //此处省略部分代码</span><br><span class="line"></span><br><span class="line">        Object obj;</span><br><span class="line">        try &#123;</span><br><span class="line">            obj = desc.isInstantiable() ? desc.newInstance() : null;</span><br><span class="line">        &#125; catch (Exception ex) &#123;</span><br><span class="line">            throw (IOException) new InvalidClassException(</span><br><span class="line">                desc.forClass().getName(),</span><br><span class="line">                &quot;unable to create instance&quot;).initCause(ex);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        //此处省略部分代码</span><br><span class="line"></span><br><span class="line">        if (obj != null &amp;&amp;</span><br><span class="line">            handles.lookupException(passHandle) == null &amp;&amp;</span><br><span class="line">            desc.hasReadResolveMethod())</span><br><span class="line">        &#123;</span><br><span class="line">            Object rep = desc.invokeReadResolve(obj);</span><br><span class="line">            if (unshared &amp;&amp; rep.getClass().isArray()) &#123;</span><br><span class="line">                rep = cloneArray(rep);</span><br><span class="line">            &#125;</span><br><span class="line">            if (rep != obj) &#123;</span><br><span class="line">                handles.setObject(passHandle, obj = rep);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return obj;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-
-<p>code 3 中主要贴出两部分代码。先分析第一部分：</p>
-<p>code 3.1</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Object obj;</span><br><span class="line">try &#123;</span><br><span class="line">    obj = desc.isInstantiable() ? desc.newInstance() : null;</span><br><span class="line">&#125; catch (Exception ex) &#123;</span><br><span class="line">    throw (IOException) new InvalidClassException(desc.forClass().getName(),&quot;unable to create instance&quot;).initCause(ex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>这里创建的这个obj对象，就是本方法要返回的对象，也可以暂时理解为是ObjectInputStream的readObject返回的对象。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305251842849.jpeg" alt="img"></p>
-<blockquote>
-<p>isInstantiable：如果一个serializable&#x2F;externalizable的类可以在运行时被实例化，那么该方法就返回true。针对serializable和externalizable我会在其他文章中介绍。</p>
-<p>desc.newInstance：该方法通过反射的方式调用无参构造方法新建一个对象。</p>
-</blockquote>
-<p>所以。到目前为止，也就可以解释，为什么序列化可以破坏单例了？</p>
-<blockquote>
-<p>答：序列化会通过反射调用无参数的构造方法创建一个新的对象。</p>
-</blockquote>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>在涉及到序列化的场景时，要格外注意他对单例的破坏。</p>
-<h3 id="如何避免单例被破坏"><a href="#如何避免单例被破坏" class="headerlink" title="如何避免单例被破坏"></a>如何避免单例被破坏</h3><h4 id="避免反射破坏单例"><a href="#避免反射破坏单例" class="headerlink" title="避免反射破坏单例"></a>避免反射破坏单例</h4><p>反射是调用默认的构造函数创建出来的，只需要我们改造下构造函数，使其在反射调用的时候识别出来对象是不是被创建过就行了：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">private Singleton() &#123;</span><br><span class="line">    if (singleton != null)&#123;        </span><br><span class="line">    throw new RuntimeException(&quot;单例对象只能创建一次... &quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="避免反序列化破坏单例"><a href="#避免反序列化破坏单例" class="headerlink" title="避免反序列化破坏单例"></a>避免反序列化破坏单例</h4><p>只要在Singleton类中定义readResolve就可以解决该问题：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.Serializable;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> * 使用双重校验锁方式实现单例</span><br><span class="line"> */</span><br><span class="line">public class Singleton implements Serializable&#123;</span><br><span class="line">    private volatile static Singleton singleton;</span><br><span class="line">    private Singleton ()&#123;&#125;</span><br><span class="line">    public static Singleton getSingleton() &#123;</span><br><span class="line">        if (singleton == null) &#123;</span><br><span class="line">            synchronized (Singleton.class) &#123;</span><br><span class="line">                if (singleton == null) &#123;</span><br><span class="line">                    singleton = new Singleton();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Object readResolve() &#123;</span><br><span class="line">        return singleton;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>还是运行以下测试类：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.hollis;</span><br><span class="line">import java.io.*;</span><br><span class="line">/**</span><br><span class="line"> * Created by hollis on 16/2/5.</span><br><span class="line"> */</span><br><span class="line">public class SerializableDemo1 &#123;</span><br><span class="line">    //为了便于理解，忽略关闭流操作及删除文件操作。真正编码时千万不要忘记</span><br><span class="line">    //Exception直接抛出</span><br><span class="line">    public static void main(String[] args) throws IOException, ClassNotFoundException &#123;</span><br><span class="line">        //Write Obj to file</span><br><span class="line">        ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(Singleton.getSingleton());</span><br><span class="line">        //Read Obj from file</span><br><span class="line">        File file = new File(&quot;tempFile&quot;);</span><br><span class="line">        ObjectInputStream ois =  new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        Singleton newInstance = (Singleton) ois.readObject();</span><br><span class="line">        //判断是否是同一个对象</span><br><span class="line">        System.out.println(newInstance == Singleton.getSingleton());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//true</span><br></pre></td></tr></table></figure>
-
-
-
-<p>本次输出结果为true。具体原理，我们回过头继续分析code 3中的第二段代码:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">if (obj != null &amp;&amp;</span><br><span class="line">            handles.lookupException(passHandle) == null &amp;&amp;</span><br><span class="line">            desc.hasReadResolveMethod())</span><br><span class="line">        &#123;</span><br><span class="line">            Object rep = desc.invokeReadResolve(obj);</span><br><span class="line">            if (unshared &amp;&amp; rep.getClass().isArray()) &#123;</span><br><span class="line">                rep = cloneArray(rep);</span><br><span class="line">            &#125;</span><br><span class="line">            if (rep != obj) &#123;</span><br><span class="line">                handles.setObject(passHandle, obj = rep);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>hasReadResolveMethod:如果实现了serializable 或者 externalizable接口的类中包含readResolve则返回true</p>
-<p>invokeReadResolve:通过反射的方式调用要被反序列化的类的readResolve方法。</p>
-<p>所以，原理也就清楚了，主要在Singleton中定义readResolve方法，并在该方法中指定要返回的对象的生成策略，就可以防止单例被破坏。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/25/%E5%B8%B8%E8%A7%81%E7%9A%84%E8%AF%AD%E6%B3%95%E7%B3%96/" class="post-title-link" itemprop="url">常见的语法糖</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：15:50:06" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>5.3k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>19 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>语法糖（Syntactic sugar），指在计算机语言中添加的某种语法，这种语法对语言的功能并没有影响，但是更方便程序员使用。</p>
-<p>虽然Java中有很多语法糖，但是Java虚拟机并不支持这些语法糖，所以这些语法糖在编译阶段就会被还原成简单的基础语法结构，这样才能被虚拟机识别，这个过程就是解语法糖。</p>
-<p>如果看过Java虚拟机的源码，就会发现在编译过程中有一个重要的步骤就是调用desugar()，这个方法就是负责解语法糖的实现。</p>
-<p>常见的语法糖有 switch支持枚举及字符串、泛型、条件编译、断言、可变参数、自动装箱&#x2F;拆箱、枚举、内部类、增强for循环、try-with-resources语句、lambda表达式等。</p>
-<h2 id="知识扩展"><a href="#知识扩展" class="headerlink" title="知识扩展"></a>知识扩展</h2><h3 id="如何解语法糖？"><a href="#如何解语法糖？" class="headerlink" title="如何解语法糖？"></a>如何解语法糖？</h3><p>语法糖的存在主要是方便开发人员使用。但其实，Java虚拟机并不支持这些语法糖。这些语法糖在编译阶段就会被还原成简单的基础语法结构，这个过程就是解语法糖。</p>
-<p>说到编译，大家肯定都知道，Java语言中javac命令可以将后缀名为.java的源文件编译为后缀名为.class的可以运行于Java虚拟机的字节码。如果你去看com.sun.tools.javac.main.JavaCompiler的源码，你会发现在compile()中有一个步骤就是调用<code>desugar()</code>，这个方法就是负责解语法糖的实现的。</p>
-<h3 id="糖块一、-switch-支持-String-与枚举"><a href="#糖块一、-switch-支持-String-与枚举" class="headerlink" title="糖块一、 switch 支持 String 与枚举"></a>糖块一、 switch 支持 String 与枚举</h3><p>前面提到过，从Java 7 开始，Java语言中的语法糖在逐渐丰富，其中一个比较重要的就是Java 7中switch开始支持String。</p>
-<p>在开始coding之前先科普下，Java中的switch自身原本就支持基本类型。比如int、char等。对于int类型，直接进行数值的比较。对于char类型则是比较其ascii码。所以，对于编译器来说，switch中其实只能使用整型，任何类型的比较都要转换成整型。比如byte。short，char(ackii码是整型)以及int。</p>
-<p>那么接下来看下switch对String得支持，有以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public class switchDemoString &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        String str = &quot;world&quot;;</span><br><span class="line">        switch (str) &#123;</span><br><span class="line">        case &quot;hello&quot;:</span><br><span class="line">            System.out.println(&quot;hello&quot;);</span><br><span class="line">            break;</span><br><span class="line">        case &quot;world&quot;:</span><br><span class="line">            System.out.println(&quot;world&quot;);</span><br><span class="line">            break;</span><br><span class="line">        default:</span><br><span class="line">            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>[反编译][1]后内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">public class switchDemoString</span><br><span class="line">&#123;</span><br><span class="line">​    public switchDemoString()</span><br><span class="line">​    &#123;</span><br><span class="line">​    &#125;</span><br><span class="line">​    public static void main(String args[])</span><br><span class="line">​    &#123;</span><br><span class="line">​        String str = &quot;world&quot;;</span><br><span class="line">​        String s;</span><br><span class="line">​        switch((s = str).hashCode())</span><br><span class="line">​        &#123;</span><br><span class="line">​        default:</span><br><span class="line">​            break;</span><br><span class="line">​        case 99162322:</span><br><span class="line">​            if(s.equals(&quot;hello&quot;))</span><br><span class="line">​                System.out.println(&quot;hello&quot;);</span><br><span class="line">​            break;</span><br><span class="line">​        case 113318802:</span><br><span class="line">​            if(s.equals(&quot;world&quot;))</span><br><span class="line">​                System.out.println(&quot;world&quot;);</span><br><span class="line">​            break;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看到这个代码，你知道原来字符串的switch是通过equals()和hashCode()方法来实现的。还好hashCode()方法返回的是int，而不是long。</p>
-<blockquote>
-<p>仔细看下可以发现，进行switch的实际是哈希值，然后通过使用equals方法比较进行安全检查，这个检查是必要的，因为哈希可能会发生碰撞。因此它的性能是不如使用枚举进行switch或者使用纯整数常量，但这也不是很差。</p>
-</blockquote>
-<h3 id="糖块二、-泛型"><a href="#糖块二、-泛型" class="headerlink" title="糖块二、 泛型"></a><strong>糖块二、 泛型</strong></h3><p>我们都知道，很多语言都是支持泛型的，但是很多人不知道的是，不同的编译器对于泛型的处理方式是不同的，通常情况下，一个编译器处理泛型有两种方式：Code specialization和Code sharing。C++和C#是使用Code specialization的处理机制，而Java使用的是Code sharing的机制。</p>
-<blockquote>
-<p>Code sharing方式为每个泛型类型创建唯一的字节码表示，并且将该泛型类型的实例都映射到这个唯一的字节码表示上。将多种泛型类形实例映射到唯一的字节码表示是通过类型擦除（type erasue）实现的。</p>
-</blockquote>
-<p>也就是说，对于Java虚拟机来说，他根本不认识Map&lt;String, String&gt; map这样的语法。需要在编译阶段通过类型擦除的方式进行解语法糖。</p>
-<p>类型擦除的主要过程如下： 1.将所有的泛型参数用其最左边界（最顶级的父类型）类型替换。 2.移除所有的类型参数。</p>
-<p>以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;String, String&gt; map = new HashMap&lt;String, String&gt;(); </span><br><span class="line">map.put(&quot;name&quot;, &quot;hollis&quot;); </span><br><span class="line">map.put(&quot;wechat&quot;, &quot;Hollis&quot;); </span><br><span class="line">map.put(&quot;blog&quot;, &quot;www.hollischuang.com&quot;);</span><br></pre></td></tr></table></figure>
-
-<p>解语法糖之后会变成：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Map map = new HashMap(); </span><br><span class="line">map.put(&quot;name&quot;, &quot;hollis&quot;); </span><br><span class="line">map.put(&quot;wechat&quot;, &quot;Hollis&quot;); </span><br><span class="line">map.put(&quot;blog&quot;, &quot;www.hollischuang.com&quot;);</span><br></pre></td></tr></table></figure>
-
-
-<p> 以下代码： ​</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static &lt;A extends Comparable&lt;A&gt;&gt; A max(Collection&lt;A&gt; xs) &#123;</span><br><span class="line">	Iterator&lt;A&gt; xi = xs.iterator();</span><br><span class="line">	A w = xi.next();</span><br><span class="line">	while (xi.hasNext()) &#123;</span><br><span class="line">		A x = xi.next();</span><br><span class="line">		if (w.compareTo(x) &lt; 0)</span><br><span class="line">			w = x;</span><br><span class="line">	&#125;</span><br><span class="line">	return w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p> 类型擦除后会变成：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public static Comparable max(Collection xs)&#123;</span><br><span class="line">	Iterator xi = xs.iterator();</span><br><span class="line">	Comparable w = (Comparable)xi.next();</span><br><span class="line">	while(xi.hasNext())</span><br><span class="line">	&#123;</span><br><span class="line">		Comparable x = (Comparable)xi.next();</span><br><span class="line">		if(w.compareTo(x) &lt; 0)</span><br><span class="line">			w = x;</span><br><span class="line">	&#125;</span><br><span class="line">	return w;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-<p> <strong>虚拟机中没有泛型，只有普通类和普通方法，所有泛型类的类型参数在编译时都会被擦除，泛型类并没有自己独有的Class类对象。比如并不存在List<String>.class或是List<Integer>.class，而只有List.class。</strong></p>
-<h3 id="糖块三、-自动装箱与拆箱"><a href="#糖块三、-自动装箱与拆箱" class="headerlink" title="糖块三、 自动装箱与拆箱"></a>糖块三、 自动装箱与拆箱</h3><p>自动装箱就是Java自动将原始类型值转换成对应的对象，比如将int的变量转换成Integer对象，这个过程叫做装箱，反之将Integer对象转换成int类型值，这个过程叫做拆箱。因为这里的装箱和拆箱是自动进行的非人为转换，所以就称作为自动装箱和拆箱。原始类型byte, short, char, int, long, float, double 和 boolean 对应的封装类为Byte, Short, Character, Integer, Long, Float, Double, Boolean。</p>
-<p> 先来看个自动装箱的代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123; </span><br><span class="line">	int i = 10; </span><br><span class="line">	Integer n = i; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后代码如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[]) &#123; </span><br><span class="line">	int i = 10; </span><br><span class="line">	Integer n = Integer.valueOf(i); </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>再来看个自动拆箱的代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123; </span><br><span class="line">	Integer i = 10; </span><br><span class="line">	int n = i; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">    Integer i = Integer.valueOf(10);</span><br><span class="line">    int n = i.intValue();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从反编译得到内容可以看出，在装箱的时候自动调用的是Integer的valueOf(int)方法。而在拆箱的时候自动调用的是Integer的intValue方法。</p>
-<p>所以，<strong>装箱过程是通过调用包装器的valueOf方法实现的，而拆箱过程是通过调用包装器的 xxxValue方法实现的。</strong></p>
-<h3 id="糖块四-、-方法变长参数"><a href="#糖块四-、-方法变长参数" class="headerlink" title="糖块四 、 方法变长参数"></a>糖块四 、 方法变长参数</h3><p>可变参数(variable arguments)是在Java 1.5中引入的一个特性。它允许一个方法把任意数量的值作为参数。</p>
-<p>看下以下可变参数代码，其中print方法接收可变参数：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args)</span><br><span class="line">    &#123;</span><br><span class="line">        print(&quot;Holis&quot;, &quot;公众号:Hollis&quot;, &quot;博客：www.hollischuang.com&quot;, &quot;QQ：907607222&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">public static void print(String... strs)</span><br><span class="line">&#123;</span><br><span class="line">    for (int i = 0; i &lt; strs.length; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(strs[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>反编译后代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">	    print(new String[] &#123;</span><br><span class="line">	            &quot;Holis&quot;, &quot;\u516C\u4F17\u53F7:Hollis&quot;,&quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;, &quot;QQ\uFF1A907607222&quot;</span><br><span class="line">	                &#125;);</span><br><span class="line">&#125;</span><br><span class="line">public static transient void print(String strs[])</span><br><span class="line">&#123;</span><br><span class="line">	    for(int i = 0; i &lt; strs.length; i++)</span><br><span class="line">	    	        System.out.println(strs[i]);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从反编译后代码可以看出，可变参数在被使用的时候，他首先会创建一个数组，数组的长度就是调用该方法是传递的实参的个数，然后再把参数值全部放到这个数组当中，然后再把这个数组作为参数传递到被调用的方法中。</p>
-<blockquote>
-<p>PS：反编译后的print方法声明中有一个transient标识，是不是很奇怪？transient不是不可以修饰方法吗？transient不是和序列化有关么？transient在这里的作用是什么？因为这个与本文关系不大，这里不做深入分析了。</p>
-</blockquote>
-<h3 id="糖块五-、-枚举"><a href="#糖块五-、-枚举" class="headerlink" title="糖块五 、 枚举"></a>糖块五 、 枚举</h3><p>在Java中，枚举是一种特殊的数据类型，用于表示有限的一组常量。枚举常量是在枚举类型中定义的，每个常量都是该类型的一个实例。Java中的枚举类型是一种安全而优雅的方式来表示有限的一组值。</p>
-<p>要想看源码，首先得有一个类吧，那么枚举类型到底是什么类呢？是enum吗？答案很明显不是，enum就和class一样，只是一个关键字，他并不是一个类，那么枚举是由什么类维护的呢，我们简单的写一个枚举：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public enum t &#123;</span><br><span class="line">    SPRING,SUMMER;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后我们使用反编译，看看这段代码到底是怎么实现的，反编译后代码内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">public final class T extends Enum</span><br><span class="line">&#123;</span><br><span class="line">    private T(String s, int i)</span><br><span class="line">    &#123;</span><br><span class="line">        super(s, i);</span><br><span class="line">    &#125;</span><br><span class="line">    public static T[] values()</span><br><span class="line">    &#123;</span><br><span class="line">        T at[];</span><br><span class="line">        int i;</span><br><span class="line">        T at1[];</span><br><span class="line">        System.arraycopy(at = ENUM$VALUES, 0, at1 = new T[i = at.length], 0, i);</span><br><span class="line">        return at1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static T valueOf(String s)</span><br><span class="line">    &#123;</span><br><span class="line">        return (T)Enum.valueOf(demo/T, s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static final T SPRING;</span><br><span class="line">    public static final T SUMMER;</span><br><span class="line">    private static final T ENUM$VALUES[];</span><br><span class="line">    static</span><br><span class="line">    &#123;</span><br><span class="line">        SPRING = new T(&quot;SPRING&quot;, 0);</span><br><span class="line">        SUMMER = new T(&quot;SUMMER&quot;, 1);</span><br><span class="line">        ENUM$VALUES = (new T[] &#123;</span><br><span class="line">            SPRING, SUMMER</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>通过反编译后代码我们可以看到，public final class T extends Enum，说明，该类是继承了Enum类的，同时final关键字告诉我们，这个类也是不能被继承的。<strong>当我们使用enmu来定义一个枚举类型的时候，编译器会自动帮我们创建一个final类型的类继承Enum类，所以枚举类型不能被继承。</strong></p>
-<h3 id="糖块六-、-内部类"><a href="#糖块六-、-内部类" class="headerlink" title="糖块六 、 内部类"></a>糖块六 、 内部类</h3><p>内部类又称为嵌套类，可以把内部类理解为外部类的一个普通成员。</p>
-<p><strong>内部类之所以也是语法糖，是因为它仅仅是一个编译时的概念，outer.java里面定义了一个内部类inner，一旦编译成功，就会生成两个完全不同的.class文件了，分别是outer.class和outer$inner.class。所以内部类的名字完全可以和它的外部类名字相同。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">public class OutterClass &#123;</span><br><span class="line">    private String userName;</span><br><span class="line"></span><br><span class="line">    public String getUserName() &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setUserName(String userName) &#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    class InnerClass&#123;</span><br><span class="line">        private String name;</span><br><span class="line"></span><br><span class="line">        public String getName() &#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setName(String name) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上代码编译后会生成两个class文件：OutterClass$InnerClass.class 、OutterClass.class 。当我们尝试对OutterClass.class文件进行反编译的时候，命令行会打印以下内容：Parsing OutterClass.class…Parsing inner class OutterClass$InnerClass.class… Generating OutterClass.jad 。他会把两个文件全部进行反编译，然后一起生成一个OutterClass.jad文件。文件内容如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">public class OutterClass</span><br><span class="line">&#123;</span><br><span class="line">    class InnerClass</span><br><span class="line">    &#123;</span><br><span class="line">        public String getName()</span><br><span class="line">        &#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line">        public void setName(String name)</span><br><span class="line">        &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line">        private String name;</span><br><span class="line">        final OutterClass this$0;</span><br><span class="line"></span><br><span class="line">        InnerClass()</span><br><span class="line">        &#123;</span><br><span class="line">            this.this$0 = OutterClass.this;</span><br><span class="line">            super();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public OutterClass()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getUserName()</span><br><span class="line">    &#123;</span><br><span class="line">        return userName;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setUserName(String userName)&#123;</span><br><span class="line">        this.userName = userName;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String args1[])</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    private String userName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="糖块七-、条件编译"><a href="#糖块七-、条件编译" class="headerlink" title="糖块七 、条件编译"></a>糖块七 、条件编译</h3><p>—般情况下，程序中的每一行代码都要参加编译。但有时候出于对程序代码优化的考虑，希望只对其中一部分内容进行编译，此时就需要在程序中加上条件，让编译器只对满足条件的代码进行编译，将不满足条件的代码舍弃，这就是条件编译。</p>
-<p>如在C或CPP中，可以通过预处理语句来实现条件编译。其实在Java中也可实现条件编译。我们先来看一段代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ConditionalCompilation &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        final boolean DEBUG = true;</span><br><span class="line">        if(DEBUG) &#123;</span><br><span class="line">            System.out.println(&quot;Hello, DEBUG!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        final boolean ONLINE = false;</span><br><span class="line"></span><br><span class="line">        if(ONLINE)&#123;</span><br><span class="line">            System.out.println(&quot;Hello, ONLINE!&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class ConditionalCompilation</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    public ConditionalCompilation()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String args[])</span><br><span class="line">    &#123;</span><br><span class="line">        boolean DEBUG = true;</span><br><span class="line">        System.out.println(&quot;Hello, DEBUG!&quot;);</span><br><span class="line">        boolean ONLINE = false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>首先，我们发现，在反编译后的代码中没有System.out.println(“Hello, ONLINE!”);，这其实就是条件编译。当if(ONLINE)为false的时候，编译器就没有对其内的代码进行编译。</p>
-<p><strong>所以，Java语法的条件编译，是通过判断条件为常量的if语句实现的。其原理也是Java语言的语法糖。根据if判断条件的真假，编译器直接把分支为false的代码块消除。通过该方式实现的条件编译，必须在方法体内实现，而无法在正整个Java类的结构或者类的属性上进行条件编译，这与C&#x2F;C++的条件编译相比，确实更有局限性。在Java语言设计之初并没有引入条件编译的功能，虽有局限，但是总比没有更强。</strong></p>
-<hr>
-<h3 id="糖块八-、-断言"><a href="#糖块八-、-断言" class="headerlink" title="糖块八 、 断言"></a>糖块八 、 断言</h3><p>在Java中，assert关键字是从JAVA SE 1.4 引入的，为了避免和老版本的Java代码中使用了assert关键字导致错误，Java在执行的时候默认是不启动断言检查的（这个时候，所有的断言语句都将忽略！），如果要开启断言检查，则需要用开关-enableassertions或-ea来开启。</p>
-<p>看一段包含断言的代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public class AssertTest &#123;</span><br><span class="line">    public static void main(String args[]) &#123;</span><br><span class="line">        int a = 1;</span><br><span class="line">        int b = 1;</span><br><span class="line">        assert a == b;</span><br><span class="line">        System.out.println(&quot;公众号：Hollis&quot;);</span><br><span class="line">        assert a != b : &quot;Hollis&quot;;</span><br><span class="line">        System.out.println(&quot;博客：www.hollischuang.com&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">public class AssertTest &#123;</span><br><span class="line">   public AssertTest()</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">    int a = 1;</span><br><span class="line">    int b = 1;</span><br><span class="line">    if(!$assertionsDisabled &amp;&amp; a != b)</span><br><span class="line">        throw new AssertionError();</span><br><span class="line">    System.out.println(&quot;\u516C\u4F17\u53F7\uFF1AHollis&quot;);</span><br><span class="line">    if(!$assertionsDisabled &amp;&amp; a == b)</span><br><span class="line">    &#123;</span><br><span class="line">        throw new AssertionError(&quot;Hollis&quot;);</span><br><span class="line">    &#125; else</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(&quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">static final boolean $assertionsDisabled = !com/hollis/suguar/AssertTest.desiredAssertionStatus();</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>很明显，反编译之后的代码要比我们自己的代码复杂的多。所以，使用了assert这个语法糖我们节省了很多代码。<strong>其实断言的底层实现就是if语言，如果断言结果为true，则什么都不做，程序继续执行</strong>，<strong>如果断言结果为false，则程序抛出AssertError来打断程序的执行</strong>。-enableassertions会设置$assertionsDisabled字段的值。</p>
-<h3 id="糖块九-、-数值字面量"><a href="#糖块九-、-数值字面量" class="headerlink" title="糖块九 、 数值字面量"></a>糖块九 、 数值字面量</h3><p>在java 7中，数值字面量，不管是整数还是浮点数，都允许在数字之间插入任意多个下划线。这些下划线不会对字面量的数值产生影响，目的就是方便阅读。</p>
-<p>比如：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class Test &#123;</span><br><span class="line">    public static void main(String... args) &#123;</span><br><span class="line">        int i = 10_000;</span><br><span class="line">        System.out.println(i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class Test</span><br><span class="line">&#123;</span><br><span class="line">  public static void main(String[] args)</span><br><span class="line">  &#123;</span><br><span class="line">    int i = 10000;</span><br><span class="line">    System.out.println(i);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后就是把删除了。也就是说 <strong>编译器并不认识在数字字面量中的，需要在编译阶段把他去掉</strong>。</p>
-<h3 id="糖块十-、-for-each"><a href="#糖块十-、-for-each" class="headerlink" title="糖块十 、 for-each"></a>糖块十 、 for-each</h3><p>增强for循环（for-each）相信大家都不陌生，日常开发经常会用到的，他会比for循环要少写很多代码，那么这个语法糖背后是如何实现的呢？</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    String[] strs = &#123;&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;&#125;;</span><br><span class="line">    for (String s : strs) &#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;String&gt; strList = ImmutableList.of(&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;);</span><br><span class="line">    for (String s : strList) &#123;</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static transient void main(String args[])</span><br><span class="line">&#123;</span><br><span class="line">    String strs[] = &#123;</span><br><span class="line">        &quot;Hollis&quot;, &quot;\u516C\u4F17\u53F7\uFF1AHollis&quot;, &quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;</span><br><span class="line">    &#125;;</span><br><span class="line">    String args1[] = strs;</span><br><span class="line">    int i = args1.length;</span><br><span class="line">    for(int j = 0; j &lt; i; j++)</span><br><span class="line">    &#123;</span><br><span class="line">        String s = args1[j];</span><br><span class="line">        System.out.println(s);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    List strList = ImmutableList.of(&quot;Hollis&quot;, &quot;\u516C\u4F17\u53F7\uFF1AHollis&quot;, &quot;\u535A\u5BA2\uFF1Awww.hollischuang.com&quot;);</span><br><span class="line">    String s;</span><br><span class="line">    for(Iterator iterator = strList.iterator(); iterator.hasNext(); System.out.println(s))</span><br><span class="line">        s = (String)iterator.next();</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码很简单，<strong>for-each的实现原理其实就是使用了普通的for循环和迭代器</strong>。</p>
-<h3 id="糖块十一-、-try-with-resource"><a href="#糖块十一-、-try-with-resource" class="headerlink" title="糖块十一 、 try-with-resource"></a><strong>糖块十一 、 try-with-resource</strong></h3><p>Java里，对于文件操作IO流、数据库连接等开销非常昂贵的资源，用完之后必须及时通过close方法将其关闭，否则资源会一直处于打开状态，可能会导致内存泄露等问题。</p>
-<p>关闭资源的常用方式就是在finally块里是释放，即调用close方法。比如，我们经常会写这样的代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    BufferedReader br = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        String line;</span><br><span class="line">        br = new BufferedReader(new FileReader(&quot;d:\\hollischuang.xml&quot;));</span><br><span class="line">        while ((line = br.readLine()) != null) &#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        // handle exception</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            if (br != null) &#123;</span><br><span class="line">                br.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException ex) &#123;</span><br><span class="line">            // handle exception</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>从Java 7开始，jdk提供了一种更好的方式关闭资源，使用try-with-resources语句，改写一下上面的代码，效果如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    try (BufferedReader br = new BufferedReader(new FileReader(&quot;d:\\ hollischuang.xml&quot;))) &#123;</span><br><span class="line">        String line;</span><br><span class="line">        while ((line = br.readLine()) != null) &#123;</span><br><span class="line">            System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        // handle exception</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看，这简直是一大福音啊，虽然我之前一般使用IOUtils去关闭流，并不会使用在finally中写很多代码的方式，但是这种新的语法糖看上去好像优雅很多呢。看下他的背后：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">public static transient void main(String args[])</span><br><span class="line">    &#123;</span><br><span class="line">        BufferedReader br;</span><br><span class="line">        Throwable throwable;</span><br><span class="line">        br = new BufferedReader(new FileReader(&quot;d:\\ hollischuang.xml&quot;));</span><br><span class="line">        throwable = null;</span><br><span class="line">        String line;</span><br><span class="line">        try</span><br><span class="line">        &#123;</span><br><span class="line">            while((line = br.readLine()) != null)</span><br><span class="line">                System.out.println(line);</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Throwable throwable2)</span><br><span class="line">        &#123;</span><br><span class="line">            throwable = throwable2;</span><br><span class="line">            throw throwable2;</span><br><span class="line">        &#125;</span><br><span class="line">        if(br != null)</span><br><span class="line">            if(throwable != null)</span><br><span class="line">                try</span><br><span class="line">                &#123;</span><br><span class="line">                    br.close();</span><br><span class="line">                &#125;</span><br><span class="line">                catch(Throwable throwable1)</span><br><span class="line">                &#123;</span><br><span class="line">                    throwable.addSuppressed(throwable1);</span><br><span class="line">                &#125;</span><br><span class="line">            else</span><br><span class="line">                br.close();</span><br><span class="line">            break MISSING_BLOCK_LABEL_113;</span><br><span class="line">            Exception exception;</span><br><span class="line">            exception;</span><br><span class="line">            if(br != null)</span><br><span class="line">                if(throwable != null)</span><br><span class="line">                    try</span><br><span class="line">                    &#123;</span><br><span class="line">                        br.close();</span><br><span class="line">                    &#125;</span><br><span class="line">                    catch(Throwable throwable3)</span><br><span class="line">                      &#123;</span><br><span class="line">                        throwable.addSuppressed(throwable3);</span><br><span class="line">                    &#125;</span><br><span class="line">                else</span><br><span class="line">                    br.close();</span><br><span class="line">        throw exception;</span><br><span class="line">        IOException ioexception;</span><br><span class="line">        ioexception;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>其实背后的原理也很简单，那些我们没有做的关闭资源的操作，编译器都帮我们做了。所以，再次印证了，语法糖的作用就是方便程序员的使用，但最终还是要转成编译器认识的语言。</strong></p>
-<h3 id="糖块十二、Lambda表达式"><a href="#糖块十二、Lambda表达式" class="headerlink" title="糖块十二、Lambda表达式"></a>糖块十二、Lambda表达式</h3><p>先来看一个简单的lambda表达式。遍历一个list：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    List&lt;String&gt; strList = ImmutableList.of(&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;);</span><br><span class="line"></span><br><span class="line">    strList.forEach( s -&gt; &#123; System.out.println(s); &#125; );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>为啥说他并不是内部类的语法糖呢，前面讲内部类我们说过，内部类在编译之后会有两个class文件，但是，包含lambda表达式的类编译后只有一个文件。</p>
-<p>反编译后代码如下:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static /* varargs */ void main(String ... args) &#123;</span><br><span class="line">    ImmutableList strList = ImmutableList.of((Object)&quot;Hollis&quot;, (Object)&quot;\u516c\u4f17\u53f7\uff1aHollis&quot;, (Object)&quot;\u535a\u5ba2\uff1awww.hollischuang.com&quot;);</span><br><span class="line">    strList.forEach((Consumer&lt;String&gt;)LambdaMetafactory.metafactory(null, null, null, (Ljava/lang/Object;)V, lambda$main$0(java.lang.String ), (Ljava/lang/String;)V)());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static /* synthetic */ void lambda$main$0(String s) &#123;</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>可以看到，在forEach方法中，其实是调用了java.lang.invoke.LambdaMetafactory#metafactory方法，该方法的第四个参数implMethod指定了方法实现。可以看到这里其实是调用了一个lambda$main$0方法进行了输出。</p>
-<p>再来看一个稍微复杂一点的，先对List进行过滤，然后再输出：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String... args) &#123;</span><br><span class="line">    List&lt;String&gt; strList = ImmutableList.of(&quot;Hollis&quot;, &quot;公众号：Hollis&quot;, &quot;博客：www.hollischuang.com&quot;);</span><br><span class="line"></span><br><span class="line">    List HollisList = strList.stream().filter(string -&gt; string.contains(&quot;Hollis&quot;)).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    HollisList.forEach( s -&gt; &#123; System.out.println(s); &#125; );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>反编译后代码如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static /* varargs */ void main(String ... args) &#123;</span><br><span class="line">    ImmutableList strList = ImmutableList.of((Object)&quot;Hollis&quot;, (Object)&quot;\u516c\u4f17\u53f7\uff1aHollis&quot;, (Object)&quot;\u535a\u5ba2\uff1awww.hollischuang.com&quot;);</span><br><span class="line">    List&lt;Object&gt; HollisList = strList.stream().filter((Predicate&lt;String&gt;)LambdaMetafactory.metafactory(null, null, null, (Ljava/lang/Object;)Z, lambda$main$0(java.lang.String ), (Ljava/lang/String;)Z)()).collect(Collectors.toList());</span><br><span class="line">    HollisList.forEach((Consumer&lt;Object&gt;)LambdaMetafactory.metafactory(null, null, null, (Ljava/lang/Object;)V, lambda$main$1(java.lang.Object ), (Ljava/lang/Object;)V)());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static /* synthetic */ void lambda$main$1(Object s) &#123;</span><br><span class="line">    System.out.println(s);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">private static /* synthetic */ boolean lambda$main$0(String string) &#123;</span><br><span class="line">    return string.contains(&quot;Hollis&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>两个lambda表达式分别调用了lambda$main$1和lambda$main$0两个方法。</p>
-<p><strong>所以，lambda表达式的实现其实是依赖了一些底层的api，在编译阶段，编译器会把lambda表达式进行解糖，转换成调用内部api的方式。</strong></p>
-<h2 id="可能遇到的坑"><a href="#可能遇到的坑" class="headerlink" title="可能遇到的坑"></a>可能遇到的坑</h2><h3 id="泛型"><a href="#泛型" class="headerlink" title="泛型"></a>泛型</h3><p><strong>一、当泛型遇到重载</strong> public class GenericTypes {</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"> public static void method(List&lt;String&gt; list) &#123;  </span><br><span class="line">        System.out.println(&quot;invoke method(List&lt;String&gt; list)&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line"></span><br><span class="line">    public static void method(List&lt;Integer&gt; list) &#123;  </span><br><span class="line">        System.out.println(&quot;invoke method(List&lt;Integer&gt; list)&quot;);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>上面这段代码，有两个重载的函数，因为他们的参数类型不同，一个是List另一个是List ，但是，这段代码是编译通不过的。因为我们前面讲过，参数List和List编译之后都被擦除了，变成了一样的原生类型List，擦除动作导致这两个方法的特征签名变得一模一样。</p>
-<p>二、<strong>当泛型遇到catch</strong> 泛型的类型参数不能用在Java异常处理的catch语句中。因为异常处理是由JVM在运行时刻来进行的。由于类型信息被擦除，JVM是无法区分两个异常类型MyException<String>和MyException<Integer>的</p>
-<p><strong>三、当泛型内包含静态变量</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public class StaticTest&#123;</span><br><span class="line">    public static void main(String[] args)&#123;</span><br><span class="line">        GT&lt;Integer&gt; gti = new GT&lt;Integer&gt;();</span><br><span class="line">        gti.var=1;</span><br><span class="line">        GT&lt;String&gt; gts = new GT&lt;String&gt;();</span><br><span class="line">        gts.var=2;</span><br><span class="line">        System.out.println(gti.var);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class GT&lt;T&gt;&#123;</span><br><span class="line">    public static int var=0;</span><br><span class="line">    public void nothing(T x)&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>以上代码输出结果为：2！由于经过类型擦除，所有的泛型类实例都关联到同一份字节码上，泛型类的所有静态变量是共享的。</p>
-<h3 id="自动装箱与拆箱"><a href="#自动装箱与拆箱" class="headerlink" title="自动装箱与拆箱"></a>自动装箱与拆箱</h3><p><strong>对象相等比较</strong></p>
-<p>public class BoxingTest {</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    Integer a = 1000;</span><br><span class="line">    Integer b = 1000;</span><br><span class="line">    Integer c = 100;</span><br><span class="line">    Integer d = 100;</span><br><span class="line">    System.out.println(&quot;a == b is &quot; + (a == b));</span><br><span class="line">    System.out.println((&quot;c == d is &quot; + (c == d)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>输出结果：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a == b is false</span><br><span class="line">c == d is true</span><br></pre></td></tr></table></figure>
-
-<p>在Java 5中，在Integer的操作上引入了一个新功能来节省内存和提高性能。整型对象通过使用相同的对象引用实现了缓存和重用。</p>
-<blockquote>
-<p>适用于整数值区间-128 至 +127。</p>
-<p>只适用于自动装箱。使用构造函数创建对象不适用。</p>
-</blockquote>
-<h3 id="增强for循环"><a href="#增强for循环" class="headerlink" title="增强for循环"></a>增强for循环</h3><p><strong>ConcurrentModificationException</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for (Student stu : students) &#123;    </span><br><span class="line">    if (stu.getId() == 2)     </span><br><span class="line">        students.remove(stu);    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>会抛出ConcurrentModificationException异常。</p>
-<p>Iterator是工作在一个独立的线程中，并且拥有一个 mutex 锁。 Iterator被创建之后会建立一个指向原来对象的单链索引表，当原来的对象数量发生变化时，这个索引表的内容不会同步改变，所以当索引指针往后移动的时候就找不到要迭代的对象，所以按照 fail-fast 原则 Iterator 会马上抛出java.util.ConcurrentModificationException异常。</p>
-<p>所以 Iterator 在工作的时候是不允许被迭代的对象被改变的。但你可以使用 Iterator 本身的方法remove()来删除对象，Iterator.remove() 方法会在删除当前迭代对象的同时维护索引的一致性。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>前面介绍了12种Java中常用的语法糖。所谓语法糖就是提供给开发人员便于开发的一种语法而已。但是这种语法只有开发人员认识。要想被执行，需要进行解糖，即转成JVM认识的语法。当我们把语法糖解糖之后，你就会发现其实我们日常使用的这些方便的语法，其实都是一些其他更简单的语法构成的。</p>
-<p>有了这些语法糖，我们在日常开发的时候可以大大提升效率，但是同时也要避免过渡使用。使用之前最好了解下原理，避免掉坑。</p>
+<p>需要注意的是，设计高可用架构需要综合考虑业务需求、技术方案、资源投入等因素，同时需要不断进行优化和改进，以实现最优的性能和可用性。</p>
 
       
     </div>
@@ -1654,7 +1425,7 @@
 
 
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
@@ -1679,14 +1450,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>站点总字数：</span>
-    <span title="站点总字数">24k</span>
+    <span title="站点总字数">39k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>站点阅读时长 &asymp;</span>
-    <span title="站点阅读时长">1:27</span>
+    <span title="站点阅读时长">2:23</span>
   </span>
 </div>
 <div class="busuanzi-count">
@@ -1752,10 +1523,6 @@
 
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.css" integrity="sha256-AJnUHL7dBv6PGaeyPQJcgQPDjt/Hn/PvYZde1iqfp8U=" crossorigin="anonymous">
-
-<script class="next-config" data-name="gitalk" type="application/json">{"enable":true,"github_id":"xmwh171","repo":"comment","client_id":"ba5f250b57416ca5966e","client_secret":"48c1b5e88e4c37bccc0f64cd132944419664d3a6","admin_user":null,"distraction_free_mode":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token","language":null,"js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/gitalk/1.8.0/gitalk.min.js","integrity":"sha256-MVK9MGD/XJaGyIghSVrONSnoXoGh3IFxLw0zfvzpxR4="},"path_md5":"d1546d731a9f30cc80127d57142a482b"}</script>
-<script src="/js/third-party/comments/gitalk.js"></script>
 
 <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":350},"mobile":{"show":false},"log":false});</script></body>
 </html>

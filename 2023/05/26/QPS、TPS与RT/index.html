@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha256-HtsXJanqjKTc8vVQjO4YMhiqFoXkfBsjBWcX91T1jr8=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="RT响应时间(Response Time)，是指从客户端发一个请求开始计时，到客户端接收到从服务器端返回的响应结果结束所经历的时间。 当我们评价一个网站的”快”和”慢”的时候，其实说的就是他的RT时间的长和短。当我们访问某个网站，有时候我们会说这个网站很”卡”，其实言下之意说的就是这个网站的RT很长。 如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QPS、TPS与RT">
+<meta property="og:url" content="http://example.com/2023/05/26/QPS%E3%80%81TPS%E4%B8%8ERT/index.html">
+<meta property="og:site_name" content="心梦无痕">
+<meta property="og:description" content="RT响应时间(Response Time)，是指从客户端发一个请求开始计时，到客户端接收到从服务器端返回的响应结果结束所经历的时间。 当我们评价一个网站的”快”和”慢”的时候，其实说的就是他的RT时间的长和短。当我们访问某个网站，有时候我们会说这个网站很”卡”，其实言下之意说的就是这个网站的RT很长。 如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261514980.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515576.jpg">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515366.jpg">
+<meta property="article:published_time" content="2023-05-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-26T07:42:31.961Z">
+<meta property="article:author" content="ZYH">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261514980.jpg">
+
+
+<link rel="canonical" href="http://example.com/2023/05/26/QPS%E3%80%81TPS%E4%B8%8ERT/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/26/QPS%E3%80%81TPS%E4%B8%8ERT/","path":"2023/05/26/QPS、TPS与RT/","title":"QPS、TPS与RT"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>QPS、TPS与RT | 心梦无痕</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+    
+   <script type = "text/javascript" src="/js/love-click.js"></script > 
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">心梦无痕</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+		
+	
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#RT"><span class="nav-number">1.</span> <span class="nav-text">RT</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#QPS"><span class="nav-number">2.</span> <span class="nav-text">QPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TPS"><span class="nav-number">3.</span> <span class="nav-text">TPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%94%A8%E6%88%B7%E6%95%B0"><span class="nav-number">4.</span> <span class="nav-text">并发用户数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E7%BA%BF%E7%A8%8B%E6%95%B0"><span class="nav-number">5.</span> <span class="nav-text">最佳线程数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+	
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ZYH"
+      src="/images/yh.jpeg">
+  <p class="site-author-name" itemprop="name">ZYH</p>
+  <div class="site-description" itemprop="description">技术博客</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xmwh171" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xmwh171" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://bilibili.com/" title="https:&#x2F;&#x2F;bilibili.com" rel="noopener" target="_blank">b站</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.baidu.com/" title="https:&#x2F;&#x2F;www.baidu.com" rel="noopener" target="_blank">百度</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+	
+	<!-- require APlayer 音乐播放器-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
+	<!-- require MetingJS-->
+	<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
+	<meting-js
+		auto="https://y.qq.com/n/ryqq/playlist/8908070873.html#stat=y_new.playlist.pic_click">
+	</meting-js>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/QPS%E3%80%81TPS%E4%B8%8ERT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="QPS、TPS与RT | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QPS、TPS与RT
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:42:31" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E6%80%A7%E8%83%BD/" itemprop="url" rel="index"><span itemprop="name">高性能</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="RT"><a href="#RT" class="headerlink" title="RT"></a>RT</h2><p>响应时间(Response Time)，是指从客户端发一个请求开始计时，到客户端接收到从服务器端返回的响应结果结束所经历的时间。</p>
+<p>当我们评价一个网站的”快”和”慢”的时候，其实说的就是他的RT时间的长和短。当我们访问某个网站，有时候我们会说这个网站很”卡”，其实言下之意说的就是这个网站的RT很长。</p>
+<p>如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需要重点优化的。</p>
+<p>拿一个游乐园的例子来说明一下可能会比较容易理解，比如我们去迪士尼乐园游玩时候，大多数的项目都是需要排队的。</p>
+<p>为了让游客知道一个项目需要排队多久才能玩上，迪士尼做了很多事情，比如他们有一个App，专门可以提示每个项目的预计排队时间。再有就是每个项目的排队处都有一个小牌牌，上面写着预计排队时间。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261514980.jpg" alt="img"></p>
+<p>但是，这个时间并不是凭空设定出来的，而是『计算』出来的。</p>
+<p>迪士尼的排队时间计算方法：</p>
+<p>1、迪士尼在每个项目的入口处和出口处都会设置工作人员。 2、入口处工作人员随机寻找游客，给游客一张小纸条，上面记录着游客开始排队的时间。 3、入口处工作人员提醒游客，项目游览玩之后，在出口处把小纸条交还给出口处的工作人员。 4、出口处工作人员在收到游客的小纸条后，会用：当前时间-游客开始排队的时间 &#x3D; 排队时长。 5、为了尽量让数据准确，一般会收集多个排队时长之后，计算一个平均值。</p>
+<p>以上就是迪士尼的排队时间计算法。其实，这也是RT的计算方法。在一个请求开始的时候记录时间，请求结束的时候再记录时间，两个时间的差值，就是RT了。</p>
+<p>如果一个网站的RT很长的话，就会特别的影响用户体验。所以，RT是很重要的一个指标。也是各个网站需要重点优化的。</p>
+<p>服务器响应时间也有多部分组成，一般包含：请求发送时间、网络传输时间和服务器处理时间等三部分。</p>
+<h2 id="QPS"><a href="#QPS" class="headerlink" title="QPS"></a>QPS</h2><p>QPS，指的是系统每秒能处理的请求数(Query Per Second) ，在Web应用中我们更关注的是Web应用每秒能处理的request数量。这个是衡量系统性能的重要指标。有时候，我们也称之为<strong>吞吐量</strong>。</p>
+<p>QPS和RT几乎总是成对出现的。当我们评价迪士尼的一个项目的好坏的时候，通常会包含这几个指标：是否好玩、游玩时长以及可以同时容纳多少人。</p>
+<p>这个可以同时容纳多少人，就可以简单的理解为QPS。很大程度上，一个项目同时可以容纳多少人，其实会大大的影响游客的游玩时长。</p>
+<p>所以，QPS和RT之间是有着一定的关系的：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">RT=并发数/QPS</span><br><span class="line">QPS=并发数/RT</span><br></pre></td></tr></table></figure>
+
+<p>虽然上面的等式看上去，在并发数一定的情况下，想要提升QPS的话就只能降低RT。但其实并不是，以上只是QPS的计算方法。想要提升QPS往往有很多手段。</p>
+<p>就像想要提升游乐设施的吞吐量，最首先想到的办法就是升级设备，比如增加游乐场地的面积，增加设备的座位数目，增加排队的队伍个数等。</p>
+<p>在计算机系统中，想要提升QPS，主要可以在CPU、内存等硬件上面下功夫，比如提升CPU利用率、增加CPU数目、提升内存等。</p>
+<h2 id="TPS"><a href="#TPS" class="headerlink" title="TPS"></a>TPS</h2><p>TPS：是Transactions Per Second的缩写，也就是事务数&#x2F;秒。一个事务是指一个客户机向服务器发送请求然后服务器做出反应的过程。客户机在发送请求时开始计时，收到服务器响应后结束计时，以此来计算使用的时间和完成的事务个数。</p>
+<p>一次事务包含了以下三个过程：</p>
+<p>1）用户请求服务器<br>2）服务器自己的内部处理<br>3）服务器返回给用户</p>
+<p>所以，TPS包含的时长就是三个过程的总和。</p>
+<h2 id="并发用户数"><a href="#并发用户数" class="headerlink" title="并发用户数"></a>并发用户数</h2><p>并发用户数指的就是同时跑到一个项目前面排队的人数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515576.jpg" alt="img"></p>
+<p>关于并发用户数有两种常见的错误观点。</p>
+<p>一种错误观点是把并发用户数量理解为使用系统的全部用户的数量；（比如迪士尼的飞跃地平线项目一天可能会接纳50万人，我们不能说这个50万就是并发用户数）</p>
+<p>还有一种错误观点是把用户在线数量理解为并发用户数量。（比如晚上六点的时候，迪士尼的飞跃地平线项目排队加观看人数共有1万人，我们不能说这个1万就是并发用户数）</p>
+<p>并发用户数量的正确理解为：在<strong>同一时刻</strong>与服务器<strong>进行了交互</strong>的<strong>在线用户数量</strong>。（我们说，晚上六点的时候，共有8000人正在和正在排队使用飞跃地平线这个项目。这才是并发用户数）</p>
+<p>拿系统来说，我们说淘宝详情页的并发用户数，其实说的是同一时刻请求查看详情页的用户个数。有些用户虽然也在浏览详情页，但是它并没有在并发时刻和系统有交互，这就不算的。</p>
+<h2 id="最佳线程数"><a href="#最佳线程数" class="headerlink" title="最佳线程数"></a>最佳线程数</h2><p>最佳线程数指的就是一个项目最多可以容纳的人数，这里的容纳可以包含排队的人数。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261515366.jpg" alt="img"></p>
+<p>迪士尼每新开一个场馆或者一个游戏项目的时候，都会是一个试运营的阶段。在试运营阶段，通过不断调整并发用户数来观察整个场馆或者项目的运行情况。</p>
+<p>除了上线新场馆和新项目以外，有的是在节假日之前也会有一些类似的实验。</p>
+<p>这和计算机软件的压测很像。就是不断的提高请求数目，来观察系统的QPS和系统的其他指标，如CPU情况、内存情况等。</p>
+<p>性能压测的情况下，起初随着用户数的增加，QPS会上升并对CPU等影响不大，当到了一定的阀值之后，用户数量增加QPS并不会增加，或者增加不明显，同时CPU Load有飙高、内存占用大等情况发生。随之而来的伴随着请求的响应时间大幅增加。这个阀值我们认为是最佳线程数。</p>
+<p>如果并发请求数目，超过了系统的最佳线程数，那么就会导致激烈的资源竞争，随着资源的匮乏甚至枯竭，整个系统也就面临着灾难。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>QPS (Queries Per Second)：是指在一秒钟内完成的查询次数。通常用于衡量系统性能。</li>
+<li>TPS (Transactions Per Second)：是指在一秒钟内完成的事务处理次数，一个事务可以包含一个或多个查询操作。相对于QPS更强调业务处理，如交易系统等。</li>
+<li>RT (Response Time)：是指从发送请求到收到响应的时间。通常用于衡量系统响应速度和用户体验。</li>
+</ul>
+<p>总之，QPS和TPS主要是用来衡量系统的处理能力，而RT则更加关注系统的响应速度和用户体验。</p>
+
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+		
+	</div>
+
+    <footer class="post-footer">
+          <div class="reward-container">
+  <div>请我一杯咖啡吧！</div>
+  <button>
+    赞赏
+  </button>
+  <div class="post-reward">
+      <div>
+        <img src="/images/wechatpay.jpg" alt="ZYH 微信">
+        <span>微信</span>
+      </div>
+      <div>
+        <img src="/images/alipay.jpg" alt="ZYH 支付宝">
+        <span>支付宝</span>
+      </div>
+
+  </div>
+</div>
+
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/26/SLA/" rel="prev" title="SLA">
+                  <i class="fa fa-chevron-left"></i> SLA
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/05/26/DDD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B/" rel="next" title="DDD的实现流程">
+                  DDD的实现流程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ZYH</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>站点总字数：</span>
+    <span title="站点总字数">39k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>站点阅读时长 &asymp;</span>
+    <span title="站点阅读时长">2:23</span>
+  </span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>
+</span>
+</div>
+
+    </div>
+  </footer>
+ 
+	
+	<script type="text/javascript"
+	color="0,0,255" opacity='0.7' zIndex="-2" count="99" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+	
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/next-theme-pjax/0.6.0/pjax.min.js" integrity="sha256-vxLn1tSKWD4dqbMRyv940UYw4sXgMtYcK6reefzZrao=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script><script src="/js/pjax.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+
+  
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hibiki.model.json"},"display":{"position":"right","width":150,"height":350},"mobile":{"show":false},"log":false});</script></body>
+</html>
+
