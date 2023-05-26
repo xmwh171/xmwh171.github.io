@@ -19,28 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.16.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="典型回答反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。   Java的反射可以：  在运行时判断任意一个对象所属的类。  在运行时判断任意一个类所具有的成员变量和方法。  在运行时任意调用一个对象的方法  在运行时构造任意一个类的对象   反射的好处就是可以提升程序的灵活性和扩展性，比较容易在运行期干很多事情。但是他带">
+    <meta name="description" content="领域驱动设计（DDD）是一种面向领域的软件设计方法。它强调将业务知识和业务逻辑集成到软件设计中，从而提高软件系统的可维护性、可扩展性和可测试性。DDD 的实现流程主要包括以下几个步骤： 1.确定业务领域首先，需要明确软件系统要解决的业务问题，并确定业务领域的边界。业务领域是指具有内在一致性和自治性的业务范畴，它包含了一些核心概念、业务规则和业务流程。 （假设我们要对一个电商网站进行DDD落地，首先">
 <meta property="og:type" content="article">
-<meta property="og:title" content="什么是反射机制？为什么反射慢？">
-<meta property="og:url" content="http://example.com/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/index.html">
+<meta property="og:title" content="DDD的实现流程">
+<meta property="og:url" content="http://example.com/2023/05/26/DDD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B/index.html">
 <meta property="og:site_name" content="心梦无痕">
-<meta property="og:description" content="典型回答反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。   Java的反射可以：  在运行时判断任意一个对象所属的类。  在运行时判断任意一个类所具有的成员变量和方法。  在运行时任意调用一个对象的方法  在运行时构造任意一个类的对象   反射的好处就是可以提升程序的灵活性和扩展性，比较容易在运行期干很多事情。但是他带">
+<meta property="og:description" content="领域驱动设计（DDD）是一种面向领域的软件设计方法。它强调将业务知识和业务逻辑集成到软件设计中，从而提高软件系统的可维护性、可扩展性和可测试性。DDD 的实现流程主要包括以下几个步骤： 1.确定业务领域首先，需要明确软件系统要解决的业务问题，并确定业务领域的边界。业务领域是指具有内在一致性和自治性的业务范畴，它包含了一些核心概念、业务规则和业务流程。 （假设我们要对一个电商网站进行DDD落地，首先">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-05-25T02:48:03.000Z">
-<meta property="article:modified_time" content="2023-05-25T10:52:01.330Z">
+<meta property="article:published_time" content="2023-05-25T16:00:00.000Z">
+<meta property="article:modified_time" content="2023-05-26T03:04:16.314Z">
 <meta property="article:author" content="ZYH">
-<meta property="article:tag" content="反射">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/">
+<link rel="canonical" href="http://example.com/2023/05/26/DDD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/","path":"2023/05/25/什么是反射机制？为什么反射慢？/","title":"什么是反射机制？为什么反射慢？"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2023/05/26/DDD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B/","path":"2023/05/26/DDD的实现流程/","title":"DDD的实现流程"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>什么是反射机制？为什么反射慢？ | 心梦无痕</title>
+<title>DDD的实现流程 | 心梦无痕</title>
   
 
 
@@ -129,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -143,7 +142,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B8%E5%9E%8B%E5%9B%9E%E7%AD%94"><span class="nav-number">1.</span> <span class="nav-text">典型回答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E7%9F%A5%E8%AF%86"><span class="nav-number">2.</span> <span class="nav-text">扩展知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%B8%B8%E8%A7%81%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">反射常见的使用方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E5%92%8CClass%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">2.2.</span> <span class="nav-text">反射和Class的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%8D%E5%B0%84%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B"><span class="nav-number">2.3.</span> <span class="nav-text">反射破坏单例</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -219,7 +217,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/DDD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/yh.jpeg">
@@ -232,12 +230,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="什么是反射机制？为什么反射慢？ | 心梦无痕">
+      <meta itemprop="name" content="DDD的实现流程 | 心梦无痕">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          什么是反射机制？为什么反射慢？
+          DDD的实现流程
         </h1>
 
         <div class="post-meta-container">
@@ -249,7 +247,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：18:52:01" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：11:04:16" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,7 +255,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+          <a href="/categories/DDD/" itemprop="url" rel="index"><span itemprop="name">DDD</span></a>
         </span>
     </span>
 
@@ -275,14 +273,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>762</span>
+      <span>1.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>5 分钟</span>
     </span>
 </div>
 
@@ -292,46 +290,41 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。  </p>
-<p>Java的反射可以：</p>
-<ol>
-<li><p>在运行时判断任意一个对象所属的类。</p>
+    <div class="post-body" itemprop="articleBody"><p>领域驱动设计（DDD）是一种面向领域的软件设计方法。它强调将业务知识和业务逻辑集成到软件设计中，从而提高软件系统的可维护性、可扩展性和可测试性。DDD 的实现流程主要包括以下几个步骤：</p>
+<p><strong>1</strong>.<strong>确定业务领域</strong><br>首先，<strong>需要明确软件系统要解决的业务问题，并确定业务领域的边界。</strong>业务领域是指具有内在一致性和自治性的业务范畴，它包含了一些核心概念、业务规则和业务流程。</p>
+<p>（假设我们要对一个电商网站进行DDD落地，首先，需要明确电商系统要解决的业务问题，即为用户提供方便快捷的购物体验。<strong>业务领域的边界为商品、订单和用户三个核心领域</strong>。）</p>
+<p><strong>2</strong>.<strong>设计领域模型</strong><br>在确定业务领域之后，需要设计领域模型。领域模型是用来描述业务领域的核心概念、业务规则和业务流程的一种图形化表示方式。它由实体、值对象、聚合、领域服务和事件等元素组成。</p>
+<p>（接着，需要设计领域模型。商品、订单和用户分别是三个领域，它们分别由实体、值对象、聚合、领域服务和事件等元素组成。例如，商品领域可以设计为Product实体，包含商品ID、商品名称、商品描述、商品价格等属性；订单领域可以设计为Order聚合，包含订单ID、用户ID、订单状态、订单金额等属性，同时包含OrderItem实体和Delivery值对象；用户领域可以设计为User实体，包含用户ID、用户名称、用户地址、用户手机号等属性。）</p>
+<p><strong>3.建立统一语言</strong><br>为了确保所有团队成员都能够理解和共享业务知识，需要建立统一的业务语言。这个语言应该是简单、清晰、精确和易于理解的，以便能够准确地表达业务概念和业务规则。</p>
+<p>（为了确保所有团队成员都能够理解和共享业务知识，需要建立统一的业务语言。例如，商品领域中可以定义“商品价格”表示商品的单价，而不是“商品单价”或者“商品售价”。）</p>
+<p><strong>4.实现领域模型</strong><br>在设计好领域模型之后，需要将它们转化为实际的代码。实现领域模型需要注意以下几点：</p>
+<ul>
+<li><p>将领域对象封装到聚合中，并保证聚合内的对象保持一致性。</p>
 </li>
-<li><p>在运行时判断任意一个类所具有的成员变量和方法。</p>
+<li><p>实现领域服务，以实现领域模型之间的交互和协作。</p>
 </li>
-<li><p>在运行时任意调用一个对象的方法</p>
+<li><p>使用领域事件来传递领域对象之间的消息。</p>
 </li>
-<li><p>在运行时构造任意一个类的对象</p>
-</li>
-</ol>
-<p>反射的好处就是可以提升程序的灵活性和扩展性，比较容易在运行期干很多事情。但是他带来的问题更多，主要由以下几个：</p>
-<p>1、代码可读性低及可维护性</p>
-<p>2、反射代码执行的性能低</p>
-<p>3、反射破坏了封装性</p>
-<p>所以，我们应该在业务代码中应该尽量避免使用反射。但是，作为一个合格的Java开发，也要能读懂中间件、框架中的反射代码。在有些场景下，要知道可以使用反射解决部分问题。</p>
-<p>那么，反射为什么慢呢？主要由以下几个原因：</p>
-<p>1、由于反射涉及动态解析的类型，因此不能执行某些Java虚拟机优化，如JIT优化。</p>
-<p>2、在使用反射时，参数需要包装（boxing)成Object[] 类型，但是真正方法执行的时候，又需要再拆包（unboxing)成真正的类型，这些动作不仅消耗时间，而且过程中也会产生很多对象，对象一多就容易导致GC，GC也会导致应用变慢。</p>
-<p>3、反射调用方法时会从方法数组中遍历查找，并且会检查可见性。这些动作都是耗时的。</p>
-<p>4、不仅方法的可见性要做检查，参数也需要做很多额外的检查。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="反射常见的使用方式"><a href="#反射常见的使用方式" class="headerlink" title="反射常见的使用方式"></a>反射常见的使用方式</h3><ol>
-<li><p>动态代理</p>
-</li>
-<li><p>JDBC的class.forName</p>
-</li>
-<li><p>BeanUtils中属性值得拷贝</p>
-</li>
-<li><p>RPC框架</p>
-</li>
-<li><p>ORM框架</p>
-</li>
-<li><p>Spring的IOC&#x2F;DI</p>
-</li>
-</ol>
-<h3 id="反射和Class的关系"><a href="#反射和Class的关系" class="headerlink" title="反射和Class的关系"></a>反射和Class的关系</h3><p>Java的Class类是java反射机制的基础,通过Class类我们可以获得关于一个类的相关信息</p>
-<p>Java.lang.Class是一个比较特殊的类，它用于封装被装入到JVM中的类（包括类和接口）的信息。当一个类或接口被装入的JVM时便会产生一个与之关联的java.lang.Class对象，可以通过这个Class对象对被装入类的详细信息进行访问。</p>
-<p>虚拟机为每种类型管理一个独一无二的Class对象。也就是说，每个类（型）都有一个Class对象。运行程序时，Java虚拟机(JVM)首先检查是否所要加载的类对应的Class对象是否已经加载。如果没有加载，JVM就会根据类名查找.class文件，并将其Class对象载入。</p>
-<h3 id="反射破坏单例"><a href="#反射破坏单例" class="headerlink" title="反射破坏单例"></a>反射破坏单例</h3><p><a href="../%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F">如何破坏单例模式</a></p>
+</ul>
+<p>（在设计好领域模型之后，需要将它们转化为实际的代码。实现领域模型需要注意以下几点：</p>
+<ul>
+<li>在聚合中封装实体和值对象，并保证聚合内的对象保持一致性。</li>
+<li>实现领域服务，例如OrderService，负责创建订单、取消订单、查询订单等操作。</li>
+<li>使用领域事件来传递领域对象之间的消息，例如OrderCreatedEvent，表示订单已经被创建。）</li>
+</ul>
+<p><strong>5.应用架构设计</strong><br>除了领域模型之外，还需要设计应用架构。应用架构包括了应用层、基础设施层和表示层等组件。应用层负责处理用户请求和协调领域对象的交互，基础设施层负责提供数据持久化和外部服务访问等功能，表示层负责将应用程序的结果展示给用户。</p>
+<p>（除了领域模型之外，还需要设计应用架构。应用架构包括了应用层、基础设施层和表示层等组件。应用层负责处理用户请求和协调领域对象的交互，基础设施层负责提供数据持久化和外部服务访问等功能，表示层负责将应用程序的结果展示给用户。）</p>
+<p><strong>6.领域驱动设计实践</strong><br>最后，需要实践领域驱动设计。实践过程中需要注意以下几点：</p>
+<ul>
+<li>确保领域模型和业务需求的一致性。</li>
+<li>实时更新领域模型，以应对业务需求的变化。</li>
+<li>鼓励团队成员共同参与领域模型的设计和实现。</li>
+</ul>
+<p>（最后，需要实践领域驱动设计。实践过程中需要注意以下几点：</p>
+<ul>
+<li>确保领域模型和业务需求的一致性。例如，修改商品价格时，需要同步更新所有已经下单但未支付的订单的金额。</li>
+<li>实时更新领域模型，以应对业务需求的变化。例如，新增促销活动时，需要修改商品领域模型，增加促销价格属性。）</li>
+</ul>
 
     </div>
 
@@ -369,21 +362,18 @@
   </div>
 </div>
 
-          <div class="post-tags">
-              <a href="/tags/%E5%8F%8D%E5%B0%84/" rel="tag"><i class="fa fa-tag"></i> 反射</a>
-          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/05/25/%E5%A6%82%E4%BD%95%E7%A0%B4%E5%9D%8F%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/" rel="prev" title="如何破坏单例模式">
-                  <i class="fa fa-chevron-left"></i> 如何破坏单例模式
+                <a href="/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E4%BD%93%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E5%AF%B9%E8%B1%A1/" rel="prev" title="什么是实体，什么是值对象">
+                  <i class="fa fa-chevron-left"></i> 什么是实体，什么是值对象
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/" rel="next" title="Java中创建对象有哪些种方式">
-                  Java中创建对象有哪些种方式 <i class="fa fa-chevron-right"></i>
+                <a href="/2023/05/26/Java%E6%B3%A8%E8%A7%A3/" rel="next" title="Java注解">
+                  Java注解 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

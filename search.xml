@@ -1,6 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>DDD的实现流程</title>
+    <url>/2023/05/26/DDD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%B5%81%E7%A8%8B/</url>
+    <content><![CDATA[<p>领域驱动设计（DDD）是一种面向领域的软件设计方法。它强调将业务知识和业务逻辑集成到软件设计中，从而提高软件系统的可维护性、可扩展性和可测试性。DDD 的实现流程主要包括以下几个步骤：</p>
+<p><strong>1</strong>.<strong>确定业务领域</strong><br>首先，<strong>需要明确软件系统要解决的业务问题，并确定业务领域的边界。</strong>业务领域是指具有内在一致性和自治性的业务范畴，它包含了一些核心概念、业务规则和业务流程。</p>
+<p>（假设我们要对一个电商网站进行DDD落地，首先，需要明确电商系统要解决的业务问题，即为用户提供方便快捷的购物体验。<strong>业务领域的边界为商品、订单和用户三个核心领域</strong>。）</p>
+<p><strong>2</strong>.<strong>设计领域模型</strong><br>在确定业务领域之后，需要设计领域模型。领域模型是用来描述业务领域的核心概念、业务规则和业务流程的一种图形化表示方式。它由实体、值对象、聚合、领域服务和事件等元素组成。</p>
+<p>（接着，需要设计领域模型。商品、订单和用户分别是三个领域，它们分别由实体、值对象、聚合、领域服务和事件等元素组成。例如，商品领域可以设计为Product实体，包含商品ID、商品名称、商品描述、商品价格等属性；订单领域可以设计为Order聚合，包含订单ID、用户ID、订单状态、订单金额等属性，同时包含OrderItem实体和Delivery值对象；用户领域可以设计为User实体，包含用户ID、用户名称、用户地址、用户手机号等属性。）</p>
+<p><strong>3.建立统一语言</strong><br>为了确保所有团队成员都能够理解和共享业务知识，需要建立统一的业务语言。这个语言应该是简单、清晰、精确和易于理解的，以便能够准确地表达业务概念和业务规则。</p>
+<p>（为了确保所有团队成员都能够理解和共享业务知识，需要建立统一的业务语言。例如，商品领域中可以定义“商品价格”表示商品的单价，而不是“商品单价”或者“商品售价”。）</p>
+<p><strong>4.实现领域模型</strong><br>在设计好领域模型之后，需要将它们转化为实际的代码。实现领域模型需要注意以下几点：</p>
+<ul>
+<li><p>将领域对象封装到聚合中，并保证聚合内的对象保持一致性。</p>
+</li>
+<li><p>实现领域服务，以实现领域模型之间的交互和协作。</p>
+</li>
+<li><p>使用领域事件来传递领域对象之间的消息。</p>
+</li>
+</ul>
+<p>（在设计好领域模型之后，需要将它们转化为实际的代码。实现领域模型需要注意以下几点：</p>
+<ul>
+<li>在聚合中封装实体和值对象，并保证聚合内的对象保持一致性。</li>
+<li>实现领域服务，例如OrderService，负责创建订单、取消订单、查询订单等操作。</li>
+<li>使用领域事件来传递领域对象之间的消息，例如OrderCreatedEvent，表示订单已经被创建。）</li>
+</ul>
+<p><strong>5.应用架构设计</strong><br>除了领域模型之外，还需要设计应用架构。应用架构包括了应用层、基础设施层和表示层等组件。应用层负责处理用户请求和协调领域对象的交互，基础设施层负责提供数据持久化和外部服务访问等功能，表示层负责将应用程序的结果展示给用户。</p>
+<p>（除了领域模型之外，还需要设计应用架构。应用架构包括了应用层、基础设施层和表示层等组件。应用层负责处理用户请求和协调领域对象的交互，基础设施层负责提供数据持久化和外部服务访问等功能，表示层负责将应用程序的结果展示给用户。）</p>
+<p><strong>6.领域驱动设计实践</strong><br>最后，需要实践领域驱动设计。实践过程中需要注意以下几点：</p>
+<ul>
+<li>确保领域模型和业务需求的一致性。</li>
+<li>实时更新领域模型，以应对业务需求的变化。</li>
+<li>鼓励团队成员共同参与领域模型的设计和实现。</li>
+</ul>
+<p>（最后，需要实践领域驱动设计。实践过程中需要注意以下几点：</p>
+<ul>
+<li>确保领域模型和业务需求的一致性。例如，修改商品价格时，需要同步更新所有已经下单但未支付的订单的金额。</li>
+<li>实时更新领域模型，以应对业务需求的变化。例如，新增促销活动时，需要修改商品领域模型，增加促销价格属性。）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java中创建对象有哪些种方式</title>
     <url>/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
@@ -26,27 +69,6 @@
 <h3 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h3><p>当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。其实反序列化也是基于反射实现的。</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //Initializes The Object</span><br><span class="line">    User1 user = new User1();</span><br><span class="line">    user.setName(&quot;hollis&quot;);</span><br><span class="line">    user.setAge(23);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    //Write Obj to File</span><br><span class="line">    ObjectOutputStream oos = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(oos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //Read Obj from File</span><br><span class="line">    File file = new File(&quot;tempFile&quot;);</span><br><span class="line">    ObjectInputStream ois = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        User1 newUser = (User1) ois.readObject();</span><br><span class="line">        System.out.println(newUser);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(ois);</span><br><span class="line">        try &#123;</span><br><span class="line">            FileUtils.forceDelete(file);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Java是如何实现平台无关性的</title>
-    <url>/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
-<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
-<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
-<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
-<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
-<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
-<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
-<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
-<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
-<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
-<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
-<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
 ]]></content>
       <categories>
         <category>java基础</category>
@@ -199,51 +221,25 @@
       </categories>
   </entry>
   <entry>
-    <title>Java注解</title>
-    <url>/2023/05/26/Java%E6%B3%A8%E8%A7%A3/</url>
-    <content><![CDATA[<p>注解是Java提供的设置程序中元素的关联信息和元数据的方法，它是一个接口</p>
-<h2 id="标准注解"><a href="#标准注解" class="headerlink" title="标准注解"></a>标准注解</h2><p>@Override，覆盖超类中的方法</p>
-<p>@Deprecated，编译器会发出警告信息。</p>
-<p>@SuppressWarnings，关闭不当的编译器警告信息。</p>
-<h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><p>说简单点，就是 定义其他注解的注解 。</p>
-<h3 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h3><p>它是被定义在一个注解类的前面，用来说明该注解的生命周期。</p>
-<p> 　　它有以下参数： </p>
-<p> 　　　　 RetentionPolicy.SOURCE：指定注解只保留在源文件当中。</p>
-<p> 　　　　 RetentionPolicy.CLASS：指定注解只保留在class文件中。(缺省)</p>
-<p>  　　　　RetentionPolicy.RUNTIME：运行期也保留注释，因此可以通过反射机制读取注解的信息。</p>
-<h3 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h3><p>它是被定义在一个注解类的前面，用来说明该注解可以被声明在哪些元素前。(默认可以放在任何元素之前)</p>
-<p> 　　它有以下参数： </p>
-<p>　　　　ElementType.TYPE：说明该注解只能被声明在一个类、接口、枚举前。 </p>
-<p>　　　　ElementType.FIELD：说明该注解只能被声明在一个类的字段前。</p>
-<p>　　　　ElementType.METHOD：说明该注解只能被声明在一个类的方法前。</p>
-<p>　　　　ElementType.PARAMETER：说明该注解只能被声明在一个方法参数前。 </p>
-<p>　　　　ElementType.CONSTRUCTOR：说明该注解只能声明在一个类的构造方法前。</p>
-<p>　　　　ElementType.LOCAL_VARIABLE：说明该注解只能声明在一个局部变量前。</p>
-<p>　　　　ElementType.ANNOTATION_TYPE：说明该注解只能声明在一个注解类型前。</p>
-<p>　　　　ElementType.PACKAGE：说明该注解只能声明在一个包名前。</p>
-<h3 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h3><p>表明该注解将会被子类继承。需要说明的是，加上该元注解的注解，只有用在类元素上才有效果。但是在其他元素上的注解，只要你没有覆盖父类中的元素，是会继承过来的。这就是为什么有getDeclaredAnnotations()和getAnnotations()的原因。</p>
-<h3 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h3><p>　表明在生成JavaDoc文档时，该注解也会出现在javaDoc文档中。</p>
-<p>比如Override这个注解，就不是一个元注解。而是通过元注解定义出来的。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.SOURCE)</span><br><span class="line">public @interface Override &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p>使用@interface 自定义一个注解，通过反射获取注解信息</p>
-<p>@Documented</p>
-<p>@Retention(RetentionPolicy.RUNTIME)</p>
-<p>@Target({ElementType.TYPE,ElementType.METHOD})</p>
-<p>public @interface ReqResLogfilter {</p>
-<p>​    String filter1();      </p>
-<p>​    String filter2() default “”;</p>
-<p>}</p>
-<h2 id="如何判断注解"><a href="#如何判断注解" class="headerlink" title="如何判断注解"></a>如何判断注解</h2><p>可以通过反射来判断类，方法，字段上是否有某个注解以及获取注解中的值, 获取某个类中方法上的注解代码示例如下：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Class clz = bean.getClass();</span><br><span class="line">Method[] methods = clz.getMethods();</span><br><span class="line">for (Method method : methods) &#123;</span><br><span class="line">if (method.isAnnotationPresent(EnableAuth.class)) &#123;</span><br><span class="line">    String name = method.getAnnotation(EnableAuth.class).name();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+    <title>Java是如何实现平台无关性的</title>
+    <url>/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/</url>
+    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
+<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
+<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
+<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
+<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
+<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
+<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
+<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
+<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
+<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
+<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
+<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
 ]]></content>
       <categories>
         <category>java基础</category>
       </categories>
-      <tags>
-        <tag>注解</tag>
-      </tags>
   </entry>
   <entry>
     <title>String、StringBuilder和StringBuffer的区别</title>
@@ -310,6 +306,53 @@
       <categories>
         <category>java基础</category>
       </categories>
+  </entry>
+  <entry>
+    <title>Java注解</title>
+    <url>/2023/05/26/Java%E6%B3%A8%E8%A7%A3/</url>
+    <content><![CDATA[<p>注解是Java提供的设置程序中元素的关联信息和元数据的方法，它是一个接口</p>
+<h2 id="标准注解"><a href="#标准注解" class="headerlink" title="标准注解"></a>标准注解</h2><p>@Override，覆盖超类中的方法</p>
+<p>@Deprecated，编译器会发出警告信息。</p>
+<p>@SuppressWarnings，关闭不当的编译器警告信息。</p>
+<h2 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h2><p>说简单点，就是 定义其他注解的注解 。</p>
+<h3 id="Retention"><a href="#Retention" class="headerlink" title="@Retention"></a>@Retention</h3><p>它是被定义在一个注解类的前面，用来说明该注解的生命周期。</p>
+<p> 　　它有以下参数： </p>
+<p> 　　　　 RetentionPolicy.SOURCE：指定注解只保留在源文件当中。</p>
+<p> 　　　　 RetentionPolicy.CLASS：指定注解只保留在class文件中。(缺省)</p>
+<p>  　　　　RetentionPolicy.RUNTIME：运行期也保留注释，因此可以通过反射机制读取注解的信息。</p>
+<h3 id="Target"><a href="#Target" class="headerlink" title="@Target"></a>@Target</h3><p>它是被定义在一个注解类的前面，用来说明该注解可以被声明在哪些元素前。(默认可以放在任何元素之前)</p>
+<p> 　　它有以下参数： </p>
+<p>　　　　ElementType.TYPE：说明该注解只能被声明在一个类、接口、枚举前。 </p>
+<p>　　　　ElementType.FIELD：说明该注解只能被声明在一个类的字段前。</p>
+<p>　　　　ElementType.METHOD：说明该注解只能被声明在一个类的方法前。</p>
+<p>　　　　ElementType.PARAMETER：说明该注解只能被声明在一个方法参数前。 </p>
+<p>　　　　ElementType.CONSTRUCTOR：说明该注解只能声明在一个类的构造方法前。</p>
+<p>　　　　ElementType.LOCAL_VARIABLE：说明该注解只能声明在一个局部变量前。</p>
+<p>　　　　ElementType.ANNOTATION_TYPE：说明该注解只能声明在一个注解类型前。</p>
+<p>　　　　ElementType.PACKAGE：说明该注解只能声明在一个包名前。</p>
+<h3 id="Inherited"><a href="#Inherited" class="headerlink" title="@Inherited"></a>@Inherited</h3><p>表明该注解将会被子类继承。需要说明的是，加上该元注解的注解，只有用在类元素上才有效果。但是在其他元素上的注解，只要你没有覆盖父类中的元素，是会继承过来的。这就是为什么有getDeclaredAnnotations()和getAnnotations()的原因。</p>
+<h3 id="Documented"><a href="#Documented" class="headerlink" title="@Documented"></a>@Documented</h3><p>　表明在生成JavaDoc文档时，该注解也会出现在javaDoc文档中。</p>
+<p>比如Override这个注解，就不是一个元注解。而是通过元注解定义出来的。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">@Target(ElementType.METHOD)</span><br><span class="line">@Retention(RetentionPolicy.SOURCE)</span><br><span class="line">public @interface Override &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><p>使用@interface 自定义一个注解，通过反射获取注解信息</p>
+<p>@Documented</p>
+<p>@Retention(RetentionPolicy.RUNTIME)</p>
+<p>@Target({ElementType.TYPE,ElementType.METHOD})</p>
+<p>public @interface ReqResLogfilter {</p>
+<p>​    String filter1();      </p>
+<p>​    String filter2() default “”;</p>
+<p>}</p>
+<h2 id="如何判断注解"><a href="#如何判断注解" class="headerlink" title="如何判断注解"></a>如何判断注解</h2><p>可以通过反射来判断类，方法，字段上是否有某个注解以及获取注解中的值, 获取某个类中方法上的注解代码示例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">Class clz = bean.getClass();</span><br><span class="line">Method[] methods = clz.getMethods();</span><br><span class="line">for (Method method : methods) &#123;</span><br><span class="line">if (method.isAnnotationPresent(EnableAuth.class)) &#123;</span><br><span class="line">    String name = method.getAnnotation(EnableAuth.class).name();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>注解</tag>
+      </tags>
   </entry>
   <entry>
     <title>String为什么设计成不可变的</title>
@@ -463,6 +506,42 @@
       </categories>
   </entry>
   <entry>
+    <title>为什么不能用浮点数表示金额</title>
+    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/</url>
+    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
+<span id="more"></span>
+
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><p>十进制整数转换为二进制整数采用”除2取余，逆序排列”法。<br>具体做法是：<br>用2整除十进制整数，可以得到一个商和余数；<br>再用2去除商，又会得到一个商和余数，如此进行，直到商为小于1时为止<br>然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。<br>如，我们想要把127转换成二进制，做法如下：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png" alt="屏幕截图 2023-05-24 172509"></p>
+<p>那么，<strong>十进制小数转换成二进制小数，又该如何计算呢？</strong><br>十进制小数转换成二进制小数采用”乘2取整，顺序排列”法。<br>具体做法是：<br>用2乘十进制小数，可以得到积<br>将积的整数部分取出，再用2乘余下的小数部分，又得到一个积<br>再将积的整数部分取出，如此进行，直到积中的小数部分为零，此时0或1为二进制的最后一位。或者达到所要求的精度为止。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png" alt="image-20230524172648834"></p>
+<p>所以，十进制的0.625对应的二进制就是0.101。</p>
+<h3 id="不是所有数都能用二进制表示"><a href="#不是所有数都能用二进制表示" class="headerlink" title="不是所有数都能用二进制表示"></a>不是所有数都能用二进制表示</h3><p>我们知道了如何将一个十进制小数转换成二进制，那么是不是计算就可以直接用二进制表示小数了呢？<br>前面我们的例子中0.625是一个特列，那么还是用同样的算法，请计算下0.1对应的二进制是多少？</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png" alt="image-20230524172739187"></p>
+<p>我们发现，0.1的二进制表示中出现了无限循环的情况，也就是(0.1)10 &#x3D; (0.000110011001100…)2<br>这种情况，计算机就没办法用二进制精确的表示0.1了。<br><strong>也就是说，对于像0.1这种数字，我们是没办法将他转换成一个确定的二进制数的。</strong></p>
+<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>为了解决部分小数无法使用二进制精确表示的问题，于是就有了IEEE 754规范。<br>IEEE二进制浮点数算术标准（IEEE 754）是20世纪80年代以来最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用。<br>浮点数和小数并不是完全一样的，计算机中小数的表示法，其实有定点和浮点两种。因为在位数相同的情况下，定点数的表示范围要比浮点数小。所以在计算机科学中，使用浮点数来表示实数的近似值。<br>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。<br>其中最常用的就是32位单精度浮点数和64位双精度浮点数。<br><strong>IEEE并没有解决小数无法精确表示的问题，只是提出了一种使用近似值表示小数的方式，并且引入了精度的概念。</strong><br>浮点数是一串0和1构成的位序列(bit sequence)，从逻辑上用三元组{S,E,M}表示一个数N,如下图所示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png"></p>
+<ul>
+<li>S(sign)表示N的符号位。对应值s满足：n&gt;0时，s&#x3D;0; n≤0时，s&#x3D;1。</li>
+<li>E(exponent)表示N的指数位，位于S和M之间的若干位。对应值e值也可正可负。</li>
+<li>M(mantissa)表示N的尾数位，恰好，它位于N末尾。M也叫有效数字位（significand）、系数位（coefficient), 甚至被称作”小数”。</li>
+</ul>
+<p>则浮点数N的实际值n由下方的式子表示：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png" alt="image-20230524172940592"></p>
+<p>上面这个公式看起来很复杂，其中符号位和尾数位还比较容易理解，但是这个指数位就不是那么容易理解了。<br>其实，大家也不用太过于纠结这个公式，大家只需要知道对于单精度浮点数，最多只能用32位字符表示一个数字，双精度浮点数最多只能用64位来表示一个数字。<br><strong>而对于那些无限循环的二进制数来说，计算机采用浮点数的方式保留了一定的有效数字，那么这个值只能是近似值，不可能是真实值。</strong><br>至于一个数对应的IEEE 754浮点数应该如何计算，不是本文的重点，这里就不再赘述了，过程还是比较复杂的，需要进行对阶、尾数求和、规格化、舍入以及溢出判断等。<br>但是这些其实不需要了解的太详细，我们只需要知道，小数在计算机中的表示是近似数，并不是真实值。根据精度不同，近似程度也有所不同。<br>如0.1这个小数，他对应的在双精度浮点数的二进制为：0.00011001100110011001100110011001100110011001100110011001 。<br>0.2这个小数0.00110011001100110011001100110011001100110011001100110011 。<br>所以两者相加：</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png" alt="image-20230524173051530"></p>
+<p>转换成10进制之后得到：0.30000000000000004！</p>
+<h3 id="避免精度丢失"><a href="#避免精度丢失" class="headerlink" title="避免精度丢失"></a>避免精度丢失</h3><p>在Java中，使用float表示单精度浮点数，double表示双精度浮点数，表示的都是近似值。<br>所以，在Java代码中，千万不要使用float或者double来进行高精度运算，尤其是金额运算，否则就很容易产生资损问题。</p>
+<p>为了解决这样的精度问题，Java中提供了BigDecimal来进行精确运算。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+      <tags>
+        <tag>double</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>什么是反射机制？为什么反射慢？</title>
     <url>/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/</url>
     <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。  </p>
@@ -572,40 +651,42 @@
       </tags>
   </entry>
   <entry>
-    <title>为什么不能用浮点数表示金额</title>
-    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/</url>
-    <content><![CDATA[<h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为不是所有的小数都能用二进制表示，所以，为了解决这个问题，IEEE<strong>提出了一种使用近似值表示小数的方式，并且引入了精度的概念。这就是我们所熟知的浮点数。</strong><br><strong>所以，浮点数只是近似值，并不是精确值，所以不能用来表示金额。否则会有精度丢失。</strong></p>
-<span id="more"></span>
+    <title>什么是实体，什么是值对象</title>
+    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E4%BD%93%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<p><strong>实体通常指具有唯一标识的具体对象或事物</strong>。实体通常具有自己的生命周期，可以被创建、修改和删除。在数据库中，实体通常对应着数据库表的一行记录，每个实体具有唯一的标识符（通常是主键）。</p>
+<p>比如，一个人可以被视为一个实体，因为每个人都有唯一的身份证号码作为标识符，并且每个人具有自己的生命周期，可以被创建、修改和删除。</p>
+<p><strong>值对象通常指没有唯一标识的对象或数据类型</strong>。值对象通常不可变，一旦创建就不能修改，只能通过创建新的值对象来替换原来的值对象。在数据库中，值对象通常对应着数据库表的一组字段，每个值对象不具有唯一的标识符，而是通过一组字段来描述其属性。</p>
+<p>比如，一个地址可以被视为一个值对象，因为它没有唯一标识符，而是由一组字段描述，例如国家、省份、城市、街道和门牌号等。并且地址通常是不可变的，一旦创建就不能修改，只能通过创建新的地址对象来替换原来的地址对象。</p>
+<h3 id="举例说明实体和值对象"><a href="#举例说明实体和值对象" class="headerlink" title="举例说明实体和值对象"></a>举例说明实体和值对象</h3><p>假设我们正在设计一个电商系统，需要设计一个订单类。订单包含多个订单项，每个订单项对应着购买了某个商品的数量和价格。</p>
+<p>首先，我们定义一个订单项类，它包含订单号、商品名称、数量和单价三个属性，并且它们都是可变的，因为每个订单项都可以修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class OrderItem &#123;</span><br><span class="line">    private String productName;</span><br><span class="line">    private int quantity;</span><br><span class="line">    private BigDecimal unitPrice;</span><br><span class="line"></span><br><span class="line">    //setter 和 getter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="十进制转二进制"><a href="#十进制转二进制" class="headerlink" title="十进制转二进制"></a>十进制转二进制</h3><p>十进制整数转换为二进制整数采用”除2取余，逆序排列”法。<br>具体做法是：<br>用2整除十进制整数，可以得到一个商和余数；<br>再用2去除商，又会得到一个商和余数，如此进行，直到商为小于1时为止<br>然后把先得到的余数作为二进制数的低位有效位，后得到的余数作为二进制数的高位有效位，依次排列起来。<br>如，我们想要把127转换成二进制，做法如下：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726656.png" alt="屏幕截图 2023-05-24 172509"></p>
-<p>那么，<strong>十进制小数转换成二进制小数，又该如何计算呢？</strong><br>十进制小数转换成二进制小数采用”乘2取整，顺序排列”法。<br>具体做法是：<br>用2乘十进制小数，可以得到积<br>将积的整数部分取出，再用2乘余下的小数部分，又得到一个积<br>再将积的整数部分取出，如此进行，直到积中的小数部分为零，此时0或1为二进制的最后一位。或者达到所要求的精度为止。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241726883.png" alt="image-20230524172648834"></p>
-<p>所以，十进制的0.625对应的二进制就是0.101。</p>
-<h3 id="不是所有数都能用二进制表示"><a href="#不是所有数都能用二进制表示" class="headerlink" title="不是所有数都能用二进制表示"></a>不是所有数都能用二进制表示</h3><p>我们知道了如何将一个十进制小数转换成二进制，那么是不是计算就可以直接用二进制表示小数了呢？<br>前面我们的例子中0.625是一个特列，那么还是用同样的算法，请计算下0.1对应的二进制是多少？</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241727258.png" alt="image-20230524172739187"></p>
-<p>我们发现，0.1的二进制表示中出现了无限循环的情况，也就是(0.1)10 &#x3D; (0.000110011001100…)2<br>这种情况，计算机就没办法用二进制精确的表示0.1了。<br><strong>也就是说，对于像0.1这种数字，我们是没办法将他转换成一个确定的二进制数的。</strong></p>
-<h3 id="IEEE-754"><a href="#IEEE-754" class="headerlink" title="IEEE 754"></a>IEEE 754</h3><p>为了解决部分小数无法使用二进制精确表示的问题，于是就有了IEEE 754规范。<br>IEEE二进制浮点数算术标准（IEEE 754）是20世纪80年代以来最广泛使用的浮点数运算标准，为许多CPU与浮点运算器所采用。<br>浮点数和小数并不是完全一样的，计算机中小数的表示法，其实有定点和浮点两种。因为在位数相同的情况下，定点数的表示范围要比浮点数小。所以在计算机科学中，使用浮点数来表示实数的近似值。<br>IEEE 754规定了四种表示浮点数值的方式：单精确度（32位）、双精确度（64位）、延伸单精确度（43比特以上，很少使用）与延伸双精确度（79比特以上，通常以80位实现）。<br>其中最常用的就是32位单精度浮点数和64位双精度浮点数。<br><strong>IEEE并没有解决小数无法精确表示的问题，只是提出了一种使用近似值表示小数的方式，并且引入了精度的概念。</strong><br>浮点数是一串0和1构成的位序列(bit sequence)，从逻辑上用三元组{S,E,M}表示一个数N,如下图所示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729041.png"></p>
-<ul>
-<li>S(sign)表示N的符号位。对应值s满足：n&gt;0时，s&#x3D;0; n≤0时，s&#x3D;1。</li>
-<li>E(exponent)表示N的指数位，位于S和M之间的若干位。对应值e值也可正可负。</li>
-<li>M(mantissa)表示N的尾数位，恰好，它位于N末尾。M也叫有效数字位（significand）、系数位（coefficient), 甚至被称作”小数”。</li>
-</ul>
-<p>则浮点数N的实际值n由下方的式子表示：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241729619.png" alt="image-20230524172940592"></p>
-<p>上面这个公式看起来很复杂，其中符号位和尾数位还比较容易理解，但是这个指数位就不是那么容易理解了。<br>其实，大家也不用太过于纠结这个公式，大家只需要知道对于单精度浮点数，最多只能用32位字符表示一个数字，双精度浮点数最多只能用64位来表示一个数字。<br><strong>而对于那些无限循环的二进制数来说，计算机采用浮点数的方式保留了一定的有效数字，那么这个值只能是近似值，不可能是真实值。</strong><br>至于一个数对应的IEEE 754浮点数应该如何计算，不是本文的重点，这里就不再赘述了，过程还是比较复杂的，需要进行对阶、尾数求和、规格化、舍入以及溢出判断等。<br>但是这些其实不需要了解的太详细，我们只需要知道，小数在计算机中的表示是近似数，并不是真实值。根据精度不同，近似程度也有所不同。<br>如0.1这个小数，他对应的在双精度浮点数的二进制为：0.00011001100110011001100110011001100110011001100110011001 。<br>0.2这个小数0.00110011001100110011001100110011001100110011001100110011 。<br>所以两者相加：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241730610.png" alt="image-20230524173051530"></p>
-<p>转换成10进制之后得到：0.30000000000000004！</p>
-<h3 id="避免精度丢失"><a href="#避免精度丢失" class="headerlink" title="避免精度丢失"></a>避免精度丢失</h3><p>在Java中，使用float表示单精度浮点数，double表示双精度浮点数，表示的都是近似值。<br>所以，在Java代码中，千万不要使用float或者double来进行高精度运算，尤其是金额运算，否则就很容易产生资损问题。</p>
-<p>为了解决这样的精度问题，Java中提供了BigDecimal来进行精确运算。</p>
+<p>然后，我们定义一个订单类，它包含订单号、订单项列表、订单状态和订单总价四个属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Order &#123;</span><br><span class="line">    private long orderId; // 实体</span><br><span class="line">    private List&lt;OrderItem&gt; orderItems; // 值对象</span><br><span class="line">    private OrderStatus status; </span><br><span class="line">    private BigDecimal totalPrice; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在数据库中存储订单的时候，可以这样存储：</p>
+<table>
+<thead>
+<tr>
+<th>orderId</th>
+<th>status</th>
+<th>totalPrice</th>
+<th>orderItems</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2023021811223344</td>
+<td>CONFIRMED</td>
+<td>120</td>
+<td>{“productName”:”《深入理解Java核心技术》 作者 Hollis”,”quantity”:100,”unitPrice”:129}</td>
+</tr>
+</tbody></table>
+<p>以上，订单就是一个实体，因为每一个订单对应一个单独的数据库记录，并且有唯一表示，就是订单号。而订单条目就是值对象，他是依赖于实体进行存储的。</p>
+<p>在数据库中把数据取出来的时候，是可以把orderItems这个json类型的字段转成我们定义好的OrderItem的对象的。这样更方便我们进行操作。</p>
 ]]></content>
       <categories>
-        <category>java基础</category>
+        <category>DDD</category>
       </categories>
-      <tags>
-        <tag>double</tag>
-      </tags>
   </entry>
   <entry>
     <title>什么是类型擦除</title>
@@ -635,6 +716,63 @@
       <tags>
         <tag>泛型</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>什么是聚合，什么是聚合根</title>
+    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%E6%A0%B9/</url>
+    <content><![CDATA[<p>在软件开发中，聚合是指将多个相关的对象或实体组合在一起形成一个单独的整体。这个整体可以是一个具有单一标识符的对象，它代表了一组相关的子对象或属性，而这些子对象或属性在整个系统中具有特定的上下文和含义。</p>
+<p>聚合根是聚合中最重要的对象，它代表了聚合的根实体。聚合根是聚合中的唯一标识符，并且控制着聚合中其他对象的生命周期。聚合根是整个聚合的唯一入口点，所有的操作都是通过聚合根来进行的。</p>
+<p>例如，如果我们有一个订单聚合，那么订单就是聚合根，它包含了发件人信息、商品信息、发票信息等子对象。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261108013.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>充血模型和贫血模型</title>
+    <url>/2023/05/26/%E5%85%85%E8%A1%80%E6%A8%A1%E5%9E%8B%E5%92%8C%E8%B4%AB%E8%A1%80%E6%A8%A1%E5%9E%8B/</url>
+    <content><![CDATA[<p>充血模型（Domain Driven Design）是一种面向对象的软件设计方法，它强调将业务逻辑封装在领域对象中。</p>
+<p>假设有一个电商网站，需要对商品进行购买、库存管理等操作。在充血模型中，我们可以定义一个Product类来表示商品。Product类会包含商品的属性（例如名称、价格、库存等），并且也会包含一些行为（例如购买商品、更新库存等）。这些行为是直接封装在Product类中的，以便于对商品进行操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product&#123;</span><br><span class="line">	private String productName;</span><br><span class="line">	private BigDecimal price;</span><br><span class="line">	private Long stock;</span><br><span class="line"></span><br><span class="line">	 public void purchase(int quantity) &#123;</span><br><span class="line">      if (quantity &gt; stock) &#123;</span><br><span class="line">          throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line">      &#125;</span><br><span class="line">      stock -= quantity;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>贫血模型（Anemic Domain Model）则是一种将数据与行为分离的模型，其中数据由对象持有，而行为则由外部服务提供。</p>
+<p>在贫血模型中，Product类可能只包含商品的属性（例如名称、价格、库存等），而行为则由其他类或服务提供。例如，我们可能会创建一个ProductService类来提供购买商品、更新库存等操作，而Product类只用于存储数据。这种方式下，Product类只是一个被动的数据持有者，而没有自己的行为。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Product &#123;</span><br><span class="line">    private String name;</span><br><span class="line">    private double price;</span><br><span class="line">    private int stock;</span><br><span class="line"></span><br><span class="line">    public Product(String name, double price, int stock) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.price = price;</span><br><span class="line">        this.stock = stock;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public double getPrice() &#123;</span><br><span class="line">        return price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public int getStock() &#123;</span><br><span class="line">        return stock;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class ProductService &#123;</span><br><span class="line"> public void purchase(Product product, int quantity) &#123;</span><br><span class="line"> if (quantity &gt; product.getStock()) &#123;</span><br><span class="line"> throw new IllegalArgumentException(&quot;Not enough stock available&quot;);</span><br><span class="line"> &#125;</span><br><span class="line"> product.setStock(product.getStock() - quantity);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="优缺点及适用场景"><a href="#优缺点及适用场景" class="headerlink" title="优缺点及适用场景"></a>优缺点及适用场景</h3><p>充血模型的优点：</p>
+<ol>
+<li><strong>面向对象设计，具有良好的封装性和可维护性。</strong></li>
+<li>领域对象自包含业务逻辑，易于理解和扩展。</li>
+<li>可以避免过度依赖外部服务，提高系统的稳定性。</li>
+</ol>
+<p>充血模型的缺点：</p>
+<ol>
+<li>对象可能变得庞大复杂，<strong>维护成本高。</strong></li>
+<li>对象间的协作可能增加，导致设计变得复杂。</li>
+<li>对象的状态可能会变得不一致，需要特别注意。</li>
+</ol>
+<p>贫血模型的优点：</p>
+<ol>
+<li><strong>数据与行为分离，降低了对象的复杂度。</strong></li>
+<li>可以提高代码的重用性和可测试性。</li>
+<li>可以更好地利用现有的服务和框架。</li>
+</ol>
+<p>贫血模型的缺点：</p>
+<ol>
+<li><strong>对象缺乏封装性，易于出现耦合性和脆弱性。</strong></li>
+<li>业务逻辑被分散在多个类中，<strong>难以维护和理解。</strong></li>
+<li><strong>过度依赖外部服务，可能导致系统的不稳定性。</strong></li>
+</ol>
+<p>一般来说，对于较小的应用系统或者简单的业务流程，可以使用贫血模型；对于较大的应用系统或者复杂的业务流程，建议使用充血模型。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
   </entry>
   <entry>
     <title>如何破坏单例模式</title>
@@ -713,22 +851,6 @@
       </categories>
       <tags>
         <tag>单例</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>日志文件</title>
-    <url>/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</url>
-    <content><![CDATA[<h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
-<span id="more"></span>
-<h2 id="redolog"><a href="#redolog" class="headerlink" title="redolog"></a>redolog</h2><p>redo log是MySQL中的重做日志，用于记录将来需要进行回滚操作的更改操作。当MySQL执行一个事务时，它会首先将更改操作记录到redolog中，然后再将更改写入磁盘。如果MySQL在写入磁盘之前崩溃，则可以使用redolog来恢复未完成的事务。用于实现崩溃恢复和数据持久性的一种机制。</p>
-<h2 id="undolog"><a href="#undolog" class="headerlink" title="undolog"></a>undolog</h2><p>undolog是MySQL中的撤销日志，用于事务回滚或系统崩溃时撤销(回滚)事务所做的修改。当MySQL执行一个事务时，它会将更改操作记录到redolog中，并且将旧值记录到undolog中。如果需要回滚该事务，则可以使用undolog中的旧值来还原修改操作。支持MVCC机制，用于在并发事务时提供一定的隔离性。</p>
-<p>注：redolog和undolog只适用于innodb引擎，因为要支持事务。</p>
-]]></content>
-      <categories>
-        <category>mysql</category>
-      </categories>
-      <tags>
-        <tag>日志</tag>
       </tags>
   </entry>
   <entry>
@@ -917,6 +1039,22 @@
       </tags>
   </entry>
   <entry>
+    <title>日志文件</title>
+    <url>/2023/05/23/%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/</url>
+    <content><![CDATA[<h2 id="binlog"><a href="#binlog" class="headerlink" title="binlog"></a>binlog</h2><p>binlog是MySQL中的二进制日志，可记录所有对数据库进行的更改操作，如insert、update和delete。binlog是MySQL的主从复制和数据备份的基础，可以用于在主服务器和从服务器之间复制更改操作，并且还可以用于恢复数据库。因为binlog只记录更改操作，所以它相对来说非常节省空间。</p>
+<span id="more"></span>
+<h2 id="redolog"><a href="#redolog" class="headerlink" title="redolog"></a>redolog</h2><p>redo log是MySQL中的重做日志，用于记录将来需要进行回滚操作的更改操作。当MySQL执行一个事务时，它会首先将更改操作记录到redolog中，然后再将更改写入磁盘。如果MySQL在写入磁盘之前崩溃，则可以使用redolog来恢复未完成的事务。用于实现崩溃恢复和数据持久性的一种机制。</p>
+<h2 id="undolog"><a href="#undolog" class="headerlink" title="undolog"></a>undolog</h2><p>undolog是MySQL中的撤销日志，用于事务回滚或系统崩溃时撤销(回滚)事务所做的修改。当MySQL执行一个事务时，它会将更改操作记录到redolog中，并且将旧值记录到undolog中。如果需要回滚该事务，则可以使用undolog中的旧值来还原修改操作。支持MVCC机制，用于在并发事务时提供一定的隔离性。</p>
+<p>注：redolog和undolog只适用于innodb引擎，因为要支持事务。</p>
+]]></content>
+      <categories>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>日志</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>泛型中K T V E ？ Object等分别代表什么含义</title>
     <url>/2023/05/23/%E6%B3%9B%E5%9E%8B%E4%B8%ADK-T-V-E-%EF%BC%9F-Object%E7%AD%89%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89/</url>
     <content><![CDATA[<p>E – Element (在集合中使用，因为集合中存放的是元素)<br>T – Type（Java 类）<br>K – Key（键）<br>V – Value（值）<br>N – Number（数值类型）<br>？ – 表示不确定的java类型（无限制通配符类型）<br>S、U、V – 2nd、3rd、4th types<br>Object – 是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是用使用了泛型T、E等这些标识符后，在实际用之前类型就已经确定了，不需要再进行类型强制转换。</p>
@@ -930,5 +1068,32 @@
       <tags>
         <tag>泛型</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>领域驱动设计</title>
+    <url>/2023/05/26/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1/</url>
+    <content><![CDATA[<p>领域驱动设计（Domain-Driven Design，DDD）是一种<strong>软件开发方法论</strong>，强调将业务领域作为软件设计的核心，以便更好地满足业务需求。</p>
+<p><strong>DDD认为，软件开发的核心是理解业务，而不是实现技术。</strong>在DDD中，软件开发人员应该与业务人员密切合作，了解业务需求，理解业务模型。通过抽象出业务领域模型、领域服务和领域事件等概念，将业务模型映射到软件系统中，以实现更好的业务价值。</p>
+<p><strong>在不使用DDD的软件开发过程中，来了一个需求，开发会首先考虑如何设计表结构，然后再根据表结构设计实体类以及对应的Service服务。但是在DDD中，提倡通过领域驱动设计，要先进行领域建模，最后在考虑持久化存储。</strong></p>
+<p>具体而言，DDD的主要思想包括：</p>
+<ul>
+<li><p>领域建模：领域建模是DDD的核心概念，其目的是将业务领域抽象出来，通过对领域对象、领域服务、领域事件等概念的定义，实现业务需求。</p>
+</li>
+<li><p>领域驱动架构：DDD中有一套自己的架构分层，将应用程序划分为四个层次，包括应用层、领域层、基础设施层和用户接口层，以实现业务领域的清晰分离。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261056343.png" alt="image.png"></p>
+</li>
+<li><p>领域事件驱动：领域事件是领域模型中的一种交互机制，可以用于在模块之间传递信息，实现领域模型的解耦。领域事件驱动是一种基于领域事件的系统架构风格，通过领域事件的发布和订阅机制，来实现系统的解耦。</p>
+</li>
+</ul>
+<h2 id="DDD带来的好处"><a href="#DDD带来的好处" class="headerlink" title="DDD带来的好处"></a>DDD带来的好处</h2><p>DDD强调业务领域的概念，术语和关系。通过深入了解业务领域，<strong>开发人员可以更好地理解和反映业务需求，从而开发出更符合业务需求的软件系统</strong>。能够更好的理解业务领域。</p>
+<p>DDD鼓励将软件系统划分为可重用的模块，这些模块基于业务领域的概念和语言进行组织。这样可以使代码更加模块化，<strong>易于维护和重构，并且可以更好地支持业务需求的变化。</strong></p>
+<p><strong>DDD倡导业务人员，开发人员和其他技术人员之间的紧密协作。</strong>通过这种协作，业务需求可以更好地传达给开发团队，同时开发人员也可以向业务人员解释他们正在开发的软件系统的工作方式。</p>
+<h2 id="DDD的不足"><a href="#DDD的不足" class="headerlink" title="DDD的不足"></a>DDD的不足</h2><p><strong>DDD是一种复杂的方法论，需要较长的学习曲线来理解和应用</strong>。因此，它可能不适合所有的开发团队。</p>
+<p>由于DDD需要更深入的业务领域知识和更好的模块化，因此它可能<strong>需要更多的开发成本</strong>。这可能会使它不适合一些较小的项目或团队。</p>
+<p>虽然DDD可以在许多项目中得到应用，但并不是所有项目都适合使用DDD。因此，在应用DDD之前，需要评估项目的需求和适用性</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
   </entry>
 </search>
