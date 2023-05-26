@@ -44,27 +44,6 @@
       </categories>
   </entry>
   <entry>
-    <title>Java是如何实现平台无关性的</title>
-    <url>/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
-<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
-<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
-<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
-<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
-<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
-<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
-<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
-<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
-<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
-<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
-<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
     <title>Java中创建对象有哪些种方式</title>
     <url>/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
@@ -242,6 +221,27 @@
       </categories>
   </entry>
   <entry>
+    <title>Java是如何实现平台无关性的</title>
+    <url>/2023/05/24/Java%E6%98%AF%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%B9%B3%E5%8F%B0%E6%97%A0%E5%85%B3%E6%80%A7%E7%9A%84/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>平台无关性就是一种语言在计算机上的运行不受平台的约束，一次编译，到处执行（Write Once ,Run Anywhere）。</p>
+<p>因为具有平台无关性，所以Java程序可以运行在各种各样的设备上，尤其是一些嵌入式设备，如打印机、扫描仪、传真机等。随着5G时代的来临，也会有更多的终端接入网络，相信平台无关性的Java也能做出一些贡献。</p>
+<p>对于Java开发者来说，Java减少了开发和部署到多个平台的成本和时间。真正的做到一次编译，到处运行。</p>
+<p>对于Java的平台无关性的支持，就像对安全性和网络移动性的支持一样，是分布在整个Java体系结构中的。其中扮演者重要的角色的有Java语言规范、Class文件、Java虚拟机（JVM）等。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="Java虚拟机与平台无关性"><a href="#Java虚拟机与平台无关性" class="headerlink" title="Java虚拟机与平台无关性"></a>Java虚拟机与平台无关性</h3><p>Java之所以可以做到跨平台，是因为Java虚拟机充当了桥梁。他扮演了运行时Java程序与其下的硬件和操作系统之间的缓冲角色。</p>
+<p>对于不同的硬件和操作系统，最主要的区别就是指令不同，想要做到跨平台，最重要的就是可以根据对应的硬件和操作系统生成对应的二进制指令。</p>
+<p>而这一工作，主要由我们的Java虚拟机完成。虽然Java语言是平台无关的，但是JVM确实平台有关的，不同的操作系统上面要安装对应的JVM。</p>
+<h3 id="字节码与平台无关性"><a href="#字节码与平台无关性" class="headerlink" title="字节码与平台无关性"></a>字节码与平台无关性</h3><p>各种不同的平台的虚拟机都使用统一的程序存储格式——字节码（ByteCode）是构成平台无关性的另一个基石。Java虚拟机只与由字节码组成的Class文件进行交互。</p>
+<p>我们说Java语言可以Write Once ,Run Anywhere。这里的Write其实指的就是生成Class文件的过程。</p>
+<p>因为Java Class文件可以在任何平台创建，也可以被任何平台的Java虚拟机装载并执行，所以才有了Java的平台无关性。</p>
+<h3 id="Java语言规范与平台无关性"><a href="#Java语言规范与平台无关性" class="headerlink" title="Java语言规范与平台无关性"></a>Java语言规范与平台无关性</h3><p>Java语言在跨平台方面也是做了一些努力的，这些努力被定义在Java语言规范中。</p>
+<p>比如，Java中基本数据类型的值域和行为都是由其自己定义的。而C&#x2F;C++中，基本数据类型是由它的占位宽度决定的，占位宽度则是由所在平台决定的。所以，在不同的平台中，对于同一个C++程序的编译结果会出现不同的行为。</p>
+<p>通过保证基本数据类型的值域和行为在所有平台的一致性，Java语言为平台无关性提供强了有力的支持。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Java注解</title>
     <url>/2023/05/26/Java%E6%B3%A8%E8%A7%A3/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>注解是Java提供的设置程序中元素的关联信息和元数据的方法，它是一个接口</p>
@@ -395,6 +395,54 @@
       </categories>
   </entry>
   <entry>
+    <title>为什么Java不支持多继承</title>
+    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
+<p>在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。但是，Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
+<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，但是，Java8中为了避免菱形继承的问题，在实现的多个接口中如果有相同方法，就会要求该类必须重写这个方法。</p>
+<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>Java的创始人James Gosling曾经回答过，他表示：</p>
+<p>“Java之所以不支持一个类继承多个类，主要是因为在设计之初我们听取了来自C++和Objective-C登阵营的人的意见。因为多继承会产生很多歧义问题。”</p>
+<p>Gosling老人家提到的歧义问题，其实是C++因为支持多继承之后带来的菱形继承问题。</p>
+<p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png" alt="image-20230524180528863"></p>
+<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
+<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
+<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
+<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
+<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
+<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8之前），这就避免了 C++ 中多继承的歧义问题。</p>
+<h2 id="Java-8中的多继承"><a href="#Java-8中的多继承" class="headerlink" title="Java 8中的多继承"></a>Java 8中的多继承</h2><p>Java不支持多继承，但是是支持多实现的，也就是说，同一个类可以同时实现多个类。</p>
+<p>我们知道，在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。</p>
+<p>那么问题来了。</p>
+<p>Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Pet &#123;</span><br><span class="line">    public default void eat()&#123;</span><br><span class="line">        System.out.println(&quot;Pet Is Eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，这不就是变相支持了多继承么。<br>那么，Java是怎么解决菱形继承问题的呢？我们再定义一个哺乳动物接口，也定义一个eat方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Mammal &#123;	</span><br><span class="line">	  public default void eat()&#123;</span><br><span class="line">	      System.out.println(&quot;Mammal Is Eating&quot;);</span><br><span class="line">	  &#125;        </span><br><span class="line">&#125;	    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>然后定义一个Cat，让他分别实现两个接口：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这时候，编译期会报错：</p>
+<blockquote>
+<p>error: class Cat inherits unrelated defaults for eat() from types Mammal and Pet</p>
+</blockquote>
+<p>这时候，就要求Cat类中，必须重写eat()方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat Is Eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>所以可以看到，Java并没有帮我们解决多继承的歧义问题，而是把这个问题留给开发人员，通过重写方法的方式自己解决。</p>
+]]></content>
+      <categories>
+        <category>java基础</category>
+      </categories>
+  </entry>
+  <entry>
     <title>String str=new String(&quot;hollis&quot;)创建了几个对象</title>
     <url>/2023/05/23/String%20str=new-String(hollis)%E5%88%9B%E5%BB%BA%E4%BA%86%E5%87%A0%E4%B8%AA%E5%AF%B9%E8%B1%A1/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>创建的对象数应该是1个或者2个。</p>
@@ -494,6 +542,44 @@
       </tags>
   </entry>
   <entry>
+    <title>什么是实体，什么是值对象</title>
+    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E4%BD%93%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>实体通常指具有唯一标识的具体对象或事物</strong>。实体通常具有自己的生命周期，可以被创建、修改和删除。在数据库中，实体通常对应着数据库表的一行记录，每个实体具有唯一的标识符（通常是主键）。</p>
+<p>比如，一个人可以被视为一个实体，因为每个人都有唯一的身份证号码作为标识符，并且每个人具有自己的生命周期，可以被创建、修改和删除。</p>
+<p><strong>值对象通常指没有唯一标识的对象或数据类型</strong>。值对象通常不可变，一旦创建就不能修改，只能通过创建新的值对象来替换原来的值对象。在数据库中，值对象通常对应着数据库表的一组字段，每个值对象不具有唯一的标识符，而是通过一组字段来描述其属性。</p>
+<p>比如，一个地址可以被视为一个值对象，因为它没有唯一标识符，而是由一组字段描述，例如国家、省份、城市、街道和门牌号等。并且地址通常是不可变的，一旦创建就不能修改，只能通过创建新的地址对象来替换原来的地址对象。</p>
+<h3 id="举例说明实体和值对象"><a href="#举例说明实体和值对象" class="headerlink" title="举例说明实体和值对象"></a>举例说明实体和值对象</h3><p>假设我们正在设计一个电商系统，需要设计一个订单类。订单包含多个订单项，每个订单项对应着购买了某个商品的数量和价格。</p>
+<p>首先，我们定义一个订单项类，它包含订单号、商品名称、数量和单价三个属性，并且它们都是可变的，因为每个订单项都可以修改：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class OrderItem &#123;</span><br><span class="line">    private String productName;</span><br><span class="line">    private int quantity;</span><br><span class="line">    private BigDecimal unitPrice;</span><br><span class="line"></span><br><span class="line">    //setter 和 getter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后，我们定义一个订单类，它包含订单号、订单项列表、订单状态和订单总价四个属性。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Order &#123;</span><br><span class="line">    private long orderId; // 实体</span><br><span class="line">    private List&lt;OrderItem&gt; orderItems; // 值对象</span><br><span class="line">    private OrderStatus status; </span><br><span class="line">    private BigDecimal totalPrice; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们在数据库中存储订单的时候，可以这样存储：</p>
+<table>
+<thead>
+<tr>
+<th>orderId</th>
+<th>status</th>
+<th>totalPrice</th>
+<th>orderItems</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2023021811223344</td>
+<td>CONFIRMED</td>
+<td>120</td>
+<td>{“productName”:”《深入理解Java核心技术》 作者 Hollis”,”quantity”:100,”unitPrice”:129}</td>
+</tr>
+</tbody></table>
+<p>以上，订单就是一个实体，因为每一个订单对应一个单独的数据库记录，并且有唯一表示，就是订单号。而订单条目就是值对象，他是依赖于实体进行存储的。</p>
+<p>在数据库中把数据取出来的时候，是可以把orderItems这个json类型的字段转成我们定义好的OrderItem的对象的。这样更方便我们进行操作。</p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
+  </entry>
+  <entry>
     <title>什么是反射机制？为什么反射慢？</title>
     <url>/2023/05/25/%E4%BB%80%E4%B9%88%E6%98%AF%E5%8F%8D%E5%B0%84%E6%9C%BA%E5%88%B6%EF%BC%9F%E4%B8%BA%E4%BB%80%E4%B9%88%E5%8F%8D%E5%B0%84%E6%85%A2%EF%BC%9F/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>反射机制指的是程序在运行时能够获取自身的信息。在java中，只要给定类的名字，那么就可以通过反射机制来获得类的所有属性和方法。  </p>
@@ -545,92 +631,6 @@
       </tags>
   </entry>
   <entry>
-    <title>什么是实体，什么是值对象</title>
-    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E5%AE%9E%E4%BD%93%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E5%80%BC%E5%AF%B9%E8%B1%A1/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p><strong>实体通常指具有唯一标识的具体对象或事物</strong>。实体通常具有自己的生命周期，可以被创建、修改和删除。在数据库中，实体通常对应着数据库表的一行记录，每个实体具有唯一的标识符（通常是主键）。</p>
-<p>比如，一个人可以被视为一个实体，因为每个人都有唯一的身份证号码作为标识符，并且每个人具有自己的生命周期，可以被创建、修改和删除。</p>
-<p><strong>值对象通常指没有唯一标识的对象或数据类型</strong>。值对象通常不可变，一旦创建就不能修改，只能通过创建新的值对象来替换原来的值对象。在数据库中，值对象通常对应着数据库表的一组字段，每个值对象不具有唯一的标识符，而是通过一组字段来描述其属性。</p>
-<p>比如，一个地址可以被视为一个值对象，因为它没有唯一标识符，而是由一组字段描述，例如国家、省份、城市、街道和门牌号等。并且地址通常是不可变的，一旦创建就不能修改，只能通过创建新的地址对象来替换原来的地址对象。</p>
-<h3 id="举例说明实体和值对象"><a href="#举例说明实体和值对象" class="headerlink" title="举例说明实体和值对象"></a>举例说明实体和值对象</h3><p>假设我们正在设计一个电商系统，需要设计一个订单类。订单包含多个订单项，每个订单项对应着购买了某个商品的数量和价格。</p>
-<p>首先，我们定义一个订单项类，它包含订单号、商品名称、数量和单价三个属性，并且它们都是可变的，因为每个订单项都可以修改：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class OrderItem &#123;</span><br><span class="line">    private String productName;</span><br><span class="line">    private int quantity;</span><br><span class="line">    private BigDecimal unitPrice;</span><br><span class="line"></span><br><span class="line">    //setter 和 getter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>然后，我们定义一个订单类，它包含订单号、订单项列表、订单状态和订单总价四个属性。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Order &#123;</span><br><span class="line">    private long orderId; // 实体</span><br><span class="line">    private List&lt;OrderItem&gt; orderItems; // 值对象</span><br><span class="line">    private OrderStatus status; </span><br><span class="line">    private BigDecimal totalPrice; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们在数据库中存储订单的时候，可以这样存储：</p>
-<table>
-<thead>
-<tr>
-<th>orderId</th>
-<th>status</th>
-<th>totalPrice</th>
-<th>orderItems</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>2023021811223344</td>
-<td>CONFIRMED</td>
-<td>120</td>
-<td>{“productName”:”《深入理解Java核心技术》 作者 Hollis”,”quantity”:100,”unitPrice”:129}</td>
-</tr>
-</tbody></table>
-<p>以上，订单就是一个实体，因为每一个订单对应一个单独的数据库记录，并且有唯一表示，就是订单号。而订单条目就是值对象，他是依赖于实体进行存储的。</p>
-<p>在数据库中把数据取出来的时候，是可以把orderItems这个json类型的字段转成我们定义好的OrderItem的对象的。这样更方便我们进行操作。</p>
-]]></content>
-      <categories>
-        <category>DDD</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>为什么Java不支持多继承</title>
-    <url>/2023/05/24/%E4%B8%BA%E4%BB%80%E4%B9%88Java%E4%B8%8D%E6%94%AF%E6%8C%81%E5%A4%9A%E7%BB%A7%E6%89%BF/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>因为如果要实现多继承，就会像C++中一样，存在菱形继承的问题，C++为了解决菱形继承问题，又引入了虚继承。因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。所以，在 Java 中，不允许“多继承”，即一个类不允许继承多个父类。</p>
-<p>在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。但是，Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，但是，Java8中为了避免菱形继承的问题，在实现的多个接口中如果有相同方法，就会要求该类必须重写这个方法。</p>
-<h2 id="扩展知识"><a href="#扩展知识" class="headerlink" title="扩展知识"></a>扩展知识</h2><h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>Java的创始人James Gosling曾经回答过，他表示：</p>
-<p>“Java之所以不支持一个类继承多个类，主要是因为在设计之初我们听取了来自C++和Objective-C登阵营的人的意见。因为多继承会产生很多歧义问题。”</p>
-<p>Gosling老人家提到的歧义问题，其实是C++因为支持多继承之后带来的菱形继承问题。</p>
-<p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305241805899.png" alt="image-20230524180528863"></p>
-<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
-<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
-<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
-<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
-<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
-<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8之前），这就避免了 C++ 中多继承的歧义问题。</p>
-<h2 id="Java-8中的多继承"><a href="#Java-8中的多继承" class="headerlink" title="Java 8中的多继承"></a>Java 8中的多继承</h2><p>Java不支持多继承，但是是支持多实现的，也就是说，同一个类可以同时实现多个类。</p>
-<p>我们知道，在Java 8以前，接口中是不能有方法的实现的。所以一个类同时实现多个接口的话，也不会出现C++中的歧义问题。因为所有方法都没有方法体，真正的实现还是在子类中的。</p>
-<p>那么问题来了。</p>
-<p>Java 8中支持了默认函数（default method ），即接口中可以定义一个有方法体的方法了。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Pet &#123;</span><br><span class="line">    public default void eat()&#123;</span><br><span class="line">        System.out.println(&quot;Pet Is Eating&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>而又因为Java支持同时实现多个接口，这就相当于通过implements就可以从多个接口中继承到多个方法了，这不就是变相支持了多继承么。<br>那么，Java是怎么解决菱形继承问题的呢？我们再定义一个哺乳动物接口，也定义一个eat方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public interface Mammal &#123;	</span><br><span class="line">	  public default void eat()&#123;</span><br><span class="line">	      System.out.println(&quot;Mammal Is Eating&quot;);</span><br><span class="line">	  &#125;        </span><br><span class="line">&#125;	    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>然后定义一个Cat，让他分别实现两个接口：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这时候，编译期会报错：</p>
-<blockquote>
-<p>error: class Cat inherits unrelated defaults for eat() from types Mammal and Pet</p>
-</blockquote>
-<p>这时候，就要求Cat类中，必须重写eat()方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">public class Cat implements Pet,Mammal &#123;</span><br><span class="line">    @Override</span><br><span class="line">    public void eat() &#123;</span><br><span class="line">        System.out.println(&quot;Cat Is Eating&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>所以可以看到，Java并没有帮我们解决多继承的歧义问题，而是把这个问题留给开发人员，通过重写方法的方式自己解决。</p>
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-  </entry>
-  <entry>
     <title>什么是类型擦除</title>
     <url>/2023/05/23/%E4%BB%80%E4%B9%88%E6%98%AF%E7%B1%BB%E5%9E%8B%E6%93%A6%E9%99%A4/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><p>类型擦除是Java在处理泛型的一种方式，如Java的编译器在编译以下代码时：</p>
@@ -658,6 +658,18 @@
       <tags>
         <tag>泛型</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>什么是聚合，什么是聚合根</title>
+    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%E6%A0%B9/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在软件开发中，聚合是指将多个相关的对象或实体组合在一起形成一个单独的整体。这个整体可以是一个具有单一标识符的对象，它代表了一组相关的子对象或属性，而这些子对象或属性在整个系统中具有特定的上下文和含义。</p>
+<p>聚合根是聚合中最重要的对象，它代表了聚合的根实体。聚合根是聚合中的唯一标识符，并且控制着聚合中其他对象的生命周期。聚合根是整个聚合的唯一入口点，所有的操作都是通过聚合根来进行的。</p>
+<p>例如，如果我们有一个订单聚合，那么订单就是聚合根，它包含了发件人信息、商品信息、发票信息等子对象。</p>
+<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261228279.png" alt="img"></p>
+]]></content>
+      <categories>
+        <category>DDD</category>
+      </categories>
   </entry>
   <entry>
     <title>什么是泛型？有什么好处</title>
@@ -763,16 +775,19 @@
       </categories>
   </entry>
   <entry>
-    <title>什么是聚合，什么是聚合根</title>
-    <url>/2023/05/26/%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%EF%BC%8C%E4%BB%80%E4%B9%88%E6%98%AF%E8%81%9A%E5%90%88%E6%A0%B9/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>在软件开发中，聚合是指将多个相关的对象或实体组合在一起形成一个单独的整体。这个整体可以是一个具有单一标识符的对象，它代表了一组相关的子对象或属性，而这些子对象或属性在整个系统中具有特定的上下文和含义。</p>
-<p>聚合根是聚合中最重要的对象，它代表了聚合的根实体。聚合根是聚合中的唯一标识符，并且控制着聚合中其他对象的生命周期。聚合根是整个聚合的唯一入口点，所有的操作都是通过聚合根来进行的。</p>
-<p>例如，如果我们有一个订单聚合，那么订单就是聚合根，它包含了发件人信息、商品信息、发票信息等子对象。</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305261228279.png" alt="img"></p>
+    <title>泛型中K T V E ？ Object等分别代表什么含义</title>
+    <url>/2023/05/23/%E6%B3%9B%E5%9E%8B%E4%B8%ADK-T-V-E-%EF%BC%9F-Object%E7%AD%89%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>E – Element (在集合中使用，因为集合中存放的是元素)<br>T – Type（Java 类）<br>K – Key（键）<br>V – Value（值）<br>N – Number（数值类型）<br>？ – 表示不确定的java类型（无限制通配符类型）<br>S、U、V – 2nd、3rd、4th types<br>Object – 是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是用使用了泛型T、E等这些标识符后，在实际用之前类型就已经确定了，不需要再进行类型强制转换。</p>
+<p><strong>代码示例</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 示例1：使用T作为泛型类型参数，表示任何类型</span><br><span class="line">public class MyGenericClass&lt;T&gt; &#123;</span><br><span class="line">    private T myField;</span><br><span class="line"></span><br><span class="line">    public MyGenericClass(T myField) &#123;</span><br><span class="line">        this.myField = myField;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T getMyField() &#123;</span><br><span class="line">        return myField;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例2：使用K、V作为泛型类型参数，表示键值对中的键和值的类型</span><br><span class="line">public class MyMap&lt;K, V&gt; &#123;</span><br><span class="line">    private List&lt;Entry&lt;K, V&gt;&gt; entries;</span><br><span class="line"></span><br><span class="line">    public MyMap() &#123;</span><br><span class="line">        entries = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void put(K key, V value) &#123;</span><br><span class="line">        Entry&lt;K, V&gt; entry = new Entry&lt;&gt;(key, value);</span><br><span class="line">        entries.add(entry);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public V get(K key) &#123;</span><br><span class="line">        for (Entry&lt;K, V&gt; entry : entries) &#123;</span><br><span class="line">            if (entry.getKey().equals(key)) &#123;</span><br><span class="line">                return entry.getValue();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private class Entry&lt;K, V&gt; &#123;</span><br><span class="line">        private K key;</span><br><span class="line">        private V value;</span><br><span class="line"></span><br><span class="line">        public Entry(K key, V value) &#123;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public K getKey() &#123;</span><br><span class="line">            return key;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public V getValue() &#123;</span><br><span class="line">            return value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例3：使用E作为泛型类型参数，表示集合中的元素类型</span><br><span class="line">public class MyList&lt;E&gt; &#123;</span><br><span class="line">    private List&lt;E&gt; elements;</span><br><span class="line"></span><br><span class="line">    public MyList() &#123;</span><br><span class="line">        elements = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void add(E element) &#123;</span><br><span class="line">        elements.add(element);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 ]]></content>
       <categories>
-        <category>DDD</category>
+        <category>java基础</category>
       </categories>
+      <tags>
+        <tag>泛型</tag>
+      </tags>
   </entry>
   <entry>
     <title>日志文件</title>
@@ -788,21 +803,6 @@
       </categories>
       <tags>
         <tag>日志</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>泛型中K T V E ？ Object等分别代表什么含义</title>
-    <url>/2023/05/23/%E6%B3%9B%E5%9E%8B%E4%B8%ADK-T-V-E-%EF%BC%9F-Object%E7%AD%89%E5%88%86%E5%88%AB%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E5%90%AB%E4%B9%89/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><p>E – Element (在集合中使用，因为集合中存放的是元素)<br>T – Type（Java 类）<br>K – Key（键）<br>V – Value（值）<br>N – Number（数值类型）<br>？ – 表示不确定的java类型（无限制通配符类型）<br>S、U、V – 2nd、3rd、4th types<br>Object – 是所有类的根类，任何类的对象都可以设置给该Object引用变量，使用的时候可能需要类型强制转换，但是用使用了泛型T、E等这些标识符后，在实际用之前类型就已经确定了，不需要再进行类型强制转换。</p>
-<p><strong>代码示例</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">// 示例1：使用T作为泛型类型参数，表示任何类型</span><br><span class="line">public class MyGenericClass&lt;T&gt; &#123;</span><br><span class="line">    private T myField;</span><br><span class="line"></span><br><span class="line">    public MyGenericClass(T myField) &#123;</span><br><span class="line">        this.myField = myField;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public T getMyField() &#123;</span><br><span class="line">        return myField;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例2：使用K、V作为泛型类型参数，表示键值对中的键和值的类型</span><br><span class="line">public class MyMap&lt;K, V&gt; &#123;</span><br><span class="line">    private List&lt;Entry&lt;K, V&gt;&gt; entries;</span><br><span class="line"></span><br><span class="line">    public MyMap() &#123;</span><br><span class="line">        entries = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void put(K key, V value) &#123;</span><br><span class="line">        Entry&lt;K, V&gt; entry = new Entry&lt;&gt;(key, value);</span><br><span class="line">        entries.add(entry);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public V get(K key) &#123;</span><br><span class="line">        for (Entry&lt;K, V&gt; entry : entries) &#123;</span><br><span class="line">            if (entry.getKey().equals(key)) &#123;</span><br><span class="line">                return entry.getValue();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private class Entry&lt;K, V&gt; &#123;</span><br><span class="line">        private K key;</span><br><span class="line">        private V value;</span><br><span class="line"></span><br><span class="line">        public Entry(K key, V value) &#123;</span><br><span class="line">            this.key = key;</span><br><span class="line">            this.value = value;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public K getKey() &#123;</span><br><span class="line">            return key;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public V getValue() &#123;</span><br><span class="line">            return value;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 示例3：使用E作为泛型类型参数，表示集合中的元素类型</span><br><span class="line">public class MyList&lt;E&gt; &#123;</span><br><span class="line">    private List&lt;E&gt; elements;</span><br><span class="line"></span><br><span class="line">    public MyList() &#123;</span><br><span class="line">        elements = new ArrayList&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void add(E element) &#123;</span><br><span class="line">        elements.add(element);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>java基础</category>
-      </categories>
-      <tags>
-        <tag>泛型</tag>
       </tags>
   </entry>
   <entry>
