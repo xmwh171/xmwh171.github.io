@@ -158,13 +158,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -201,15 +201,6 @@
         </ul>
       </div>
     </div>
-	
-	<!-- require APlayer 音乐播放器-->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-	<!-- require MetingJS-->
-	<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
-	<meting-js
-		auto="https://y.qq.com/n/ryqq/playlist/8908070873.html#stat=y_new.playlist.pic_click">
-	</meting-js>
   </aside>
 
 
@@ -416,6 +407,116 @@
 <li>性能监控：使用性能监控工具可以监测系统的性能瓶颈，提高系统的性能和可用性。</li>
 <li>安全性：分布式系统的安全性是至关重要的，可以使用身份验证、访问控制等技术来保证系统的安全性。</li>
 </ol>
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/26/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E9%AB%98%E5%8F%AF%E7%94%A8%E6%9E%B6%E6%9E%84/" class="post-title-link" itemprop="url">如何设计一个高可用架构</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-26 00:00:00 / 修改时间：15:49:36" itemprop="dateCreated datePublished" datetime="2023-05-26T00:00:00+08:00">2023-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E9%AB%98%E5%8F%AF%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">高可用</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>754</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>设计一个高可用架构需要考虑多个方面，包括可用性、可靠性、性能、扩展性、安全性等。下面是一些设计高可用架构的一般性原则和方法：</p>
+<ol>
+<li><strong>设计集群架构</strong>：采用多节点的集群架构可以提高系统的可用性和可靠性，从而避免单点故障导致系统不可用。</li>
+<li>采用<strong>分布式架构</strong>：采用分布式架构可以将系统的负载分散到多个节点上，从而提高系统的性能和可扩展性。</li>
+<li>实现<strong>故障转移</strong>和<strong>容错机制</strong>：通过使用冗余组件、备份数据等技术手段，可以实现故障转移和容错机制。例如，采用主从复制、备份、快速切换等技术来确保数据不丢失、系统快速恢复。</li>
+<li><strong>可靠的服务器和网络</strong>：选择可靠的服务器和网络设备，以确保它们能够在故障时正常运行。可以采用多个服务器进行冗余备份，以实现故障转移和负载均衡。可以选择高可靠性网络设备和路由器，以避免网络故障。</li>
+<li><strong>容灾和备份</strong>：需要设置容灾和备份计划，以确保在自然灾害、人为错误或其他紧急情况下能够快速恢复服务。可以使用云备份和容灾服务，以提高备份和恢复的效率和可靠性。</li>
+<li>设计<strong>监控</strong>和自动化工具：通过使用监控工具和自动化工具可以实现对系统的实时监控和自动化维护。例如，通过使用系统监控工具、自动化运维工具等来实现自动化运维、自动化扩容等功能，从而减少手动操作和人为错误。</li>
+<li>实现<strong>数据安全保护</strong>：通过采用多层次的安全策略来保护数据的安全性。例如，使用加密技术、防火墙、入侵检测等技术来保护系统和数据的安全。</li>
+<li>进行<strong>容量规划和性能优化</strong>：通过进行容量规划和性能优化，可以提高系统的性能和可扩展性。例如，通过使用缓存、调整配置参数、优化代码等技术手段来提高系统的性能和稳定性。</li>
+<li>设计<strong>自动化扩容和弹性伸缩</strong>：通过设计自动化扩容和弹性伸缩功能，可以根据业务需求和系统负载情况来自动调整系统资源。例如，通过使用自动化扩容工具和自动化弹性伸缩策略来实现系统资源的自动分配和调整。</li>
+</ol>
+<p>需要注意的是，设计高可用架构需要综合考虑业务需求、技术方案、资源投入等因素，同时需要不断进行优化和改进，以实现最优的性能和可用性。</p>
 
       
     </div>
@@ -1315,126 +1416,6 @@
 <h2 id="DDD的不足"><a href="#DDD的不足" class="headerlink" title="DDD的不足"></a>DDD的不足</h2><p><strong>DDD是一种复杂的方法论，需要较长的学习曲线来理解和应用</strong>。因此，它可能不适合所有的开发团队。</p>
 <p>由于DDD需要更深入的业务领域知识和更好的模块化，因此它可能<strong>需要更多的开发成本</strong>。这可能会使它不适合一些较小的项目或团队。</p>
 <p>虽然DDD可以在许多项目中得到应用，但并不是所有项目都适合使用DDD。因此，在应用DDD之前，需要评估项目的需求和适用性</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Java中创建对象有哪些种方式</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：19:00:07" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>572</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
-<p>User user &#x3D; new User();</p>
-<h3 id="使用反射机制"><a href="#使用反射机制" class="headerlink" title="使用反射机制"></a>使用反射机制</h3><p>运用反射手段，调用Java.lang.Class或者java.lang.reflect.Constructor类的newInstance()实例方法。</p>
-<p>1 使用Class类的newInstance方法</p>
-<p>可以使用Class类的newInstance方法创建对象。这个newInstance方法调用无参的构造函数创建对象。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = (User)Class.forName(&quot;xxx.xxx.User&quot;).newInstance(); </span><br><span class="line">User user = User.class.newInstance();</span><br></pre></td></tr></table></figure>
-
-
-
-<p>2 使用Constructor类的newInstance方法</p>
-<p>和Class类的newInstance方法很像， java.lang.reflect.Constructor类里也有一个newInstance方法可以创建对象。我们可以通过这个newInstance方法调用有参数的和私有的构造函数。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor  constructor = User.class.getConstructor();</span><br><span class="line">User user = constructor.newInstance();</span><br></pre></td></tr></table></figure>
-
-<p>这两种newInstance方法就是大家所说的反射。事实上Class的newInstance方法内部调用Constructor的newInstance方法。</p>
-<h3 id="使用clone方法"><a href="#使用clone方法" class="headerlink" title="使用clone方法"></a>使用clone方法</h3><p>无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。 </p>
-<p>要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。如果只实现了Cloneable接口，并没有重写clone方法的话，会默认使用Object类中的clone方法，这是一个native的方法。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class CloneTest implements Cloneable&#123;</span><br><span class="line">    private String name; </span><br><span class="line">    private int age; </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">    	this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">    	return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">    	this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public CloneTest(String name, int age) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            CloneTest cloneTest = new CloneTest(&quot;wangql&quot;,18);</span><br><span class="line">            CloneTest copyClone = (CloneTest) cloneTest.clone();</span><br><span class="line">            System.out.println(&quot;newclone:&quot;+cloneTest.getName());</span><br><span class="line">            System.out.println(&quot;copyClone:&quot;+copyClone.getName());</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">        	e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h3 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h3><p>当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。其实反序列化也是基于反射实现的。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //Initializes The Object</span><br><span class="line">    User1 user = new User1();</span><br><span class="line">    user.setName(&quot;hollis&quot;);</span><br><span class="line">    user.setAge(23);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    //Write Obj to File</span><br><span class="line">    ObjectOutputStream oos = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(oos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //Read Obj from File</span><br><span class="line">    File file = new File(&quot;tempFile&quot;);</span><br><span class="line">    ObjectInputStream ois = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        User1 newUser = (User1) ois.readObject();</span><br><span class="line">        System.out.println(newUser);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(ois);</span><br><span class="line">        try &#123;</span><br><span class="line">            FileUtils.forceDelete(file);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>

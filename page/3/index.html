@@ -158,13 +158,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -201,21 +201,132 @@
         </ul>
       </div>
     </div>
-	
-	<!-- require APlayer 音乐播放器-->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css">
-	<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script>
-	<!-- require MetingJS-->
-	<script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script> 
-	<meting-js
-		auto="https://y.qq.com/n/ryqq/playlist/8908070873.html#stat=y_new.playlist.pic_click">
-	</meting-js>
   </aside>
 
 
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/yh.jpeg">
+      <meta itemprop="name" content="ZYH">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="心梦无痕">
+      <meta itemprop="description" content="技术博客">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | 心梦无痕">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/05/25/Java%E4%B8%AD%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E6%9C%89%E5%93%AA%E4%BA%9B%E7%A7%8D%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">Java中创建对象有哪些种方式</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2023-05-25 10:48:03 / 修改时间：19:00:07" itemprop="dateCreated datePublished" datetime="2023-05-25T10:48:03+08:00">2023-05-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>572</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="典型回答"><a href="#典型回答" class="headerlink" title="典型回答"></a>典型回答</h2><h3 id="使用new关键字"><a href="#使用new关键字" class="headerlink" title="使用new关键字"></a>使用new关键字</h3><p>这是我们最常见的也是最简单的创建对象的方式，通过这种方式我们还可以调用任意的构造函数（无参的和有参的）。 </p>
+<p>User user &#x3D; new User();</p>
+<h3 id="使用反射机制"><a href="#使用反射机制" class="headerlink" title="使用反射机制"></a>使用反射机制</h3><p>运用反射手段，调用Java.lang.Class或者java.lang.reflect.Constructor类的newInstance()实例方法。</p>
+<p>1 使用Class类的newInstance方法</p>
+<p>可以使用Class类的newInstance方法创建对象。这个newInstance方法调用无参的构造函数创建对象。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">User user = (User)Class.forName(&quot;xxx.xxx.User&quot;).newInstance(); </span><br><span class="line">User user = User.class.newInstance();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2 使用Constructor类的newInstance方法</p>
+<p>和Class类的newInstance方法很像， java.lang.reflect.Constructor类里也有一个newInstance方法可以创建对象。我们可以通过这个newInstance方法调用有参数的和私有的构造函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Constructor  constructor = User.class.getConstructor();</span><br><span class="line">User user = constructor.newInstance();</span><br></pre></td></tr></table></figure>
+
+<p>这两种newInstance方法就是大家所说的反射。事实上Class的newInstance方法内部调用Constructor的newInstance方法。</p>
+<h3 id="使用clone方法"><a href="#使用clone方法" class="headerlink" title="使用clone方法"></a>使用clone方法</h3><p>无论何时我们调用一个对象的clone方法，jvm就会创建一个新的对象，将前面对象的内容全部拷贝进去。用clone方法创建对象并不会调用任何构造函数。 </p>
+<p>要使用clone方法，我们需要先实现Cloneable接口并实现其定义的clone方法。如果只实现了Cloneable接口，并没有重写clone方法的话，会默认使用Object类中的clone方法，这是一个native的方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public class CloneTest implements Cloneable&#123;</span><br><span class="line">    private String name; </span><br><span class="line">    private int age; </span><br><span class="line">    public String getName() &#123;</span><br><span class="line">    	return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">    	this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    public int getAge() &#123;</span><br><span class="line">    	return age;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setAge(int age) &#123;</span><br><span class="line">    	this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public CloneTest(String name, int age) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.name = name;</span><br><span class="line">        this.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        try &#123;</span><br><span class="line">            CloneTest cloneTest = new CloneTest(&quot;wangql&quot;,18);</span><br><span class="line">            CloneTest copyClone = (CloneTest) cloneTest.clone();</span><br><span class="line">            System.out.println(&quot;newclone:&quot;+cloneTest.getName());</span><br><span class="line">            System.out.println(&quot;copyClone:&quot;+copyClone.getName());</span><br><span class="line">        &#125; catch (CloneNotSupportedException e) &#123;</span><br><span class="line">        	e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="使用反序列化"><a href="#使用反序列化" class="headerlink" title="使用反序列化"></a>使用反序列化</h3><p>当我们序列化和反序列化一个对象，jvm会给我们创建一个单独的对象。其实反序列化也是基于反射实现的。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">    //Initializes The Object</span><br><span class="line">    User1 user = new User1();</span><br><span class="line">    user.setName(&quot;hollis&quot;);</span><br><span class="line">    user.setAge(23);</span><br><span class="line">    System.out.println(user);</span><br><span class="line"></span><br><span class="line">    //Write Obj to File</span><br><span class="line">    ObjectOutputStream oos = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        oos = new ObjectOutputStream(new FileOutputStream(&quot;tempFile&quot;));</span><br><span class="line">        oos.writeObject(user);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(oos);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //Read Obj from File</span><br><span class="line">    File file = new File(&quot;tempFile&quot;);</span><br><span class="line">    ObjectInputStream ois = null;</span><br><span class="line">    try &#123;</span><br><span class="line">        ois = new ObjectInputStream(new FileInputStream(file));</span><br><span class="line">        User1 newUser = (User1) ois.readObject();</span><br><span class="line">        System.out.println(newUser);</span><br><span class="line">    &#125; catch (IOException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; catch (ClassNotFoundException e) &#123;</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    &#125; finally &#123;</span><br><span class="line">        IOUtils.closeQuietly(ois);</span><br><span class="line">        try &#123;</span><br><span class="line">            FileUtils.forceDelete(file);</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+	
+	<div>
+		
+	</div>
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1680,141 +1791,6 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">static final int MAX = 1000 * 10000;</span><br><span class="line">static final String[] arr = new String[MAX];</span><br><span class="line"> </span><br><span class="line">public static void main(String[] args) throws Exception &#123;</span><br><span class="line">	Integer[] DB_DATA = new Integer[10];</span><br><span class="line">	Random random = new Random(10 * 10000);</span><br><span class="line">	for (int i = 0; i &lt; DB_DATA.length; i++) &#123;</span><br><span class="line">		DB_DATA[i] = random.nextInt();</span><br><span class="line">	&#125;</span><br><span class="line">	long t = System.currentTimeMillis();</span><br><span class="line">	for (int i = 0; i &lt; MAX; i++) &#123;</span><br><span class="line">		arr[i] = new String(String.valueOf(DB_DATA[i % DB_DATA.length])).intern();</span><br><span class="line">	&#125;</span><br><span class="line"> </span><br><span class="line">	System.out.println((System.currentTimeMillis() - t) + &quot;ms&quot;);</span><br><span class="line">	System.gc();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在以上代码中，我们明确的知道，会有很多重复的相同的字符串产生，但是这些字符串的值都是只有在运行期才能确定的。所以，只能我们通过intern显示的将其加入常量池，这样可以减少很多字符串的重复创建。</p>
-
-      
-    </div>
-
-    
-    
-    
-	
-	<div>
-		
-	</div>
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/yh.jpeg">
-      <meta itemprop="name" content="ZYH">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="心梦无痕">
-      <meta itemprop="description" content="技术博客">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | 心梦无痕">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/05/23/String%E4%B8%BA%E4%BB%80%E4%B9%88%E8%AE%BE%E8%AE%A1%E6%88%90%E4%B8%8D%E5%8F%AF%E5%8F%98%E7%9A%84/" class="post-title-link" itemprop="url">String为什么设计成不可变的</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2023-05-23 10:48:03" itemprop="dateCreated datePublished" datetime="2023-05-23T10:48:03+08:00">2023-05-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-05-24 21:08:55" itemprop="dateModified" datetime="2023-05-24T21:08:55+08:00">2023-05-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/java%E5%9F%BA%E7%A1%80/" itemprop="url" rel="index"><span itemprop="name">java基础</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>948</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>为什么要把String设计成不可变的呢？有什么好处呢？</p>
-<p>这个问题，困扰过很多人，甚至有人直接问过Java的创始人James Gosling。</p>
-<p>在一次采访中James Gosling被问到什么时候应该使用不可变变量，他给出的回答是:</p>
-<blockquote>
-<p>I would use an immutable whenever I can.</p>
-</blockquote>
-<p>那么，他给出这个答案背后的原因是什么呢？是基于哪些思考的呢？</p>
-<p>其实，主要是从缓存、安全性、线程安全和性能等角度出发的。</p>
-<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>字符串是使用最广泛的数据结构。大量的字符串的创建是非常耗费资源的，所以，Java提供了对字符串的缓存功能，可以大大的节省堆空间。</p>
-<p>JVM中专门开辟了一部分空间来存储Java字符串，那就是字符串池。</p>
-<p>通过字符串池，两个内容相同的字符串变量，可以从池中指向同一个字符串对象，从而节省了关键的内存资源。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String s = &quot;abcd&quot;;</span><br><span class="line">String s2 = s;</span><br></pre></td></tr></table></figure>
-
-<p>对于这个例子，s和s2都表示”abcd”，所以他们会指向字符串池中的同一个字符串对象：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/xmwh171/image/202305242104703.jpg" alt="img"></p>
-<p>但是，之所以可以这么做，主要是因为字符串的不变性。试想一下，如果字符串是可变的，我们一旦修改了s的内容，那必然导致s2的内容也被动的改变了，这显然不是我们想看到的。</p>
-<h2 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h2><p>字符串在Java应用程序中广泛用于存储敏感信息，如用户名、密码、连接url、网络连接等。JVM类加载器在加载类的时也广泛地使用它。</p>
-<p>因此，保护String类对于提升整个应用程序的安全性至关重要。</p>
-<p>当我们在程序中传递一个字符串的时候，如果这个字符串的内容是不可变的，那么我们就可以相信这个字符串中的内容。</p>
-<p>但是，如果是可变的，那么这个字符串内容就可能随时都被修改。那么这个字符串内容就完全不可信了。这样整个系统就没有安全性可言了。</p>
-<h2 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h2><p>不可变会自动使字符串成为线程安全的，因为当从多个线程访问它们时，它们不会被更改。</p>
-<p>因此，一般来说，不可变对象可以在同时运行的多个线程之间共享。它们也是线程安全的，因为如果线程更改了值，那么将在字符串池中创建一个新的字符串，而不是修改相同的值。因此，字符串对于多线程来说是安全的。</p>
-<h2 id="hashcode缓存"><a href="#hashcode缓存" class="headerlink" title="hashcode缓存"></a>hashcode缓存</h2><p>由于字符串对象被广泛地用作数据结构，它们也被广泛地用于哈希实现，如HashMap、HashTable、HashSet等。在对这些散列实现进行操作时，经常调用hashCode()方法。</p>
-<p>不可变性保证了字符串的值不会改变。因此，hashCode()方法在String类中被重写，以方便缓存，这样在第一次hashCode()调用期间计算和缓存散列，并从那时起返回相同的值。</p>
-<p>在String类中，有以下代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private int hash;//this is used to cache hash code.</span><br></pre></td></tr></table></figure>
-
-
-
-<h2 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h2><p>前面提到了的字符串池、hashcode缓存等，都是提升性能的体现。</p>
-<p>因为字符串不可变，所以可以用字符串池缓存，可以大大节省堆内存。而且还可以提前对hashcode进行缓存，更加高效</p>
-<p>由于字符串是应用最广泛的数据结构，提高字符串的性能对提高整个应用程序的总体性能有相当大的影响。</p>
 
       
     </div>
